@@ -1,0 +1,11 @@
+{
+  "local-backup:run-local-backup": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "B"
+    }
+  ]
+}
