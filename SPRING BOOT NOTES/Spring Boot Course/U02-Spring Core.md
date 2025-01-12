@@ -233,7 +233,6 @@ public class CricketCoach implements Coach{
 - application : scoped to a web app servletContext (only used for web apps)
 - websocket : Scoped to a web socket (only used for web apps)
 
-
 ### Bean Lifecycle
 ![[Bean Lifecycle.png]]
 ##### Init : Method Configuration : 

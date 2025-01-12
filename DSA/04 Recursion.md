@@ -241,6 +241,4 @@ static String removeChar(String str , char ch){
 	return str.charAt(0) + removeChar(str.substring(1), ch);
 }
 ```
-
-SubSets 
-Find all the subsets of a given array :
+More in subsets and subsequences

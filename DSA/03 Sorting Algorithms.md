@@ -110,7 +110,7 @@ public static void countSortHash(int[]  arr){
 ```
 
 
-# Some Cyclic Sort Questions
+## Some Cyclic Sort Questions
 [268. Missing Number](https://leetcode.com/problems/missing-number/)
 ```java
 public int missingNumber(int[] nums) {
@@ -156,5 +156,138 @@ public List<Integer> findDuplicates(int[] nums) {
         }
     }
     return list;
+}
+```
+
+# Recursive Sorting Algorithms
+
+Merge Sort : 
+```java
+public static int[] mergeSort(int[] arr){
+    if(arr.length == 1){
+        return arr;
+    }
+    int mid = arr.length/2;
+    int[] first = mergeSort(Arrays.copyOfRange(arr,0,mid));
+    int[] second = mergeSort(Arrays.copyOfRange(arr, mid, arr.length));
+
+    return merge(first, second);
+}
+
+public static int[] merge(int[] first, int[] second){
+    int i= 0;
+    int j = 0;
+    int k = 0;
+    int[] ans = new int[first.length + second.length];
+    while(i != first.length && j != second.length){
+        if(first[i] < second[j]){
+            ans[k] = first[i];
+            i++;
+        }
+        else{
+            ans[k] = second[j];
+            j++;
+        }
+        k++;
+    }
+
+    while(i < first.length){
+        ans[k] = first[i];
+        i++;
+        k++;
+    }
+    while(j < second.length){
+        ans[k] = second[j];
+        j++;
+        k++;
+    }
+    return ans;
+}
+```
+
+Merge Sort in Place
+```java
+static void mergeSortInPlace(int[] arr, int s, int e) {
+    if (e - s == 1) {
+        return;
+    }
+
+    int mid = (s + e) / 2;
+
+    mergeSortInPlace(arr, s, mid);
+    mergeSortInPlace(arr, mid, e);
+
+    mergeInPlace(arr, s, mid, e);
+}
+
+private static void mergeInPlace(int[] arr, int s, int m, int e) {
+    int[] mix = new int[e - s];
+
+    int i = s;
+    int j = m;
+    int k = 0;
+
+    while (i < m && j < e) {
+        if (arr[i] < arr[j]) {
+            mix[k] = arr[i];
+            i++;
+        } else {
+            mix[k] = arr[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < m) {
+        mix[k] = arr[i];
+        i++;
+        k++;
+    }
+
+    while (j < e) {
+        mix[k] = arr[j];
+        j++;
+        k++;
+    }
+
+    for (int l = 0; l < mix.length; l++) {
+        arr[s+l] = mix[l];
+    }
+}
+```
+
+Quick Sort : 
+```java
+// sort(arr, 0, arr.length-1);
+public static void sort(int[] arr, int low, int high){ // 
+    if(low >= high){
+        return;
+    }
+    int s = low;
+    int e = high;
+    int m = s + (e-s)/2;
+    int pivot = arr[m];
+
+    while(s <= e){
+        //also a reason why if its already sorted it will not swap
+        while(arr[s] < pivot){
+            s++;
+        }
+        while(arr[e] > pivot){
+            e--;
+        }
+        // the original condition might be violated
+        if(s <= e){
+            int temp = arr[s];
+            arr[s] = arr[e];
+            arr[e] = temp;
+            s++;
+            e--;
+        }
+    }
+
+    // now my pivot is at correct index, sort other two halves now
+    sort(arr, low, e);
+    sort(arr, s, high);
 }
 ```

@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Docker Tutorial.md",
+                "file": "DSA/LinkedList.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Docker Tutorial"
+              "title": "LinkedList"
             }
           }
         ],
@@ -67,7 +67,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "href",
+                "query": "sort",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -92,7 +92,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 209.5
+    "width": 306.5
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -180,32 +180,34 @@
   },
   "active": "6c5e399c7115511a",
   "lastOpenFiles": [
-    "New folder",
-    "MARKDOWN.md",
+    "LEETCODE 75 SOLUTIONS/08 Linked-List.md",
+    "DSA/LinkedList.md",
+    "DSA/00 Readme.md",
+    "LEETCODE 75 SOLUTIONS/19 Bit Manipulation.md",
+    "LEETCODE 75 SOLUTIONS/21 Intervals.md",
+    "DSA/Greedy Algorithm.md",
+    "LEETCODE 75 SOLUTIONS/14 Heap and Priority Queue.md",
+    "LEETCODE 75 SOLUTIONS/05 HashMap-Set.md",
+    "SPRING BOOT NOTES/Additional Notes/Web Sockets/Chat Application Tutorial.md",
+    "DATA STRUCTURES/Basic Methods.md",
+    "SPRING BOOT NOTES/Additional Java/Unit Testing.md",
+    "SPRING BOOT NOTES/Additional Java/Reading an Image.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
+    "SPRING BOOT NOTES/Additional Notes/Spring Boot Docker.md",
     "Docker Tutorial.md",
-    "DSA/02 Binary Search.md",
+    "SPRING BOOT NOTES/Additional Notes/Web Sockets",
+    "SPRING BOOT NOTES/Spring Boot Course/U01-Introduction.md",
+    "DSA/Backtracking.md",
     "DSA/04 Recursion.md",
     "DSA/03 Sorting Algorithms.md",
-    "SPRING BOOT NOTES/Additional Java/Unit Testing.md",
+    "test.md",
+    "DSA/Subsets and Subsequences.md",
+    "DSA/02 Binary Search.md",
+    "New folder",
+    "MARKDOWN.md",
     "DSA/01 Basics.md",
-    "DSA/Greedy Algorithm.md",
     "DSA/Sliding Window.md",
-    "LEETCODE 75 SOLUTIONS/Bit Manipulation.md",
     "LEETCODE 75 SOLUTIONS/00 README.md",
-    "LEETCODE 75 SOLUTIONS/Intervals.md",
-    "LEETCODE 75 SOLUTIONS/20 Trie.md",
-    "LEETCODE 75 SOLUTIONS/16 Backtracking.md",
-    "LEETCODE 75 SOLUTIONS/15 Binary Search.md",
-    "LEETCODE 75 SOLUTIONS/14 Heap and Priority Queue.md",
-    "LEETCODE 75 SOLUTIONS/12 Graphs DFS.md",
-    "LEETCODE 75 SOLUTIONS/13 Graphs BFS.md",
-    "LEETCODE 75 SOLUTIONS/09 Binary Tree DFS.md",
-    "LEETCODE 75 SOLUTIONS/11 Binary Search Tree.md",
-    "LEETCODE 75 SOLUTIONS/10 Binary Tree BFS.md",
-    "LEETCODE 75 SOLUTIONS/08 Linked-List.md",
-    "LEETCODE 75 SOLUTIONS/07 Queue.md",
-    "LEETCODE 75 SOLUTIONS/06 Stack.md",
-    "LEETCODE 75 SOLUTIONS/05 HashMap-Set.md",
     "SPRING BOOT NOTES/Additional Java",
     "SPRING BOOT NOTES/Spring Boot Course",
     "JavaScript Notes",
@@ -226,8 +228,6 @@
     "SPRING BOOT NOTES/Spring Boot Course/Resources",
     "DATA STRUCTURES/Untitled.canvas",
     "LEETCODE 75 SOLUTIONS",
-    "SPRING BOOT NOTES",
-    "DATA STRUCTURES",
     "Untitled.canvas"
   ]
 }
