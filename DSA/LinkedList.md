@@ -30,6 +30,7 @@ public void removeDuplicates(){
 }
 ```
 
+### Two pointer Questions
 Check if a LinkedList has a cycle or not
 ```java
 public boolean hasCycle(Node head){
@@ -98,6 +99,31 @@ public ListNode detectCycle(ListNode head) {
 }
 ```
 
+Happy Number 
+- Sum of square of digits at some point is 1
+```java
+public boolean isHappy(int n){
+	int slow = n;
+	int fast = n;
+
+	do{
+		slow = findSquareSum(slow);
+		fast = findSquareSum(findSquareSum(fast));
+	}while(slow != fast); // if we reach the same number again, its a loop and cannot become a happy number
+	if(slow == 1) return true;
+	else return false;
+}
+private int findSquareSum(int number){
+	int ans = 0;
+	while(number > 0){
+		int rem = number % 10;
+		ans += rem * rem;
+		number /= 10;
+	}
+	return ans;
+}
+```
+
 # SORTING
 
 Bubble Sort
@@ -133,9 +159,91 @@ public static void bubbleSort(int row, int col){ // (n,0)
 }
 ```
 
-Merge Sort
+Merge Sort 
+- Using dummy head approach
 ```java
-public Node mergeSort(ListNode head){
-	
+public static ListNode mergeSort(ListNode head) {
+    if (head == null || head.next == null) {
+        return head;
+    }
+
+    ListNode mid = getMid(head);
+    ListNode left = mergeSort(head);
+    ListNode right = mergeSort(mid);
+
+    return merge(left, right);
+}
+
+public static ListNode merge(ListNode list1, ListNode list2) {
+    ListNode dummyHead = new ListNode();
+    ListNode tail = dummyHead;
+    while (list1 != null && list2 != null) {
+        if (list1.val < list2.val) {
+            tail.next = list1;
+            list1 = list1.next;
+            tail = tail.next;
+        } else {
+            tail.next = list2;
+            list2 = list2.next;
+            tail = tail.next;
+        }
+    }
+    tail.next = (list1 != null) ? list1 : list2;
+    return dummyHead.next;
+}
+
+static ListNode getMid(ListNode head) {
+    ListNode midPrev = null;
+    while (head != null && head.next != null) {
+        midPrev = (midPrev == null) ? head : midPrev.next;
+        head = head.next.next;
+    }
+    ListNode mid = midPrev.next;
+    midPrev.next = null; 
+    //important, because its not just pointing anymore but splitting
+    return mid;
+}
+```
+
+### Other Questions :
+
+Reverse Linked List
+```java
+public Node reverseList(Node head){
+	if(head == null) {
+		return head;
+	}
+	Node prev = null;
+	Node present = head;
+	Node next = present.next;
+
+	while(present != null){
+		present.next = prev;
+		prev = present;
+		present = next;
+		if(next != null){
+			next = next.next;
+		}
+	}
+	return prev;
+}
+```
+
+Palindrome Check
+```java
+public static boolean isPalindrome(Node head) {
+	Node mid = middleNode(head);
+	Node headSecond = reverseList(mid);
+	Node rereverseHead = headSecond;
+
+	while(head != null && headSecond != null){
+		if(head.data != headSecond.data){
+			break;
+		}
+		head = head.next;
+		headSecond = headSecond.next;
+	}
+	reverseList(rereverseHead);
+	return head == null || headSecond == null;
 }
 ```

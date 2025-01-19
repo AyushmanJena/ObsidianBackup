@@ -1,6 +1,3 @@
----
-lastSync: Thu Oct 17 2024 17:37:05 GMT+0530 (India Standard Time)
----
 ### REST Web Services
 
 Example : App that provides weather report for a city
@@ -56,12 +53,12 @@ REST over HTTP for CRUD applications :
 
 **HTTP Request Message consists of :** 
 - Request Line : the HTTP Command
-- Header Variable : Request Metadata
+- Header Variable : Request's Metadata
 - Message Body : contents of the message
 
 **HTTP Response Message consists of :** 
 - Response Line : Server Protocol and status code
-- Header Variable : Response Metadata
+- Header Variable : Response's Metadata
 - Message Body : Contents of the message
 
 **Status Codes :** 
@@ -98,9 +95,13 @@ public class Student{
 		this.lastName = lastName;
 	}
 	
-	public String getFirstName(){return firstName;}
+	public String getFirstName(){
+		return firstName;
+	}
 	
-	public String getLastName(){return lastName;}
+	public String getLastName(){
+		return lastName;
+	}
 	
 	public void setFirstName(String firstName){
 		this.firstName = firstName;
@@ -136,26 +137,23 @@ GET  /api/students/{studentId}
 // {studentId} is the pathvariable and  can be 1, 2, 3...
 
 ```java
-@RestController
-@RequestMapping("/api")
-public class StudentRestController {
-	// define endpoint for "/students" - return list of students
-	@GetMapping("/students/{studentId}")
-	public List<Student> getStudents(@PathVariable int StudentId){ 
-		List<Student> theStudents = new ArrayList<>();
-		
-		// adding students hard coded for now
-		theStudents.add(new Student("Mario", "Rossi"));
-		...
-		
-		return theStudents.get(studentId);
-	}
+// define endpoint for "/students/id" - return student with id 
+@GetMapping("/students/{studentId}")
+public Student getStudents(@PathVariable int studentId){ 
+	List<Student> theStudents = new ArrayList<>();
+	
+	// adding students hard coded for now
+	theStudents.add(new Student("Mario", "Rossi"));
+	...	
+	return theStudents.get(studentId);
 }
 ```
 > [!warning]
 > The variable studentId must match with the path variable 
 
-### Exception Handling
+
+
+### Exception Handling #revise
 - and returning error as JSON instead of typical "Internal Server error", etc.
 - Ex : Student Id entered does not exist
 ##### Development Process
@@ -247,13 +245,16 @@ public class StudentRestExceptionHandler{
 ### Real life example of REST API with spring boot that connects to a database
 **Application Architecture :** 
 ![[Screenshot 2024-10-14 141410.png]]
+(EmployeeDAO instead of 2nd Employee REST Controller)
 
 1. Setup database table and load Sample data 
-> [!Quote] Employee
+```
+Employee
 > id INT
 > first_name VARCHAR
 > last_name VARCHAR
 > email VARCHAR
+```
 
 2. Create DAO Interface : EmployeeDAO
 3. DAO Implementation : EmployeeDAOJpaImpl implements EmployeeDAO 

@@ -39,13 +39,13 @@ Autowiring example :
 ![[Screenshot 2024-10-06 145159.png]]
 ### STEPS for CONSTRUCTOR INJECTION : 
 #### 1. Define the dependency interface and class
-	Coach.java
+`Coach.java`
 ```java
 public interface Coach{
 	String getDailyWorkout();
 }
 ```
-	CricketCoach.java
+`CricketCoach.java`
 ```java
 @Component
 public class CricketCoach implements Coach{
@@ -100,6 +100,7 @@ Then sub packages are scanned recursively
 - Automatically registers the beans in the spring container
 
 - For packages outside (we need to explicitely list them)
+
 `SpringcoredemoApplication`
 ```java
 @SpringBootApplication(
@@ -227,7 +228,7 @@ public class CricketCoach implements Coach{
 
 **Additional Spring Bean scopes :** 
 - singleton : Create a single instance of the bean, default scope
-- prototype : Creates a new bean instance for ech container request
+- prototype : Creates a new bean instance for each container request
 - request : Scoped to HTTP web request (only used for web apps)
 - session : scoped to HTTP web session (only used for web apps)
 - application : scoped to a web app servletContext (only used for web apps)
@@ -242,7 +243,7 @@ public class CricketCoach implements Coach{
 	// startup stuff
 	@PostConstruct
 	public void doMyStartupStuff(){
-		System.out.println("Startup Stuff : "+ getClasS().getSimpleName());
+		System.out.println("Startup Stuff : "+ getClass().getSimpleName());
 	}
 ```
 
@@ -253,7 +254,7 @@ public class CricketCoach implements Coach{
 	// cleanup stuff
 	@PreDestroy
 	public void doMyCleanupStuff(){
-		System.out.println("Cleanup Stuff : "+ getClasS().getSimpleName());
+		System.out.println("Cleanup Stuff : "+ getClass().getSimpleName());
 	}
 ```
 

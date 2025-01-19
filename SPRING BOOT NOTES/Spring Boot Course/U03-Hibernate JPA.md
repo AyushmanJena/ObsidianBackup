@@ -2,6 +2,7 @@
 lastSync: Wed Oct 16 2024 16:15:52 GMT+0530 (India Standard Time)
 ---
 ## Hibernate :
+- Framework and ORM (Object Relational Mapping) tool 
 - Most popular implementation of JPA spec (or interface) and is default in spring boot.
 - It is a framework for persisting/ saving java objects in a database.
 ![[hibernate.png]]
@@ -12,17 +13,18 @@ lastSync: Wed Oct 16 2024 16:15:52 GMT+0530 (India Standard Time)
 - Provides ORM : Object to Relational Mapping
 
 ### Object to Relational Mapping (ORM) : 
-- The devleloper defines mapping between java class and database table
+- The developer defines mapping between java class and database table
 
-| **Java Class**     |           | **Database Table**     |
-| ------------------ | --------- | ---------------------- |
-| id : int           |           | id INT                 |
-| firstName : String | Hibernate | first_name VARCHAR(45) |
-| lastName : String  |           | last_name VARCHAR(45)  |
-| email : String     |           | email VARCHAR(45)      |
+| **Java Class**     |               | **Database Table**     |
+| ------------------ | ------------- | ---------------------- |
+| id : int           |               | id INT                 |
+| firstName : String | **Hibernate** | first_name VARCHAR(45) |
+| lastName : String  |               | last_name VARCHAR(45)  |
+| email : String     |               | email VARCHAR(45)      |
 
 ## JPA
-Jakarta Persistence  API
+Jakarta Persistence  API / Java Persistence API
+- JPA is like a bridge between the Spring Application models and the relational database that is used for managing and accessing the data between the objects in application and database.
 - Standard API for ORM
 - Only a specification 
 	- defines a set of interfaces
@@ -39,7 +41,7 @@ to turn off spring boot banner in console:
 > 	`spring.main.banner-mode = off`
 
 to reduce the logging level in console : 
-> 	logging.level.root = warn
+> 	`logging.level.root = warn`
 
 ### Entity Manager
 - Entity manager is an interface in JPA
@@ -86,7 +88,7 @@ public CommandLineRunner commandLineRunner(String[] args){
 ### Entity Class
 - Java class that is mapped to a database
 		ex : Student
-- The entity class must have @Entity
+- The entity class must have `@Entity`
 - Public or protected no argument constructor
 - The class can also have other constructors
 #### Steps: 
@@ -109,10 +111,12 @@ public class Student{
 - But this approach is not recommended.
 
 #### For Auto incrementing primary key : 
-`@Id`
-`@GeneratedValue(strategy = GenerationType.IDENTITY)`
-`@Column(name="id")`
-`private int id`
+```
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name="id")
+private int id
+```
 
 Other Generation strategies are : AUTO, SEQUENCE, TABLE, UUID
 ##### You can even define your own strategy : 
@@ -207,7 +211,7 @@ public class StudentDAOImpl implements StudentDAO{
 	...
 }
 ```
-- @Transactional is not needed for operations which just read data
+- @Transactional is not needed for operation which just reads data
 
 3. Update Main app 
 ```java
@@ -225,7 +229,7 @@ public class CruddemoApplication {
 	}
 	private void readStudent(StudentDAO studentDAO) {
 		// retrieve student based on the id: primary key
-		Student myStudent = studentDAO.findById(tempStudent.getId());
+		Student myStudent = studentDAO.findById(1);
 		System.out.println("Found the student: " + myStudent);
 	}
 }
@@ -235,11 +239,15 @@ public class CruddemoApplication {
 - Using JPQL : JPA Query Language
 - JPQL is based on entity name and entity fields but use concepts similar to SQL 
 ##### Retrieving all Students : 
-`TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student", Student.class);`
-`List<Student> students = theQuery.getResultList();`
+```
+TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student", Student.class);
+List<Student> students = theQuery.getResultList();
+```
 - Student -> Name of JPA entity, i.e. the class name ( not the name of database table)
 ##### Retrieving students with lastName = 'Doe' : 
-`TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student WHERE lastName='Doe'", Student.class);`
+```
+TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student WHERE lastName='Doe'", Student.class);
+```
 ##### Similarly : 
 `"FROM Student WHERE lastName='Das' OR firstName='Tom'"`
 `"FROM Student WHERE email LIKE '%gmail.com'"`
@@ -280,6 +288,7 @@ public class StudentDAOImpl implements StudentDAO{
 	...
 }
 ```
+
 3. Update the Main App
 ```java
 @SpringBootApplication
@@ -306,20 +315,12 @@ public class CruddemoApplication {
 ```
 
 ### UPDATE AN STUDENT
-entityManager.remove(theStudent);
-
-- Delete based on condition using JPQL
-`int numRowsDeleted = entityManager.createQuery("DELETE FROM Student WHERE lastName = 'Ramachandra'").executeUpdate();`
-- Returns number of rows deleted  (stored in numRowsDeleted)
-
-- Delete All Students
-`int numRowsDeleted = entityManager.createQuery("DELETE FROM Student").executeUpdate();`
-
+entityManager.merge(theStudent);
 #### Steps :
 1. Add new Method to DAO Interface
 ```java
 public interface StudentDAO{
-	void delete(Integer id);
+	void update(Student theStudent); // Student is the entity class
 }
 ```
 
@@ -330,13 +331,14 @@ public class StudentDAOImpl implements StudentDAO{
 	...
 	@Override
 	@Transactional // adding transactional since we are updating data
-	public void delete(Student theStudent){
-		Student theStudent = entityManager.find(Student.class, id);
-		entityManager.remove(theStudent);
+	public void update(Student theStudent){
+		entityManager.merge(theStudent);
 	}
 	...
 }
 ```
+
+
 3. Update the Main App
 ```java
 @SpringBootApplication
@@ -364,13 +366,22 @@ public class CruddemoApplication {
 
 
 ### DELETE AN STUDENT
-entityManager.merge(theStudent);
+entityManager.remove(theStudent);
 
+- Delete based on condition using JPQL
+`int numRowsDeleted = entityManager.createQuery("DELETE FROM Student WHERE lastName = 'Ramachandra'").executeUpdate();`
+- Returns number of rows deleted  (stored in numRowsDeleted)
+
+- Delete All Students
+`int numRowsDeleted = entityManager.createQuery("DELETE FROM Student").executeUpdate();`
+
+> [!note]
+> Use executeUpdate() when you want to perform data manipulation operation that does not return a result list
 #### Steps :
 1. Add new Method to DAO Interface
 ```java
 public interface StudentDAO{
-	void update(Student theStudent); // Student is the entity class
+	void delete(Integer id); 
 }
 ```
 
@@ -381,12 +392,14 @@ public class StudentDAOImpl implements StudentDAO{
 	...
 	@Override
 	@Transactional // adding transactional since we are updating data
-	public void update(Student theStudent){
-		entityManager.merge(theStudent);
+	public void delete(Integer id){
+		Student theStudent = entityManager.find(Student.class, id);
+		entityManager.remove(theStudent);
 	}
 	...
 }
 ```
+
 3. Update the Main App
 ```java
 @SpringBootApplication
@@ -400,7 +413,7 @@ public class CruddemoApplication {
 			deleteStudent(studentDAO);
 		};
 	}
-	private void queryForStudents(StudentDAO studentDAO) {
+	private void deleteStudent(StudentDAO studentDAO) {
 		int studentId = 3;
 		studentDAO.delete(studentId);
 	}
@@ -417,14 +430,17 @@ Hibernate will automatically generate table creation SQL code and execute it
 ```properties
 spring.jpa.hibernate.ddl-auto = PROPERTY-VALUE
 ```
-property-value : 
-		none : 
-		create-only : 
-		drop : drops database tables
-		create : database tables are dropped followed by table creation
-		create-drop : same as create, but on app shutdown, drop db tables
-		validate : validate the database tables schema
-		update : 
+
+| property-value | Description                                            |
+| -------------- | ------------------------------------------------------ |
+| none           |                                                        |
+| create-only    | creates the table only                                 |
+| drop           | drops database tables                                  |
+| create         | database tables are dropped followed by table creation |
+| create-drop    | same as create, but on app shutdown, drop db tables    |
+| validate       | validate the database tables schema                    |
+| update         | updates the existing tables                            |
+
 
 > [!WARNING]
 > When database tables are dropped, all data is LOST

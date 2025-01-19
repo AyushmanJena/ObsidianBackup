@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/LinkedList.md",
+                "file": "DSA/Stacks and Queues.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "LinkedList"
+              "title": "Stacks and Queues"
             }
           }
         ],
@@ -67,7 +67,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "sort",
+                "query": "autowired",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -92,7 +92,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 306.5
+    "width": 267.5
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -108,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "LEETCODE 75 SOLUTIONS/Binary Tree.md",
+                "file": "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Binary Tree"
+              "title": "Backlinks for U05-Spring Security"
             }
           },
           {
@@ -180,34 +180,34 @@
   },
   "active": "6c5e399c7115511a",
   "lastOpenFiles": [
-    "LEETCODE 75 SOLUTIONS/08 Linked-List.md",
-    "DSA/LinkedList.md",
     "DSA/00 Readme.md",
-    "LEETCODE 75 SOLUTIONS/19 Bit Manipulation.md",
+    "DSA/01 Basics.md",
+    "DSA/Stacks and Queues.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U06-Thymeleaf Introduction.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U04-REST APIs.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U03-Hibernate JPA.md",
+    "MARKDOWN.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
+    "DATA STRUCTURES/Basic Methods.md",
+    "LEETCODE 75 SOLUTIONS/22 Monotonic Stack.md",
     "LEETCODE 75 SOLUTIONS/21 Intervals.md",
+    "LEETCODE 75 SOLUTIONS/Intervals.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U01-Introduction.md",
+    "DSA/LinkedList.md",
+    "LEETCODE 75 SOLUTIONS/08 Linked-List.md",
+    "LEETCODE 75 SOLUTIONS/19 Bit Manipulation.md",
     "DSA/Greedy Algorithm.md",
     "LEETCODE 75 SOLUTIONS/14 Heap and Priority Queue.md",
     "LEETCODE 75 SOLUTIONS/05 HashMap-Set.md",
     "SPRING BOOT NOTES/Additional Notes/Web Sockets/Chat Application Tutorial.md",
-    "DATA STRUCTURES/Basic Methods.md",
     "SPRING BOOT NOTES/Additional Java/Unit Testing.md",
     "SPRING BOOT NOTES/Additional Java/Reading an Image.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
     "SPRING BOOT NOTES/Additional Notes/Spring Boot Docker.md",
     "Docker Tutorial.md",
     "SPRING BOOT NOTES/Additional Notes/Web Sockets",
-    "SPRING BOOT NOTES/Spring Boot Course/U01-Introduction.md",
     "DSA/Backtracking.md",
-    "DSA/04 Recursion.md",
-    "DSA/03 Sorting Algorithms.md",
-    "test.md",
-    "DSA/Subsets and Subsequences.md",
-    "DSA/02 Binary Search.md",
     "New folder",
-    "MARKDOWN.md",
-    "DSA/01 Basics.md",
-    "DSA/Sliding Window.md",
-    "LEETCODE 75 SOLUTIONS/00 README.md",
     "SPRING BOOT NOTES/Additional Java",
     "SPRING BOOT NOTES/Spring Boot Course",
     "JavaScript Notes",

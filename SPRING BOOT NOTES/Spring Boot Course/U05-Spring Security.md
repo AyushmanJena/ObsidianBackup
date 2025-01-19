@@ -1,8 +1,6 @@
----
-lastSync: Thu Oct 17 2024 18:47:46 GMT+0530 (India Standard Time)
----
 # Spring Security
 - Spring Security is implemented using servlet filters
+- Servlet filters are components that intercept and modify HTTP requests before they reach the servlet or controllers.
 - Servlet filters are used to pre-process/post-process web requests
 ![[Spring Security Filters.png]]
 - Spring security filters perform 2 tasks : authentication and authorization
@@ -31,7 +29,7 @@ spring.security.user.password = test123
 ### Configuring Basic Security (without database)
 ##### Development Steps : 
 1. Create Spring security configuration file
-DemoSecurityConfig.java
+`DemoSecurityConfig.java`
 ```java
 @Configuration
 public class DemoSecurityConfig{
@@ -70,7 +68,7 @@ requestMatchers("/systems/**").hasRole("ADMIN")
 
 ** -> Match on path and all sub directories
 
-**PUTTING IT ALL TOGETHER** :
+**PUTTING IT ALL TOGETHER** :  #revise
 `DemoSecurityConfig.java`
 ```java
 ...
@@ -99,7 +97,7 @@ Note :
 #### CSRF -> Cross Site Request Forgery
 - Spring security can protect against CSRF attacks
 - Primary use case is traditional web applications (HTML forms, etc.)
-- In general not required for stateless REST API's, that use POST, PUT, DELETE, PATCHA
+- In general not required for stateless REST API's, that use POST, PUT, DELETE, PATCH
 - If you are building a REST API for non browser clients, you may disable CSRF protection
 `http.csrf(csrf -> csrf.disable());`
 
@@ -171,7 +169,7 @@ members :
 
 insert values ('john', '{noop}test123', 1), etc.
 
-authorities : 
+roles : 
 	user_id VARCHAR(50) FK
 	role VARCHAR(50)
 
