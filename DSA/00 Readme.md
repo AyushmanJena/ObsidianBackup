@@ -5,5 +5,7 @@
 5. Recursion 
 6. Backtracking
 7. LinkedList
-8. Stacks
-9. 
+8. Stacks and Queues
+9. Trees
+10. Heaps
+11. Hashmaps and Hashsets

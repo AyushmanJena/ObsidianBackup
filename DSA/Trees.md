@@ -1,0 +1,191 @@
+Populate a Binary Search Tree from a given unsorted array : 
+```java
+	public void populate(int[] nums){
+		for(int i = 0; i<nums.length; i++){
+			this.insert(nums[i]);
+		}
+	}
+
+	public void insert(int value){
+		root = insert(value, root);
+	}
+	public Node insert(int value, Node node){
+		if(node == null){
+			node = new Node(value);
+			return node;
+		}
+		if(value < node.value){
+			node.left = insert(value, node.left);
+		}
+		if(value > node.value){
+			node.right = insert(value, node.right);
+		}
+		return node;
+	}
+```
+
+Check if a Binary tree is Balanced : 
+```java
+public boolean balanced(){
+	return balanced(root);
+}
+
+public boolean balanced(Node node){
+	if(node == null){
+		return true;
+	}
+	return Math.abs(height(node.left) - height(node.right)) <= 1 && balanced(node.right) && balanced(node.left);
+}
+
+publiv int height(Node node){
+	if(node == nul){
+		return 0;
+	}
+	return 1 + Math.max(height(node.left), height(node.right));
+}
+```
+
+AVL Tree : (Rotating Binary Tree) #revise 
+- Self Balancing Binary Tree
+```java
+public void populate(int value){
+	root = insert(value, root);
+}
+publiv Node insert(int value, Node node){
+	if(node == null){
+		node = new Node(value);
+		return node;
+	}
+	if(value < node.value){
+		node.left = insert(value, node.left);
+	}
+	if(valuse > node.value){
+		node.right = insert(value, node.right);
+	}
+	
+	node.height = Math.max(height(node.left), height(node.right)) + 1;
+	return rotate(node);
+}
+
+private Node rotate(Node node){
+	// left heavy (case l-l or l-r)
+	if((height(node.left) - height(node.right)) > 1){ 
+		// left-left case
+		if((height(node.left.left) - height(node.left.right)) > 0){
+			return rightRotate(node);
+		}
+		// left-right case
+		if((height(node.left.left) - height(node.left.right)) < 0) {
+			node.left = leftRotate(node.left);
+			return rightRotate(node);
+		}
+	}
+
+	// right heavy case (r-l or r-r)
+	if((height(node.left) - height(node.right)) < -1){
+		// right-right case
+		if((height(node.right.left) - height(node.right.right)) < 0){
+			return leftRotate(node);
+		}
+		if((height(node.right.left) - height(node.right.right)) > 0){
+			node.right = rightRotate(node.right);
+			return leftRotate(node);
+		}
+	}
+	return node;
+}
+
+private Node rightRotate(Node p){
+	Node c = p.left;
+	Node t = c.right; // t3; t1 and t2 remain unchanged
+
+	c.right = p;
+	p.left = t;
+
+	// update height
+	p.height = Math.max(height(p.left), height(p.right)) + 1;
+	c.height = Math.max(height(c.left), height(c.right)) + 1;
+	return c;
+}
+
+private Node leftRotate(Node c){
+	Node p = c.right;
+	Node t = p.left; // t2; t1 and t3 remain unchanged
+
+	p.left = c;
+	c.right = t;
+
+	// update height
+	p.height = Math.max(height(p.left), height(p.right)) + 1;
+	c.height = Math.max(height(c.left), height(c.right)) + 1;
+	return p;
+}
+```
+
+Segment Tree 
+- Find sum of indices from given start till end in an array
+- segment : perform query on a range
+- can be sum or some other operations as well
+```java
+public SegmentTree(int[] arr){
+	this.root = constructTree(arr, 0, arr.length -1);
+}
+private Node constructTree(int[] arr,  int start, int end){
+	if(start == end){
+		// we are at leaf node (single element)
+		Node leaf = new Node(start, end);
+		leaf.data = arr[start];
+		return leaf;
+	}
+	// create new node with index you are at
+	Node node = new Node(start, end);
+	int mid = (start + end)/2;
+
+	node.left = this.constructTree(arr, start, mid);
+	node.right = this.constructtree(arr, mid+1, end);
+
+	node.data = node.left.data + node.right.data;
+	return node;
+}
+
+// Querying a segment tree (sum in this case with query start index and end index)
+public int query(int qsi, int qei){
+	return this.query(this.root, qsi, qei);
+}
+private int query(Node node, int qsi, int qei){
+	// case 1
+	if(node.startInterval >= qsi && node.endInterval <= qei){
+		// node is lyiing inside the query
+		return node.data;
+	}
+	// case 2
+	else if(node.startInterval > qei || node.endInterval < qsi){
+		// completely outside the query range
+		return 0;
+	}
+	// case 3
+	else{
+		return this.query(node.left, qsi, qei) + this.query(node.right, qsi, qei);
+	}
+}
+
+// Updating index of a segment tree
+public void update(int index, int value){
+	this.root.data = update(this.root, index, value);
+}
+
+private int update(Node node , int index, int value){
+	if(index >= node.startInterval && index <= node.endInterval){
+		if(index == node.startInterval && index == endInterval){
+			node.data = value;
+			return node.data;
+		}else{
+			int leftAns = update(node.left, index, value);
+			int rightAns = update(node.right, index, value);
+			node.data = leftAns + rightAns;
+			return node.data;
+		}
+	}
+	return node.data;
+}
+```

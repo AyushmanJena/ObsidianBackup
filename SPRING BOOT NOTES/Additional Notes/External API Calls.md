@@ -24,6 +24,9 @@ public ResponseEntity<?> home(){
 RestController : 
 to get quote : 
 ```java
+@Autowired
+Public QuoteService quoteService;
+
 @GetMapping("/")
 public ResponseEntity<?> home(){
 	String str = "Quote : "+quoteService.getQuote().data.getContent() + " -" + 
@@ -99,3 +102,21 @@ public class RestClientConfiguration{
 RestTemplate : 
 - RestTemplate is a spring class used for making synchronous HTTP requests on the client side. 
 - It simplifies communication with RESTful services by abstracting the complexities of HTTP communication.
+
+# Calls with request body within java 
+```java
+// Building the request Body
+Map<String, Object> body = Map.of(  
+        "contents", List.of(  
+                Map.of("parts", List.of(  
+                        Map.of("text", prompt)  
+                ))  
+        )  
+);
+
+// Setting headers
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.APPLICATION_JSON);
+```
+
+Needs to be updated

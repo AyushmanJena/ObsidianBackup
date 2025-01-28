@@ -29,12 +29,13 @@ public class DemoController {
 	@GetMapping("/hello")
 	public String sayHello(Model theModel){
 		theModel.addAttribute("theDate", java.time.LocalDateTime.now());
-		return "helloworld";
+		return "helloworld"; // returns the template name
 	}
 }
 ```
 
 3. Create Thymeleaf template :
+`helloworld.html`
 ```html
 <!DOCTYPE HTML>  
 <html xmlns:th="http://www.thymeleaf.org">  
