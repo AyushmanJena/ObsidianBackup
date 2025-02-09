@@ -6,6 +6,28 @@ lastSync: Mon Oct 21 2024 23:20:26 GMT+0530 (India Standard Time)
 > [!check]
 > Green Diary : 4th July
 
+# IMPORTANT FORMS : 
+```JAVA
+public int numSubarraysWithSumLessOrEqual(int[] nums, int goal){
+        int l = 0;
+        int r = 0; 
+        int count = 0;
+        int sum= 0;
+
+        while(r < nums.length){
+            sum = sum + nums[r];
+            while(l < nums.length && sum > goal){
+                sum = sum - nums[l];
+                l++;
+            }
+            count = count + (r-l+1);
+            r++;
+        }
+        return count;
+    }
+```
+
+
 ## 1. Consecutive Maximum Sum 
 -  Maximum points you can obtain from cards 
 - Pick consecutively from from or back or both
@@ -163,3 +185,38 @@ public static int solution(int[] arr, int k){
 ```
 
 --- 
+
+# LeetCode Questions
+
+[930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/)
+```java
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        int curr = numSubarraysWithSumLessOrEqual(nums, goal);
+        System.out.println(curr);
+        if(goal == 0){ // goal = -1 breaks the code
+            return curr;
+        }
+        int prev = numSubarraysWithSumLessOrEqual(nums, goal-1);
+        System.out.println(prev);
+        return curr-prev;
+    }
+    public int numSubarraysWithSumLessOrEqual(int[] nums, int goal){
+        int l = 0;
+        int r = 0; 
+        int count = 0;
+        int sum= 0;
+
+        while(r < nums.length){
+            sum = sum + nums[r];
+            while(l < nums.length && sum > goal){
+                sum = sum - nums[l];
+                l++;
+            }
+            count = count + (r-l+1);
+            r++;
+        }
+        return count;
+    }
+}
+```

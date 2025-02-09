@@ -72,7 +72,7 @@ some annotations and methods
 ### Assert class:
 
 | assertEquals(expected, actual)      | Checks that two objects are equal                       |
-| ----------------------------------- | ------------------------------------------------------- |
+| :---------------------------------- | :------------------------------------------------------ |
 | assertNotEquals(expected, actual)   | Checks that two objects are not equal                   |
 | assertArrayEquals(expected, actual) | Checks that two arrays are equal                        |
 | assertTrue(condition)               | Checks that a condition is true                         |

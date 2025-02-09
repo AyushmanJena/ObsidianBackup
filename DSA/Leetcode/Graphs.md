@@ -1,0 +1,339 @@
+## Note: 
+Need to complete Graphs playlist by STRIVER
+
+#### Matrix :
+
+|     | A   | B   | C   |
+| --- | --- | --- | --- |
+| A   | 0   | 1   | 1   |
+| B   | 1   | 0   | 0   |
+| C   | 1   | 0   | 0   |
+- edges between (a, b), (a,c) exist and 0 means no edges 
+- we can replace 1 with integer values to signify weight of the edge
+- Takes nxn space, so not appreciable
+
+#### ArrayList
+arraylist of arraylist 
+two ways : 
+1. Indexes represent nodes 
+2. Each edge is represented by an internal arraylist
+
+**Index represent nodes :** 
+0 -> 
+1 -> {2, 3}
+2 -> {1, 4, 5}
+3 -> {4, 1}
+4 -> {3, 2, 5}
+5 -> {2, 4}
+
+1 has two connected edges to 2 and 3
+2 has 3 connected edges and so on...
+
+Undirected graph : 
+```java
+adj.get(1).add(2);
+adj.get(2).add(1); // add both directional nodes
+```
+Directed graph : 
+```java
+adj.get(1).add(2); // edge from 1 to 2
+```
+
+**Each edge is represented by an internal Arraylist :** 
+{{1,2}{3,4},{2,1},{4,3},{2,4}, {4,2}}
+
+#### Weighted graphs : 
+1. Using Matrix to store the weight of the edge
+	instead of 1 `adj[u][j] = weight`
+2. Using Lists 
+	`4 -> {(2,1),(3,4)}` // 2-> connected node, 1-> weight
+3. Using node representation list 
+	`{2,1,5}` // 2->start node, 1->end node, 5->weight
+
+
+### BFS Traversal
+- Breadth First Search Traversal
+```java
+public static ArrayList<Integer> bfs( ArrayList<ArrayList<Integer>> adj){
+	ArrayList<Integer> bfs = new ArrayList<>();
+	boolean vis[] = new boolean[adj.size()];
+	Queue<Integer> q = new LinkedList<>();
+
+	q.add(0);
+	vis[0] = true;
+
+	while(!q.isEmpty()){
+		Integer node = q.poll(); 
+		// poll() : similar to remove() but returns null if queue empty
+		bfs.add(node);
+		// get all adjacent vertices of the dequeued vertex s
+		// if a adjacent node has not been visited, then mark it visited and enqueu it
+		for(Integer it : adj.get(node)){
+			if(!vis[it]){
+				vis[it] = true;
+				q.add(it);
+			}
+		}
+	}
+}
+```
+
+### DFS Traversal
+- Depth First Search Traversal
+```java
+public ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj){
+	// boolean array to keep track of visited vertices
+	boolean vis[] = new boolean[adj.size()];
+	vis[0] = true;
+	ArrayList<Integer> ls = new ArrayList<>();
+	dfs(0, vis, adj, ls);
+	return ls;
+}
+
+public static void dfs(int node, boolean vis[], ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> ls){
+	// marking current node as visited
+	vis[node] = true;
+	ls.add(node);
+
+	// getting neighbour nodes
+	for(Integer it: adj.get(node)){
+		if(vis[it] == false){
+			dfs(it, vis, adj, ls);
+		}
+	}
+}
+```
+
+### Find Number of Provinces in a Graph
+- Number of unconnected components
+```java
+public int numProvinces(ArrayList<ArrayList<Integer>> adj){
+	ArrayList<ArrayList<Integer>> adjLs = new ArrayList<>();
+	for(int i = 0; i<adj.size() ; i++){
+		adjLs.add(new ArrayList<>());
+	}
+
+	// to change adjacency matrix to List
+	for(int i = 0; i<adj.size(); i++){
+		for(int j = 0; j<adj.size(); j++){
+			// self nodes are not considered
+			if(adj.get(i).get(j) == 1 && i != j){
+				adjLs.get(i).add(j);
+				adjLs.get(j).add(i);
+			}
+		}
+	}
+	
+	inf vis[] = new int[adj.size()];
+	int count = 0;
+	for(int i = 0; i<adj.size(); i++){
+		if(vis[i] == 0){
+			count++;
+			dfs(i, adjLs, vis);
+		}
+	}
+	return count;
+}
+
+private void dfs(int node, ArrayList<ArrayList<Integer>> adjLs, int[] vis){
+	vis[node] = 1;
+	for(Integer it : adjLs.get(node)){
+		if(vis[it] == 0){
+			dfs(it, adjLs, vis);
+		}
+	}
+}
+```
+Time Complexity : O(N) + O(V+2E) ~= O(N)
+O(N) -> outer for loop
+O(V+2E) -> V number of nodes, if each node is an province
+
+Space Complexity : O(N) + O(N) : Nodes and The Recursion Stack
+
+### Find Number of Connected Components in a Graph
+- Given n x m grid matrix n(rows) and m(cols)
+- where 0-> water and 1-> land
+- Find number of islands 
+- Islands formed by connecting adjacent lands horizontally, vertically or diagonally in all 8 directions
+
+```java
+public static int numIslands(char[][] grid){
+	int n = grid.length;
+	int m = grid[0].length;
+	int[][] vis = new int[n][m];
+	int count = 0;
+	for(int row = 0; row < n; row++){
+		for(int col = 0; col < m; col++){
+			if(vis[row][col] == 0 && grid[row][col] == '1'){
+				count++;
+				bfs(row, col, vis, grid);
+			}
+		}
+	}
+	return count;
+}
+
+public static void bfs(int ro, int co, int[][] vis, char[][] grid){
+	vis[ro][co] = 1; // mark the cell as visited
+	Queue<Pair> q = new LinkedList<>();
+	q.add(new Pair(ro,co));
+	int n = grid.length;
+	int m = grid[0].length;
+
+	while(!q.isEmpty()){
+		int row = q.peek().r;
+		int col = q.peek().c;
+		q.remove();
+
+		// traverse in the neighbors and mark them if it is a land
+		for(int delRow = -1; delRow <= 1; delRow++){ // check all 8 corners 
+			for(int delcol = -1; delcol <= 1; delcol++){
+                    int nrow = row+ delrow;
+                    int ncol = col + delcol;
+                    if(nrow >= 0 && nrow <n && ncol >= 0 && 
+	                    ncol <m && grid[nrow][ncol] == '1' &&
+	                    vis[nrow][ncol] == 0){
+	                        vis[nrow][ncol] = 1;
+	                        q.add(new Pair(nrow, ncol));
+	                }
+                }
+            }
+		}
+	}
+}
+```
+Time Complexity : ~~ O(N<sup>2</sup>)
+Space Complexity : Visited Matrix + Queue  : O(N<sup>2</sup>) + O(N<sup>2</sup>)
+
+
+### Flood Fill Algorithm 
+using DFS
+- Given a starting row and starting column with value 1 (sr, sc)
+```java
+int[][] image = {
+                {1, 1, 1},
+                {1, 1, 0},
+                {1, 0, 1}
+        };
+    int[][] image = {
+                {2, 2, 2},
+                {2, 2, 0},
+                {2, 0, 1}
+        };
+```
+- And a new color 2 
+- color the adjacent cells with the new color and the adjacent cells as well if value of the adjacent cell is not equal to 0
+- Note here only move in 4 directions and not in 8 directions like the previous question
+
+```java
+public int[][] floodfill(int[][] image, int sr, int sc, int newColor){
+	int iniColor = image[sr][sc];
+	int[][] ans = image;
+	int[] delRow = {-1, 0, 1, 0};
+	int[] delCol = {0, 1, 0, -1};
+	dfs(sr, sc, ans, image, newColor, delRow, delCol, iniColor);
+	return ans;
+}
+
+public static void dfs(int row, int col, int[][] ans, int[][] image, int newColor, int delRow[], int delCol[], int iniColor){
+	ans[row][col] = newColor;
+	int n = image.length;
+	int m = image[0].length;
+
+	for(int i = 0; i<4; i++){
+		int nrow = row + delRow[i];
+		int ncol = col + delCol[i];
+		// check for valid coordinates 
+		// then check if the same initial color and unvisited pixel
+		if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m &&
+			image[nrow][ncol] == iniColor && ans[nrow][ncol] != newColor){
+				dfs(nrow, ncol, ans, image, newColor, delRow, delCol, iniColor);
+			}
+	}
+}
+```
+
+Time Complexity : O(mxn) // if all nodes are connected
+Space Complexity  : O(nxm) + O(nxm) // new matrix + recursive stack
+
+
+
+
+
+
+
+
+
+
+
+
+
+# LeetCode Questions
+##### [Minimize the Maximum Edge Weight of Graph](https://leetcode.com/problems/minimize-the-maximum-edge-weight-of-graph/)
+Solution Reference :    [Solution Youtube](https://www.youtube.com/watch?v=DXinKbQQDVE)
+```java
+class Solution {
+    public int minMaxWeight(int n, int[][] edges, int threshold) {
+        int minW = Integer.MAX_VALUE;
+        int maxW = Integer.MIN_VALUE;
+        for(int[] e : edges){
+            minW = Math.min(minW, e[2]);
+            maxW = Math.max(maxW, e[2]);
+        }
+
+         // performing binary search for finding the minimum weight 
+        int ans = -1;
+        int l = minW;
+        int h = maxW;
+        while(l <= h){
+            int mid = l + (h-l)/2;
+            if(isPossible(n, edges, mid)){
+                ans = mid;
+                h = mid - 1;
+            }else{
+                l = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+
+    public boolean isPossible(int n, int[][] edges, int maxWeight){ 
+    // check if all conditions are met with the given maxWeight value
+        List<List<Integer>> revGraph = new ArrayList<>();
+
+        for(int i =0; i<n; i++){
+            revGraph.add(new ArrayList<>()); // Initializes the graph (start point)
+        }
+
+        for(int[] e : edges){
+            if(e[2] <= maxWeight){
+                revGraph.get(e[1]).add(e[0]); 
+                // reverses the graph and stores in the new graph list
+            }
+        }
+
+        boolean[] visited = new boolean[n]; // to track visited nodes
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(0); 
+        // add to queue without size constraints 
+        visited[0] = true;
+        int count = 1; 
+        // count of number of nodes that can be visited with current maxWeight
+
+        while(!q.isEmpty()){ // usual graph traversal
+            int cur = q.poll();
+            for(int nxt : revGraph.get(cur)){
+                if(!visited[nxt]){
+                    visited[nxt] = true;
+                    q.offer(nxt);
+                    count++;
+                }
+            }
+        }
+
+        return count == n; 
+        // returns true if all the nodes can be reached starting from 0
+    }
+}
+```
