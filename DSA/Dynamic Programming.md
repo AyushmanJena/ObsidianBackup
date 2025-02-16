@@ -17,3 +17,128 @@ public static int fibbo(int n, int[] dp){
 }
 ```
 
+### Possible Steps
+
+
+### Frog Jump 1
+Frog is at 1st step of n steps long staircase. Wants to reach nth stair. `Height[i]` is the height of (i+1)<sup>th</sup> stair. If frog jumps from i<sup>th</sup> to j<sup>th</sup> stair, the energy lost is (`height[i-1] - height[j-1]`).
+The frog can either jump (i+1) or (i+2) steps. 
+You have to find minimum total energy used by frog to reach 1st stair to Nth stair.
+
+Using Recursive Memorization DP approach :  (top down)
+```java
+static int frogjump(int[] arr){
+	int[] dp = new int[arr.length];
+	Arrays.fill(dp, -1);
+	return  helper(arr.length -1, arr, dp);
+}
+static int helper(int n, int[] arr, int[] dp){
+	if(n == 0){
+		return 0;
+	}
+	if(dp[n] != -1){
+		return dp[n];
+	}
+	int left = helper(n -1, arr, dp) + Math.abs(arr[n] - arr[n - 1]);
+	int right = Integer.MAX_VALUE; // for i = 1, when theres 0 but no -1
+	if(n > 1){
+		right = helper(n -2, arr, dp) + Math.abs(arr[n] - arr[n-2]);
+	}
+	dp[n] = Math.min(left, right);
+	return dp[n];
+}
+```
+
+Using Iterative Tabulation Approach : (bottom up)
+```java
+static int frogJump2(int[] arr){ // iterative tabulation approach
+	int[] dp = new int[arr.length];
+	Arrays.fill(dp, 0);
+	for(int i = 1; i< arr.length;i++){
+		int firstStep = dp[i - 1] + Math.abs(arr[i] - arr[i-1]);
+		int secondStep = Integer.MAX_VALUE;
+		if(i > 1){
+			secondStep = dp[i-2] + Math.abs(arr[i] - arr[i-2]);
+		}
+		dp[i] = Math.min(firstStep, secondStep);
+	}
+	return dp[arr.length -1];
+}
+```
+
+Space Optimized Solution :
+- Since i only need (i-1) and (i-2) we can replace them with prev and prev2 and update their values with each iteration
+```java
+static int frogJump2(int[] arr){
+	int prev = 0;
+	int prev2 = 0;
+	for(int i = 1; i< arr.length;i++){
+		int firstStep = prev + Math.abs(arr[i] - arr[i-1]);
+		int secondStep = Integer.MAX_VALUE;
+		if(i > 1){
+			secondStep = prev2 + Math.abs(arr[i] - arr[i-2]);
+		}
+		int currI = Math.min(firstStep, secondStep);
+		prev2 = prev;
+		prev = currI;
+	}
+	return prev;
+}
+```
+
+### Frog Jump 2
+- Similar to above question but the frog can jump till k distance 
+- find minimum energy required.
+
+Memorization
+```java
+public static int frogjump(int[] arr, int k){ 
+	int[] dp = new int[arr.length];
+	Arrays.fill(dp, -1);
+	return  helper(arr.length -1, arr, dp, k);
+}
+public static int helper(int n, int[] arr, int[] dp, int k){
+	if(n == 0){
+		return 0;
+	}
+	if(dp[n] != -1){
+		return dp[n];
+	}
+	int minSteps = Integer.MAX_VALUE;
+
+	for(int j = 1; j <= k; j++){
+		if(n - j >= 0){
+			int jump = helper(n-j, arr, dp, k) + Math.abs(arr[n] - arr[n-j]);
+			minSteps = Math.min(minSteps, jump);
+		}
+	}
+	dp[n] = minSteps;
+	return dp[n];
+}
+```
+TC -> O(N x k)
+SC -> O(N) + O(N) : dp array + recursion stack space
+
+Iterative Tabulation
+```java
+public static int frogJump2(int[] arr, int k){
+	int[] dp = new int[arr.length];
+	Arrays.fill(dp, 0);
+	for(int i = 1; i< arr.length;i++){
+		int minSteps = Integer.MAX_VALUE;
+
+		for(int j = 1; j <= k; j++){
+			if((i - j) >= 0){
+				int jump = dp[i-j] + Math.abs(arr[i] - arr[i-j]);
+				minSteps = Math.min(minSteps, jump);
+			}
+		}
+		dp[i] = minSteps;
+	}
+	return dp[arr.length -1];
+}
+```
+TC -> O(N x k)
+SC -> O(N) : dp array only
+
+

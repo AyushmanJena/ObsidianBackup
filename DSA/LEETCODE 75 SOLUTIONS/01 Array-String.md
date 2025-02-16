@@ -204,21 +204,19 @@ class Solution {
 }
 ```
 
-[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) #imp
 ```java
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        int left = 1;
-        int right = 1;
         int[] ans = new int[nums.length];
         
         ans[0] = 1;
-        for(int i = 1; i<nums.length; i++){
+        for(int i = 1; i<nums.length; i++){ // going left to right
             ans[i] = ans[i-1]  * nums[i-1];
         }
         
         int prefixProduct = 1;
-        for(int i = nums.length - 1; i >= 0; i--){
+        for(int i = nums.length - 1; i >= 0; i--){ // going right to left
             ans[i] = ans[i] * prefixProduct;
             prefixProduct = prefixProduct * nums[i];
         }

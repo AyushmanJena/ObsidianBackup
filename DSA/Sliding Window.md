@@ -8,7 +8,7 @@ lastSync: Mon Oct 21 2024 23:20:26 GMT+0530 (India Standard Time)
 
 # IMPORTANT FORMS : 
 ```JAVA
-public int numSubarraysWithSumLessOrEqual(int[] nums, int goal){
+public int function(int[] nums, int goal){
         int l = 0;
         int r = 0; 
         int count = 0;
@@ -80,9 +80,34 @@ public static int solution(String str){
     return maxLen; 
 }
 ```
+Same question using hashmap #imp
+```java
+    public static int solution(String str){
+        HashMap<Character, Integer> map = new HashMap<>();
+        int n = str.length();
+        int l = 0;
+        int r = 0;
+        int maxLen = 0;
+        
+        while(r < n){
+            char ch = str.charAt(r);
+            if(map.containsKey(ch)){
+                if(map.get(ch) > l){
+                    l = map.get(ch) + 1;
+                }
+            }
+            maxLen = Math.max(maxLen, r-l + 1);
+            map.put(ch, r);
+            r++;
+        }
+        return maxLen;
+    }
+```
 
 ## 3. Fruits Into Baskets 
 - Max length of subarray with at-most k types of numbers 
+- At most 2 types of fruits(integers) can be repeated 
+- Ex :` [3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 3, 4]` ANS : `1, 2, 1, 1, 2` 
 ```java
 public static int solution(int[] arr, int k){
     int l = 0;
@@ -115,7 +140,7 @@ public static int solution(int[] arr, int k){
 ```
 
 # 4. Number of Substrings containing all 3 characters
-```
+```java
 function(String s){
 	lastSeen[3] -> {-1, -1, -1};
 	count = 0;

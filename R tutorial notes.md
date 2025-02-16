@@ -11,6 +11,7 @@ community : to be downloaded for use
 
 popular packages : 
 dplyr : for manipulating data frames
+doBy : for grouped data manipulation, summarization and ordering
 tidyr : for cleaning up information 
 stringr : for working with string data 
 lubridate : for manipulating date information
@@ -928,6 +929,14 @@ cat("\014")  # ctrl+L
 
 ```
 
+### Functions
+Code blocks that take in input and gives output 
+```r
+functionName <- function(x) {c(length(x), min(x), mean(x), max(x))}
+```
+takes in the value x object with every call 
+returns a concatenated list of length, minimum, mean and maximum values.
+
 ### Modeling Data  
 Overview Only
 Hierarchical Clustering -> Like with Like 
@@ -1016,6 +1025,8 @@ Example :
 
 We went from 2d to 1d data but maintained the most important information in the dataset.
 
+prcomp() -> principal component analysis : calculates the principal component which are those variables that account for the most variations in the dataset
+
 ```r
 # File:    R01_6_2_PrincipalComponents.R
 # Course:  R01: R: An introduction
@@ -1042,12 +1053,13 @@ head(cars)
 # COMPUTE PCA ##############################################
 
 # For entire data frame ####################################
+# automatically gets principal components
 pc <- prcomp(cars,
         center = TRUE,  # Centers means to 0 (optional)
         scale = TRUE)   # Sets unit variance (helpful)
 
 # To specify variables #####################################
-
+# set the principal components manually
 pc <- prcomp(~ mpg + cyl + disp + hp + wt + qsec + am +
         gear + carb, 
         data = mtcars, 
@@ -1070,6 +1082,100 @@ predict(pc) %>% round(2)
 
 # Biplot of first two components
 biplot(pc)
+
+# CLEAN UP #################################################
+
+# Clear environment
+rm(list = ls()) 
+
+# Clear packages
+p_unload(all)  # Remove all add-ons
+detach("package:datasets", unload = TRUE)  # For base
+
+# Clear plots
+dev.off()  # But only if there IS a plot
+
+# Clear console
+cat("\014")  # ctrl+L
+
+# Clear mind :)
+
+```
+
+
+### Regression 
+- Regression is a statistical technique that uses a function to predict a numerical value based on one or more variables.
+
+reg1 <- lm(y ~ x) 
+lm : linear model 
+~ : function of (y is a function of x)
+
+```r
+# File:   Regression.R
+# Course: R: An Introduction (with RStudio)
+
+# INSTALL AND LOAD PACKAGES ################################
+
+library(datasets)  # Load base packages manually
+
+# Installs pacman ("package manager") if needed
+if (!require("pacman")) install.packages("pacman")
+
+# Use pacman to load add-on packages as desired
+pacman::p_load(pacman, caret, lars, tidyverse)
+
+# LOAD DATA ################################################
+
+?USJudgeRatings
+head(USJudgeRatings)
+data <- USJudgeRatings
+
+# Define variable groups (not important but preferred)
+x <- as.matrix(data[, -12]) # -12 : dont read column 12 
+y <- data[, 12] # read only column 12
+
+# REGRESSION WITH SIMULTANEOUS ENTRY #######################
+
+# Using variable groups
+reg1 <- lm(y ~ x) 
+
+# Or specify variables individually
+reg1 <- lm(RTEN ~ CONT + INTG + DMNR + DILG + CFMG +
+           DECI + PREP + FAMI + ORAL + WRIT + PHYS,
+           data = USJudgeRatings)
+
+# Results
+reg1           # Coefficients only
+summary(reg1)  # Inferential tests
+
+# MORE SUMMARIES ###########################################
+
+anova(reg1)            # Coefficients w/inferential tests
+coef(reg1)             # Coefficients (same as reg1)
+confint(reg1)          # CI for coefficients
+resid(reg1)            # Residuals case-by-case
+hist(residuals(reg1))  # Histogram of residuals
+
+# ADDITIONAL MODELS ########################################
+
+# Conventional stepwise regression
+stepwise <- lars(x, y, type = "stepwise")
+
+# Stagewise: Like stepwise but with better generalizability
+forward <- lars(x, y, type = "forward.stagewise")
+
+# LAR: Least Angle Regression
+lar <- lars(x, y, type = "lar")
+
+# LASSO: Least Absolute Shrinkage and Selection Operator
+lasso <- lars(x, y, type = "lasso")
+
+# Comparison of R^2 for new models
+r2comp <- c(stepwise$R2[6], forward$R2[6], 
+            lar$R2[6], lasso$R2[6]) %>% 
+            round(2)
+names(r2comp) <- c("stepwise", "forward", "lar", "lasso") 
+r2comp  # Show values of R^2
 
 # CLEAN UP #################################################
 

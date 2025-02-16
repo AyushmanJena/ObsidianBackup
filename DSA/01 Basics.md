@@ -5,7 +5,7 @@ You should Know
 public static int gcd(int num1, int num2){
 	if(num1 == 0)
 		return num2;
-	ef(num2 == 0)
+	if(num2 == 0)
 		return num1;
 		
 	if(num1 > num2)

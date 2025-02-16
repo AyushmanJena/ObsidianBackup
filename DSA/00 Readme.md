@@ -9,7 +9,7 @@
 9. Trees
 10. Heaps
 11. Hashmaps and Hashsets
-12. Graphs (incomplete)
+12. Graphs (incomplete) ❄️
 
 To add : 
 - Pattern Questions
