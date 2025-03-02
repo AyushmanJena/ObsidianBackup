@@ -28,7 +28,7 @@ public int function(int[] nums, int goal){
 ```
 
 
-## 1. Consecutive Maximum Sum 
+### 1. Consecutive Maximum Sum 
 -  Maximum points you can obtain from cards 
 - Pick consecutively from from or back or both
 - Pick a total of **k** cards 
@@ -58,7 +58,7 @@ public static int solution(int[] arr, int k){
 ```
 
 
-## 2. Longest Non Repeating substring
+### 2. Longest Non Repeating substring
 - Return the length of the longest substring without repeating characters
 - Ex : str = "cadbzabcd", output = 5 i.e. "cadbz"
 ```java
@@ -104,10 +104,11 @@ Same question using hashmap #imp
     }
 ```
 
-## 3. Fruits Into Baskets 
+### 3. Fruits Into Baskets 
 - Max length of subarray with at-most k types of numbers 
-- At most 2 types of fruits(integers) can be repeated 
-- Ex :` [3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 3, 4]` ANS : `1, 2, 1, 1, 2` 
+- At most 2 types of fruits(integers) can be placed  `k = 2`
+- Ex :` [3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 3, 4]` ANS : `1, 2, 1, 1, 2`
+		one basket contains 1 and another contains 2 
 ```java
 public static int solution(int[] arr, int k){
     int l = 0;
@@ -139,7 +140,7 @@ public static int solution(int[] arr, int k){
 }
 ```
 
-# 4. Number of Substrings containing all 3 characters
+### 4. Number of Substrings containing all 3 characters
 ```java
 function(String s){
 	lastSeen[3] -> {-1, -1, -1};
@@ -154,8 +155,8 @@ function(String s){
 }
 ```
 
-# 5. Longest Repeating character with k replacements
-- s = "AABABBA", k = 2
+### 5. Longest Repeating character with k replacements
+- s = "**AABAB**BA", k = 2
 - changing 2 B's to A such that the longest series of the same character is possible i.e. 5 A's
 - Any character can be converted to any other character (given all are uppercase)
 ```java
@@ -165,10 +166,10 @@ public static int solution(String s, int k){
 	while(r < s.length()){
 		hash[s.charAt(r) - 'A']++;
 		maxFreq = Math.max(maxFreq, hash[s.charAt(r)- 'A']);
-		if((r - l +1) - maxFreq > k){
+		if((r - l +1) - maxFreq > k){ //substr len-repeatn char = non-repeatn chars
 			hash[s.charAt(l) - 'A']--;
 			maxFreq = 0;
-			for(int i = 0; i<=25; i++){
+			for(int i = 0; i<= 25; i++){ // again find the max repeatin char
 				maxFreq = Math.max(maxFreq, hash[i]);
 			}
 			l++;
@@ -182,7 +183,7 @@ public static int solution(String s, int k){
 }
 ```
 
-# 6. Subarrays with K different Integers
+### 6. Subarrays with K different Integers
 - this code finds solution for <= k different integers
 - use solution(arr, k) - solution(arr, k-1)
 ```java
@@ -211,9 +212,9 @@ public static int solution(int[] arr, int k){
 
 --- 
 
-# LeetCode Questions
+## LeetCode Questions
 
-[930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/)
+[930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) #imp
 ```java
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {

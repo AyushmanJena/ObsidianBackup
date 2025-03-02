@@ -37,6 +37,8 @@ class Solution {
     }
 }
 ```
+## 27
+## 26
 
 [80. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/)
 ```java
@@ -62,6 +64,8 @@ class Solution {
     }
 }
 ```
+
+## 169
 
 [189. Rotate Array](https://leetcode.com/problems/rotate-array/)
 ```java
@@ -125,3 +129,229 @@ class Solution {
     }
 }
 ```
+
+[55. Jump Game](https://leetcode.com/problems/jump-game/)
+```java
+class Solution {
+    public boolean canJump(int[] nums) {
+        int max = 0;
+        for(int i =0;i<nums.length; i++){
+            if(max >= nums.length-1){
+                return true;
+            }
+            if(i == max && nums[max] == 0){
+                return false;
+            }
+            max = Math.max(max, i+nums[i]);
+        }
+        return false;
+    }
+}
+```
+
+[45. Jump Game II](https://leetcode.com/problems/jump-game-ii/)
+```java
+class Solution {
+    public int jump(int[] nums) {
+        int ans = 0;
+        int l = 0;
+        int r = 0;
+        while(r < nums.length -1){
+            int max = 0;
+            for(int i = l; i <= r; i++){
+                max = Math.max(i + nums[i], max);
+            }
+            l = r+1;
+            r = max;
+            ans++;
+        }
+        return ans;
+    }
+}
+```
+
+[274. H-Index](https://leetcode.com/problems/h-index/)
+```java
+class Solution {
+    public int hIndex(int[] citations) {
+        // find max value in array
+        int max = 0;
+        for(int num : citations){
+            if(max < num){
+                max = num;
+            }
+        }
+
+        int[] arr = new int[max+1];
+
+        for(int num : citations){
+            arr[num]++; 
+        }
+
+        // loop
+        int sum = 0;
+        for(int i = max; i>= 0; i--){
+            sum = sum + arr[i];
+            if(sum >= i){
+                return i;
+            }
+        }
+        return 0;
+    }
+}
+```
+
+[380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/) meh
+```java
+class RandomizedSet {
+    HashMap<Integer, Integer> map;
+    List<Integer> list;
+    Random random = new Random();
+
+    public RandomizedSet() {
+        list = new ArrayList<>();
+        map = new HashMap<Integer, Integer>();
+    }
+    
+    public boolean insert(int val) {
+        if(map.containsKey(val)){
+            return false;
+        }
+        map.put(val, list.size());
+        list.add(val);
+        return true;
+    }
+    
+    public boolean remove(int val) {
+        if(!map.containsKey(val)){
+            return false;
+        }
+        int pos = map.get(val);
+        if(pos != (list.size() - 1)){
+            int lastElement = list.get(list.size() - 1);
+            list.set(pos, lastElement);
+            map.put(lastElement, pos);
+        }
+        map.remove(val);
+        list.remove(list.size() - 1);
+        return true;
+    }
+    
+    public int getRandom() {
+        int randomInt = random.nextInt(list.size());
+        return list.get(randomInt);
+    }
+}
+
+/**
+ * Your RandomizedSet object will be instantiated and called as such:
+ * RandomizedSet obj = new RandomizedSet();
+ * boolean param_1 = obj.insert(val);
+ * boolean param_2 = obj.remove(val);
+ * int param_3 = obj.getRandom();
+ */
+```
+
+## 238
+
+[134. Gas Station](https://leetcode.com/problems/gas-station/)
+help : [yt](https://www.youtube.com/watch?v=3wUa7Lf1Xjk)
+```java
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int sum = 0;
+        int total = 0;
+        int position = 0;
+
+        for(int i = 0; i < gas.length; i++){
+            sum += gas[i] - cost[i];
+            if(sum < 0){
+                total += sum;
+                sum = 0;
+                position = i + 1;
+            }
+        }
+        total += sum;
+        return total >= 0 ? position : -1;
+    }
+}
+```
+
+[135. Candy](https://leetcode.com/problems/candy/) #imp 
+```java
+class Solution {
+    public int candy(int[] ratings) {
+        int sum = 1;
+        int i = 1;
+        while(i < ratings.length){
+            if(ratings[i] == ratings[i-1]){
+                sum += 1;
+                i++;
+                continue;
+            }
+
+            int peak = 1;
+            while(i < ratings.length && ratings[i] > ratings[i-1]){
+                peak++;
+                sum += peak;
+                i++;
+            }
+
+            int down = 1;
+            while(i < ratings.length && ratings[i] < ratings[i-1]){
+                sum += down;
+                down++;
+                i++;
+            }
+
+            if(down > peak){
+                sum = sum - peak + down;
+            }
+        }
+        return sum;
+    }
+}
+```
+
+[42. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
+```java
+class Solution {
+    public int trap(int[] height) {
+        int[] left = new int[height.length];
+        int[] right = new int[height.length];
+
+        int leftGreatest = height[0];
+        left[0] = 0;
+        for(int i = 1; i<height.length; i++){
+            left[i] = leftGreatest;
+            if(height[i] > leftGreatest){
+                leftGreatest = height[i];
+            }
+        }
+
+        int rightGreatest = height[height.length-1];
+        right[height.length-1] = 0;
+        for(int i = height.length-2; i >= 0; i--){
+            right[i] = rightGreatest;
+            if(height[i] > rightGreatest){
+                rightGreatest = height[i];
+            }
+        }
+
+        int sum = 0;
+        for(int i= 0; i<height.length; i++){
+            int temp = Math.min(left[i], right[i]) - height[i];
+            if(temp > 0){
+                sum += temp;
+            }
+        }
+
+        return sum;
+    }
+}
+```
+
+## 13
+## 12
+
+

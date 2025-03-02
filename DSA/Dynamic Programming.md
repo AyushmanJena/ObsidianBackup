@@ -1,3 +1,17 @@
+# Notes
+Approach : 
+1. Recursion no dynamic programming
+2. Memorization : Top Down Approach 
+	- If the call has been made before use the previous result 
+	- If not make the call and store the result
+3. Tabulation : Bottom Up Approach
+	- Keep storing the result in a dp
+	- Use the previous result for future calls 
+	- Removes the recursive stack
+4. Further Space Optimization : 
+	- Conditional
+	- Do not store all the previous results 
+	- Only store the last n results and keep updating the value of the n variables. Constant extra space.
 ### Fibonacci Series with Memorization
 ```java
 public static int fibbo(int n){
@@ -141,4 +155,47 @@ public static int frogJump2(int[] arr, int k){
 TC -> O(N x k)
 SC -> O(N) : dp array only
 
+### Maximum Sum of Non-Adjacent Elements
+Memorization
+```java
+public static int solution(int[] arr){
+	int[] dp = new int[arr.length];
+	return helper(arr.length-1, arr, dp);
+}
+public static int helper(int i, int[] arr, int[] dp){
+	if(i == 0){
+		return arr[i];
+	}
+	if(i < 0){
+		return 0;
+	}
+	if(dp[i] != 0){
+		return dp[i];
+	}
+	int pick = arr[i] + helper(i - 2, arr, dp); // include the number and not the previous
+	int notPick = 0 + helper(i-1, arr, dp); // not include the number and call the prev
+	dp[i] = Math.max(pick, notPick);
+	return dp[i];
+}
+```
 
+Tabulation
+```java
+public static int solution(int[] arr){
+	int dp[] = new int[arr.length];
+	dp[0] = arr[0];
+
+	for(int i = 1; i< arr.length; i++){
+		int take = arr[i];
+		if(i > 1){
+			take += dp[i-2];
+		}
+
+		int notTake = 0 + dp[i-1];
+
+		dp[i] = Math.max(take, notTake);
+	}
+
+	return dp[dp.length-1];
+} 
+```
