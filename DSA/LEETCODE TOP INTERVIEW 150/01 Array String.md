@@ -354,4 +354,51 @@ class Solution {
 ## 13
 ## 12
 
+[58. Length of Last Word](https://leetcode.com/problems/length-of-last-word/)
+```java
+class Solution {
+    public int lengthOfLastWord(String s) {
+        int i = s.length() -1;
+        int size = 0;
+
+        while(s.charAt(i) == ' '){
+            i--;
+        }
+
+        while(i >= 0){
+            if(s.charAt(i) == ' '){
+                return size;
+            }
+            size++;
+            i--;
+        }
+        return size;
+    }
+}
+```
+
+[14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
+```java
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        int ans = strs[0].length(); // ans can be max as the first word
+        char[] arr = new char[strs[0].length()];
+        for(int i = 0 ; i < strs[0].length(); i++){
+            arr[i] = strs[0].charAt(i);
+        }
+
+        for(int i = 1; i<strs.length; i++){
+            for(int j = 0;j <= strs[i].length() && j < ans ; j++){
+                if(j == strs[i].length() || strs[i].charAt(j) != arr[j]){
+                    ans = j; // replace ans if curr char not match or ends there
+                }
+            }
+        }
+        return strs[0].substring(0, ans);
+    }
+}
+```
+
+## 151
+## 6
 

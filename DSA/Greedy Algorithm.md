@@ -3,10 +3,82 @@
 > [!check]
 > Green Diary : 23rd July
 
-### 1. SJF -> shortest job first find the average waiting time
+
+### Cookies
+- greed size -> number of children
+- `greed[i]` -> greed of i<sup>th</sup> child
+- size -> number of cookies
+- `size[i]` -> size of a cookie 
+- return maximum number of children whose greed is satisfied
+
+- Approach : first sort both the arrays and give minimum cookie to minimum child greed  and increase size if greed of the child is not satisfied
+
+```java
+public static int solution(int[] greed, int[] size){
+	int n = greed.length;
+	int m = size.length;
+	int l = 0; // pointer for cookie size
+	int r = 0; // pointer for greed (child)
+
+	Arrays.sort(greed);
+	Arrays.sort(size);
+
+	while(l < m && r < n){
+		if(greed[r] <= size[l]){
+			r++;
+		}
+		l++;
+	}
+	return r;
+}
+```
+
+### Lemonade Change
+- Each lemonade costs 5 dollars
+- array of bills -> what ith customer pays 
+- Return true if you can provide the customers exact change 
+- Bills available -> 5, 10, 20 dollars
+
+Approach : 
+- You do not need to return 20 to anyone so no need to count it
+- Try to get rid of larger notes first 
+```java
+public static boolean solution(int[] arr){
+	int five = 0;
+	int ten = 0;
+	for(int i = 0; i<arr.length; i++){
+		if(arr[i] == 5){
+			five++;
+		}
+		else if(arr[i] == 10){
+			if(five > 0){
+				five--;
+				ten++;
+			}else{
+				return false;
+			}
+		}
+		else{
+			if(ten > 0 && five > 0){
+				ten--;
+				five--;
+			}else if(five >= 3){
+				five -= 3;
+			}else{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+```
+
+### 1. SJF -> shortest job first : find the average waiting time
+Given array of integers -> time taken to complete the job
+Given all arrive at time 0
 ```java
 public static int solution(int[] arr){
-	Arrays.sort(arr);
+	Arrays.sort(arr); //since shortest job is done first
 	int t = 0;
 	int wt = 0;
 	for(int i = 0; i<arr.length; i++){
@@ -33,7 +105,7 @@ public static boolean solution(int[] arr){
 }
 ```
 
-### 3. Jump Game II
+### 3. Jump Game II #imp
 - Similar to jump game except return the smallest number of steps taken to reach the end.
 ```java
 public static int solution(int[] arr){
@@ -49,6 +121,27 @@ public static int solution(int[] arr){
 		jumps++;
 	}
 	return jumps;
+}
+```
+
+
+### 5. Non overlapping Intervals 
+- Remove some intervals so that there are no overlapping ( end exclusive)
+- Ex : int[][] arr = { {0, 5}, {3, 4}, {1, 2}, {5, 9}, {5, 7}, {7, 9} };
+- Ans : 2 -> remove {0, 5} and {5, 9}
+```java
+public static int solution(int[][] arr){
+	// sort based on end value
+	Arrays.sort(arr, (a, b) -> Integer.compare(a[1], b[1]));
+	int count = 1;
+	int endTime = arr[0][1];
+	for(int i = 1; i<arr.length; i++){
+		if(arr[i][0] >= endTime){
+			endTime = arr[i][1];
+			count++;
+		}
+	}
+	return arr.length - count;
 }
 ```
 
@@ -68,7 +161,7 @@ public class NMeetingsInOneRoom{
 	public static class Data{
 		int start;
 		int end;
-		int pos;
+		int pos; // position of the meeting in original array
 	}
 	public static ArrayList<Integer> solution(int[] start, int[] end){
 		Data[] arr = new Data[start.length];
@@ -87,7 +180,7 @@ public class NMeetingsInOneRoom{
 		ArrayList<Integer> ans = new ArrayList<>();
 		ans.add(arr[0].pos);
 
-		for(int i = 0; i< arr.length; i++){
+		for(int i = 1; i< arr.length; i++){
 			if(arr[i].start > freeTime){
 				count++;
 				freeTime = arr[i].end;
@@ -97,28 +190,6 @@ public class NMeetingsInOneRoom{
 		return ans;
 	}
 }
-```
-
-### 5. Non overlapping Intervals 
-- Remove some intervals so that there are no overlapping ( end exclusive)
-- Ex : int[][] arr = { {0, 5}, {3, 4}, {1, 2}, {5, 9}, {5, 7}, {7, 9} };
-- Ans : 2 -> remove 0, 5 and 5, 9
-```java
-public static int solution(int[][] arr){
-		Arrays.sort(arr, (a, b) -> Integer.compare(a[1], b[1]));
-
-		int count = 1;
-		int endTime = arr[0][1];
-
-		for(int i = 1; i<arr.length; i++){
-			if(arr[i][0] >= endTime){
-				endTime = arr[i][1];
-				count++;
-			}
-		}
-
-		return arr.length - count;
-	}
 ```
 
 ### 6. Insert Interval 
