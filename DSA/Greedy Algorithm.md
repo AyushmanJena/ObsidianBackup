@@ -238,15 +238,15 @@ public static int solution(int[] arr, int[] dep){
 	int count = 0;
 	int maxCount = 0;
 	while(i < arr.length){
-		if(arr[i] < dep[j]){
+		if(arr[i] < dep[j]){ // train arrived
 			count++;
 			i++;
 		}
-		else{
+		else{ // train departed
 			count--;
 			j++;
 		}
-		maxCount = Math.max(maxCount, count);
+		maxCount = Math.max(maxCount, count); // maximum count at any instance
 	}
 	return maxCount;
 }
@@ -272,8 +272,8 @@ public static boolean solution(String s){
 			min = min -1;
 			max = max + 1;
 		}
-		if(min < 0){
-			min = 0;
+		if(min < 0){ // to reset min value if there are multiple ')'
+			min = 0; // also if it is invalid max would catch it
 		}
 		if(max < 0){
 			return false;
@@ -283,7 +283,7 @@ public static boolean solution(String s){
 }
 ```
 
-### 9. Children ad candies
+### 9. Children and candies
  given : arr = {1, 3, 2, 1};  -> output  = 7
  each element is rating value of a children
  Distribute minimum candies such that : 
@@ -331,11 +331,11 @@ public static double solution(int[][] arr, int w){
 	// compare per unit value and sort them in reverse order
 	double totVal = 0;
 	for(int i = 0; i<arr.length; i++){
-		if(arr[i][1] <= w){
+		if(arr[i][1] <= w){ // taking the whole item
 			totVal += arr[i][0];
 			w -= arr[i][1];
 		}
-		else{
+		else{ // taking fractional item
 			totVal += ((double)(arr[i][0]/arr[i][1])) * w;
 			break;
 		}

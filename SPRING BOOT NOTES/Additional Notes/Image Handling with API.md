@@ -15,7 +15,7 @@ catch(Exception e){
 	...
 }
 
-return ResponseEntity.status(HttpStatus.OK).body(randomQuote);
+return encoded;
 ```
 
 # Receiving Image in Base64 and converting it

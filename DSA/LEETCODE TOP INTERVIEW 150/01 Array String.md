@@ -402,3 +402,28 @@ class Solution {
 ## 151
 ## 6
 
+[28. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
+```java
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int i = 0;
+        if(needle.length() > haystack.length()){
+            return -1;
+        }
+        while(i < haystack.length()){
+            int j = 0;
+            int temp = i;
+            while(i < haystack.length() && j < needle.length() && haystack.charAt(i) == needle.charAt(j)){
+                if(j == needle.length() -1){
+                    return temp;
+                }
+                i++;
+                j++;
+            }
+            i = temp + 1;
+        }
+        return -1;
+    }
+}
+```
+
