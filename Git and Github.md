@@ -238,3 +238,12 @@ git branch main master -f
 git checkout main
 git push origin main -f
 ```
+
+
+Reverting local changes back to the last commit : 
+```
+git restore .
+git reset
+git clean -f
+git clean -fd
+```

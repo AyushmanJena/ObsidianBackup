@@ -199,3 +199,75 @@ public static int solution(int[] arr){
 	return dp[dp.length-1];
 } 
 ```
+
+# 2D Dynamic Programming Questions
+
+### Ninja Training 
+- Given a 2d array of integers with each `arr[i]` of size 3
+- given you have to pick a number from each array
+- you cannot pick the same index for the next array
+- maximize your output
+
+Simple Recursive Solution 
+```java
+public static int solution(int[][] arr){
+	return helper(arr, arr.length-1, 3);
+}
+public static int helper(int[][] arr, int day, int last){ // simple recursive solution
+	if(day == 0){
+		int maxi = 0;
+		for(int i = 0; i<3; i++){
+			if(i != last){
+				maxi = Math.max(maxi, arr[0][i]);
+			}
+		}
+		return maxi;
+	}
+
+	int maxi = 0;
+	for(int i = 0; i<3; i++){
+		if(i != last){
+			int points = arr[day][i] + helper(arr, day-1, i);
+			maxi = Math.max(maxi, points);
+		}
+	}
+	return maxi;
+}
+```
+
+Memorization 
+```java
+public static int solution(int[][] arr){
+	int[][] dp = new int[arr.length][4];
+	for(int[] day : dp){
+		Arrays.fill(day, -1);
+	}
+	return helper2(arr, dp, arr.length-1, 3);
+}
+
+public static int helper2(int[][] arr, int[][] dp, int day, int last){ // memorization solution
+	if(day == 0){
+		int maxi = 0;
+		for(int i = 0; i<3; i++){
+			if(i != last){
+				maxi = Math.max(maxi, arr[0][i]);
+			}
+		}
+		return maxi;
+	}
+	if(dp[day][last] != -1){
+		return dp[day][last];
+	}
+	int maxi = 0;
+	for(int i = 0; i<3; i++){
+		if(i != last){
+			int points = arr[day][i] + helper(arr, day-1, i);
+			maxi = Math.max(maxi, points);
+		}
+	}
+	dp[day][last] = maxi;
+	return maxi;
+}
+```
+
+Tabulation and space optimized in notes.

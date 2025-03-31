@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Git and Github.md",
-                "mode": "source",
+                "file": "SPRING BOOT NOTES/Additional Notes/Sending Email using Spring Boot.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Git and Github"
+              "title": "Sending Email using Spring Boot"
             }
           },
           {
@@ -69,16 +69,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DATA STRUCTURES/Basic Methods.md",
-                "mode": "preview",
+                "file": "REACT NATIVE NOTES/React Native Udemy Course/01 Getting Started.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Basic Methods"
+              "title": "01 Getting Started"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -221,32 +221,37 @@
       "local-backup:Run local backup": false
     }
   },
-  "active": "4c476748df6df139",
+  "active": "673e8eedce7d9a90",
   "lastOpenFiles": [
     "JavaScript Notes/React Tutorial/React Notes.md",
-    "RESOURCES/git/example-diagram.png",
+    "REACT NATIVE NOTES/React Native Udemy Course/01 Getting Started.md",
+    "JavaScript Notes/React Tutorial/Resources/02.png",
+    "JavaScript Notes/React Tutorial/Resources/Screenshot 2025-03-13 110829.png",
+    "JavaScript Notes/React Tutorial/Resources/01.png",
+    "REACT NATIVE NOTES/React Native Udemy Course",
+    "REACT NATIVE NOTES",
+    "DSA/Dynamic Programming.md",
+    "DSA/LEETCODE TOP INTERVIEW 150/01 Array String.md",
+    "SPRING BOOT NOTES/Additional Notes/Sending Email using Spring Boot.md",
     "Git and Github.md",
+    "JavaScript Notes/Fundamentals.md",
+    "DATA STRUCTURES/Basic Methods.md",
+    "RESOURCES/git/example-diagram.png",
     "RESOURCES/git/git picture 2.png",
     "RESOURCES/git",
     "RESOURCES/New folder",
     "RESOURCES",
     "New folder",
     "MARKDOWN.md",
-    "JavaScript Notes/React Tutorial/Resources/01.png",
     "JavaScript Notes/React Tutorial/Resources",
     "JavaScript Notes/React Tutorial",
-    "DSA/LEETCODE TOP INTERVIEW 150/01 Array String.md",
     "DSA/Greedy Algorithm.md",
     "DSA/LEETCODE TOP INTERVIEW 150/02 Two Pointers.md",
     "SPRING BOOT NOTES/Additional Notes/pdf file creation.md",
     "SPRING BOOT NOTES/Additional Notes/Image Handling with API.md",
-    "SPRING BOOT NOTES/Additional Notes/Sending Email using Spring Boot.md",
     "SPRING BOOT NOTES/Additional Notes/Spring Boot Application Unit Testing.md",
-    "DSA/Dynamic Programming.md",
-    "DATA STRUCTURES/Basic Methods.md",
     "Docker Tutorial.md",
     "R tutorial notes.md",
-    "JavaScript Notes/Fundamentals.md",
     "SPRING BOOT NOTES/Documenting Projects.md",
     "SPRING BOOT NOTES/Additional Notes/MongoDB integration.md",
     "SPRING BOOT NOTES/Additional Notes/file upload-download.md",
@@ -259,15 +264,11 @@
     "DSA/04 Recursion.md",
     "DSA/LEETCODE TOP INTERVIEW 150",
     "DSA/Leetcode",
-    "SPRING BOOT NOTES/Additional Notes/Web Sockets",
-    "SPRING BOOT NOTES/Additional Java",
     "SPRING BOOT NOTES/Spring Boot Course/Resources/mapping thymeleaf.png",
     "SPRING BOOT NOTES/Resources/Screenshot 2024-10-18 132208.png",
     "SPRING BOOT NOTES/Spring Boot Course/Resources/Form Thymeleaf.png",
     "SPRING BOOT NOTES/Resources/Screenshot 2024-10-18 123244.png",
     "SPRING BOOT NOTES/Spring Boot Course/Resources/templating engine.png",
-    "SPRING BOOT NOTES/Resources/Screenshot 2024-10-18 121154.png",
-    "SPRING BOOT NOTES/Spring Boot Course/Resources/Screenshot 2024-10-15 105720.png",
     "SPRING BOOT NOTES/Resources/canvas for structures.canvas",
     "DATA STRUCTURES/Untitled.canvas",
     "Untitled.canvas"

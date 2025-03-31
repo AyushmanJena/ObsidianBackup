@@ -1,3 +1,6 @@
+
+> [!ERROR]
+> INCOMPLETE TUTORIAL 
 ## Creating a react app : 
 1. Create React App
 2. Vite : 
@@ -167,7 +170,7 @@ Now tailwind css is the way to go. (most popular and recommended)
 - State is like a react component's brain
 - It holds information about components that can change overtime.
 
-INSERT STATE IMAGE HERE
+![[02.png]]
 
 If  you use js variable instead of states and pass them as props to components, react won't know when the value has changed and would not render changes accordingly.
 Because React rendering process relies on state and props to decide when and how to re-render components.
@@ -294,5 +297,90 @@ Notes :
 - do not mutate props 
 - Never mutate state, you only modify the state using the state setter function
 
+
+
+Since api is not working anymore here are notes only
+
+- In your react app you do not put your api key as a variable in the jsx files
+- You put the key in environment variables. 
+
+1. create a new file in the root of your folder : my-first-react-app 
+2. .env.local
+```.env.local
+VITE_TMDB_API_KEY=yourapikey 
+```
+re run your app
+
+- Use useEffect() react hook to fetch your movies. 
+```jsx
+
+const API_BASE_URL = 'https://api.themoviedb.org/3';
+
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY; // import from the env file
+
+const API_OPTIONS = {
+	method : 'GET', 
+	headers: {
+		accept: 'application/json',
+		Authorization: 'Bearer ${API_KEY}'
+	}
+}
+
+const App = () => {
+	const[searchTerm, setSearchTerm] = useState('');
+
+	// we can display any error message in the browser itself using useState hook
+	const [errorMessage, setErrorMessage] = useState('');
+	const [movieList, setMovieList] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	const fetchMovies = async() => {
+		setIsLoading(true);
+		setErrorMessage(';);
+		try { // calling the api
+			const endpoint = `{API_BASE_URL}/discover/movie?sort_by=popularity.desc`; // this is the complete endpoint
+			const response = await fetch(endpoint, API_OPTIONS); // making api request using fetch()
+
+		if(!response.ok){ // throw error if we do not get ok response
+			throw new Error("Failed to fetch movies");
+		}
+
+		const data = await response.json(); // convert response into json
+
+		console.log(data);
+
+		// now we want to use the data we received and show it to the user
+		if(data.Response === 'False'){
+			setErrorMessage(data.Error || "Failed to fetch movies");
+			setMovieList([]);
+			return;
+		}
+		setMovieList(data.results || []);
+			
+		}catch(error) // if anything fails in the api call we catch it here
+			console.error(`Error Fetching movies ${error}`);
+			setErrorMessage('Error fetching movies try again later'); // setting the state of errorMessage  which would be displayed in the browser
+		}finally {
+			setIsLoading(false);
+		}
+	}
+
+	useEffect(() => {
+		fetchMovies();
+	}, []);
+}
+```
+
+accessing the error message in the website : 
+```html
+{errorMessage && <p clasName="text-red-500">{errorMesage}</p>}
+```
+
+showing the movies in the browser : 
+```html
+<section className = "all-movies">
+	
+</section>
+```
 
 
