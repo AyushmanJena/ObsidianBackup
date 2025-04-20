@@ -289,4 +289,142 @@ ex :
 
 ## ng-container
 - The ng-container is a special angular element that can hold structural directives without adding new elements to the DOM.
-- 
+- You cannot use multiple structural directives (*ngFor, *ngIf) together in the same tag, same with any event binding cause they all manipulate the DOM and might create some conflicts.
+- Thats when you use ng-container, ng-container element is invisible to the HTML layout.
+- ng-component allows us to use structural directives, without any extra elements making sure that the only DOM changes being applied are those being dictated by the directive itself.
+```html
+<ng-container *ngIf="toggle; else toggleOff">
+<p>The toggle is ON</p>
+</ng-container>
+<ng-template #toggleOff>
+  <p>The toggle is OFF</p>
+</ng-template>
+<button (click)=" onToggle()">Toggle</button>
+
+```
+```ts
+export class AppComponent {
+  title = 'angular-ng-container';
+
+  toggle:boolean = true;
+
+  onToggle() {
+    this.toggle = !this.toggle;
+  }
+}
+
+```
+- Note since it is invisible to html, events cannot be used with it, use events in the child elements. 
+
+### ng-content
+- Specify some content within selector html tags
+- By default nothing happens.
+- We can pass data to the called(child) component's view template from the calling (parent) component with the help of `<ng-component>` tag
+
+Ex : 
+container.component.html
+```html
+<featured-brands>  
+  <h3 class="title">New Arrival in Nike</h3>  
+</featured-brands>
+```
+featured-brands.component.html
+```html
+<div class="ekart-featured-product-item">  
+  <ng-content></ng-content>  
+  <p class="description">  
+    Lorem Ipsum is the best thing that has ever happened to the HTML Space.  
+    This is how things used to work before Lorem Ipsum happened.  
+  </p>  
+  <button class="call-to-action">Learn More</button>  
+</div>
+```
+
+Now instead of ng-content it would display the data passed within the featured-brands tag.
+This is called CONTENT PROJECTION.
+- We are projecting the content from the parent component to the child component.
+
+Note :
+- When we have multiple ng-content elements, the last ng-content element will be replaced with the content which we are projecting from the parent element.
+- Other ng-content elements will be ignored.
+
+Lets say we have multiple elements being projected and we want different ng-content elements to be replaced by each of them differently.
+
+Example : 
+```html
+<featured-brands>  
+    <h3 class="title">New Arrival in Upma</h3>  
+    <button class="call-to-action">Show New Arrivals in Upma</button>  
+  </featured-brands>  
+```
+
+```html
+<div class="ekart-featured-product-item">  
+  <ng-content select=".title"></ng-content>  
+  <p class="description">  
+    Lorem Ipsum is the best thing that has ever happened to the HTML Space.  
+    This is how things used to work before Lorem Ipsum happened.  
+  </p>  
+  <ng-content select=".call-to-action"></ng-content>  
+</div>
+```
+
+## @ContentChild()
+- The @ContentChild decorator is used to access a reference of a DOM element or a component or directive from the projected content into child component class.  
+
+We want to get a reference of a parent html element in the child component class
+We can use the ContentChild decorator with Template Reference variable on the element 
+Ex : 
+parent.component.html
+```html
+<h2>Parent Component</h2>
+<app-child>
+	<h2>Some Heading</h2>
+	<p #paragraph> This is a paragraph</p>
+	<app-test></app-test>
+</app-child>
+```
+child.component.ts
+```ts
+@Component({
+	selector:'app-child',
+	templateUrl:'./child.component.html',
+	styleUrls: './child.component.css'
+})
+export class ChildComponent{
+	@ContentChild('paragraph') paraEl: ElementRef;
+}
+```
+
+- We are using the template reference variable as the selector
+- It searches for the first matching element
+
+
+- This cannot be done using ViewChild because we want to access the element in the Parent component within the class of child component.
+- ViewChild can be used for the same component view template and class only.
+
+
+### @ContentChildren
+- The @ContentChildren decorator is used to access reference of all the DOM elements, components or directives from the projected content in the child component class based on a given selector. 
+
+parent.component.html
+```html
+<div>
+	<app-child>
+		<p #para> para 1</para>
+		<p #para> para 2</para>
+		<p #para> para 3</para>
+	</app-child>
+</div>
+``` 
+
+child.component.ts
+```ts
+@ContentChildren('para') paraElements: QueryList<ElementRef>;
+
+display(){
+	this.testElements.forEach((el) => {console.log(el)});
+}
+```
+
+

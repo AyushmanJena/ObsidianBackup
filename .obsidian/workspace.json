@@ -4,21 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "e8beff1eee1544f0",
+        "id": "b3e7f3dd2fc3edbc",
         "type": "tabs",
         "children": [
           {
-            "id": "ce910f9c0fe9cdcd",
+            "id": "2c83df3e28f790e8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ANGULAR/Angular Youtube Tutorial/04 Template Reference Variable 🟢.md",
+                "file": "ANGULAR/Angular Course Udemy/100x Routing 🟢 (prev. Angular 16).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04 Template Reference Variable 🟢"
+              "title": "100x Routing 🟢 (prev. Angular 16)"
+            }
+          },
+          {
+            "id": "90f465fa263a0d73",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ANGULAR/Angular Course Udemy/101 Forms.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "101 Forms"
             }
           }
         ]
@@ -53,7 +67,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "line chart",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -163,34 +177,35 @@
       "local-backup:Run local backup": false
     }
   },
-  "active": "ce910f9c0fe9cdcd",
+  "active": "2c83df3e28f790e8",
   "lastOpenFiles": [
-    "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
-    "ANGULAR/Angular Youtube Tutorial/04 Template Reference Variable 🟢.md",
-    "SPRING BOOT notes for the boys.md",
-    "R tutorial notes.md",
-    "ANGULAR/Angular Youtube Tutorial/02 Directives.md",
-    "ANGULAR/Angular Youtube Tutorial/03 Custom Property Binding.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U09-Advanced JPA-Hibernate Mappings.md",
-    "ANGULAR/Typescript Tutorial/01 Introduction 🟢.md",
-    "DSA/Dynamic Programming.md",
-    "SPRING BOOT NOTES/Additional Java/JDBC Tutorial.md",
-    "SPRING BOOT NOTES/Additional Notes/Spring Boot Docker.md",
-    "SPRING BOOT NOTES/Additional Notes/Spring Boot Application Unit Testing.md",
-    "SPRING BOOT NOTES/Additional Notes/Sending Email using Spring Boot.md",
-    "SPRING BOOT NOTES/Additional Notes/pdf file creation.md",
-    "SPRING BOOT NOTES/Additional Notes/MongoDB integration.md",
-    "SPRING BOOT NOTES/Additional Notes/Image Handling with API.md",
-    "SPRING BOOT NOTES/Additional Notes/file upload-download.md",
-    "SPRING BOOT NOTES/Additional Notes/External API Calls.md",
-    "SPRING BOOT NOTES/Additional Notes/Exposing an Endpoint.md",
-    "SPRING BOOT NOTES/Additional Java/Reading an Image.md",
-    "SPRING BOOT NOTES/Additional Java/Unit Testing.md",
+    "ANGULAR/Angular Course Udemy/00 Readme.md",
+    "ANGULAR/Angular Course Udemy/01 Introduction.md",
+    "ANGULAR/Angular Course Udemy/100x Routing 🟢 (prev. Angular 16).md",
+    "ANGULAR/Angular Course Udemy/Untitled",
+    "ANGULAR/Angular Course Udemy/102 Modules.md",
     "MARKDOWN.md",
-    "JavaScript Notes/React Tutorial/React Notes.md",
+    "ANGULAR/Angular Course Udemy/101 Forms.md",
+    "ANGULAR/Angular Youtube Tutorial/05 Component Initialization 🟢.md",
+    "ANGULAR/Angular Youtube Tutorial/04 Template Reference Variable.md",
+    "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
+    "ANGULAR/Angular Course Udemy/03 Basics.md",
+    "ANGULAR/Angular Course Udemy/02 Angular Essentials.md",
+    "Untitled.md",
+    "DSA/Stacks and Queues.md",
+    "DSA/LinkedList.md",
+    "DSA/03 Sorting Algorithms.md",
+    "DSA/Subsets and Subsequences.md",
+    "DSA/04 Recursion.md",
+    "DSA/02 Binary Search.md",
+    "DSA/01 Basics.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U10-.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U09-Advanced JPA-Hibernate Mappings.md",
     "SPRING BOOT NOTES/Spring Boot Course/U08-Spring MVC Security.md",
     "SPRING BOOT NOTES/Spring Boot Course/U07-Thymeleaf CRUD App IMP.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U06-Thymeleaf Introduction.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U04-REST APIs.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
     "ANGULAR/Angular Youtube Tutorial",
     "ANGULAR/Angular Course Udemy",
     "ANGULAR/Typescript Tutorial",
@@ -205,7 +220,6 @@
     "RESOURCES/git",
     "RESOURCES/New folder",
     "RESOURCES",
-    "New folder",
     "SPRING BOOT NOTES/Spring Boot Course/Resources/mapping thymeleaf.png",
     "SPRING BOOT NOTES/Resources/Screenshot 2024-10-18 132208.png",
     "SPRING BOOT NOTES/Spring Boot Course/Resources/Form Thymeleaf.png",
