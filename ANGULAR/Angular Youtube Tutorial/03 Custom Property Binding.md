@@ -17,7 +17,8 @@ In the child component we create a property called "product" with @Input() decor
 })
 export class ProductComponent {
   @Input()
-  product: {id: number, 
+  product: {
+	id: number, 
     name: string, 
     description: string,
      brand: string, 
@@ -135,7 +136,7 @@ filter.component.html
 (1) :  handles two way data binding for the value selectedFilterRadioButton
 (2) : handles the custom event and calls the required method.
 2. The method which raises the custom event and we want to emit the data which the user has selected. 
-	- If the user has selected all button emit all, if instock then emit true, etc. as per code
+	- If the user has selected 'all' button emit all, if instock then emit true, etc. as per code
 	- we are storing the data in selectedFilterRadioButton property
 	- Since selectedFilterRadioButton is two way data binded its value will be tracked automatically.
 
