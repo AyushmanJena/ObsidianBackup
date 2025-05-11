@@ -10,7 +10,7 @@ But we want to change it and search as soon as the user clicks the search button
 
 ```html
 <div class="ekart--search--product">  
-    <input class="ekart-search-product-input" #searchInput>  
+    <input class="ekart-search-product-input" #searchInput>   // THIS
     <button class="btn btn-search" (click)="updateSearchText(searchInput)">Search</button>  
 </div>  
 <div class="ekart-search-result-for"><p *ngIf="searchText != ''"><strong>Search result for: </strong> {{searchText}} </p></div>
@@ -262,12 +262,12 @@ i.e. ngOnInit() wont work with @ViewChildren properties like @ViewChild
 1. using ngTemplateOutlet Directive
 - ngTemplateOutlet is a structural directive, makes changes to the DOM
 ```html
-<ng-template #myTemplate>  
+<ng-template #myTemplate>                                    // THIS
   <h3>This is a template</h3>  
   <p>This is an example paragraph to understand ng-template</p>  
 </ng-template>  
   
-<div *ngTemplateOutlet="myTemplate"></div>
+<div *ngTemplateOutlet="myTemplate"></div>                  // THIS
 ```
 
 now instead of the div the ng-template element will be rendered

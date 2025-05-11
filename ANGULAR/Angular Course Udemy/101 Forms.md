@@ -328,7 +328,7 @@ this.signupForm.reset(); // can be called after setting in onSubmit
 # Reactive Forms 
 - Form is created programmatically and synchronized with the DOM
 - You dont need the FormsModule for Reactive forms approach
-- Import ReactiveFormsModule
+- Import **ReactiveFormsModule**
 
 Creating a form object in our class of type FormGroup 
 - FormGroup : A class made by angular for holding form data
@@ -348,13 +348,13 @@ Now we need to sync the ts class form with the html view template form
 
 CODE : 
 ```html
- <form [formGroup]="signupForm">
+ <form [formGroup]="signupForm">                   // THIS
    <div class="form-group">
      <label for="username">Username</label>
      <input
        type="text"
        id="username"
-       formControlName="username"
+       formControlName="username"                  // THIS
        class="form-control">
    </div>
    <div class="form-group">
@@ -392,7 +392,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      'username': new FormControl(null),
+      'username': new FormControl(null),       // default value 
       'email': new FormControl(null),
       'gender': new FormControl('male'),
     })

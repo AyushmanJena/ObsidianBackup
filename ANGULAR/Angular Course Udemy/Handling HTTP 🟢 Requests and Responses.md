@@ -27,7 +27,7 @@ The backend app responds with some response
 using a special service called HttpClient 
 
 in the component.ts file
-```
+```ts
 private httpClient = inject(HttpClient);
 
 or
@@ -44,7 +44,7 @@ add array of providers with a value of array
 main.ts
 ```ts
 bootstrapApplication(AppComponent, {  
-  providers: [provideHttpClient()]  
+  providers: [provideHttpClient()]               // THIS
 }).catch((err) => console.error(err));
 ```
 
@@ -91,7 +91,7 @@ export class AvailablePlacesComponent implements OnInit {
   
   ngOnInit() {  
     const subscription = this.httpClient.get<{places: Place[]}>('http://localhost:3000/places').subscribe({  
-      next: (resData) => {  
+      next: (resData) => {  // next -> handle next emitted value
         console.log(resData.places);  
       }  
     });  

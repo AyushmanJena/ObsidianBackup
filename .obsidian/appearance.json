@@ -1,4 +1,6 @@
 {
   "cssTheme": "",
-  "theme": "system"
+  "theme": "system",
+  "baseFontSize": 19,
+  "baseFontSizeAction": true
 }

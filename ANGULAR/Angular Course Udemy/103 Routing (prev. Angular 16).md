@@ -1,4 +1,4 @@
-# Routing and Building Multi-page Single Page Applications
+## Routing and Building Multi-page Single Page Applications
 
 
 - Up untill now we were using the same page and making changes to it
@@ -62,7 +62,7 @@ const appRoutes: Routes = [
   imports: [  
     BrowserModule,  
     FormsModule,  
-    RouterModule.forRoot(appRoutes)  
+    RouterModule.forRoot(appRoutes)              // THIS
   ],  
   providers: [ServersService],  
   bootstrap: [AppComponent]  
@@ -96,7 +96,7 @@ That's where we use `router-outlet` directive
 - Now we can route to the components through typing the paths in the address bar
 
 ### Navigating with Router Links
-replacing href links with "/server", etc. works.
+replacing href links with "/server", etc. works. (not recommended)
 ```
 <li role="presentation"><a href="/servers">Servers</a></li>
 ```
@@ -278,7 +278,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.user = {
-      id:this.route.snapshot.params['id'],
+      id: this.route.snapshot.params['id'],
       name: this.route.snapshot.params['name']
     };
   }
@@ -376,7 +376,7 @@ similarly we also have a fragment property
 <a  
   [routerLink]="['/servers', 5, 'edit']"  
   [queryParams]="{allowEdit: 1}"  
-  fragment="loading"                   // omitted the [] for manual value
+  fragment="loading"         // omitted the [] for manual value
   href="#"  
   class="list-group-item"  
   *ngFor="let server of servers">  
