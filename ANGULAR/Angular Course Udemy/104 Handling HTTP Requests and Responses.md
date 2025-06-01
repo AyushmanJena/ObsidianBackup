@@ -517,7 +517,7 @@ bootstrapApplication(AppComponent, {
 }).catch((err) => console.error(err));
 ```
 
-add withInterceptors method which takes an array of all the interceptor functions we want to add to our angular app
+add with Interceptors method which takes an array of all the interceptor functions we want to add to our angular app
 
 the interceptor function accepts two arguments
 1. interceptor request object

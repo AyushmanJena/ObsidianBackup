@@ -58,3 +58,7 @@ Movie Catalogue communicates with both the services and returns the result toget
 
 Q. Is it possible to have the end client directly call the individual microservices and collect data on the client side ? 
 YES
+
+Note: You need to handle the port numbers for multiple applications if running on the same machine
+
+Note: Each spring boot project here runs it's own instance of tomcat
