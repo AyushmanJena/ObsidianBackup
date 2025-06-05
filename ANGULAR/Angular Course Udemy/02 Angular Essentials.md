@@ -259,3 +259,25 @@ constructor() {
 ```
 
 now call saveTasks() after removing and adding tasks to save the snapshot to the browser localStorage.
+
+
+
+MORE NOTE : 
+- adding new data to signals need it to be updated as follows : 
+```ts
+tasks = signal<Task[]>([]);
+
+...
+const newTask: Task = {data: "xyz"}
+tasks.update((oldTasks) =. [...oldTasks, newTask]);
+```
+
+or updating a signal
+
+```ts
+updateTaskStatus(taskId: string, newStatus: TaskStatus){
+	this.tasks.update((oldTasks) => oldTasks.map((task) => task.id === taskId ? {...task, status: newStatus} : task));
+}
+```
+- here we want to update the task status of a particular task based on id, 
+- we loop over all the tasks and find the task whose id matches the clicked task then update it with the new task object with changed taskstatus value

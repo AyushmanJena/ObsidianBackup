@@ -1,11 +1,13 @@
 1. Introduction
 2. Angular Essentials
 3. Basics
-
-4. Forms
-5. Modules
-6. Routing
-7. Handling HTTP Requests and Responses
+4. Services and Dependency Injection
+5. RxJS and Observables
+6. Forms
+7. Modules
+8. Routing
+9. Handling HTTP Requests and Responses
+10. Authentication and Route Protection
 
 
 New Angular 16 and above
