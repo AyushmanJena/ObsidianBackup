@@ -1,9 +1,6 @@
----
-lastSync: Fri Oct 11 2024 16:12:04 GMT+0530 (India Standard Time)
----
-This is your new *vault*. test
+##### This cheatsheet is currently under construction
 
-CALLOUTS 
+### CALLOUTS 
 - note (blue)
 - abstract, summary, tldr (green)
 - info (blue)
@@ -20,3 +17,12 @@ CALLOUTS
 
 > [!question]
 > Everything is figureoutable
+
+Example of **Bold Text**
+Example of *Italic Text*
+Example of ~~Strike Through Text~~
+Example of ==Highlighted Text==
+Example of `Code Snip`
+Example of $Math  Expression$
+Example of %% Comment %%
+

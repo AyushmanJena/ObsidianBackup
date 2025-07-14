@@ -1,7 +1,7 @@
 ## Routing and Building Multi-page Single Page Applications
 
 
-- Up untill now we were using the same page and making changes to it
+- Up until now we were using the same page and making changes to it
 
 Routing helps you to change what the user sees in a single page app. 
 Showing and hiding portions of the display that correspond to particular components, rather than going out to the server to get a new page.
@@ -30,7 +30,7 @@ the structure of the objects is pre defined
 path : what gets entered in the url after domain
 - a string
 - ex : if paths = 'users'
-- url becomes "localhose:4200/users"
+- url becomes "localhost:4200/users"
 
 component : signifies the component
 - when this path is reached, the certain component should be loaded
@@ -43,7 +43,7 @@ The RouterModule has a special method to call forRoot() with our Routes as a par
 ```ts
 ...
   
-const appRoutes: Routes = [  
+const appRoutes: Routes = [                              // THESE
   { path: '', component: HomeComponent },  
   { path: 'users', component: UsersComponent },  
   { path: 'servers', component: ServersComponent },  
@@ -173,7 +173,7 @@ FULL CODE
 ```
 
 ### Navigating Programmatically
-- Ex : We want to trigger the navigation after something heppened, like form submitted, a button is clicked, etc.
+- Ex : We want to trigger the navigation after something happened, like form submitted, a button is clicked, etc.
 - i.e. from our ts class
 
 Here we will have to inject the Router 
@@ -188,7 +188,7 @@ export class HomeComponent implements OnInit {
 	...
   onLoadServer(){  
     // complex calculation  
-    this.router.navigate(['/servers']);  
+    this.router.navigate(['/servers']);                  // THIS
   }
 }
 ```

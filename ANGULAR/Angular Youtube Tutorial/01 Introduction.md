@@ -57,7 +57,7 @@ note : In our angular project we can have multiple applications, and the default
 	- make sure the same version of the dependencies is installed 
 
 ### src : 
-styles.css : stylesheet file
+styles.css : main stylesheet file
 index.html : main html file
 faviocn.ico : icon
 main.ts : the first code file to be executed when the app loads up
@@ -108,7 +108,7 @@ A component has mainly 3 files  :
 - The markup of the component is stored in the templateUrl and style in styleUrl
 - for a component the value of the selector can be used as an html element.
 
-whenever we navigate around in the angular application, only the content of the html file will change, the content of the html file will not change. 
+whenever we navigate around in the angular application, only the content of the html will change, the content of the html file will not change. 
 The single html page loaded into our browser is index.html.
 
 
@@ -130,7 +130,7 @@ OVERALL : Angular Project -> index.html -> angular.json -> main.ts -> AppModule 
 - A component is a piece of user interface.
 - Root component by convention is called App Component.
 - The root component contains the entire application and other child components.
-- Ab angular application is essentially a tree of components.
+- An angular application is essentially a tree of components.
 - Combining all these components together makes an Angular UI.
 
 - We can split a webpage into multiple components and work on them separately.
@@ -243,6 +243,8 @@ go to styles.css and another import statement
 ### Creating Components using Angular CLI 
 command : 
 `ng generate component component-name`
+or
+`ng g c component-name`
 - It creates a component class decorated with @Component decorator
 - Generates the view template and stylesheet for that component
 - Registers the component class in the main module
@@ -250,7 +252,7 @@ command :
 ### Types of Component Selector :
 - we can use multiple types of selectors like :
 1. HTML tag : `selector : 'app-nav'`
-2. HTML attribute : `selector : '[app-nav]"'
+2. HTML attribute : `selector : '[app-nav]'`
 3. CSS Class : `selector : '.app-nav'`
 4. CSS ID : `selector : '#app-nav'`
 
@@ -357,7 +359,7 @@ export class ProductListComponent {
 ```
 
 - you can also call functions through string interpolation 
-- You can also write ts expressions within the brackets 
+- You can also write ts expressions within the string interpolation brackets 
 
 ### Property Binding : 
 - String interpolation is used to display a piece of data in HTML, such as displaying a title or a name.
@@ -429,7 +431,7 @@ export class ProductListComponent {
 ```
 
 ```ts
-onNameChange(event: any) { // can also use type besed on the event obj e.g. InputEvent here
+onNameChange(event: any) { // can also use type based on the event obj e.g. InputEvent here
 	this.name = event.target.value;
     console.log(event.target.value);
 }

@@ -1,6 +1,6 @@
-notes for Angular 16 and less
+notes for Angular 16 and less probably
 
-### Basic Authentication notes
+### Basic Authentication overview
 Client sends Auth data to server
 Server sends token to Client (JWT)
 The client stores the token in the local browser storage 
@@ -55,4 +55,5 @@ export class AuthComponent {
 add a new path to the routing module: 
 `{path: 'auth', component: AuthComponent}`
 
+### Preparing the Backend using Firebase
 

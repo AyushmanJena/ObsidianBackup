@@ -57,7 +57,7 @@ or (in the` app.modules.ts`) if you are using modules
 		...
 	],
 	imports: [BroswerModule, FormsModule],
-	providers: [provideHttpClient()],
+	providers: [provideHttpClient()],                    // THIS
 	bootstrap: [AppComponent],
 })
 export class AppModule { }

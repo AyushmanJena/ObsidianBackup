@@ -129,7 +129,7 @@ public class Instructor {
 @Override
 @Transactional
 public void save(Instructor theInstructor) {
-entityManager.persist(theInstructor);
+	entityManager.persist(theInstructor);
 }
 ```
 - Update main app

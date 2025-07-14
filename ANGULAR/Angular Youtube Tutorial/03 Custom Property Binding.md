@@ -16,7 +16,7 @@ In the child component we create a property called "product" with @Input() decor
   styleUrl: './product.component.css'
 })
 export class ProductComponent {
-  @Input()
+  @Input()                          // this
   product: {
 	id: number, 
     name: string, 
@@ -37,7 +37,7 @@ export class ProductComponent {
 ```
 
 In the Parent component view template
-we can use the variable product as a html attribute, wrapped around square brackets. This is custom property binding.
+we can use the variable product as a html attribute for the child component call, wrapped around square brackets. This is custom property binding.
 ```html
 <app-product *ngFor="let prod of products" [product]="prod"></app-product>
 ```
@@ -227,7 +227,7 @@ usecase : when we type something inside the search box, we want to display the l
 app-search component and product-list component are siblings (both child of container component)
 
 - To do this we need to use a combination of custom custom event binding with @Output and custom event binding with @Input decorator
-- First we pass data from search component to container component with @Output and then send the same data from container to product-list component with @Input
+- First we pass data from search component to container component(common parent) with @Output and then send the same data from container to product-list component with @Input
 - For this we can also use Services (later)
 
 

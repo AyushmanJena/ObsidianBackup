@@ -8,5 +8,6 @@
   },
   "readableLineLength": true,
   "attachmentFolderPath": "./assets",
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "showLineNumber": false
 }

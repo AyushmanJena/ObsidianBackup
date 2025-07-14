@@ -88,24 +88,26 @@ track user.id -> unique identification for each element it is rendering which he
 ### Using @If for conditions
 ```html
 @If(selectedUser){               // if selcted user is defined 
-	<div></div>
+	<div>...</div>
 } @else {
 	<p>User not selected</p>
 }
 ```
 - You can also add @else if
-- Alternative `*ngIf`, but for else you need reference variable  
+- Alternative `*ngIf`, but for else you need template reference variable  
 
 
 ### Creating Model files
 note : outsource the models into separate files
 user.model.ts : 
 
+```ts
 export interface User {
 	id: string;
 	avatar: string;
 	name: string; 
 }
+```
 - now you can import User into all the components that use it. 
 
 ### Dynamic CSS Styling with class binding
@@ -262,7 +264,7 @@ now call saveTasks() after removing and adding tasks to save the snapshot to the
 
 
 
-MORE NOTE : 
+### MORE NOTE on SIGNALS : 
 - adding new data to signals need it to be updated as follows : 
 ```ts
 tasks = signal<Task[]>([]);

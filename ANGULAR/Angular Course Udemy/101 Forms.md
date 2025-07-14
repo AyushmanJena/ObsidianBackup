@@ -2,6 +2,7 @@ Angular's job is to
 - Display the form to the user
 - Take input from the user
 - Check if the form is valid 
+- (Send the form data to a backend)
 
 What angular does is it gives you a javascript representation of the form along with metadata making it easier to perform operations based on it.
 
@@ -331,11 +332,11 @@ this.signupForm.reset(); // can be called after setting in onSubmit
 - Import **ReactiveFormsModule**
 
 Creating a form object in our class of type FormGroup 
-- FormGroup : A class made by angular for holding form data
+- **FormGroup** : A class made by angular for holding form data
 Initialize the form in a method (preferably OnInit lifecycle hook) 
 Add controls to the form object
-- Controls : Controls are basically key value pairs in the object, that are passed to the overall form group.
-- FormControl :  another class from forms package that tracks the value and validation status of an individual form input element.
+- **Controls** : Controls are basically key value pairs in the object, that are passed to the overall form group.
+- **FormControl** :  another class from forms package that tracks the value and validation status of an individual form input element.
 - The FormControl constructor takes few parameters 
 	1. Initial value 
 	2. single or array of validators
@@ -344,7 +345,7 @@ Add controls to the form object
 #### Syncing the form
 Now we need to sync the ts class form with the html view template form
 1. `[formGroup]` directive to the form element with the formGroup variable as value
-2. formControlName directive to the elements of form to link the formControl variables with the tags (must match)
+2. *formControlName* directive to the elements of form to link the formControl variables with the tags (must match)
 
 CODE : 
 ```html
@@ -392,7 +393,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      'username': new FormControl(null),       // default value 
+      'username': new FormControl(null),       // default value passed
       'email': new FormControl(null),
       'gender': new FormControl('male'),
     })

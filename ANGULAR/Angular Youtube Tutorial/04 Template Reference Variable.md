@@ -11,7 +11,7 @@ But we want to change it and search as soon as the user clicks the search button
 ```html
 <div class="ekart--search--product">  
     <input class="ekart-search-product-input" #searchInput>   // THIS
-    <button class="btn btn-search" (click)="updateSearchText(searchInput)">Search</button>  
+    <button class="btn btn-search" (click)="updateSearchText(searchInput)">Search</button>         // this
 </div>  
 <div class="ekart-search-result-for"><p *ngIf="searchText != ''"><strong>Search result for: </strong> {{searchText}} </p></div>
 ```
@@ -90,7 +90,7 @@ container.component.html
 <div class="ekart--product--container">
     <app-search (searchTextChanged)="setSearchText($event)"></app-search>
 
-    <product-list [searchText]="searchText" #productListComponent=></product-list>
+    <product-list [searchText]="searchText" #productListComponent></product-list>
   <product-detail *ngIf="productListComponent.selectedProduct"></product-detail>
 </div>
 
@@ -192,7 +192,7 @@ Using ViewChild we can access only the first element which matches the `#inputEl
 We want to get a reference to all the elements  in our app component class
 
 Using @ViewChildren
-- It returns a QueryList of type ElementRef
+- It returns a **QueryList** of type ElementRef
 ```ts
 export class AppComponent {  
   title = 'angular-view-children';  
@@ -294,7 +294,7 @@ ex :
 - ng-component allows us to use structural directives, without any extra elements making sure that the only DOM changes being applied are those being dictated by the directive itself.
 ```html
 <ng-container *ngIf="toggle; else toggleOff">
-<p>The toggle is ON</p>
+	<p>The toggle is ON</p>
 </ng-container>
 <ng-template #toggleOff>
   <p>The toggle is OFF</p>
@@ -319,7 +319,7 @@ export class AppComponent {
 ### ng-content
 - Specify some content within selector html tags
 - By default nothing happens.
-- We can pass data to the called(child) component's view template from the calling (parent) component with the help of `<ng-component>` tag
+- We can pass data to the called(child) component's view template from the calling (parent) component with the help of `<ng-content>` tag
 
 Ex : 
 container.component.html

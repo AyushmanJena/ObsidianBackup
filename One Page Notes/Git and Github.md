@@ -247,3 +247,10 @@ git reset
 git clean -f
 git clean -fd
 ```
+
+
+If updated branches, tags or commits are not visible in the local git repo : 
+```
+git fetch 
+
+```

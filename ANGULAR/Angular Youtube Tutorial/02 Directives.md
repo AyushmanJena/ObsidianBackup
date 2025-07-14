@@ -14,7 +14,7 @@
 		- It does not have any template as well.
 		- YOU MUST USE A asterisk for structural directives.
 		-  Some in built structural directives are ngIf, ngFor, ngSwitch
-		- Ex : `<div *ngIf>Some Content<div>`
+		- Ex : `<div *ngIf="xyz">Some Content<div>`
 
 - We can use the selector of a directive like an html tag, css class or even id selector. However we mostly use directives like an HTML attribute.
 
@@ -195,7 +195,7 @@ format :
 ```html
 <button [ngClass]="{'btn': true, 'btn-search' :true}" [disabled]="!searchText">Search</button>
 ```
-- her btn and btn-search : css styles
+- here btn and btn-search : css styles
 - its value represents if they are to be applied or not
 
 applying css style if text is there, and not a different style if it is disabled : 

@@ -18,7 +18,7 @@
 </dependency>
 ```
 - Default user : user
-- default password : generated in console
+- default password : (generated in console)
 
 Overriding default username and password :
 `application.properties`
@@ -62,9 +62,9 @@ public class DemoSecurityConfig{
 `requestMatchers(<<add path to match on>>).hasRole(<< authorized role >>)`
 `requestMatchers(<<add path to match on>>).hasAnyRole(<< multiple roles >>)`
 
-Ex : requestMatchers("/").hasRole("EMPLOYEE")
-requestMatchers("/leaders/**").hasRole("MANAGER")
-requestMatchers("/systems/**").hasRole("ADMIN")
+Ex : `requestMatchers("/").hasRole("EMPLOYEE")`
+`requestMatchers("/leaders/**").hasRole("MANAGER")`
+`requestMatchers("/systems/**").hasRole("ADMIN")`
 
 ** -> Match on path and all sub directories
 

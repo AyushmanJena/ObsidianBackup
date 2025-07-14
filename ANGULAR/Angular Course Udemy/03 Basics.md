@@ -4,7 +4,7 @@
 ### Adding assets
 - Add images to the code 
 ```html
-<img src="assets/image.png" alt="this"/>
+<img src="assets/image.png" alt="text"/>
 ```
 - Make sure angular.json assets array looks like this : 
 ```json
@@ -23,7 +23,7 @@
 - Instead of using ts expressions within property binding, we can use getter methods to handle ts login within the class file and just access the property with computed value
 - ex : selectedUser.avatar : user.png but we want to access the image like "/assets/users/user.png"
 ```ts
-get imagePaht(){
+get imagePath(){
 	return '/assets/users/' + this.selectedUser.avatar;
 }
 
@@ -35,7 +35,9 @@ get imagePaht(){
 
 ### Listening to Events with Event Listeners
 event name between parenthesis in the view template 
-ctrl + space gives all the possible values within the parenthesis
+
+> [!info]
+> ctrl + space gives all the possible values within the parenthesis
 
 ```ts
 export class UserComponent {  
@@ -54,7 +56,7 @@ export class UserComponent {
 
 ```html
 <div>  
-  <button (click)="onSelectUser()">  
+  <button (click)="onSelectUser()">                // this
     <img [src]="imagePath" [alt]="selectedUser.name"/>  
     <span>{{ selectedUser.name }}</span>  
   </button></div>
@@ -119,7 +121,7 @@ imagePath = computed(() => 'assets/users/'+ this.selectedUser().avatar);
 ### Adding Component Inputs 
 - Passing values to the components where they are called
 
-- create properties in the ts class of the data you want to accept and give them decorator "@Input"
+- create properties in the ts class of the data you want to accept and give them decorator "@Input()"
 - now set the property value for the component using the property name attribute in the tag using property binding..
 
 in parent where called
@@ -149,7 +151,7 @@ user.component.html
 ```ts
 <div>  
   <button (click)="onSelectUser()">  
-    <img [src]="imagePath" [alt]="name"/>  
+    <img [src]="imagePath()" [alt]="name"/>  
     <span>{{ name }}</span>  
   </button></div>
 ```
