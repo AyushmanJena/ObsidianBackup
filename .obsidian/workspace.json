@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ANGULAR/Angular Course Udemy/04 Services and Dependency Injection.md",
+                "file": "ANGULAR/Angular Youtube Tutorial/03 Custom Property Binding.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04 Services and Dependency Injection"
+              "title": "03 Custom Property Binding"
             }
           },
           {
@@ -41,29 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/LEETCODE 75 SOLUTIONS/01 Array-String.md",
+                "file": "ANGULAR/Angular Youtube Tutorial/Authentication/02 Frontend.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Array-String"
-            }
-          },
-          {
-            "id": "3c6261f7eb8f9405",
-            "type": "leaf",
-            "state": {
-              "type": "webviewer",
-              "state": {
-                "url": "https://leetcode.com/problems/greatest-common-divisor-of-strings/description/",
-                "title": "Greatest Common Divisor of Strings - LeetCode",
-                "mode": "webview"
-              },
-              "icon": "globe-2",
-              "title": "Greatest Common Divisor of Strings - LeetCode"
+              "title": "02 Frontend"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -204,18 +191,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "239da982f3ca03c3",
+  "active": "6ba2b525b78b4199",
   "lastOpenFiles": [
-    "ANGULAR/Angular Course Udemy/04 Services and Dependency Injection.md",
+    "ANGULAR/Angular Youtube Tutorial/Authentication/01 Introduction.md",
+    "ANGULAR/Angular Youtube Tutorial/Authentication/02 Frontend.md",
     "ANGULAR/Angular Course Udemy/105 Authentication and Route Protection.md",
+    "REACT NATIVE NOTES/React Native Udemy Course/01 Getting Started.md",
+    "ANGULAR/Angular Youtube Tutorial/Authentication",
+    "JavaScript Notes/Authentication",
+    "SPRING BOOT NOTES/Documenting Projects.md",
+    "SPRING BOOT NOTES/JWT Authentication and Authorization in Spring Boot.md",
+    "SPRING BOOT NOTES/SPRING BOOT notes for the boys.md",
+    "OBSIDIAN cheatsheet.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U10-.md",
+    "DSA/LEETCODE 75 SOLUTIONS/01 Array-String.md",
     "ANGULAR/Angular Youtube Tutorial/03 Custom Property Binding.md",
+    "ANGULAR/Angular Course Udemy/04 Services and Dependency Injection.md",
     "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
     "ANGULAR/Angular Course Udemy/02 Angular Essentials.md",
-    "DSA/LEETCODE 75 SOLUTIONS/01 Array-String.md",
     "DSA/LEETCODE 75 SOLUTIONS/06 Stack.md",
     "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
     "ANGULAR/Angular Course Udemy/00 Readme.md",
-    "SPRING BOOT NOTES/JWT Authentication and Authorization in Spring Boot.md",
     "DSA/LEETCODE 75 SOLUTIONS/00 README.md",
     "One Page Notes/CSS.md",
     "ANGULAR/Angular Course Udemy/102 Modules.md",
@@ -225,13 +221,6 @@
     "SPRING BOOT NOTES/Spring Boot Course/U08-Spring MVC Security.md",
     "SPRING BOOT NOTES/Spring Boot Course/U09-Advanced JPA-Hibernate Mappings.md",
     "SPRING BOOT NOTES/Spring Boot Course/U06-Thymeleaf Introduction.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U03-Hibernate JPA.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U07-Thymeleaf CRUD App IMP.md",
-    "ANGULAR/Angular Course Udemy/101 Forms.md",
-    "ANGULAR/Angular Course Udemy/05 RxJS and Observables.md",
-    "ANGULAR/Angular Course Udemy/01 Introduction.md",
-    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
     "assets/Pasted image 20250601003940.png",
     "assets/Pasted image 20250601003541.png",
     "assets/Pasted image 20250601002937.png",
@@ -245,11 +234,9 @@
     "ANGULAR/Angular Youtube Tutorial",
     "ANGULAR/Angular Course Udemy",
     "ANGULAR/Typescript Tutorial",
-    "ANGULAR",
     "JavaScript Notes/React Tutorial/Resources/02.png",
     "JavaScript Notes/React Tutorial/Resources/Screenshot 2025-03-13 110829.png",
     "JavaScript Notes/React Tutorial/Resources/01.png",
-    "REACT NATIVE NOTES/React Native Udemy Course",
     "RESOURCES/git/example-diagram.png",
     "RESOURCES/git/git picture 2.png",
     "SPRING BOOT NOTES/Resources/canvas for structures.canvas",

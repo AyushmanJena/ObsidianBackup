@@ -131,6 +131,31 @@ class Solution {
     }
 }
 ```
+BETTER
+```java
+class Solution {
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+	    if(n == 0){
+            return true;
+        }
+        int count = 0;
+        for (int i = 0; i < flowerbed.length; i++) {
+            if (flowerbed[i] == 0) {
+                boolean left = (i == 0) || (flowerbed[i - 1] == 0);
+                boolean right = (i == flowerbed.length - 1) || (flowerbed[i + 1] == 0);
+
+                if (left && right) {
+                    flowerbed[i] = 1; // mark as planted
+                    count++;
+                    if (count >= n) return true;
+                }
+            }
+        }
+        return count >= n;
+    }
+}
+
+```
 
 [345. Reverse Vowels of a String](https://leetcode.com/problems/reverse-vowels-of-a-string/)
 ```java
@@ -200,6 +225,23 @@ class Solution {
         }
 
         return sentence.toString();
+    }
+}
+```
+USING BUILT IN FUNCTIONS
+```java
+class Solution {
+    public String reverseWords(String s) {
+        String [] words = s.trim().split("\\s+");
+        StringBuilder rev = new StringBuilder();
+        for(int i = words.length - 1 ; i >= 0;i-- ){
+          rev.append(words[i]);
+          if(i!=0){
+            rev.append(" ");
+          }
+
+        }
+        return rev.toString();
     }
 }
 ```
