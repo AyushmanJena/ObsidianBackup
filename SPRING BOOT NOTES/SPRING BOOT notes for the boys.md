@@ -169,7 +169,7 @@ pom : project object model
 ```
 
 ## Flow of the project 
-User hits a endpoint :
+User hits an endpoint :
 with the home url user hits a controller endpoint : / which sends him to the index.html page. 
 where based on which button he clicks another request is made to open another webpage e.g. login with /login, store with /store
 then is asked to login through email otp verification

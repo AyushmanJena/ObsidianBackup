@@ -295,9 +295,9 @@ class Solution {
 ```java
 class Solution {
     public int compress(char[] chars) {
-        int j = 0;
+        int j = 0;      // to write
         char ch = chars[0];
-        int i = 1;
+        int i = 1;       // to read
         int count = 1;
 
         if(chars.length == 1){
@@ -329,7 +329,7 @@ class Solution {
 
     public int storeNumInArr(char[] chars, int j, int count){
         String s = count+"";
-        char i = 0;
+        int i = 0;
         while(j < chars.length && i < s.length()){
             chars[j] = s.charAt(i);
             i++;
@@ -339,3 +339,7 @@ class Solution {
     }
 }
 ```
+- The `storeNumInArr()` is useful for numbers when count exceeds 9, 
+- i loops over the count value digits
+- j writes to the original array and increases the index as well
+- returns position of j after including all  digits of count.

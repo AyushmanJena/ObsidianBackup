@@ -6,8 +6,9 @@
 6. Forms
 7. Modules
 8. Routing
-9. Handling HTTP Requests and Responses
-10. Authentication and Route Protection
+9. Code Splitting and Deferrable Views
+10. Handling HTTP Requests and Responses
+11. Authentication and Route Protection
 
 
 New Angular 16 and above
@@ -42,7 +43,7 @@ Legacy Angular below 16
 - Using Pipes to Transform Output
 - Making HTTP requests
 - Project
-- Authentication and Route Protection In Angular ⚠️
+- Authentication and Route Protection In Angular
 - Dynamic Components
 - Angular Modules and Optimizing Angular Apps
 

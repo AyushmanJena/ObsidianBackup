@@ -122,48 +122,142 @@ export class LoginFormComponent {
 ```html
 <div class="row justify-content-center">  
   <div class="col-4">  
-    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">  
-      <li class="nav-item" role="presentation">  
-        <button [ngClass]="active == 'login' ? 'nav-link active' : 'nav-link'" id="tab-login"  
-                (click)="onLoginTab()" >Login</button>  
-      </li>      <li class="nav-item" role="presentation">  
-        <button [ngClass]="active == 'register' ? 'nav-link active' : 'nav-link'" id="tab-register"  
-                (click)="onRegisterTab()" >Register</button>  
-      </li>    </ul>  
-    <div class="tab-content">  
-      <div [ngClass]="active == 'login' ? 'tab-pane fade show active' : 'tab-pane fade'">  
-        <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">  
+    <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">  
   
-          <div class="form-outline mb-4">  
-            <input type="login" id="loginName" name= "login" class="form-control" [(ngModel)]="login" />  
-            <label class="form-label" for="loginName">Username</label>  
-          </div>  
-          <div class="form-outline mb-4">  
-            <input type="password" id="loginPassword" name="password" class="form-control" [(ngModel)]="password" />  
-            <label class="form-label" for="loginPassword">Password</label>  
-          </div>  
-          <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>  
+      <div class="form-outline mb-4">  
+        <input type="login" id="loginName" name= "login" class="form-control" [(ngModel)]="login" />  
+        <label class="form-label" for="loginName">Username</label>  
+      </div>  
+      <div class="form-outline mb-4">  
+        <input type="password" id="loginPassword" name="password" class="form-control" [(ngModel)]="password" />  
+        <label class="form-label" for="loginPassword">Password</label>  
+      </div>  
+      <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>  
   
-        </form>      </div>      <div [ngClass]="active == 'register' ? 'tab-pane fade show active' : 'tab-pane fade'">  
-        <form (ngSubmit)="onSubmitRegister()" #registerForm="ngForm">  
-  
-          <div class="form-outline mb-4">  
-            <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="firstName" />  
-            <label class="form-label" for="firstName">First name</label>  
-          </div>  
-          <div class="form-outline mb-4">  
-            <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="lastName" />  
-            <label class="form-label" for="lastName">Last name</label>  
-          </div>  
-          <div class="form-outline mb-4">  
-            <input type="text" id="login" name="login" class="form-control" [(ngModel)]="login" />  
-            <label class="form-label" for="login">Username</label>  
-          </div>  
-          <div class="form-outline mb-4">  
-            <input type="password" id="registerPassword" name="password" class="form-control" [(ngModel)]="password" />  
-            <label class="form-label" for="registerPassword">Password</label>  
-          </div>  
-          <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>  
-        </form>      </div>    </div>  </div></div>
+    </form>  
+  </div>
+</div>
 ```
 
+Now in the parent (content) component we will create the submit component.
+
+content.component.html
+```html
+<div>  
+<!-- routing will be added later -->  
+  <app-login-form (onSubmitLoginEvent)="onLogin($event)"/>  
+</div>
+```
+content.component.ts
+```ts
+@Component({  
+  selector: 'app-content',  
+  standalone: false,  
+  templateUrl: './content.component.html',  
+  styleUrl: './content.component.css'  
+})  
+export class ContentComponent {  
+  
+  constructor(private axiosService: AxiosService) {  
+  }  
+  
+  onLogin(input: any){  
+    this.axiosService.request(  
+      "POST",  
+      "/login",  
+      {  
+        login: input.login,  
+        password: input.password  
+      }  
+    )  
+  }  
+}
+```
+
+### Spring Security Configuration
+Now in the backend we will create the login endpoint that accepts the user name and password.
+For that add the Spring Security Dependency and protect the messages endpoint
+
+### Preparing the Backend for accepting the login request
+
+```java
+@RestController  
+public class AuthController {  
+    @PostMapping("/login")  
+    public ResponseEntity<UserDto> login(@RequestBody CredentialsDto credentialsDto){  
+        UserDto user = userService.login(credentialsDto);  
+        return ResponseEntity.ok(user);  
+    }  
+}
+```
+
+#### Preparing and Connecting the Database
+`docker run -d -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Vulcan@24 -e POSTGRES_DB=backenddb -p 5432:5432 postgres:13`
+
+backend properties file
+application.yml (replaces application.properties)
+```yml
+spring:  
+  datasource:  
+    driver-class-name: org.postgresql.Driver  
+    url: jdbc:postgresql://localhost:5432/backenddb  
+    username: backend  
+    password: backend  
+  jpa:  
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  
+    hibernate:  
+      ddl-auto: 'create-drop'
+```
+
+create entities : 
+`User.java`
+```java
+@AllArgsConstructor  
+@NoArgsConstructor  
+@Builder  
+@Data  
+@Entity  
+@Table(name ="app_user")  
+public class User {  
+    @Id  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    private Long id;  
+  
+    @Column(name="first_name", nullable = false)  
+    private String firstName;  
+  
+    @Column(name="last_name", nullable = false)  
+    private String lastName;  
+  
+    @Column(nullable = false)  
+    private String login;  
+      
+    @Column(nullable = false)  
+    private String password;  
+}
+```
+
+Create repositories
+UserRepository
+```java
+public interface UserRepository extends JpaRepository<User, Long> {  
+    Optional<User> findByLogin(String Login);  
+      
+}
+```
+
+We need mappers with MapStruct to map User Entity to User Details
+folder -> mappers
+
+```java
+@Mapper(componentModel = "spring")  
+public interface UserMapper {  
+    UserDto toUserDto(User user);  
+}
+```
+
+We need a password Encoder (here using )
+PasswordConfig.java
+```java
+
+```

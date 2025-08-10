@@ -2,7 +2,7 @@
 
 ### 1. Binary Search
 ```java
-static in binarySearch(int[] arr, int target){
+static int binarySearch(int[] arr, int target){
 	int start = 0;
 	int end = arr.length -1;
 	while(start <= end){
@@ -178,7 +178,7 @@ public static int infiniteArray(int[] arr, int target) {
 }
 ```
 
-### 5. Find peak index in Mountain Array or Bitonic array
+### 5. Find peak index in Mountain Array or Bi-tonic array
 `int[] arr = {0, 1, 2, 5, 19, 24, 36, 12, 2};`
 ```java
 public static int mountainArray(int[] arr) {

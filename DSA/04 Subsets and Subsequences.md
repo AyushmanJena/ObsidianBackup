@@ -89,7 +89,7 @@ static ArrayList<String> subseqRet(String p, String up) {
 ```
 
 Dice sum
-Produce all possible com
+Produce all possible combinations to get the target as sum 
 ```java
 static ArrayList<String> diceRet(String p, int target) {
     if (target == 0) {

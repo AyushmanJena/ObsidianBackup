@@ -34,3 +34,77 @@ class Solution {
     }
 }
 ```
+
+[3487. Maximum Unique Subarray Sum After Deletion](https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/)
+```java
+class Solution {
+    public int maxSum(int[] nums) {
+        int maxElement = Integer.MIN_VALUE;
+        int positiveSum = 0;
+        Set<Integer> seen = new HashSet<>();
+
+        for (int num : nums) {
+            if (!seen.contains(num)) {
+                seen.add(num);
+                if (num > 0) {
+                    positiveSum += num;
+                }
+                maxElement = Math.max(maxElement, num);
+            }
+        }
+
+        return positiveSum > 0 ? positiveSum : maxElement;
+    }
+}
+
+```
+
+[118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
+```java
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for(int i = 0; i<numRows; i++){
+            ans.add(new ArrayList<Integer>());
+            for(int j = 0; j<i+1; j++){
+                ans.get(i).add(1);
+            }
+        }
+
+        for(int i = 2; i<numRows; i++){
+            for(int j = 1; j < i; j++){
+                int top = ans.get(i-1).get(j-1);
+                int left = ans.get(i-1).get(j);
+                ans.get(i).set(j, top+left);
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
+[3477. Fruits Into Baskets II](https://leetcode.com/problems/fruits-into-baskets-ii/)
+```java
+class Solution {
+    public int numOfUnplacedFruits(int[] fruits, int[] baskets) {
+        int unplaced = 0;
+        boolean unp = true;
+        for(int i = 0; i<fruits.length; i++){
+            for(int j = 0; j< baskets.length; j++){
+                if(baskets[j] >= fruits[i]){
+                    baskets[j] = 0;
+                    unp = false;
+                    break;
+                }
+            }
+            if(unp){
+                unplaced++;
+            }
+            unp = true;
+        }
+        return unplaced;
+    }
+}
+```
