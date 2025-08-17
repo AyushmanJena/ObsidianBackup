@@ -93,31 +93,28 @@ private static int twoStacks(int x, int[] a, int[] b, int sum, int count){
 }
 ```
 
-Check if the parenthesis are valid in a string expression : 
+Check if the parenthesis are valid in a string expression  consisting of only parenthesis: 
 ```java
-public static boolean validParenthesis(String s){
-	Stack<Character> stack = new Stack<>();
-	for(char ch : s.toCharArray()){
-		stack.push(ch);
-	}else {
-		if(ch == ')'){
-			if(stack.isEmpty() || stack.pop() != '('){
-				return false;
-			}
-		}
-		if(ch == '}'){
-			if(stack.isEmpty() || stack.pop() != '{'){
-				return false;
-			}
-		}
-		if(ch == '['){
-			if(stack.isEmpty() || stack.pop() != '['){
-				return false;
-			}
-		}
-		return stack.isEmpty();
-	}
+public static boolean validParenthesis(String s) {
+    Stack<Character> stack = new Stack<>();
+
+    for (char ch : s.toCharArray()) {
+        if (ch == '(' || ch == '{' || ch == '[') {
+            stack.push(ch);
+        } 
+        else if (ch == ')') {
+            if (stack.isEmpty() || stack.pop() != '(') return false;
+        } 
+        else if (ch == '}') {
+            if (stack.isEmpty() || stack.pop() != '{') return false;
+        } 
+        else if (ch == ']') {
+            if (stack.isEmpty() || stack.pop() != '[') return false;
+        }
+    }
+    return stack.isEmpty();
 }
+
 ```
 
 Minimum parenthesis needed to make the string valid
@@ -131,7 +128,7 @@ public static int minAddToMakeValid(String s){
 			}else{
 				stack.push(ch);
 			}
-		} else {
+		} else { // if ch == '('
 			stack.push(ch);
 		}
 	}

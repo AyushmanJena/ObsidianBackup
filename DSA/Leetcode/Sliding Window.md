@@ -38,3 +38,28 @@ class Solution {
 }
 ```
 
+[2264. Largest 3-Same-Digit Number in String](https://leetcode.com/problems/largest-3-same-digit-number-in-string/)
+```java
+class Solution {
+    public String largestGoodInteger(String num) {
+        char largestGood = ' ';
+
+        for(int i = 0; i <=num.length() -3;){
+            if(num.charAt(i) == num.charAt(i+1) && num.charAt(i+1) == num.charAt(i+2)){
+                if(largestGood - '0' < num.charAt(i) - '0'){
+                    largestGood = num.charAt(i);
+                }
+                i += 2;
+            }else{
+                i++;
+            }
+        }
+
+        if(largestGood == ' '){
+            return "";
+        }
+
+        return ""+largestGood + largestGood + largestGood;
+    }
+}
+```

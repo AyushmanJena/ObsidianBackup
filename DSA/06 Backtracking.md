@@ -9,8 +9,8 @@ static int count(int r, int c){
 	if(r == 1 || c == 1){
 		return 1;
 	}
-	int left = count(r, c+1);
-	int right = count(r+1, c);
+	int left = count(r, c-1);
+	int right = count(r-1, c);
 	return left + right;
 }
 ```
@@ -97,10 +97,10 @@ public static void path(String s, boolean[][] maze, int r, int c){
     }
 
     if(r < maze.length-1){
-        path(s + 'D',maze, r+1, c );
+        path(s + 'D',maze, r+1, c ); // down
     }
     if(c < maze[0].length -1){
-        path(s+'R', maze, r, c+1);
+        path(s+'R', maze, r, c+1);  // right
     }
 }
 ```
