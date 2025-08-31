@@ -6,7 +6,7 @@ webflux
 Required Files : 
 1. Controller : QuoteController
 2. Response : QuoteResponse
-3. Service : QuiteService and QuoteServiceImpl
+3. Service : QuoteService and QuoteServiceImpl
 4. RestClientConfig : RestClientConfiguration
 
 Note : The API gives us a random quote with its attributes

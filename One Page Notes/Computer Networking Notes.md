@@ -277,8 +277,6 @@ Each Email provider has their own servers e.g. yahoo, gmail, etc.
 
 ![[Pasted image 20250815234244.png]]
 
-
-
 ### DNS
 Domain Name Server
 Where the domain name is stored and corresponds to the ip address
@@ -308,9 +306,280 @@ these domains especially top level are registered and managed by ICANN : Interna
 - If still not found it is searched in TLD : Top Level Domain 
 - Both root server and TLD respond to the ISP, which forwards the data to your machine 
 ![[Pasted image 20250816231454.png]]
-
 - You cannot buy a domain name, you only rent it 
 
-
 # Transport Layer in Detail
-Transport Layer 
+
+The primary role of the transport layer in the OSI model is to provide reliable, end-to-end communication between devices on a network
+
+During data sharing, the transportation of data from one computer to another computer is done by Network Layer.
+Transport Layer lies inside the devices, its role is to take the information from the application to network and network to the application. 
+Also connecting multiple applications and sharing data among them
+- It provides an abstraction.
+
+Transport layer has some protocols : TCP and UDP
+TCP handles entire data 
+UDP data packets may be lost
+
+### Multiplexing and DeMultiplexing
+How computers determine the type of data sharing and how to determine which application asked for the data
+Since data is shared in bundled packets.
+Transport layer of sender has a multiplexer, 
+Transport layer of receiver side has a demultiplexer
+
+A multiplexer (MUX) combines data from multiple applications (like web browsers, email, chat) into a single stream and transmission over the network.
+A Demultiplexer (DEMUX) separates that single incoming stream back into the correct application processes at the receiver
+
+Using port numbers we refer to applications 
+Using sockets we connect two applications
+
+Transport layer will attach socket port numbers, therefore it knows which application it is coming from and to which application we need to send the data.
+
+Transport layer also takes care of Congestion Control  (Traffic) 
+It uses some Congestion Control Algorithms built in TCP
+
+##### Checksums
+Sometimes data might get corrupted while sharing.
+
+Transport Layer protocol takes care of this using Checksums
+
+Checksum is an error detection mechanism used to verify the integrity of data during transmission.
+
+Checksum could be said is a number. 
+The checksum is generated using the data and is associated with the data.
+Then using the checksum we can check if the data is complete or not. If the value is different, the data is sent again.
+
+##### Timers
+Data packets might be lost during transmission.
+
+How to know if the data has reached its destination. 
+
+A timer is a clock based mechanism used to detect delays, retransmit lost packets and manage time related events in transport protocols like TCP.
+
+case 1 : data being lost
+- When sender sends the packet, sender starts the timer.
+- When receiver receives the packet, he responds with an acknowledgement.
+- If the acknowledgement is not received before the timer expires, the sender assumes the packet was lost or corrupted and retransmits it.
+
+case 2 : ack being lost
+- sender sends a packet, receiver received it and responds with an acknowledgement. 
+- However the acknowledgement does not reach the sender. 
+- Therefore the sender sends the same packet again assuming the packet is not received.
+- To solve this packet we use Sequence Numbers
+- Unique identification value number to each packet.
+
+## Protocols
+A protocol in networking is a set of rules and standards that define how data is transmitted, received and interpreted between devices in a network.
+They ensure that computers, routers and servers can understand each other despite differences in hardware, software or architecture.
+
+- TCP and UDP are Transport layer Protocols
+- HTTP is Application Layer Protocol
+- IP is Network Layer Protocol
+
+#### UDP : 
+User Datagram Protocol
+- Provides fast, connectionless and lightweight way of sending data over a network.
+- Used in streaming, online gaming, Voice Over IP
+- Data may or may not be delivered
+- Data may change on the way
+- Data may not be in order or sequence
+- UDP uses checksum to detect errors, but does nothing about it.
+
+**UDP Packet  structure :**
+Source Port Number : 2 bytes
+Destination Por Number : 2 bytes
+Length of Datagram : 2 bytes (contains length of UDP header and data)
+Checksum : 2 bytes
+Data : Variable size ~ (2<sup>16</sup> - 8) bytes
+
+```
+ ------------------------------------------------
+| Source Port (16) | Destination Port (16)       |
+ ------------------------------------------------
+| Length (16)      | Checksum (16)               | // size in bits
+ ------------------------------------------------
+|                 Data (variable)                |
+|                 ............                   |
+ ------------------------------------------------
+
+```
+
+
+#### TCP
+Transmission Control Protocol
+shares data between network layer and transport layer
+- HTTP uses TCP
+- Application Layer sends lots of Raw Data
+- TCP segments the data, divides the data into chunks and adds headers, etc.
+- It may also collect data from network layer 
+- Also provides Congestion Control
+- Takes care of : when data does not arrive and also maintains the order of data using ack and sequence numbers.
+- Also provides error control.
+- Full Duplex (Bi directional data transfer)
+- Used in emails, web browsing, etc.
+
+
+How the connection Oriented(handshake) works :
+3 way handshake :
+- client sends a connection request to server, sends a synchronization flag SYN (a value inside the header) and a sequence number
+- server responds a acknowledgement flag ACK, and a SYN for its own request to start a connection and a sequence number
+- then the client again responds with another acknowledgement ACK and a sequence number
+then the connection will be established. 
+
+
+#### Difference between UDP and TCP : 
+
+| TCP                                         | UDP                                             |
+| ------------------------------------------- | ----------------------------------------------- |
+| Connection Oriented(requires handshake)     | Connectionless(no handshake)                    |
+| Reliable(acknowledgements, retransmissions) | Unreliable(no guarantee of delivery)            |
+| Ensures data arrives in correct order       | No ordering, packets may arrive out of sequence |
+| Slower                                      | Faster                                          |
+| Higher Overhead                             | Lower Overhead                                  |
+| Use : Web browsing, Email, file transfer    | Use : audio streaming, online gaming, VoIP      |
+
+
+# Network Layer
+Data in the transport layer, we have data in segments
+In network layer, data travels in packets ✅
+Data link layer has frames
+
+Here we work with routers (This is where the data is transferred from one computer to another)
+Every router is connected to multiple routers
+Every router has its own network address
+The packet contains the network address of the destination (and other data as well)
+Using forwarding table of each router, we can find a path travelling which the data can receive the destination router
+This is called **Hop by Hop forwarding**
+
+![[Pasted image 20250819230353.png]]
+
+
+The forwarding table comes inside routing table (routing table may have multiple paths) 
+Forwarding table contains only one path.
+Hopping does not happen on individual routers (like personal routers)
+It happens on the ISPs (Internet Service Providers) 
+For addressing it does not use individual addresses, but uses Blocks of addresses.
+
+addressing :
+for example in an IP address:` 192.168.2.30`
+`192.168.2` is the network address of your device / subnet id
+`30` is the device address / host id
+
+
+Q. Who is creating these routing tables ? How does router know where to forward the data packets ?
+A. Control Plane : Control Plane is used to build these routing tables. 
+It is similar to a graph. Every router is a node and connections between them are edges.
+
+Two types of routing to create tables : 
+1. Static Routing (Adding addresses manually)
+2. Dynamic Routing (When there is change in network, it changes automatically)
+
+Path finding algorithms like dijkstra algorithm are used in routing.
+
+
+#### Internet Protocol
+Internet Protocol IP : This takes place in the network layer 
+IP address uniquely identifies a client/server/node/router
+
+IPv4 : 32 bit numbers, 4 words
+IPv6 : 128 bit numbers
+
+```
+5. 6. 9. 14
+00000101 . and so on binary representation
+```
+
+The concept of blocking (clustering) of addresses is called sub-netting.
+When router forwards a packet, it needs to know the subnet of the destination
+
+There are 3 types of classes : 
+IP address of : 
+CLASS A, CLASS B, CLASS C, (class D and E are also there)
+Class of Ip address signifies a basic range
+
+| CLASS | starting  | ending          |
+| ----- | --------- | --------------- |
+| A     | 0.0.0.0   | 127.255.255.255 |
+| B     | 128.0.0.0 | 191.255.255.255 |
+| C     | 192.0.0.0 | 223.255.255.255 |
+| D     | 224.0.0.0 | 239.255.255.255 |
+| E     | 240.0.0.0 | 255.255.255.255 |
+
+Class A given to very large organizations and ISPs
+Class B given to medium sized organizations like universities, corporations and regional ISPs
+Class C given to small organizations, used in LANs and private networks
+Class D used for multicast communication (one to many)
+Class E used for research and experimental purposes
+
+Subnet masking identifies the network portion of an IP address, while leaving the host portion available for device addressing.
+
+Variable length subnets : You can set your custom subnet part length in a network 
+ex : 12.0.0.0/31 -> first 31 bits are my subnet part
+
+Reserved Addresses : 
+127.0.0.0/8 => localhost (the first number is fixed, other 3 can vary)
+
+##### IP Packets : 
+Apart from data the header is of 20 bytes
+It contains data like IP version, length, identification number, flags, protocols, checksum, TTL, source and destination ip address, etc.
+
+TTL-> Time To Live : Maximum number of hops (routers) the packet can pass through before being discarded, preventing it from circulating endlessly in the network.
+
+##### IPv6
+- 2<sup>128</sup> unique ip addresses
+con : 
+- it is not backward compatible, devices which are configured on ipv4 cannot access websites or servers based on ipv6
+- needs hardware upgrades and ISPs also need to make modifications
+
+8 parts of hexadecimal values
+a : a  : a : a : a : a : a : a 
+each number is a 16 bit hexadecimal string
+
+ex : 2405:201:a001:1054:5h77:49a3:4545:41b0
+
+In IPv6 we can also have a subnet (fixed initial values)
+
+
+### MiddleBoxes
+Extra devices that also interact with the IP packets
+some such devices are Firewall, Network Address Translator, Load Balancer, Proxies (forward/reverse)
+
+###### Firewall : 
+It provides filters, based on which the IP packets are filtered based on various rules.
+Ex. : address, port numbers, flags, protocols, etc.
+There are 2 types of firewalls :
+1. stateless firewall : does not store a state
+2. stateful firewall : stores the packets in its cache memory 
+
+###### Network Address Translator : 
+Converts private IP addresses to a public IP (and vice versa).
+Allows multiple devices in a local network to share a single public IP.
+
+###### Load Balancers : 
+Distribute incoming network traffic across multiple servers to ensure no single server is overloaded and to improve reliability and performance.
+
+###### Proxies : 
+Acts as an intermediary between client and server - forward proxies hide client identity, while reverse proxies protect servers and can cache responses.
+
+
+# DataLink Layer
+DataLink layer is responsible for reliable transmission of data **frames** between two devices directly connected on the same physical link.
+
+- It takes packets from the Network Layer and encapsulates them into frames.
+- Handles MAC addressing (source & destination on the local network).
+- Provides error detection (using CRC/checksum).
+- Manages flow control and access to the physical medium (like Ethernet, Wi-Fi).
+- Ensures that the data successfully travels over a single hop (link).
+
+There might be many devices connected together in a LAN. 
+At the datalink layer they communicate with each other using datalink layer address.
+Every device will have a datalink layer address. 
+This address is also called MAC address of your device. Uniquely identifying the device on a network.
+
+What does a  frame contain ?
+- contains the datalink layer address of sender and ip address of destination.
+
+ARP : Address Resolution Protocol
+
+# Physical Layer
+Hardware stuff

@@ -108,3 +108,29 @@ class Solution {
     }
 }
 ```
+
+[2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/)
+```java
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+        long total = 0;
+        long zeroCount = 0;
+        for(int i = 0; i<nums.length+1; i++){
+            if(i < nums.length && nums[i] == 0){
+                zeroCount++;
+            }
+            else{
+                if(zeroCount > 0){
+                    total += calculateCombinations(zeroCount);
+                    zeroCount = 0;
+                }
+            }
+        }
+        return total;
+    }
+
+    public long calculateCombinations(long count){
+        return count * (count + 1)/2;
+    }
+}
+```

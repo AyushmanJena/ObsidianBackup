@@ -25,7 +25,7 @@ public void insert(int value){
 	list.add(value);
 	upheap(list.size() - 1);
 }
-private void uphead(int index){
+private void upheap(int index){
 	if(index == 0){
 		return;
 	}

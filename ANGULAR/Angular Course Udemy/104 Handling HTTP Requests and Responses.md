@@ -171,7 +171,7 @@ ngOnInit() {
 
 1. create a variable isFetching to track if the process is going on
 2. Set the value to false by default
-3. set value to trye, when you start onInit method
+3. set value to true, when you start onInit method
 4. then after the http request is complete set it to true within a parameter to the subscribe method called complete
 
 ```ts

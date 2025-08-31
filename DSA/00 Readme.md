@@ -12,7 +12,10 @@
 12. Graphs (incomplete) ❄️
 13. Sliding Window 
 14. Greedy Algorithm
-15. Dynamic Programming
+15. Dynamic Programming ❄️
 
 MORE : 
 - Questions (folder named Questions) add to Basics (also add Hanoi tower)
+- Add codes for n queens and n knights in backtracking
+- Add traversal methods in trees, BFS DFS, etc.
+- Transfer cp solutions from code folder to OBS

@@ -38,7 +38,7 @@ public boolean balanced(Node node){
 }
 
 publiv int height(Node node){
-	if(node == nul){
+	if(node == null){
 		return 0;
 	}
 	return 1 + Math.max(height(node.left), height(node.right));
@@ -46,6 +46,7 @@ publiv int height(Node node){
 ```
 
 AVL Tree : (Rotating Binary Tree) #revise 
+AVL -> Adelson Velskil and Landis
 - Self Balancing Binary Tree
 ```java
 public void populate(int value){
