@@ -198,3 +198,210 @@ CREATE TABLE childtableName(
 	FOREIGN KEY(baseId) REFERENCES parenttableName(baseId) ON UPDATE CASCADE
 );
 ```
+
+
+
+# Types of SQL commands
+### DQL 
+Data Query Language
+When we want to fetch data from our database
+SELECT 
+
+### DML
+Data Manipulation Language
+When we want to make changes to our data
+INSERT, UPDATE, DELETE
+
+### DDL
+Data Definition Language
+Deals with the definition of the data, like creating table, doing modifications to table columns, etc.
+CREATE, ALTER, DROP, TRUNCATE, RENAME
+
+### DCL
+Data Control Language
+Specify the controls on our data
+
+### TCL
+Transaction Control Command
+Used while performing transactions
+
+
+# Update Command
+ The UPDATE command in SQL is used to modify existing records in a table. 
+ 
+ If you get a safe mode error while executing queries run this query : 
+ `SET SQL_SAFE_UPDATES=0;`
+
+QUERY :
+```sql
+UPDATE tableName
+SET columnName1= value1, columnName2 = value2 
+WHERE condition;
+
+-- example 
+UPDATE employee
+SET salary=50000
+WHERE department="HR";
+```
+
+
+# DELETE Command
+The DELETE command in SQL is used to remove records from a table
+
+```sql
+DELETE FROM tableName
+WHERE condition;
+
+-- example
+DELETE FROM employee
+WHERE department = "HR";
+```
+
+
+# SELECT Command
+SELECT command is a DQL (Data Query Language) command. It is used to retrieve data from a database.
+
+We can provide specific columns from which we can retrieve data.
+
+```SQL
+-- to retrieve data present in specific column in a table
+SELECT column1, column2 FROM tableName;
+
+-- to retrieve all the data present in a table
+SELECT * FROM tableName;
+
+
+-- examples :
+SELECT name, age FROM employee;
+SELECT * FROM employee;
+```
+
+
+# WHERE clause
+It filters the rows based on specified conditions
+
+```SQL
+SELECT col1, col2 FROM tableName WHERE condition;
+
+-- example
+SELECT name, age FROM employee WHERE aga>20;
+```
+
+
+# Alter Command
+Alter is a DDL command used to modify(change) existing database objects, such as tables, indexes or constraints(schema)
+
+Ex: 
+Adding a new column, deleting a column
+Changing name of attribute from id to empId
+
+Adding a column
+```sql
+ALTER TABLE tableName
+ADD columnName datatype constraint;
+
+ex : 
+ALTER TABLE employee
+ADD dob VARCHAR(20);
+```
+
+Drop a column
+```sql
+ALTER TABLE tableName
+DROP COLUMN columnName;
+
+ex : 
+ALTER TABLE employee
+DROP COLUMN dob;
+```
+
+Modify the datatype of an existing column
+- The MODIFY clause is often used within an ALTER TABLE statement in SQL. 
+- It allows us to change the definition or properties of an existing column in a table.
+```sql
+-- new datatype for existing column
+ALTER TABLE tableName
+MODIFY columnName newDataType;
+
+-- ex:
+ALTER TABLE employee
+MODIFY age NUMBER;
+
+```
+
+Change the name of an existing column
+- The CHANGE command is often used within an ALTER TABLE statement in SQL.
+- It helps to change the name or data type of a column within a table
+```sql
+ALTER TABLE tableName
+CHANGE oldColumnName newColumnName newDataType;
+
+-- ex :
+ALTER TABLE employee
+CHANGE age emp_age VARCHAR(3);
+```
+
+# RENAME Command
+- The RENAME command is used to change the name of an existing database object, such as a table, column, index or constraint.
+
+Rename the name of Database : 
+```sql
+RENAME DATABASE DatabaseName TO newDatabaseName;
+```
+
+Rename the name of table: 
+```SQL
+RENAME TABLE oldTableName TO newTableName;
+
+-- ex : 
+RENAME TABLE employee TO employees;
+```
+
+Rename the name of an existing column
+```sql
+ALTER TABLE tableName
+RENAME COLUMN oldColumnName TO newColumnName;
+
+-- ex :
+ALTER TABLE employee
+RENAME COLUMN emp_age TO age;
+```
+
+
+# Truncate Command
+- This command removes all the rows from a given table, leaving the table empty but preserving its structure.
+```sql
+TRUNCATE TABLE tableName;
+```
+
+
+## Difference between TRUNCATE, DELETE and DROP
+TRUNCATE : 
+- Removes all rows from a table
+- `TRUNCATE TABLE tableName`
+
+DELETE : 
+- Used to remove specific rows from a table based on a condition.
+- `DELETE FROM tableName WHERE condition;`
+
+DROP : 
+- Used to completely remove table
+- `DROP TABLE tableName;`
+
+# DISTINCT keyword
+DISTINCT keyword is used within the SELECT statement to retrieve unique values from a column or combination of columns.
+
+Retrieve a list of unique values from col1
+```sql
+SELECT DISTINCT col1 
+FROM tableName;
+```
+
+Return unique combinations of col1 and col2
+```sql
+SELECT DISTINCT col1, col2
+FROM tableName;
+```
+- together there should not be same combinations
+
+# Operators in SQL
