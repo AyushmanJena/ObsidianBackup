@@ -405,3 +405,417 @@ FROM tableName;
 - together there should not be same combinations
 
 # Operators in SQL
+To perform operations on data in SQL we use operators.
+
+ex : 
+```sql
+SELECT col1 col2 FROM tableName WHERE condition(use operator);
+```
+
+### Types of operators in SQL : 
+**Arithmetic Operators** : 
+- addition `+`, subtraction `-`, multiplication `*`, division / , modulus `%`etc.
+query : 
+```sql
+SELECT * FROM employee WHERE age+1=60;
+```
+
+**Comparison Operators** : 
+equal to `=`
+not equal to `<> or !=`
+greater than `>`
+greater than or equal to `>=` , etc.
+
+query : 
+```sql
+SELECT * FROM employee WHERE age > 20;
+```
+
+**Logical Operator** :
+AND : return true if both conditions are true
+OR : return true if either conditions are true
+NOT : reverses the condition result
+
+```sql
+SELECT * FROM employee WHERE city='Pune' AND age> 18;
+
+SELECT * FROM employee WHERE city='Pune' OR age> 18;
+
+SELECT * FROM employee WHERE department NOT IN ('IT', 'HR');
+```
+
+**IN Operator** : 
+Checks if a value matches in a list of values
+```sql
+SELECT * FROM employee WHERE department IN ('IT', 'HR');
+```
+
+**IS NULL / IS NOT NULL Operators** : 
+IS NULL (checks for null values), IS NOT NULL (checks for not null values)
+```sql
+SELECT * FROM employee WHERE department IS NOT NULL;
+
+SELECT * FROM employee WHERE department IS NULL;
+```
+
+**Bitwise Operators** : 
+AND(&), OR(|)   
+
+**LIKE & Wildcard Operators :** 
+LIKE operator is used to search for a specified pattern in a column.
+It uses wildcard operators for matching patterns.
+
+% (percentage sign) : It matches for any sequence of zero or more characters
+```sql
+SELECT * FROM employee WHERE name LIKE 'A%';
+-- starts with A and can have any characters after it
+```
+
+`_` (Underscore sign) : It matches for any single character  
+```sql
+SELECT * FROM employee WHERE name LIKE '_A%';
+-- single character before A and can have any number of char after A
+```
+
+**BETWEEN Operator** : 
+Checks if a value is within a range of values
+ includes both starting and ending range as well.
+```sql
+SELECT * FROM employee 
+WHERE salary BETWEEN 1200 AND 1500;
+```
+
+
+# Clauses in SQL
+Clauses are like tools/conditions that helps us to make queries more specific or decide what data to fetch.
+
+Ex : WHERE, GROUP BY, HAVING, ORDER BY, LIMIT
+
+Query : 
+```
+SELECT col1, col2
+FROM tableName
+clause condition;
+```
+
+**WHERE clause :**
+Filters thr rows based on specified conditions.
+```sql
+SELECT col1, col2
+FROM tableName
+WHERE condition;
+
+--ex : 
+SELECT * FROM employee WHERE age > 20;
+```
+
+**LIMIT clause** : 
+LIMIT clause is used to restrict the number of rows returned by a query.
+This query retrieves the first n rows from the table.
+
+```sql
+SELECT col1, col2 FROM tableName
+LIMIT noOfRows;
+
+-- ex : 
+SELECT * FROM employee LIMIT 2;
+```
+
+ORDER BY clause : 
+It is used to sort the results in ascending or descending order. 
+By default it returns the result in ascending order.
+
+```sql
+SELECT col1, col2 FROM tableName
+ORDER BY col1(ASC/DESC), col2(ASC/DESC);
+
+--ex : 
+SELECT * FROM employee 
+ORDER BY salary DESC;
+```
+
+
+# SOME QUESTIONS 
+```SQL
+-- write a sql query to fetch the details of employees having id as 1 and city as mumbai
+SELECT * FROM employee
+WHERE id=1 AND city="Mumbai";
+
+-- Write a SQL query to fetch the details of employees having salary greater than 1200 and city as Mumbai
+SELECT * FROM employee
+WHERE salary>1200 AND city="Mumbai";
+
+-- Write a SQL query to fetch the details of employees who are not from Mumbai
+SELECT * FROM employee
+WHERE city NOT IN("Mumbai");
+
+-- Write a SQL query to fetch the details of employees having the maximum salary
+SELECT * FROM employee
+ORDER BY salary DESC;
+
+--Write a SQL query to fetch the details of 2 employees having the maximum salary 
+SELECT * FROM employee 
+ORDER BY salary DESC
+LIMIT 2;
+```
+
+# Aggregate Functions
+Aggregate functions performs some operations on a set of rows and then returns a single value summarizing the data.
+These are used with SELECT statements to perform calculations.
+
+Types of Aggregate functions :
+- COUNT()
+- SUM()
+- AVG()
+- MIN()
+- MAX()
+- GROUP_CONCAT()
+
+**COUNT() :** It counts the number of rows in a table or the number of non-null values in a column.
+- This counts how many things are in a list or a group.
+
+```sql
+SELECT count(name) FROM employee; 
+-- This will tell the number of employees in a company.
+-- name : column name
+```
+
+**SUM() :** It calculates the sum of all values in a numeric column.
+- This adds up all the numbers isn a list
+```sql
+SELECT SUM(salary) FROM employee; 
+-- this will tell the total amount company is paying to its employees
+```
+
+**AVG() :** It computes the average of all values in a numeric column.
+It finds the average or the middle number of all the numbers in a list
+
+```sql
+SELECT AVG(salary) FROM employee; 
+-- this will tell the average amount of the salary
+```
+
+
+**MIN() :** It finds the smallest number in a list
+```sql
+SELECT MIN(salary) FROM employee;
+-- This will tell the minimum salary company is paying to its employees
+```
+
+
+**MAX() :** It finds the largest number in a list
+```sql
+SELECT MAX(salary) FROM employee;
+-- This will tell the maximum salary company is paying to its employees
+```
+
+
+##### Grouping data with GROUP BY clause
+GROUP BY CLAUSE
+This is used to group rows that have the same values together.
+It helps to organise data into groups so that you can do calculations, like finding totals or averages for each group.
+
+
+For example : There are various departments in a company, and you want to know the maximum salary for the IT department.
+Group them and then find the max on them 
+
+
+```sql
+-- QUERY
+SELECT col1, aggregateFun(col2) 
+FROM tableName
+GROUP BY col1;
+
+--EX: 
+SELECT department, AVG(salary) AS avgsal FROM employee
+GROUP BY department;
+
+-- output will be all departments and their avg salary table
+```
+
+##### HAVING clause
+Having Clause : The HAVING clause is just like the where clause but the main difference is it works on aggregated data. 
+It is used with the GROUP BY clause
+It helps to filter groups based on given conditions.
+
+```sql
+SELECT col1, col2 aggregateFun(col3) 
+FROM tableName
+GROUP BY col1 col2
+HAVING condition;
+
+--EX : 
+SELECT department, AVG(salary) AS avgsal
+FROM employee
+GROUP BY department
+HAVING avgsal > 1500;
+```
+
+![[Pasted image 20250930225540.png]]
+# Practice Questions 
+```sql
+-- Write a query to find the total number of employees in each city
+SELECT city, COUNT(name) AS no_of_emp 
+FROM employee
+GROUP BY city;
+
+-- Write a query to find the maximum salary of employees in each city in descending order
+SELECT city, max(salary) AS max_salary
+FROM employee
+GROUP BY city
+ORDER BY max_salary DESC;
+
+-- Write a query to display the department names alongside the total cound of employees in each department, sorting the results by the total number of employees in descending order.
+SELECT department, COUNT(id) AS totalemployees
+FROM employee
+GROUP BY department
+ORDER BY totalemployees DESC;
+
+-- Write a query to list the departments where the average salary is greater than 1200, also display the department name and the average salary
+SELECT department, AVG(salary) AS avgsalary
+FROM employee 
+GROUP BY department
+HAVING AVG(salary) > 50000; -- can use avgsalary as well
+
+--
+``` 
+
+
+![[Pasted image 20250930232209.png]]
+
+
+# Joins in SQL
+Joins are used to combine rows from two or more tables based on a related or shared or common column between them.
+There are commonly 4 types of joins including 
+INNER JOIN
+LEFT JOIN
+RIGHT JOIN,
+FULL JOIN,
+SELF JOIN,
+CROSS JOIN
+
+Q. Is Foreign key important for performing joins?
+A. Joins can be performed based on any columns that establish a relationship between tables, not just FK constraints, so its not necessary.
+
+Note : 
+- For joins if there is no value in the other table for the common field it fills the value with NULL
+
+### Inner Join
+- Get values common in both the table this join is performed on. 
+
+![[Pasted image 20250930232932.png]]
+
+Inner Join helps us in getting the rows that have matching values in both tables, according to the given join condition.
+
+two tables (students, courses) have a common field (e.g. rollno)
+We will get all the rows for which rollno are present in both tables
+
+```sql
+SELECT columns
+FROM table1
+INNER JOIN table2
+ON table1.colName = table2.colName;
+
+-- ex : 
+SELECT customer.id, customer.name, orders.o_name
+FROM customer
+INNER JOIN orders
+ON customer.id = orders.id;
+```
+
+### Left Join / Left Outer Join
+![[Pasted image 20251001220856.png]]
+
+Left Join is used to fetch all the records from the left table along with matched records from the right table.
+If there are no matching records in the right table, NULL values are returned for the columns of the right table.
+
+```sql
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.colName = table2.colName;
+
+--ex : 
+SELECT *
+FROM customer
+LEFT JOIN orders
+ON customer.id = orders.id;
+```
+
+### Right Join / Right Outer Join
+We get all the values present in the right table along with values common in both the tables
+![[Pasted image 20251001221026.png]]
+
+Right Outer Join is used to fetch all the records from the right table along with matched records from the left table.
+If there are no matching records in the left table, NULL values are returned for the columns of the left table.
+
+```sql
+SELECT columns 
+FROM table1
+RIGHT JOIN table2
+ON table1.colName = table2.colName;
+
+-- ex : 
+SELECT *
+FROM customer
+RIGHT JOIN orders
+ON customer.id = orders.id;
+```
+
+### Full Join / Full Outer Join
+All the values of left and right table will be taken
+![[Pasted image 20251001221202.png]]
+
+It returns the matching rows of both left and right table and also including all rows from the both tables even if they don't have matching rows.
+If there is no match, NULL values are returned for the columns of the missing table.
+In MySQL, the syntax for a full join is different compared to other SQL databases like PostgreSQL or SQL server.
+
+MySQL does not support the FULL JOIN keyword directly. So we use a command like LEFT JOIN, RIGHT JOIN AND UNION to achieve the result.
+So we write the query for LEFT JOIN and query for RIGHT JOIN with a UNION between them
+```sql
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.colName = table2.colName
+
+UNION
+
+SELECT columns
+FROM table1
+RIGHT JOIN table2
+ON table1.colName = table2.colName;
+
+```
+
+### Self Join
+A self join is a type of join where a table is joined with itself.
+ ![[Pasted image 20251001221248.png]]
+It is a type of inner join.
+```sql
+SELECT columns
+FROM table as t1
+JOIN table as t2
+ON t1.colName = t2.colName;
+```
+ex : 
+![[Pasted image 20251001233436.png]]
+### Cross Join 
+![[Pasted image 20251001221322.png]]
+
+It combines each row of the first table with every row of the second table.
+
+It will perform a cartesian product of A table with B table
+All possible combinations will be the output
+Final table will have `m*n` rows
+
+```sql
+SELECT *
+FROM table1
+CROSS JOIN table2;
+
+--ex : 
+SELECT * 
+FROM customer
+CROSS JOIN orders;
+```
+

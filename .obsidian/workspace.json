@@ -108,9 +108,23 @@
               "icon": "lucide-file",
               "title": "105 Authentication and Route Protection"
             }
+          },
+          {
+            "id": "4abb46936f640e38",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "One Page Notes/Tailwind CSS.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Tailwind CSS"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -252,17 +266,28 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "27bba1b9f5204e56",
+  "active": "4abb46936f640e38",
   "lastOpenFiles": [
+    "One Page Notes/SQL.md",
+    "One Page Notes/assets/Pasted image 20251001233436.png",
+    "One Page Notes/assets/Pasted image 20251001221322.png",
+    "One Page Notes/assets/Pasted image 20251001221248.png",
+    "One Page Notes/assets/Pasted image 20251001221202.png",
+    "One Page Notes/assets/Pasted image 20251001221026.png",
+    "One Page Notes/assets/Pasted image 20251001220856.png",
+    "One Page Notes/assets/Pasted image 20250930232932.png",
+    "One Page Notes/assets/Pasted image 20250930232209.png",
+    "One Page Notes/assets/Pasted image 20250930225540.png",
+    "One Page Notes/assets/Pasted image 20250930225459.png",
+    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
+    "One Page Notes/Tailwind CSS.md",
+    "ANGULAR/Angular Course Udemy/105 Authentication and Route Protection.md",
     "Cognizant Emerging Technologies/01 IOT.md",
     "One Page Notes/Git and Github.md",
     "Cognizant Emerging Technologies",
     "ANGULAR/Angular Course Udemy/101 Forms.md",
-    "One Page Notes/SQL.md",
-    "ANGULAR/Angular Course Udemy/105 Authentication and Route Protection.md",
     "ANGULAR/Angular Youtube Tutorial/Authentication/02 Frontend.md",
     "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
-    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
     "SPRING BOOT NOTES/JWT Authentication and Authorization in Spring Boot.md",
     "SPRING BOOT NOTES/Additional Notes/pdf file creation.md",
     "SPRING BOOT NOTES/Additional Notes/Sending Email using Spring Boot.md",
@@ -279,21 +304,9 @@
     "DSA/10 Heaps.md",
     "DSA/09 Trees.md",
     "DSA/00 Readme.md",
-    "One Page Notes/assets/Pasted image 20250819230353.png",
-    "REACT NATIVE NOTES/React Native Youtube Tutorial/01 Getting Started.md",
-    "DSA/Leetcode/Arrays.md",
-    "One Page Notes/assets/Pasted image 20250816231454.png",
-    "One Page Notes/assets/Pasted image 20250815234244.png",
-    "One Page Notes/assets/Pasted image 20250814231533.png",
-    "One Page Notes/assets/Pasted image 20250813230810.png",
-    "One Page Notes/assets/Pasted image 20250813230731.png",
-    "One Page Notes/assets/network-topology-types-1024x536.jpeg",
     "One Page Notes/assets",
     "ANGULAR/Angular Youtube Tutorial/Authentication",
     "JavaScript Notes/Authentication",
-    "assets/Pasted image 20250601003940.png",
-    "assets/Pasted image 20250601003541.png",
-    "assets/Pasted image 20250601002937.png",
     "assets",
     "JAVA Microservices",
     "One Page Notes",
