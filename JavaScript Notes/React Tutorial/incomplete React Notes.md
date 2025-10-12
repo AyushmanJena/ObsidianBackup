@@ -1,6 +1,6 @@
 
 > [!ERROR]
-> INCOMPLETE TUTORIAL 
+> INCOMPLETE TUTORIAL  from Udemy
 ## Creating a react app : 
 1. Create React App
 2. Vite : 

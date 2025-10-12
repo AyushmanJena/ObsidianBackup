@@ -521,7 +521,12 @@ LIMIT noOfRows;
 SELECT * FROM employee LIMIT 2;
 ```
 
-ORDER BY clause : 
+LIMIT n - It helps to retrieve a maximum of n rows from the beginning of the result set
+LIMIT m, n - It helps to retrieve a specific range of rows where
+	m : number of rows to skip from the beginning
+	n : number of rows to fetch after skipping 
+
+**ORDER BY clause** : 
 It is used to sort the results in ascending or descending order. 
 By default it returns the result in ascending order.
 
@@ -819,3 +824,240 @@ FROM customer
 CROSS JOIN orders;
 ```
 
+## Exclusive Self Join
+Exclusive joins are used when we want to retrieve data from two tables excluding matched rows. 
+They are a part of outer joins or full outer join.
+
+Types of Exclusive Joins : 
+![[Pasted image 20251002103651.png]]
+
+### Left Exclusive Join : 
+When we retrieve records from the left table excluding the ones matching in both left and right table.
+
+```sql
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.colName = table2.colName
+WHERE table2.colName IS NULL;
+
+-- EX :
+SELECT *
+FROM customer
+LEFT JOIN orders
+ON customer.id = orders.id
+WHERE orders.id IS NULL;
+```
+
+### Right Exclusive Join
+When we retrieve records from the right table excluding the ones matching in both left and right table.
+
+```sql
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.colName = table2.colName
+WHERE table1.colName IS NULL;
+
+--EX : 
+SELECT *
+FROM customer
+LEFT JOIN orders
+ON customer.id = orders.id
+WHERE customer.id IS NULL;
+```
+
+
+### Full Exclusive Join
+When we retrieve records from the right table and left table excluding the ones matching in both left and right table.
+
+Perform LEFT EXCLUSIVE  JOIN and RIGHT EXCLUSIVE JOIN and perform union on them
+
+```sql
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.colName = table2.colName
+WHERE table2.colName IS NULL
+
+UNION 
+
+SELECT columns
+FROM table1
+RIGHT JOIN table2
+ON table1.colName = table2.colName
+WHERE table1.colName IS NULL;
+
+--EX : 
+SELECT *
+FROM customer
+LEFT JOIN orders
+ON customer.id = orders.id
+WHERE orders.id IS NULL
+
+UNION
+
+SELECT *
+FROM customer
+LEFT JOIN orders
+ON customer.id = orders.id
+WHERE customer.id IS NULL;
+```
+
+
+## UNION operator in SQL
+Union operator in SQL is used to combine the results of two or more SELECT queries into a single result set and gives unique rows by removing duplicate rows.
+
+Things to keep in mind : 
+1. Each SELECT command within the UNION must retrieve the same number of columns.
+2. The data types of columns in corresponding positions across SELECT statements should match
+3. Columns should be listed in the same order across all SELECT statements.
+
+### UNION ALL Operator in SQL
+UNION Operator in SQL is used to combine the results of two or more SELECT queries inot a single result set and gives all rows by **not removing duplicate rows**.
+
+```sql
+SELECT columns
+FROM table1
+UNION ALL
+SELECT columns
+FROM table2;
+```
+
+# SUBQUERIES IN SQL
+SQL subquery is a query nested within another SQL statement. 
+Whenever we want to retrieve data based on the result of another query we use nested queries.
+
+Using SUBQUERIES : 
+1. Subqueries can be used with clauses such as SELECT, INSERT, UPDATE or DELETE to perform complex data retrieval
+QUERY : 
+```SQL
+SELECT columns, (subquery)
+FROM tableName;
+
+--EX : 
+--Find the employees with average age and age of employees
+SELECT AGE, (AVG(age) FROM employee) as avg_age
+FROM employee;
+```
+
+2. Subqueries can be used with WHERE clause to filter data based on conditions.
+```sql
+SELECT *
+FROM tableName
+WHERE column name operator (subquery);
+
+--ex : 
+-- Find all the employees who have salary greater than the min salary
+-- 1. find the min salary
+-- 2. find employee having salary greater than min salary
+SELECT name, salary
+FROM employee
+WHERE salary >(SELECT MIN(salary) FROM employee);
+
+-- Find the employee with the minimum age
+-- 1. FInd the min age
+-- 2. Find employee having the min age
+SELECT name, age 
+FROM employee
+WHERE age = (SELECT MIN(age) FROM employee);
+```
+
+ 3. Subqueries can also be used in the FROM clause
+```sql
+SELECT *
+FROM subquery AS altName;
+
+-- ex : 
+-- To find the employee with age greater than  the minimum age
+SELECT emp.name, emp.age
+FROM employee emp, (SELECT MIN(age) AS min_age FROM employee) AS subquery
+WHERE emp.age > subquery.min_age;
+```
+
+# QUESTIONS
+1. Find the nth highest salary in a given dataset
+Steps 
+- Select the column which you want to show the final result i.e. salary
+- Order the salary in descending order so that you have the max at the first
+- Now the value of n could be 1,2,3, ... n. So we have to make the query in such a way that whatever be the value of n, it can provide the result.
+- So at the end of the query we will provide a LIMIT so that on the dataset which we have got after ordering the salary in descending order, we can fetch the nth highest one.
+
+```sql
+SELECT DISTINCE Salary
+FROM tableName
+ORDER BY Salary DESC
+LIMIT n-1, 1; -- skip first n-1 and get the 1 after that
+```
+
+
+## Stored Procedures
+These are programs that can perform specific tasks based on the stored query
+It is basically a collection of pre-written SQL statements grouped together under a specific name
+
+```SQL
+-- Query to create a procedure
+CREATE PROCEDURE procedureName()
+BEGIN
+Query
+END;
+
+-- Query to call the procedure
+CALL procedureName(); 
+```
+
+```sql
+-- Example for a stored procedure without params
+DELIMITER /
+CREATE PROCEDURE getAllOrderDetails()
+BEGIN 
+Select * from orders;
+END /
+DELIMITER ;
+
+-- query to call the procedure 
+CALL getAllOrderDetails();
+```
+
+DELIMITER -> sets the delimiter as / temporarily and reset it after the end
+
+
+```sql
+-- Example to return the detail sof order by id (Stored procedure with params)
+CREATE PROCEDURE getAllOrderDetailsById(IN id int)
+BEGIN
+SELECT * FROM Orders WHERE id = id;
+END;
+
+-- calling the procedure
+CALL getAllORderDetailsById(2);
+```
+
+
+# Views in SQL
+A view is a virtual table in SQL
+It helps in providing a filtered view of data for security purposes
+```sql
+CREATE VIEW viewName AS
+SELECT columns FROM baseTableName (Specify the columns to be included in the view)
+
+-- ex : 
+CREATE VIEW employeeView AS
+SELECT id, name, city FROM employee;
+```
+Views help in Data Abstraction, Security and to simplify complex queries.
+
+ex : not display user_password in a new table which would be visible to other users 
+
+Since view is a virtual table, all the operations we perform on tables can be performed on views
+
+```sql
+SELECT * FROM viewName;
+DROP VIEW IF EXISTS viewName;
+etc.
+
+-- ex : 
+SELECT id FROM employeeView;
+```
+
+--- 
