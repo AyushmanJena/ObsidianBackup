@@ -214,6 +214,33 @@ public static int solution(int[] arr, int k){
 
 ## LeetCode Questions
 
+[3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int start = 0;
+        char ch;
+        int len = 0;
+        int maxLen = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for(int i = 0; i<s.length() ; i++){
+            ch = s.charAt(i);
+            if(map.containsKey(ch)){
+                if(map.get(ch) >= start){
+                    start = map.get(ch) + 1;
+                    
+                }
+            }
+            map.put(ch, i);
+            len = i - start + 1;
+            maxLen = Math.max(len, maxLen);
+        }
+        return maxLen;
+    }
+}
+```
+
 [930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) #imp
 ```java
 class Solution {

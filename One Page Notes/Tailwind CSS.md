@@ -231,4 +231,8 @@ still increasing, when we hit medium we get green color and till end
     </div>
 ```
 
- 
+# Other tailwind classes I found out 
+
+`line-clamp-3` -> hide text overflowing with "...". Value indicated number of lines
+
+Zoom in effect : `transition-transform duration-300 hover:scale-105`

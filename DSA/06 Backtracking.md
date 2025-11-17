@@ -106,3 +106,36 @@ public static void path(String s, boolean[][] maze, int r, int c){
 ```
 
 
+# LeetCode Questions
+
+[22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
+```java
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        return helper(1, 0, new StringBuilder("("), n);
+    }
+
+    public List<String> helper(int open, int close, StringBuilder s, int n){
+        if(open == n && close == n){
+            ArrayList<String> ans = new ArrayList<>();
+            ans.add(s.toString());
+            return ans;
+        }
+
+        ArrayList<String> list = new ArrayList<>();
+
+        if(open < n){
+            s.append('(');
+            list.addAll(helper(open+1, close, s, n));
+            s.deleteCharAt(s.length() - 1); // backtrack
+        }
+        if(close <n && close < open){
+            s.append(')');
+            list.addAll(helper(open, close+1, s, n));
+             s.deleteCharAt(s.length() - 1); // backtrack
+        }
+
+        return list;
+    }
+}
+```

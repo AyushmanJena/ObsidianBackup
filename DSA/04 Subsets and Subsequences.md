@@ -46,7 +46,7 @@ static List<List<Integer>> subsetDuplicate(int[] arr) {
 
 # String Permutation
 input : "ABC"
-output : {ABC, BAC, BCA, ACB, CAB, CBA}
+output : {ABC, BAC, BCA, ACB, CAB, CBA} 
 ```java
 // permutationsList(processed, unprocessed)
 static ArrayList<String> permutationsList(String p, String up) {

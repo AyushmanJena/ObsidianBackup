@@ -68,3 +68,10 @@ SafeAreaView -> to avoid notches, cutouts, etc.
 2) 2 ) Views are similar to div. 
 3) SafeAreaView: It is used to avoid the notch. Wrap the entire content in it. 
 4) In jsx, a starting tag needs to have an end tag.
+
+
+CONTINUE FROM 
+07 : # Styling React Native Components: The Fundamentals of Stylesheet
+
+https://www.youtube.com/playlist?list=PLRAV69dS1uWSjBBJ-egNNOd4mdblt1P4c
+
