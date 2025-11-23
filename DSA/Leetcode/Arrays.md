@@ -134,3 +134,121 @@ class Solution {
     }
 }
 ```
+
+[2154. Keep Multiplying Found Values by Two](https://leetcode.com/problems/keep-multiplying-found-values-by-two/)
+```java
+class Solution {
+    public int findFinalValue(int[] nums, int original) {
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : nums) {
+            numSet.add(num);
+        }
+        
+        while (numSet.contains(original)) {
+            original *= 2;
+        }
+        
+        return original;
+    }
+}
+```
+
+[36. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
+```java
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        int i =0;
+        int j = 0;
+
+        HashSet<Character> set = new HashSet<>();
+
+        // check rows
+        for(i = 0; i< 9; i++){
+            for(j = 0; j < 9; j++){
+                if(board[i][j] != '.'){
+                    if(set.contains(board[i][j])){
+                        return false;
+                    }
+                    set.add(board[i][j]);
+                }
+            }
+            set.clear();
+        }
+
+
+        // check columns
+        for(i = 0; i<9; i++){
+            for(j = 0; j< 9; j++){
+                if(board[j][i] != '.'){
+                    if(set.contains(board[j][i])){
+                        return false;
+                    }
+                    set.add(board[j][i]);
+                }
+            }
+            set.clear();
+        }
+
+        i = 0;
+        j = 0;
+
+        
+
+
+        // check grids
+        for(i =0; i<9; i+=3){
+            for(j = 0; j <9;j+=3){
+                boolean check = checkGrid(board, i, j, set);
+                if(check == false){
+                    return false;
+                }
+                set.clear();
+            }
+        }
+
+        return true;
+    }
+
+    public boolean checkGrid(char[][] board, int r, int c, HashSet<Character> set){
+        for(int i = r; i<r+3; i++){
+            for(int j = c; j< c+3; j++){
+                if(board[i][j] != '.'){
+                    if(set.contains(board[i][j])){
+                        return false;
+                    }
+                    set.add(board[i][j]);
+                }
+            }
+        }
+        return true;
+    }
+}
+```
+
+
+[48. Rotate Image](https://leetcode.com/problems/rotate-image/)
+```java
+class Solution {
+    public void rotate(int[][] matrix) {
+        // transpose the matrix
+        for(int i =0; i <matrix.length; i++){
+            for(int j =0; j< matrix[0].length; j++){
+                if(j > i){
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+        }
+
+        // reverse rows 
+        for(int i =0 ; i < matrix.length; i++){
+            for(int j = 0; j < matrix.length / 2; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][matrix[i].length - 1 - j];
+                matrix[i][matrix[i].length- 1 - j] = temp;
+            }
+        }
+    }
+}
+```
