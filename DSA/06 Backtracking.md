@@ -139,3 +139,68 @@ class Solution {
     }
 }
 ```
+
+[39. Combination Sum](https://leetcode.com/problems/combination-sum/)
+```java
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        helper(0, candidates, target, new ArrayList<>(), result);
+        return result;
+    }
+
+    public void helper(int i, int[] arr, int target, List<Integer> current, List<List<Integer>> result){
+         if(target == 0){
+            result.add(new ArrayList<>(current));
+            return;
+         }
+
+         if(i >= arr.length || target < 0){
+            return;
+         }
+
+        // include current element
+         current.add(arr[i]);
+         helper(i, arr, target - arr[i], current, result);
+         current.remove(current.size() - 1); // backtrack
+
+        // exclude current element
+        helper(i+1, arr, target, current, result);
+    }
+}
+```
+
+[131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
+```java
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> result = new ArrayList<>();
+        helper(s, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    public void helper(String s, int start, List<String> path, List<List<String>> result){
+        if(start == s.length()){
+            result.add(new ArrayList<>(path));
+            return;
+        }
+
+        for(int end = start; end < s.length(); end++){
+            if(isPalindrome(s, start, end)){
+                path.add(s.substring(start, end+ 1));
+                helper(s, end+1, path, result);
+                path.remove(path.size() -1);
+            }
+        }
+    }
+
+    public boolean isPalindrome(String s, int left, int right){
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+```
