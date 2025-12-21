@@ -204,3 +204,44 @@ class Solution {
     }
 }
 ```
+
+[40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
+```java
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> result = new ArrayList<>();
+        helper(candidates,0, target, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    public void helper(int[] arr, int index, int target, int sum, List<Integer> list, List<List<Integer>> result){
+        
+        if(sum == target){
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        
+        if(sum > target || index >= arr.length){
+            return;
+        }
+        
+
+        // including current element
+        list.add(arr[index]);
+        helper(arr,index+1, target, sum + arr[index], list, result);
+        list.remove(list.size() -1);
+
+
+        // if the current element is not being included remove all duplicates of it as well
+        int temp = index+1;
+        while(temp < arr.length && arr[temp] == arr[index]){
+            temp++;
+        }
+
+        // excluding current element
+        helper(arr, temp, target, sum, list, result);
+
+    }
+}
+```
