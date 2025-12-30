@@ -269,3 +269,63 @@ static int findPivotWithDuplicates(int[] arr) {
 ```
 
 --- 
+
+# LEETCODE QUESTIONS
+
+[33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+```java
+class Solution {
+    public int search(int[] nums, int target) {
+        // find peak
+        // perform 2 searches
+        int peak = findPeak(nums);
+        int ans = binarySearch(nums, 0, peak, target);
+        if(ans == -1){
+            return binarySearch(nums, peak+1, nums.length-1, target);
+        }
+        return ans;
+    }
+
+    public int findPeak(int[] nums){
+        int l = 0;
+        int r = nums.length -1;
+
+        if(nums[l] <= nums[r]) return r;
+
+        int m = 0;
+        while(l<r){
+            m = l + (r-l)/2;
+            if(m < nums.length -1 && nums[m] > nums[m+1]){
+                return m;
+            }
+            if(m > 0 && nums[m] < nums[m-1]){
+                return m-1;
+            }
+
+            if(nums[m] >= nums[l]){
+                l = m+1;
+            }
+            else{
+                r = m+1;
+            }
+        }
+        return l;
+    }
+
+    public int binarySearch(int[] nums, int start, int end, int target){
+        while(start <= end){
+            int mid = start + (end-start)/2;
+            if(nums[mid] == target){
+                return mid;
+            }
+            else if(nums[mid] > target){
+                end = mid-1;
+            }
+            else{
+                start = mid+1;
+            }
+        }
+        return -1;
+    }
+}
+```

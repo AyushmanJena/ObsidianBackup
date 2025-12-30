@@ -271,3 +271,159 @@ public static boolean isPalindrome(Node head) {
 	return head == null || headSecond == null;
 }
 ```
+
+
+[23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+```java
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length == 0){
+            return null;
+        }
+
+        ListNode ans = lists[0];
+
+        int i = 1;
+        while(i<lists.length){
+            ans = merge(ans, lists[i]);
+            i++;
+        }
+
+        return ans;
+    }
+
+    public ListNode merge(ListNode first, ListNode second){
+        if(first == null) return second;
+        if(second == null) return first;
+        ListNode head;
+        if(first.val < second.val){
+            head = new ListNode(first.val, null);
+            first = first.next;
+        }else{
+            head = new ListNode(second.val, null);
+            second = second.next;
+        }
+
+        ListNode temp = head;
+        
+
+        while(first!=null && second != null){
+            if(first.val < second.val){
+                temp.next = first;
+                first = first.next;
+            }
+            else{
+                temp.next = second;
+                second = second.next;
+            }
+            temp = temp.next;
+
+        }
+
+        if(first != null){
+            temp.next = first;
+        }
+
+        if(second != null){
+            temp.next = second;
+        }
+
+        return head;
+    }
+}
+```
+
+More optimised solution by taking two pairs as a time :
+```java
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0) return null;
+
+        while(lists.length > 1) {
+            List<ListNode> mergedLists = new ArrayList<>();
+            for(int i=0;i<lists.length;i=i+2) {
+                ListNode l1 = lists[i];
+                ListNode l2 = (i+1 < lists.length) ? lists[i+1] : null;
+                mergedLists.add(merge(l1,l2));
+            }
+            lists = mergedLists.toArray(new ListNode[mergedLists.size()]);
+        }
+
+        return lists[0];
+    }
+
+    ListNode merge(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode tail = dummy;
+
+        while(l1 != null && l2 != null) {
+            if(l1.val <= l2.val) {
+                tail.next = new ListNode(l1.val);
+                l1 = l1.next;
+            } else {
+                tail.next = new ListNode(l2.val);
+                l2 = l2.next;
+            }
+            tail = tail.next;
+        }
+
+        while(l1 != null) {
+            tail.next = new ListNode(l1.val);
+            l1 = l1.next;
+            tail = tail.next;
+        }
+
+        while(l2 != null) {
+            tail.next = new ListNode(l2.val);
+            l2 = l2.next;
+            tail = tail.next;
+        }
+
+        return dummy.next;
+    }
+}
+```
+
+[25. Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/) #revise 
+```java
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode groupPrev = dummy;
+
+        while(true){
+            ListNode kth = getKth(groupPrev, k);
+            if(kth == null){
+                break;
+            }
+
+            ListNode groupNext = kth.next;
+
+            // reversing the group
+            ListNode prev = kth.next;
+            ListNode curr = groupPrev.next;
+
+            while(curr != groupNext){
+                ListNode temp = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = temp;
+            }
+
+            ListNode temp = groupPrev.next;
+            groupPrev.next = kth;
+            groupPrev = temp;
+
+        }
+        return dummy.next;
+    }
+
+    public ListNode getKth(ListNode curr, int k){
+        while(curr != null && k > 0){
+            curr = curr.next;
+            k = k-1;
+        }
+        return curr;
+    }
+}
+```

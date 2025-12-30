@@ -271,3 +271,47 @@ public static int helper2(int[][] arr, int[][] dp, int day, int last){ // memori
 ```
 
 Tabulation and space optimized in notes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+# LeetCode Questions 
+
+[518. Coin Change II](https://leetcode.com/problems/coin-change-ii/)
+```java
+class Solution {
+    public int change(int amount, int[] coins) {
+        Integer[][] dp = new Integer[coins.length][amount+1];
+        return helper(amount, coins, 0, 0, dp);
+    }
+
+    public int helper(int amount, int[] coins, int i, int sum, Integer[][] dp){
+            if(sum > amount || i >= coins.length){
+                return 0;
+            }
+            if(sum == amount){
+                return 1;
+            }
+
+            if(dp[i][sum] != null) return dp[i][sum];
+
+            int ans = 0;
+
+            ans += helper(amount, coins, i+1, sum, dp);
+            ans += helper(amount, coins, i, sum+coins[i], dp); 
+
+            dp[i][sum] = ans;
+            return ans;   
+        }
+}
+```
+
