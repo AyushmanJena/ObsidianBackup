@@ -57,12 +57,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/Leetcode/Two Pointers.md",
+                "file": "DSA/15 Dynamic Programming 🟢.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Two Pointers"
+              "title": "15 Dynamic Programming 🟢"
             }
           },
           {
@@ -85,12 +85,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/02 Binary Search.md",
+                "file": "DSA/LEETCODE 75 SOLUTIONS/MultiDimensional DP.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Binary Search"
+              "title": "MultiDimensional DP"
             }
           }
         ],
@@ -126,7 +126,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "binary",
+                "query": "Tribonacci Number",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -235,15 +235,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f20b3e03675258fc",
+  "active": "07e96ce06aa5aa47",
   "lastOpenFiles": [
+    "DSA/LEETCODE 75 SOLUTIONS/23 Dynamic Programming.md",
+    "DSA/LEETCODE 75 SOLUTIONS/MultiDimensional DP.md",
     "DSA/15 Dynamic Programming 🟢.md",
+    "DSA/Leetcode/Two Pointers.md",
+    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
+    "DSA/LEETCODE 75 SOLUTIONS/Untitled",
+    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
+    "ANGULAR/Angular Course Udemy/101 Forms.md",
+    "DSA/04 Subsets and Subsequences.md",
+    "One Page Notes/Tailwind CSS.md",
+    "DSA/02 Binary Search.md",
     "DSA/07 LinkedList.md",
     "DSA/11 Hashmap and Hashset.md",
     "Untitled 1.base",
     "Untitled.base",
-    "One Page Notes/Tailwind CSS.md",
-    "DSA/Leetcode/Two Pointers.md",
     "DSA/06 Backtracking.md",
     "ANGULAR/Angular Course Udemy/01 Introduction.md",
     "ANGULAR/Angular Course Udemy/00 Readme.md",
@@ -251,7 +259,6 @@
     "IONIC/00 Readme.md",
     "IONIC/02 Basic Builds.md",
     "One Page Notes/SQL.md",
-    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
     "DSA/Leetcode/Sliding Window.md",
     "DSA/Leetcode/Arrays.md",
     "DSA/Leetcode/Graphs.md",
@@ -259,12 +266,6 @@
     "DSA/LEETCODE 75 SOLUTIONS/16 Backtracking.md",
     "DSA/Leetcode/Trees.md",
     "DSA/12 Graphs 🟢.md",
-    "JavaScript Notes/React Tutorial/React Notes/02 Basic React.md",
-    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
-    "ANGULAR/Angular Course Udemy/105 Authentication and Route Protection.md",
-    "DSA/LEETCODE TOP INTERVIEW 150/02 Two Pointers.md",
-    "DSA/Leetcode/Stacks.md",
-    "DSA/13 Sliding Window.md",
     "IONIC",
     "JavaScript Notes/React Tutorial/React Notes",
     "One Page Notes/assets/Pasted image 20251002103651.png",
@@ -282,7 +283,6 @@
     "ANGULAR/Angular Youtube Tutorial/Authentication",
     "JavaScript Notes/Authentication",
     "assets",
-    "JAVA Microservices",
     "SPRING BOOT NOTES/Resources/canvas for structures.canvas",
     "DATA STRUCTURES/Untitled.canvas",
     "Untitled.canvas"

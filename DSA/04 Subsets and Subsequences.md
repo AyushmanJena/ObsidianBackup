@@ -48,7 +48,7 @@ static List<List<Integer>> subsetDuplicate(int[] arr) {
 input : "ABC"
 output : {ABC, BAC, BCA, ACB, CAB, CBA} 
 ```java
-// permutationsList(processed, unprocessed)
+// permutationsList(processed, unprocessed) // PermutationRecursion
 static ArrayList<String> permutationsList(String p, String up) {
     if (up.isEmpty()) {
         ArrayList<String> list = new ArrayList<>();
@@ -156,6 +156,35 @@ class Solution {
             list.addAll(solution(p + ch, up.substring(1), arr));
         }
         return list;
+    }
+}
+```
+
+# LEETCODE QUESTIONS
+
+[46. Permutations](https://leetcode.com/problems/permutations/)
+Permutations with Numbers
+```java
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        helper(nums, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    public void helper(int[] arr, int i, ArrayList<Integer> processed, List<List<Integer>> result){
+        if(i == arr.length){
+            result.add(new ArrayList<>(processed));
+            return;
+        }
+
+        int num = arr[i];
+
+        for(int j = 0; j<= processed.size(); j++){
+            processed.add(j, num);
+            helper(arr, i+1, processed, result);
+            processed.remove(j);
+        }
     }
 }
 ```
