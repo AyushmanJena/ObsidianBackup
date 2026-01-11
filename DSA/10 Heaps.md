@@ -82,3 +82,81 @@ public ArrayList<Integer> heapSort(){
 	return data;
 }
 ```
+
+
+# LEETCODE QUESTIONS
+
+[1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/)
+#revise 
+```java
+class Solution {
+
+    public int minCostConnectPoints(int[][] points) {
+        int N = points.length;
+
+        // Build adjacency list: {cost, node}
+        List<int[]>[] adj = new ArrayList[N];
+        for (int i = 0; i < N; i++) {
+            adj[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < N; i++) {
+            int x1 = points[i][0];
+            int y1 = points[i][1];
+
+            for (int j = i + 1; j < N; j++) {
+                int x2 = points[j][0];
+                int y2 = points[j][1];
+
+                int dist = Math.abs(x1 - x2) + Math.abs(y1 - y2);
+
+                adj[i].add(new int[]{dist, j});
+                adj[j].add(new int[]{dist, i});
+            }
+        }
+
+        // Apply Prim's Algorithm
+        return primMST(adj, N);
+    }
+
+    private int primMST(List<int[]>[] adj, int N) {
+        boolean[] visited = new boolean[N];
+
+        // Min-heap based on cost
+        PriorityQueue<int[]> pq = new PriorityQueue<>(
+                (a, b) -> a[0] - b[0]
+        );
+
+        // {cost, node}
+        pq.offer(new int[]{0, 0});
+
+        int totalCost = 0;
+        int edgesUsed = 0;
+
+        while (!pq.isEmpty() && edgesUsed < N) {
+            int[] curr = pq.poll();
+            int cost = curr[0];
+            int node = curr[1];
+
+            if (visited[node]) continue;
+
+            visited[node] = true;
+            totalCost += cost;
+            edgesUsed++;
+
+            // Add neighbors
+            for (int[] next : adj[node]) {
+                int nextCost = next[0];
+                int nextNode = next[1];
+
+                if (!visited[nextNode]) {
+                    pq.offer(new int[]{nextCost, nextNode});
+                }
+            }
+        }
+
+        return totalCost;
+    }
+}
+
+```
