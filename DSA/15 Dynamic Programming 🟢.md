@@ -31,9 +31,6 @@ public static int fibbo(int n, int[] dp){
 }
 ```
 
-### Possible Steps
-
-
 ### Frog Jump 1
 Frog is at 1st step of n steps long staircase. Wants to reach nth stair. `Height[i]` is the height of (i+1)<sup>th</sup> stair. If frog jumps from i<sup>th</sup> to j<sup>th</sup> stair, the energy lost is (`height[i-1] - height[j-1]`).
 The frog can either jump (i+1) or (i+2) steps. 
@@ -272,19 +269,242 @@ public static int helper2(int[][] arr, int[][] dp, int day, int last){ // memori
 
 Tabulation and space optimized in notes.
 
+### Total Unique Paths
+
+##### a) Total Unique Paths
+given m and n 
+start from (0,0) and go till (m-1, n-1)
+only moves allowed right and down, find total unique paths count possible
+
+memorization solution
+```java
+class Main {
+    public static void main(String[] args) {
+        int m = 3;
+        int n = 3;
+        
+        System.out.println(uniquePaths(m, n));
+    }
+    
+    public static int uniquePaths(int m, int n){
+        int[][] dp = new int[m][n];
+        return helper(dp, m-1, n-1);
+    }
+    
+    public static int helper(int[][] dp, int i, int j){
+        if(i == 0 && j == 0){
+            return 1;
+        }
+        if(i < 0 || j < 0){
+            return 0;
+        }
+        if(dp[i][j] != 0){
+            return dp[i][j];
+        }
+        int up = helper(dp, i-1, j);
+        int left = helper(dp, i, j-1);
+        dp[i][j] = up + left;
+        return dp[i][j];
+    }
+}
+```
+
+tabulation solution
+removing the recursion space complexity
+bottom up approach
+```java
+
+class Main {
+    public static void main(String[] args) {
+        int m = 3;
+        int n = 3;
+        
+        System.out.println(uniquePaths(m, n));
+    }
+    
+    public static int uniquePaths(int m, int n){
+        int[][] dp = new int[m][n];
+        
+        for(int i =0 ; i < m; i++){
+            for(int j = 0; j< n; j++){
+                if(i == 0 && j == 0){
+                    dp[i][j] = 1;
+                }else{
+                    int up=0;
+                    int left=0;
+                    if(i>0)
+                        up = dp[i-1][j];
+                    if(j>0)
+                        left = dp[i][j-1];
+                    dp[i][j] = up + left;
+                }
+            }
+        }
+        return dp[m-1][n-1];
+    }
+}
+```
+
+
+##### b) Maze with obstacles
+start 0,0
+end m-1, n-1
+0 -> visitable and -1 -> not visitable
+
+Memorization solution
+```java
+public int mazeWithObstacles(int[][] arr){
+	int[][] dp = new int[arr.length][arr[0].length];
+	return helper(arr, arr.length - 1, arr[0].length -1, dp);
+}
+public int helper(int[][] arr, int i, int j, int[][] dp){
+	if(i >= 0 && j >= 0 && arr[i][j] == -1){
+		return 0;
+	}
+	if(i == 0  && j == 0){
+		return 1;
+	}
+	if(i < 0 || j < 0){
+		return 0;
+	}
+	if(dp[i][j] != -1){
+		return dp[i][j];
+	}
+	int up = helper(arr, i-1, j, dp);
+	int left = helper(arr, i, j-1, dp);
+	dp[i][j] = up + left;
+	return dp[i][j];
+}
+```
+
+Tabulation Solution
+```java
+public int mazeWithObstacles(int[][] arr){
+	for(int i =0; i< arr.length-1; i++){
+		for(int j = 0; j<arr[0].length -1; j++){
+			if(arr[i][j] == -1){
+				dp[i][j] = 0;
+			}
+			else if(i== 0 && j == 0){
+				dp[i][j] = 1;
+			}
+			else{
+				int up = 0;
+				int left = 0;
+				if(i > 0){
+					up = dp[i-1][j];
+				}
+				if( j> 0){
+					left = dp[i][j-1];
+				}
+				dp[i][j] = up + left;
+			}
+		}
+	}
+	return dp[arr.length-1][arr[0].length-1];
+}
+```
+
+
+##### c) Minimum Sum Path
+
+Memorization
+```java
+public static int minimumSumPath(int[][] arr){
+    int[][] dp = new int[arr.length][arr[0].length];
+    
+    for (int i = 0; i < dp.length; i++) {
+        for (int j = 0; j < dp[0].length; j++) {
+            dp[i][j] = -1;
+        }
+    }
+    
+    return helper(arr, arr.length-1, arr[0].length-1, dp);
+}
+public static int helper(int[][] arr, int i, int j, int[][] dp){
+    if(i == 0 && j == 0){
+        return arr[0][0];
+    }
+    if(dp[i][j] != -1){
+        return dp[i][j];
+    }
+    
+    int up = 0;
+    int left = 0;
+    
+    if(i > 0){
+        up = arr[i][j] + helper(arr, i-1, j, dp);
+    }
+    if(j > 0){
+        left = arr[i][j] + helper(arr, i, j-1, dp);
+    }
+    
+    
+    if(up == 0){
+        dp[i][j] = Math.min(Integer.MAX_VALUE, left);
+        return dp[i][j];
+    }
+    if(left == 0){
+        dp[i][j] =  Math.min(up, Integer.MAX_VALUE);
+        return dp[i][j];
+    }
+
+    dp[i][j] = Math.min(up, left);
+    return dp[i][j];
+}
+```
+
+Tabulation 
+```java
+public static int minimumSumPath(int[][] arr){
+    int[][] dp = new int[arr.length][arr[0].length];
+    for(int i =0; i<arr.length; i++){
+        for(int j = 0; j<arr[0].length; j++){
+            if(i == 0 && j == 0){
+                dp[i][j] = arr[0][0];
+            }
+            else{
+                int up = 1000;
+                int left = 1000; // assuming the largest possible value is 1000
+                if(i > 0)
+                    up = arr[i][j] + dp[i-1][j];
+                if(j > 0)
+                    left = arr[i][j] + dp[i][j-1];
+                
+                dp[i][j] = Math.min(up, left);
+            }
+        }
+    }
+    return dp[arr.length-1][arr[0].length -1 ];
+}
+```
+
+##### d) Fixed start and Variable End on Triangular Grid
+`[[1], [2, 3], [3, 6, 7], [8, 9, 6, 10]]`
+Reach the bottom row with minimum cost starting from first row
+```
+1
+2 3
+3 6 7
+8 9 6 10
+
+you can either move down or diagonal right down only
+```
+
+
+Memorization Solution
+```java
+fun(i, j){
+	if(i == n-1) return arr[i][j];
+	
+}
+```
 
 
 
 
 
-
-
-
-
-
-
-
-# LeetCode Questions 
+# LEETCODE QUESTIONS 
 
 [518. Coin Change II](https://leetcode.com/problems/coin-change-ii/)
 ```java
@@ -315,11 +535,7 @@ class Solution {
 }
 ```
 
-incomplete videos
 
-
-
-# LEETCODE QUESTIONS
 [746. Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/)
 ```java
 class Solution {

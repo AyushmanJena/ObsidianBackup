@@ -13,9 +13,15 @@
 13. Sliding Window 
 14. Greedy Algorithm
 15. Dynamic Programming ❄️
+16. Two Pointers 
 
 MORE : 
 - Questions (folder named Questions) add to Basics (also add Hanoi tower)
 - Add codes for n queens and n knights in backtracking
 - Add traversal methods in trees, BFS DFS, etc.
 - Transfer cp solutions from code folder to OBS
+
+TOPICS NEED MORE QUESTIONS :
+1. Stacks and Queues
+2. Trees
+3. Graphs

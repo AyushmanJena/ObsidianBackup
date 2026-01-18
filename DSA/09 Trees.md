@@ -190,3 +190,62 @@ private int update(Node node , int index, int value){
 	return node.data;
 }
 ```
+
+
+# LeetCode Questions
+
+[94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        helper(root, list);
+        return list;
+    }
+
+    public void helper(TreeNode node, List<Integer> list){
+        if(node == null){
+            return;
+        }
+        if(node.left == null && node.right == null){
+            list.add(node.val);
+            return;
+        }
+        if(node.left != null){
+            helper(node.left, list);
+        }
+        list.add(node.val);
+        if(node.right != null){
+            helper(node.right, list);
+        }
+    }
+}
+```
+
+[114. Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/)
+#revise 
+```java
+class Solution {
+    public void flatten(TreeNode root) {
+        helper(root);
+    }
+
+    public TreeNode helper(TreeNode curr){
+        if(curr == null){
+            return null;
+        }
+        TreeNode leftTail = helper(curr.left);
+        TreeNode rightTail = helper(curr.right);
+
+        if(leftTail != null){
+            leftTail.right = curr.right;
+            curr.right = curr.left;
+            curr.left = null;
+        }
+
+        if(rightTail != null)return rightTail; // if right subtree exists
+        if(leftTail != null) return leftTail;  // if right subtree does not exist but left does
+        return curr; // if leaf node
+    }
+}
+```

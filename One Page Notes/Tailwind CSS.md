@@ -236,3 +236,5 @@ still increasing, when we hit medium we get green color and till end
 `line-clamp-3` -> hide text overflowing with "...". Value indicated number of lines
 
 Zoom in effect : `transition-transform duration-300 hover:scale-105`
+
+`aspect-square` -> set height only or width only and it will match the other param

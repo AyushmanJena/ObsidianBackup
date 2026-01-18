@@ -220,3 +220,121 @@ class Solution {
     }
 }
 ```
+
+# LEETCODE QUESTIONS
+
+[143. Reorder List](https://leetcode.com/problems/reorder-list/)
+```java
+class Solution {
+    public void reorderList(ListNode head) {
+        // find mid
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode dummy = slow;
+        
+        // push second half into stack
+        Stack<ListNode> stack = new Stack<>();
+        while(slow != null){
+            stack.push(slow);
+            slow = slow.next;
+        }
+
+        // actual megic
+        ListNode curr = head;
+        ListNode next = head.next;
+
+        while(!stack.isEmpty()){
+            if(curr != null && curr.next != dummy){
+                next = curr.next;
+            }else if(curr.next == dummy){
+                while(!stack.isEmpty()){
+                    curr.next  = stack.pop();
+                    if(curr != null)curr = curr.next;
+                }
+                if(curr != null){
+                    curr.next = null;
+                }
+                return;
+            }
+            curr.next = stack.pop();
+            curr.next.next = next;
+            curr = next;
+            
+            
+        }
+    }
+}
+```
+
+[503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/)
+```java
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+
+        Stack<Integer> stack = new Stack<>();
+
+        for(int i =0 ;i < 2* n; i++){
+            int idx = i % n;
+
+            while(!stack.isEmpty() && nums[stack.peek()] < nums[idx]){
+                ans[stack.pop()] = nums[idx];
+            }
+
+            if(i < n){
+                stack.push(idx);
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
+
+[316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/)
+```java
+class Solution {
+    public String removeDuplicateLetters(String s) {
+        HashMap<Character, Integer> lastIndex = new HashMap<>();
+        HashSet<Character> seen = new HashSet<>();
+        Stack<Character> stack = new Stack<>();
+
+        for(int i = 0; i< s.length(); i++){
+            lastIndex.put(s.charAt(i), i);
+        }
+        stack.push(s.charAt(0));
+        seen.add(s.charAt(0));
+
+        for(int i = 1; i<s.length(); i++){
+            if(seen.contains(s.charAt(i))){
+                        continue;
+                    }
+            if(!stack.isEmpty()){
+                while(!stack.isEmpty() && 
+		                (stack.peek() > s.charAt(i) && 
+		                i < lastIndex.get(stack.peek()))){
+                    seen.remove(stack.pop());
+                }
+                stack.push(s.charAt(i));
+                seen.add(s.charAt(i));
+            }
+        }
+
+        StringBuilder st = new StringBuilder();
+        while(!stack.isEmpty()){
+            st.append(stack.pop());
+        }
+
+        st.reverse();
+
+        return st.toString();
+    }
+}
+```
