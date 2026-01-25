@@ -494,12 +494,49 @@ you can either move down or diagonal right down only
 
 Memorization Solution
 ```java
-fun(i, j){
+fun(int i,int j, int[][] arr,  int[][] dp){
 	if(i == n-1) return arr[i][j];
+	if(dp[i][j] != -1){
+		return dp[i][j];
+	}
 	
+	down = arr[i][j] + fun(i+1, j, arr, dp);
+	diagonal = arr[i][j] + fun(i+1, j+1, arr, dp);
+	
+	dp[i][j] = Math.min(down, diagonal);
+	return dp[i][j];
 }
 ```
 
+Tabulation Method : 
+```java
+for(int j = 0; j < n; j++){
+	dp[n-1][j] = arr[n-1][j];
+}
+
+for(int i = n-2; i >= 0; i--){
+	for(j = i; j>= 0; j--){
+		down = arr[i][j] + dp[i+1][j];
+		diagonal = arr[i][j] + dp[i+1][j+1];
+		dp[i][j] = Math.min(down, diagonal);
+	}		
+}
+
+return dp[0][0];
+```
+
+
+##### e) Variable Starting and Ending Points
+Maximum Falling Path Sum in Matrix : 
+
+`n*m` matrix
+movements : direct below, diagonal left down, diagonal right down
+any cell in first row to any cell in the last row
+
+Memorization Solution
+```java
+
+```
 
 
 

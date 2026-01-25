@@ -249,3 +249,100 @@ class Solution {
     }
 }
 ```
+
+[106. Construct Binary Tree from Inorder and Postorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
+
+```java
+class Solution {
+    int postIndex;
+    HashMap<Integer, Integer> inorderIndex;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        postIndex = postorder.length -1;
+        inorderIndex = new HashMap<>();
+
+        for(int i =0 ; i< inorder.length; i++){
+            inorderIndex.put(inorder[i] , i);
+        }
+
+        return helper(postorder, 0, inorder.length - 1);
+    }
+    private TreeNode helper(int[] postorder, int left, int right){
+        if(left > right) return null;
+
+        int rootVal = postorder[postIndex--];
+        TreeNode root = new TreeNode(rootVal);
+
+        int idx = inorderIndex.get(rootVal);
+
+        root.right = helper(postorder, idx+1, right);
+        root.left = helper(postorder, left, idx-1);
+
+        return root;
+    }
+}
+```
+
+[897. Increasing Order Search Tree](https://leetcode.com/problems/increasing-order-search-tree/)
+```java
+class Solution {
+    TreeNode prev = null;
+    TreeNode head = null;
+    public TreeNode increasingBST(TreeNode root) {
+        helper(root);
+        return head;
+    }
+
+    public void helper(TreeNode node){
+        if(node == null){
+            return;
+        }
+
+        helper(node.left);
+
+        if(prev == null){
+            head = node;
+        }
+        else{
+            prev.right = node;
+        }
+        node.left = null;
+        prev = node;
+
+        helper(node.right);
+    }
+}
+```
+
+solved using stack : 
+```java
+class Solution {
+    public TreeNode increasingBST(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        helper(root, stack);
+
+        TreeNode head = stack.pop();
+        head.left = null;
+        TreeNode tempHead = head;
+
+        while(!stack.isEmpty()){
+            head.right = stack.pop();
+            head = head.right;
+            head.left = null;
+        }
+        head.right = null;
+
+        return tempHead;
+    }
+
+    public void helper(TreeNode node, Stack<TreeNode> stack){
+        if(node == null)return;
+
+        if(node.right != null){
+            helper(node.right, stack);
+        }
+        stack.push(node);
+        if(node.left != null){
+            helper(node.left, stack);
+        }
+    }
+```

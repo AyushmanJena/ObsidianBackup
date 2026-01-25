@@ -80,21 +80,35 @@
             }
           },
           {
-            "id": "b114944d33276460",
+            "id": "c67d67fa44fd9cd4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "One Page Notes/Git and Github.md",
+                "file": "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Git and Github"
+              "title": "103 Routing (prev. Angular 16)"
+            }
+          },
+          {
+            "id": "d3a7ff43620045da",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DSA/08 Stacks and Queues.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "08 Stacks and Queues"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -151,8 +165,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 286.5,
-    "collapsed": true
+    "width": 286.5
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -236,17 +249,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "06d9ef7a2e347364",
+  "active": "d3a7ff43620045da",
   "lastOpenFiles": [
-    "DSA/15 Dynamic Programming 🟢.md",
-    "One Page Notes/Git and Github.md",
-    "One Page Notes/Tailwind CSS.md",
-    "DSA/08 Stacks and Queues.md",
-    "ANGULAR/Angular Course Udemy/101 Forms.md",
     "DSA/09 Trees.md",
+    "DSA/15 Dynamic Programming 🟢.md",
+    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
+    "One Page Notes/Git and Github.md",
+    "DSA/08 Stacks and Queues.md",
+    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
+    "One Page Notes/Tailwind CSS.md",
+    "ANGULAR/Angular Course Udemy/101 Forms.md",
     "DSA/16 Two Pointers.md",
     "DSA/00 Readme.md",
-    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
     "Untitled.base",
     "Untitled 1.base",
     "DSA/07 LinkedList.md",
@@ -268,7 +282,6 @@
     "DSA/LEETCODE 75 SOLUTIONS/assets",
     "DSA/Leetcode/Two Pointers.md",
     "DSA/LEETCODE 75 SOLUTIONS/Untitled",
-    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
     "IONIC",
     "JavaScript Notes/React Tutorial/React Notes",
     "One Page Notes/assets/Pasted image 20251002103651.png",

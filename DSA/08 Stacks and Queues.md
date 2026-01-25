@@ -338,3 +338,134 @@ class Solution {
     }
 }
 ```
+
+[445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/)
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
+        Stack<Integer> ans = new Stack<>();
+
+        ListNode node1 = l1;
+        ListNode node2 = l2;
+
+        while(l1 != null){
+            s1.push(l1.val);
+            l1 = l1.next;
+        }
+        while(l2 != null){
+            s2.push(l2.val);
+            l2 = l2.next;
+        }
+        int rem = 0;
+
+        while(!s1.isEmpty() || !s2.isEmpty()){
+
+            int sum = rem;
+            if(!s1.isEmpty()){
+                sum += s1.pop();
+            }
+            if(!s2.isEmpty()){
+                sum += s2.pop();
+            }
+
+            ans.push(sum % 10);
+            rem = sum / 10;
+        }
+
+        if(rem > 0){
+            ans.push(rem);
+        }
+
+        ListNode result = new ListNode(ans.pop(), null);
+        ListNode head = result;
+
+        while(!ans.isEmpty()){
+            result.next = new ListNode(ans.pop(), null);
+            result = result.next;
+        }
+
+        return head;
+    }
+}
+```
+
+[402. Remove K Digits](https://leetcode.com/problems/remove-k-digits/)
+```java
+class Solution {
+    public String removeKdigits(String num, int k) {
+        Stack<Character> stack = new Stack<>();
+
+        if(k == num.length()){
+            return "0";
+        }
+
+        for(int i = 0; i< num.length(); i++){
+            while(!stack.isEmpty() && k > 0){
+                if(num.charAt(i) < stack.peek()){
+                    stack.pop();
+                    k--;
+                }else{
+                    break;
+                }
+            }
+            stack.push(num.charAt(i));
+        }
+
+        while(k > 0 && !stack.isEmpty()){
+            stack.pop();
+            k--;
+        }
+
+        StringBuilder ans = new StringBuilder();
+
+        while(!stack.isEmpty()){
+            ans.append(stack.pop());
+        }
+        ans.reverse();
+
+        // trim initial 0's
+        while(ans.length() > 1 && ans.charAt(0) == '0'){
+            ans.deleteCharAt(0);
+        }
+
+        return ans.toString();
+    }
+}
+```
+
+[897. Increasing Order Search Tree](https://leetcode.com/problems/increasing-order-search-tree/)
+```java
+class Solution {
+    public TreeNode increasingBST(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        helper(root, stack);
+
+        TreeNode head = stack.pop();
+        head.left = null;
+        TreeNode tempHead = head;
+
+        while(!stack.isEmpty()){
+            head.right = stack.pop();
+            head = head.right;
+            head.left = null;
+        }
+        head.right = null;
+
+        return tempHead;
+    }
+
+    public void helper(TreeNode node, Stack<TreeNode> stack){
+        if(node == null)return;
+
+        if(node.right != null){
+            helper(node.right, stack);
+        }
+        stack.push(node);
+        if(node.left != null){
+            helper(node.left, stack);
+        }
+    }
+}
+```
