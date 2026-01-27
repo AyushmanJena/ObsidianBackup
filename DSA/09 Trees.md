@@ -1,4 +1,5 @@
 Populate a Binary Search Tree from a given unsorted array : 
+**Populate Sorted**
 ```java
 	public void populate(int[] nums){
 		for(int i = 0; i<nums.length; i++){
@@ -44,6 +45,7 @@ publiv int height(Node node){
 	return 1 + Math.max(height(node.left), height(node.right));
 }
 ```
+
 
 AVL Tree : (Rotating Binary Tree) #revise 
 AVL -> Adelson Velskil and Landis
@@ -123,6 +125,7 @@ private Node leftRotate(Node c){
 }
 ```
 
+
 Segment Tree 
 - Find sum of indices from given start till end in an array
 - segment : perform query on a range
@@ -193,6 +196,113 @@ private int update(Node node , int index, int value){
 
 
 # LeetCode Questions
+
+
+[1367. Linked List in Binary Tree](https://leetcode.com/problems/linked-list-in-binary-tree/)
+```java
+class Solution {
+    public boolean isSubPath(ListNode head, TreeNode root) {
+        if (root == null)
+            return false;
+        return solve(head, root) || isSubPath(head, root.left) || isSubPath(head, root.right);
+    }
+
+    private boolean solve(ListNode head, TreeNode root) {
+        if (head == null)
+            return true;
+        if (root == null)
+            return false;
+        return head.val == root.val && (solve(head.next, root.left) || (solve(head.next, root.right)));
+    }
+}
+```
+
+[226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
+```java
+class Solution {
+    public TreeNode invertTree(TreeNode node) {
+        if(node == null){
+            return null;
+        }
+        TreeNode left = invertTree(node.left);
+        TreeNode right = invertTree(node.right);
+        node.left = right;
+        node.right = left;
+        return node;
+    }
+}
+```
+
+
+[1325. Delete Leaves With a Given Value](https://leetcode.com/problems/delete-leaves-with-a-given-value/)
+```java
+class Solution {
+    public TreeNode removeLeafNodes(TreeNode node, int target) {
+        if(node == null){
+            return null;
+        }
+        node.left = removeLeafNodes(node.left, target);
+        node.right = removeLeafNodes(node.right, target);
+        if(node.left == null && node.right == null){//leaf
+            if(node.val == target){
+                return null;
+            }
+            return node;
+        }
+        return node;
+    }
+}
+```
+
+[404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/)
+```java
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        return sumOfLeftLeaves(root.left, true) + sumOfLeftLeaves(root.right, false);
+    }
+    public int sumOfLeftLeaves(TreeNode node, boolean isLeft){
+        if(node == null){
+            return 0;
+        }
+        if((node.left == null && node.right == null) && isLeft){
+            return node.val;
+        }
+
+        int leftVal = sumOfLeftLeaves(node.left, true);
+        int rightVal = sumOfLeftLeaves(node.right, false);
+        return leftVal + rightVal;
+    }
+}
+```
+
+
+[230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+
+```java
+class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        int n = 0;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+
+        while(curr != null || !stack.isEmpty()){
+            while(curr != null){
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            n += 1;
+            if(n == k){
+                return curr.val;
+            }
+
+            curr = curr.right; 
+        }
+
+        return curr.val;
+    }
+}
+```
 
 [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
 ```java

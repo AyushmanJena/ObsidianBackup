@@ -36,20 +36,6 @@
             }
           },
           {
-            "id": "a5d1e74340ec2d17",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/09 Trees.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "09 Trees"
-            }
-          },
-          {
             "id": "13c5638adda47061",
             "type": "leaf",
             "pinned": true,
@@ -94,17 +80,31 @@
             }
           },
           {
-            "id": "d3a7ff43620045da",
+            "id": "e234b7fbf4c062dc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/08 Stacks and Queues.md",
+                "file": "DSA/02 Binary Search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "08 Stacks and Queues"
+              "title": "02 Binary Search"
+            }
+          },
+          {
+            "id": "e58166273950b06c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DSA/00 Readme.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "00 Readme"
             }
           }
         ],
@@ -140,7 +140,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "possibleSteps",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -165,7 +165,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 286.5
+    "width": 289.5
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -249,38 +249,38 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d3a7ff43620045da",
+  "active": "e58166273950b06c",
   "lastOpenFiles": [
-    "DSA/09 Trees.md",
-    "DSA/15 Dynamic Programming 🟢.md",
-    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
-    "One Page Notes/Git and Github.md",
-    "DSA/08 Stacks and Queues.md",
-    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
-    "One Page Notes/Tailwind CSS.md",
-    "ANGULAR/Angular Course Udemy/101 Forms.md",
-    "DSA/16 Two Pointers.md",
+    "DSA/02 Arrays.md",
+    "DSA/01 Basics.md",
     "DSA/00 Readme.md",
-    "Untitled.base",
-    "Untitled 1.base",
+    "DSA/03 Strings.md",
     "DSA/07 LinkedList.md",
-    "DSA/LEETCODE 75 SOLUTIONS/02 Two-Pointers.md",
-    "DSA/LEETCODE TOP INTERVIEW 150/02 Two Pointers.md",
     "DSA/06 Backtracking.md",
-    "DSA/05 Recursion.md",
+    "DSA/09 Trees.md",
     "DSA/04 Subsets and Subsequences.md",
     "DSA/03 Sorting Algorithms.md",
     "DSA/02 Binary Search.md",
+    "DSA/12 Graphs 🟢.md",
     "DSA/13 Sliding Window.md",
-    "DSA/10 Heaps.md",
-    "REACT NATIVE NOTES/React Native Youtube Tutorial/02 Basic App Development.md",
+    "DSA/15 Dynamic Programming 🟢.md",
+    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
+    "DSA/Tries.md",
+    "DSA/16 Two Pointers.md",
+    "DSA/14 Greedy Algorithm.md",
     "DSA/11 Hashmap and Hashset.md",
-    "DSA/01 Basics.md",
-    "DSA/LEETCODE 75 SOLUTIONS/24 MultiDimensional DP.md",
-    "DSA/LEETCODE 75 SOLUTIONS/23 Dynamic Programming.md",
+    "DSA/10 Heaps.md",
+    "DSA/08 Stacks and Queues.md",
+    "DSA/05 Recursion.md",
+    "DSA/LEETCODE 75 SOLUTIONS/13 Graphs BFS.md",
+    "DSA/LEETCODE TOP INTERVIEW 150/01 Array String.md",
+    "DSA/Leetcode/Graphs.md",
+    "DSA/Leetcode/Two Pointers.md",
+    "DSA/Leetcode/Trees.md",
+    "Untitled.base",
+    "Untitled 1.base",
     "DSA/LEETCODE 75 SOLUTIONS/assets/Pasted image 20260107121304.png",
     "DSA/LEETCODE 75 SOLUTIONS/assets",
-    "DSA/Leetcode/Two Pointers.md",
     "DSA/LEETCODE 75 SOLUTIONS/Untitled",
     "IONIC",
     "JavaScript Notes/React Tutorial/React Notes",

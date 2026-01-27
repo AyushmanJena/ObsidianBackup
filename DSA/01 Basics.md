@@ -42,3 +42,64 @@ class Solution {
 
 }
 ```
+
+Happy Number Check
+At any point sum of square equals to 1
+```java
+public static void main(String[] args) {
+    int n = 19;
+    System.out.println(isHappy(12));
+}
+
+public static boolean isHappy(int n){
+    int slow = n;
+    int fast = n;
+    do{
+        slow = squareSum(slow);
+        fast = squareSum(squareSum(fast));
+    }while(slow != fast);
+
+    if(slow == 1){
+        return true;
+    }
+
+    return false;
+}
+
+public static int squareSum(int num){
+    int ans = 0;
+    while(num != 0){
+        int rem = num%10;
+        ans += rem*rem;
+        num /= 10;
+    }
+    return ans;
+}
+
+```
+
+Sieve of Eratosthenes 
+Approach to find all the prime Numbers in a range
+```java
+static void sieveOfEratosthenes(int n){
+    boolean prime[] = new boolean[n+1];
+    for(int i = 0; i<=n ; i++){
+        prime[i] = true;
+    }
+
+    for(int p = 2; p*p <= n; p++){
+        if(prime[p] == true){
+            for(int i = p*p; i<= n; i += p){
+                prime[i] = false;
+            }
+        }
+    }
+
+    for(int i = 2; i<= n; i++){
+        if(prime[i] == true){
+            System.out.print(i + " ");
+        }
+    }
+}
+```
+

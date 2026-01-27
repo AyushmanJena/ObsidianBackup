@@ -223,6 +223,50 @@ class Solution {
 
 # LEETCODE QUESTIONS
 
+[1717. Maximum Score From Removing Substrings](https://leetcode.com/problems/maximum-score-from-removing-substrings/)
+Uses Stacks and Greedy Algorithm
+```java
+class Solution {
+    public int maximumGain(String s, int x, int y) {
+        if(x > y){
+            return calculate(s, 'a', 'b', x, y);
+        }else{
+            return calculate(s, 'b', 'a', y, x);
+        }
+    }
+
+    public int calculate(String s, char first, char second, int firstValue, int secondValue){
+        Stack<Character> stack = new Stack<>();
+        int score = 0;
+
+        for(char c : s.toCharArray()){
+            if(!stack.isEmpty() && stack.peek() == first && c == second){
+                stack.pop();
+                score += firstValue;
+            }
+            else{
+                stack.push(c);
+            }
+        }
+
+        Stack<Character> stack2 = new Stack<>();
+        while(!stack.isEmpty()){
+            char c = stack.pop();
+            if(!stack2.isEmpty() && c == second  && stack2.peek() == first){
+                stack2.pop();
+                score += secondValue;
+            }
+            else{
+                stack2.push(c);
+            }
+        }
+
+        return score;
+    }
+}
+```
+
+
 [143. Reorder List](https://leetcode.com/problems/reorder-list/)
 ```java
 class Solution {
@@ -466,6 +510,39 @@ class Solution {
         if(node.left != null){
             helper(node.left, stack);
         }
+    }
+}
+```
+
+[1700. Number of Students Unable to Eat Lunch](https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/)
+```java
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        Queue<Integer> queue = new LinkedList<>();
+
+        for(int i = 0; i< students.length; i++){
+            queue.offer(students[i]);
+        }
+
+        for(int i = 0; i < sandwiches.length; i++){
+            int size = queue.size();
+            boolean eaten = false;
+
+            for(int j = 0; j < size ; j++){
+                if(sandwiches[i] == queue.peek()){
+                    queue.poll();
+                    eaten = true;
+                    break;
+                }else{
+                    queue.offer(queue.poll());
+                }
+            }
+            if(!eaten){
+                break;
+            }
+        }
+
+        return queue.size();
     }
 }
 ```

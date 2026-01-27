@@ -533,11 +533,61 @@ Maximum Falling Path Sum in Matrix :
 movements : direct below, diagonal left down, diagonal right down
 any cell in first row to any cell in the last row
 
-Memorization Solution
+Recursion Solution NO DP
 ```java
-
+// start from bottom and move upward 
+fun(i, j){
+	if(j < 0 || j >= m) return MIN_VALUE;
+	if(i == 0) return arr[0][j];
+	
+	int s = arr[i][j] + fun(i-1, j); // straight up
+	int ld =  arr[i][j] + fun(i-1, j-1); // left diagonal up
+	int rd = arr[i][j] + fun(i-1, j+1); // right diagonal up
+	
+	return Max(s, Max(ld, rd));
+}
 ```
 
+Memorization Solution
+```java
+DP[n][m] -> -1;
+fun(i, j){
+	if(j < 0 || j >= m) return MIN_VALUE;
+	if(i == 0) return arr[0][j];
+	
+	if(dp[i][j] != -1){ 
+		return dp[i][j];
+	}
+	
+	int s = arr[i][j] + fun(i-1, j); // straight up
+	int ld =  arr[i][j] + fun(i-1, j-1); // left diagonal up
+	int rd = arr[i][j] + fun(i-1, j+1); // right diagonal up
+	
+	dp[i][j] = Max(s, Max(ld, rd));
+	return dp[i][j];
+}
+```
+
+Tabulation Solution
+```java
+for(j = 0; j < m; j++){
+	dp[0][j] = arr[0][j];
+}
+
+for(i = 1; i < n; i++){
+	for(j = 0; j < m; j++){
+		u = arr[i][j] + dp[i-1][j];
+		if(j-1 >= 0)
+			ld = arr[i][j] + dp[i-1][j-1];
+		if(j+1 < m)
+			rd = arr[i][j] + dp[i-1][j+1];
+		dp[i][j] = Max(u, ld, rd);
+	}	
+}
+```
+
+
+Continue : https://www.youtube.com/watch?v=QGfn7JeXK54&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=17
 
 
 
