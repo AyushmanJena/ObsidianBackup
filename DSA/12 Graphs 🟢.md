@@ -206,7 +206,7 @@ Time Complexity : ~~ O(N<sup>2</sup>)
 Space Complexity : Visited Matrix + Queue  : O(N<sup>2</sup>) + O(N<sup>2</sup>)
 
 
-### Flood Fill Algorithm 
+**Flood Fill Algorithm** 
 using DFS
 - Given a starting row and starting column with value 1 (sr, sc)
 ```java
@@ -255,6 +255,117 @@ public static void dfs(int row, int col, int[][] ans, int[][] image, int newColo
 
 Time Complexity : O(mxn) // if all nodes are connected
 Space Complexity  : O(nxm) + O(nxm) // new matrix + recursive stack
+
+
+Rotten Oranges
+```java
+
+```
+
+
+### Dijkstra's Algorithm
+```
+for each vertex v : 
+	dist[v]= max_value
+	prev[v] = none
+dist[source] = 0
+
+set all vertices to unexplored
+while destination not explored:
+	v = least-valued unexplored vertex
+	set v to explored
+	for each edge (v, w):
+		if dist[v] + len(v, w) < dist[w]:
+			dist[w] = dist[v] + len(v, w)
+			prev[w] = v
+```
+
+```java
+import java.util.*;
+
+public class Main {
+
+    static class Pair {
+        int distance;
+        int node;
+
+        Pair(int distance, int node) {
+            this.distance = distance;
+            this.node = node;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        int V = 5;
+        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
+
+        for (int i = 0; i < V; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        addEdge(adj, 0, 1, 2);
+        addEdge(adj, 0, 4, 8);
+        addEdge(adj, 1, 2, 3);
+        addEdge(adj, 4, 2, 2);
+        addEdge(adj, 2, 3, 6);
+        addEdge(adj, 4, 3, 4);
+
+        int result = dijkstraFrom0ToN(V, adj);
+
+        System.out.println("Shortest distance from 0 to " + (V - 1) + " is: " + result);
+    }
+
+    // Dijkstra from node 0 to node N-1
+    static int dijkstraFrom0ToN(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
+
+        PriorityQueue<Pair> pq =
+                new PriorityQueue<>((a, b) -> a.distance - b.distance);
+
+        int[] dist = new int[V];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+
+        dist[0] = 0; // source is 0
+        pq.add(new Pair(0, 0));
+
+        while (!pq.isEmpty()) {
+
+            Pair curr = pq.poll();
+            int node = curr.node;
+            int dis = curr.distance;
+
+            if (dis > dist[node]) continue;
+
+            // If we reached N-1, we can stop
+            if (node == V - 1) {
+                return dis;
+            }
+
+            for (ArrayList<Integer> edge : adj.get(node)) {
+                int adjNode = edge.get(0);
+                int weight = edge.get(1);
+
+                if (dis + weight < dist[adjNode]) {
+                    dist[adjNode] = dis + weight;
+                    pq.add(new Pair(dist[adjNode], adjNode));
+                }
+            }
+        }
+
+        return -1; // destination unreachable
+    }
+
+    static void addEdge(ArrayList<ArrayList<ArrayList<Integer>>> adj,
+                        int u, int v, int w) {
+
+        adj.get(u).add(new ArrayList<>(Arrays.asList(v, w)));
+        adj.get(v).add(new ArrayList<>(Arrays.asList(u, w)));
+    }
+}
+
+```
+
+
 
 
 # LeetCode Questions
@@ -382,5 +493,46 @@ class Solution {
     }
 
 
+}
+```
+
+[2976. Minimum Cost to Convert String I](https://leetcode.com/problems/minimum-cost-to-convert-string-i/)
+```java
+class Solution {
+    public long minimumCost(String source, String target, char[] original, char[] changed, int[] cost) {
+        int[][] dis = new int[26][26];
+        for(int i = 0 ; i < 26 ;i++){
+            Arrays.fill(dis[i] , Integer.MAX_VALUE);
+            dis[i][i] = 0 ;
+        }
+        
+        for(int i = 0 ; i < cost.length ; i++){
+            dis[original[i] - 'a'][changed[i] - 'a'] = Math.min(dis[original[i] - 'a'][changed[i] - 'a'],cost[i]);
+        }
+
+        for(int k = 0 ; k < 26 ; k++){
+            for(int i = 0 ; i < 26 ; i++){
+                if(dis[i][k] < Integer.MAX_VALUE){
+                    for(int j = 0 ; j < 26 ; j++){
+                        if(dis[k][j] < Integer.MAX_VALUE){
+                            dis[i][j] = Math.min(dis[i][j] , dis[i][k] + dis[k][j]);
+                        }
+                    }
+                }
+            }
+        }
+
+        long ans = 0L ;
+        for(int i = 0 ; i <source.length() ;i++){
+            int c1 = source.charAt(i) - 'a';
+            int c2 = target.charAt(i) - 'a';
+            if(dis[c1][c2] == Integer.MAX_VALUE){
+                return -1L;
+            }
+            ans += (long)dis[c1][c2];
+        }
+
+        return ans ;
+    }
 }
 ```

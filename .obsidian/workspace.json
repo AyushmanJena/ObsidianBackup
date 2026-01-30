@@ -36,65 +36,23 @@
             }
           },
           {
-            "id": "13c5638adda47061",
+            "id": "c67d67fa44fd9cd4",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/15 Dynamic Programming 🟢.md",
+                "file": "DSA/12 Graphs 🟢.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "15 Dynamic Programming 🟢"
+              "title": "12 Graphs 🟢"
             }
           },
           {
-            "id": "06d9ef7a2e347364",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/08 Stacks and Queues.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "08 Stacks and Queues"
-            }
-          },
-          {
-            "id": "c67d67fa44fd9cd4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "103 Routing (prev. Angular 16)"
-            }
-          },
-          {
-            "id": "e234b7fbf4c062dc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/02 Binary Search.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "02 Binary Search"
-            }
-          },
-          {
-            "id": "e58166273950b06c",
+            "id": "b2733c1e0b4666cc",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -106,9 +64,23 @@
               "icon": "lucide-file",
               "title": "00 Readme"
             }
+          },
+          {
+            "id": "2d2e11b93c7dfe79",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ANGULAR/Angular Course Udemy/101 Forms.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "101 Forms"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -249,34 +221,34 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e58166273950b06c",
+  "active": "2d2e11b93c7dfe79",
   "lastOpenFiles": [
+    "DSA/12 Graphs 🟢.md",
+    "DSA/00 Readme.md",
+    "REACT NATIVE NOTES/React Native Youtube Tutorial/02 Basic App Development.md",
+    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
+    "DSA/15 Dynamic Programming 🟢.md",
+    "DSA/08 Stacks and Queues.md",
+    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
+    "DSA/02 Binary Search.md",
     "DSA/02 Arrays.md",
     "DSA/01 Basics.md",
-    "DSA/00 Readme.md",
     "DSA/03 Strings.md",
     "DSA/07 LinkedList.md",
     "DSA/06 Backtracking.md",
     "DSA/09 Trees.md",
     "DSA/04 Subsets and Subsequences.md",
     "DSA/03 Sorting Algorithms.md",
-    "DSA/02 Binary Search.md",
-    "DSA/12 Graphs 🟢.md",
     "DSA/13 Sliding Window.md",
-    "DSA/15 Dynamic Programming 🟢.md",
-    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
     "DSA/Tries.md",
     "DSA/16 Two Pointers.md",
     "DSA/14 Greedy Algorithm.md",
     "DSA/11 Hashmap and Hashset.md",
     "DSA/10 Heaps.md",
-    "DSA/08 Stacks and Queues.md",
     "DSA/05 Recursion.md",
     "DSA/LEETCODE 75 SOLUTIONS/13 Graphs BFS.md",
     "DSA/LEETCODE TOP INTERVIEW 150/01 Array String.md",
     "DSA/Leetcode/Graphs.md",
-    "DSA/Leetcode/Two Pointers.md",
-    "DSA/Leetcode/Trees.md",
     "Untitled.base",
     "Untitled 1.base",
     "DSA/LEETCODE 75 SOLUTIONS/assets/Pasted image 20260107121304.png",
