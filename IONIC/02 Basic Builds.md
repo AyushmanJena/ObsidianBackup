@@ -8,4 +8,3 @@ ex :
 Might need to add standalone: false to @Component if such issues arise
 
 Creating Login and Registration Pages :
- 

@@ -254,6 +254,37 @@ class Solution {
 }
 ```
 
+[110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
+```java
+class Solution {
+    public boolean result;
+    public boolean isBalanced(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        result = true;
+        helper(root);
+        
+        return result;
+    }
+
+    public int helper(TreeNode node){
+        if(node == null){
+            return 0;
+        }
+
+        int left = helper(node.left) + 1;
+        int right = helper(node.right) + 1;
+
+        if(Math.abs(left - right) > 1){
+            this.result = false;
+        }
+
+        return Math.max(left, right);
+    }
+}
+```
+
 [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/)
 ```java
 class Solution {

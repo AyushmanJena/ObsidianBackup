@@ -129,6 +129,29 @@ class Solution {
 }
 ```
 
+[3634. Minimum Removals to Balance Array](https://leetcode.com/problems/minimum-removals-to-balance-array/)
+```java
+class Solution {
+    public int minRemoval(int[] nums, int k) {
+        if(nums.length == 1) return 0;
+        
+        int l = 0;
+        int maxWindow = 0;
+
+        Arrays.sort(nums);
+        
+        for(int r = 0; r < nums.length ; r++){
+            while((long)nums[r] > (long)nums[l] * k){
+                l++;
+            }
+            maxWindow = Math.max(maxWindow, r-l + 1);
+        }
+
+        return nums.length - maxWindow;
+    } 
+}
+```
+
 [556. Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/)
 #revise 
 ```java

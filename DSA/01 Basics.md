@@ -15,6 +15,27 @@ public static int gcd(int num1, int num2){
 }
 ```
 
+Find Two smallest Numbers in an array
+```java
+public void twoSmallest(int[] nums) {
+        int first = Integer.MAX_VALUE;
+        int second = Integer.MAX_VALUE;
+
+        for (int i = 0; i < nums.length; i++) {
+            int x = nums[i];
+            if (x < first) {
+                second = first;
+                first = x;
+            } else if (x < second) {
+                second = x;
+            }
+        }
+        
+        System.out.println(first);
+        System.out.println(second);
+    }
+```
+
 [50. Pow(x, n)](https://leetcode.com/problems/powx-n/)
 ```java
 class Solution {

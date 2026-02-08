@@ -1,5 +1,26 @@
-
 # LeetCode
+
+[3379. Transformed Array](https://leetcode.com/problems/transformed-array/)
+```java
+class Solution {
+    public int[] constructTransformedArray(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        for(int i =0; i<n; i++){
+            int newIndex = 0;
+            if(nums[i] >= 0){
+                newIndex = (nums[i] + i)%n;;
+            }
+            else{
+                newIndex = (((nums[i] + i )%n) + n)%n;
+            }
+            result[i] = nums[newIndex];
+        }
+
+        return result;
+    }
+}
+```
 
 [2022. Convert 1D Array Into 2D Array](https://leetcode.com/problems/convert-1d-array-into-2d-array/)
 ```java
@@ -736,6 +757,52 @@ class Solution {
             }
         }
         return ans;
+    }
+}
+```
+
+[3010. Divide an Array Into Subarrays With Minimum Cost I](https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/)
+```java
+class Solution {
+    public int minimumCost(int[] nums) {
+        int first = Integer.MAX_VALUE;
+        int second = Integer.MAX_VALUE;
+
+        for (int i = 1; i < nums.length; i++) {
+            int x = nums[i];
+            if (x < first) {
+                second = first;
+                first = x;
+            } else if (x < second) {
+                second = x;
+            }
+        }
+        
+        return nums[0] + first + second;
+    }
+}
+```
+
+[3637. Trionic Array I](https://leetcode.com/problems/trionic-array-i/)
+```java
+class Solution {
+    public boolean isTrionic(int[] nums) {
+        int i =1;
+        while(i < nums.length && nums[i] > nums[i-1]){
+            i++;
+        }
+        if(i == 1 || i == nums.length) return false;
+        while(i < nums.length && nums[i] < nums[i-1]){
+            i++;
+        }
+        if(i == nums.length) return false;
+        while(i < nums.length && nums[i] > nums[i-1]){
+            i++;
+        }
+        if(i == nums.length){
+            return true;
+        }
+        return false;
     }
 }
 ```
