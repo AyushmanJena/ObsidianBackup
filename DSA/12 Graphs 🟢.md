@@ -206,7 +206,7 @@ Time Complexity : ~~ O(N<sup>2</sup>)
 Space Complexity : Visited Matrix + Queue  : O(N<sup>2</sup>) + O(N<sup>2</sup>)
 
 
-**Flood Fill Algorithm** 
+#### Flood Fill Algorithm 
 using DFS
 - Given a starting row and starting column with value 1 (sr, sc)
 ```java
@@ -257,10 +257,119 @@ Time Complexity : O(mxn) // if all nodes are connected
 Space Complexity  : O(nxm) + O(nxm) // new matrix + recursive stack
 
 
-Rotten Oranges
-```java
+#### Rotten Oranges
+0 -> empty cell
+1 -> fresh oranges
+2 -> rotten oranges
 
+find minimum time to rot all oranges, 
+any rotten orange can rot all oranges in left, right, up, down in unit time
+```txt
+0 1 2
+0 1 2 -> ans = 1
+2 1 1
+
+if remaining oranges not rotten -> return -1
+
+intuition : 
+- use queue for bfs traversal
+- visited array for marking oranges
+
+push all rotten orange pos into the queue initially
+
+pick rotten orange remove it from queue
+ and add all its neighbouring fresh oranges into the queue
+ and repeat
+ mark them all rotten in visited array 
+ 
+increment time at each level
 ```
+applying BFS
+```java
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        int freshCount = 0;
+        int time = 0;
+        Queue<Pair> queue = new LinkedList<>();
+        int n = grid.length;
+        int m = grid[0].length;
+
+        for(int i =0; i< n; i++){
+            for(int j = 0; j < m; j++){
+                if(grid[i][j] == 1){
+                    freshCount++;
+                }else if(grid[i][j] == 2){
+                    queue.add(new Pair(i, j));
+                }
+            }
+        }
+
+        if(freshCount == 0) return 0;
+
+        while(!queue.isEmpty() && freshCount > 0){
+            int size = queue.size();
+            for(int i = 0; i< size; i++){
+                Pair p = queue.poll();
+                if(isValid(p.x + 1, p.y, n, m) && (grid[p.x +1][p.y] == 1)){
+                    grid[p.x + 1][p.y] = 2;
+                    freshCount--;
+                    queue.add(new Pair(p.x+1, p.y));
+                }
+                if(isValid(p.x - 1, p.y, n, m) && (grid[p.x - 1][p.y] == 1)){
+                    grid[p.x - 1][p.y] = 2;
+                    freshCount--;
+                    queue.add(new Pair(p.x-1, p.y));
+                }
+                if(isValid(p.x, p.y + 1, n, m) && (grid[p.x][p.y + 1] == 1)){
+                    grid[p.x][p.y + 1] = 2;
+                    freshCount--;
+                    queue.add(new Pair(p.x, p.y+1));
+                }
+                if(isValid(p.x, p.y - 1, n, m) && (grid[p.x][p.y - 1] == 1)){
+                    grid[p.x][p.y - 1] = 2;
+                    freshCount--;
+                    queue.add(new Pair(p.x, p.y-1));
+                }
+            }
+            time++;
+        }
+
+        if(freshCount != 0){
+            return -1;
+        }
+        return time;
+    }
+
+    public boolean isValid(int x , int y, int n, int m){
+        if(x >= 0 && y >= 0 && x < n && y < m){
+            return true;
+        }
+        return false;
+    }
+
+    class Pair{
+        int x;
+        int y;
+        Pair(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### Dijkstra's Algorithm

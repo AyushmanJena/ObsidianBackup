@@ -21,6 +21,11 @@ git merge feature
 git log 
 ```
 
+Commit Message Format : personal
+```
+fix (ToastService) : Added relevant icons to all toasts
+```
+
 Deploying Angular Applications (17+) with github pages 
 ```
 First push your code to the main branch of your repo

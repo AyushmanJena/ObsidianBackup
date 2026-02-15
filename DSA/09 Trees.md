@@ -285,6 +285,49 @@ class Solution {
 }
 ```
 
+[1382. Balance a Binary Search Tree](https://leetcode.com/problems/balance-a-binary-search-tree/)
+```java
+class Solution {
+    public TreeNode balanceBST(TreeNode root) {
+        ArrayList<TreeNode> list = new ArrayList<>();
+        makeList(root, list);
+
+        int l = 0;
+        int r = list.size()-1;
+        int m = (l+r)/2;
+        TreeNode ansRoot = list.get(m);
+        ansRoot.left = makeBalancedTree(list, 0, m-1);
+        ansRoot.right = makeBalancedTree(list, m+1, r);
+        return ansRoot;
+    }
+
+    public void makeList(TreeNode node, ArrayList<TreeNode> list){
+        if(node.left != null) makeList(node.left, list);
+        node.left = null;
+        list.add(node);
+        if(node.right != null) makeList(node.right, list);
+        node.right = null;
+    }
+
+    public TreeNode makeBalancedTree(ArrayList<TreeNode> list, int l, int r){
+        if(l > r){
+            return null;
+        }
+        if(l == r){
+            TreeNode leaf = list.get(l);
+            return leaf;
+        }
+
+        int m = (l+r)/2;
+
+        TreeNode node = list.get(m);
+        node.left = makeBalancedTree(list, l, m-1 );
+        node.right = makeBalancedTree(list, m+1, r);
+        return node;
+    }
+}
+```
+
 [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/)
 ```java
 class Solution {

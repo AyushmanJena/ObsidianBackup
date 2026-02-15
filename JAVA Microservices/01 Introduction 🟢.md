@@ -62,12 +62,7 @@ Q. Is it possible to have the end client directly call the individual microservi
 YES
 
 Note: You need to handle the port numbers for multiple applications if running on the same machine
-
 Note: Each spring boot project here runs it's own instance of tomcat
-
-
-CONTINUE FROM PART 10
-https://youtu.be/UBnSkjsJ-ow?feature=shared
 
 You have a single project focused on a single area of concern and make it easier to manage and handle.
 
@@ -90,6 +85,25 @@ But when model is changed in one microservice, it needs to notify other microser
 Like removing and changing a field in a class. 
 
 
+
+```java
+@RequestMapping
+public List<CatelogItem> getCatalog(@PathVariable('userId'') String userId){
+	List<Rating> rating = Arrays.asList(
+		new Rating("1234", 3),
+		new Rating("5678", 4)
+	);
+	
+	return rating.stream().map(rating ->
+		{
+			Movie movie = restTemplate.getForObject("https://localhost:8082/movie/" + rating.getMovieId(), Movie.class );
+			return new CatalogItem(movie.getName(), "Desc", rating.getRating());
+		}
+	)
+	.collect(Collectors.toList());
+}
+```
+
 CONTINUE FROM : 
 https://www.youtube.com/watch?v=F3uJyeAyv5g
-
+5:18

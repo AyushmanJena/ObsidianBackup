@@ -1,0 +1,2 @@
+This is not a complete guide for learning ionic, you need to have a good understanding of angular to understand IONIC. 
+These notes will be a reference and reminders of how things work and marks changes if any.

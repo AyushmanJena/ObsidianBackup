@@ -210,6 +210,57 @@ class Solution {
 }
 ```
 
+[67. Add Binary](https://leetcode.com/problems/add-binary/)
+```java
+class Solution {
+    public String addBinary(String a, String b) {
+        int carry = 0;
+        int size = Math.max(a.length(), b.length());
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < size; i++){
+            char aValue = '0';
+            char bValue = '0';
+            if(a.length() - i -1 >= 0){
+                aValue = a.charAt(a.length() - i - 1);
+            }
+            if(b.length() - i -1 >= 0){
+                bValue = b.charAt(b.length() - i - 1);
+            }
+            if(aValue == '1' && bValue == '1'){
+                if(carry == 1){ // 1+1+1
+                    sb.append('1');
+                }else{ // 1+1+0
+                    sb.append('0');
+                }
+                carry = 1;
+            }else if(aValue== '0' && bValue == '0'){
+                if(carry == 1){ // 0 + 0 + 1
+                    sb.append('1');
+                }else{ // 0+ 0+0
+                    sb.append('0');
+                }
+                carry = 0;
+            }else{
+                if(carry == 1){ // 1+0+1 / 0+1+1
+                    sb.append('0');
+                    carry = 1;
+                }else{ // 1+0+0 / 0+1+0
+                    sb.append('1');
+                    carry = 0;
+                }
+            }
+        }
+        if(carry == 1){ // extra 1 if gets carried
+            sb.append('1');
+        }
+
+        sb.reverse();
+        return sb.toString();
+    }
+}
+```
+
 [1945. Sum of Digits of String After Convert](https://leetcode.com/problems/sum-of-digits-of-string-after-convert/)
 ```java
 
@@ -251,6 +302,41 @@ class Solution {
 }
 ```
 
+[3713. Longest Balanced Substring I](https://leetcode.com/problems/longest-balanced-substring-i/)
+```java
+class Solution {
+    public int longestBalanced(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int maxLen = 0;
+
+        for(int i = 0; i< s.length() ; i++){
+            for(int j = i; j<s.length() ;j++){
+                if(!map.containsKey(s.charAt(j))){
+                    map.put(s.charAt(j), 1);
+                }else{
+                map.put(s.charAt(j), map.get(s.charAt(j)) + 1);
+
+                }
+
+                int count = map.get(s.charAt(j));
+                boolean isValid = true;
+                if((j-i + 1) >= maxLen){
+                    for(Integer k : map.values()){
+                        if(k != count){
+                            isValid = false;
+                        }
+                    }
+                }
+                if(isValid == true){
+                    maxLen = Math.max(maxLen, j-i+1);
+                }
+            }
+            map = new HashMap<>();            
+        }
+        return maxLen;
+    }
+}
+```
 
 [1071. Greatest Common Divisor of Strings](https://leetcode.com/problems/greatest-common-divisor-of-strings/)
 ```java

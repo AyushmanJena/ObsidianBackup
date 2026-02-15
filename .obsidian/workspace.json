@@ -8,34 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "16e6e1cd2045a7dc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/16 Two Pointers.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "16 Two Pointers"
-            }
-          },
-          {
-            "id": "024b6c5ee2843cd0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/09 Trees.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "09 Trees"
-            }
-          },
-          {
             "id": "c67d67fa44fd9cd4",
             "type": "leaf",
             "pinned": true,
@@ -50,9 +22,65 @@
               "icon": "lucide-file",
               "title": "12 Graphs 🟢"
             }
+          },
+          {
+            "id": "8a439e64ee8721af",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "IONIC/03 Authentication.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "03 Authentication"
+            }
+          },
+          {
+            "id": "308d72e23a846fa4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "103 Routing (prev. Angular 16)"
+            }
+          },
+          {
+            "id": "08ff931865fb6e34",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "JAVA Microservices/01 Introduction 🟢.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01 Introduction 🟢"
+            }
+          },
+          {
+            "id": "78619766d660bd87",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DSA/03 Strings.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "03 Strings"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -84,7 +112,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tailwind",
+                "query": "Rotting ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -109,7 +137,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 334.5
+    "width": 334.5,
+    "collapsed": true
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -193,8 +222,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "024b6c5ee2843cd0",
+  "active": "78619766d660bd87",
   "lastOpenFiles": [
+    "DSA/01 Basics.md",
+    "DSA/15 Dynamic Programming 🟢.md",
+    "JAVA Microservices/01 Introduction 🟢.md",
+    "JAVA Microservices/00 ReadMe.md",
+    "DSA/00 Readme.md",
+    "One Page Notes/Git and Github.md",
+    "DSA/03 Strings.md",
+    "DSA/12 Graphs 🟢.md",
+    "IONIC/03 Authentication.md",
+    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
+    "IONIC/02 Basic Builds.md",
+    "IONIC/01 Introduction.md",
+    "IONIC/00 Readme.md",
+    "Test Markdown.md",
+    "DSA/09 Trees.md",
+    "ANGULAR/Angular Course Udemy/01 Introduction.md",
+    "DSA/LEETCODE 75 SOLUTIONS/13 Graphs BFS.md",
     "SPRING BOOT NOTES/Spring Boot Course/U07-Thymeleaf CRUD App IMP.md",
     "SPRING BOOT NOTES/Spring Boot Course/U04-REST APIs.md",
     "SPRING BOOT NOTES/Additional Notes/Exposing an Endpoint.md",
@@ -203,24 +249,7 @@
     "DSA/02 Arrays.md",
     "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
     "REACT NATIVE NOTES/React Native Youtube Tutorial/02 Basic App Development.md",
-    "DSA/12 Graphs 🟢.md",
     "One Page Notes/Tailwind CSS.md",
-    "JavaScript Notes/React Tutorial/incomplete React Notes.md",
-    "JavaScript Notes/React Tutorial/React Notes/02 Basic React.md",
-    "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
-    "ANGULAR/Angular Course Udemy/04 Services and Dependency Injection.md",
-    "ANGULAR/Angular Course Udemy/03 Basics.md",
-    "ANGULAR/Angular Course Udemy/02 Angular Essentials.md",
-    "ANGULAR/Angular Course Udemy/01 Introduction.md",
-    "ANGULAR/Angular Course Udemy/00 Readme.md",
-    "IONIC/01 Introduction.md",
-    "IONIC/02 Basic Builds.md",
-    "IONIC/00 Readme.md",
-    "DSA/00 Readme.md",
-    "DSA/01 Basics.md",
-    "ANGULAR/Angular Course Udemy/101 Forms.md",
-    "DSA/15 Dynamic Programming 🟢.md",
-    "DSA/08 Stacks and Queues.md",
     "Untitled.base",
     "Untitled 1.base",
     "DSA/LEETCODE 75 SOLUTIONS/assets/Pasted image 20260107121304.png",
