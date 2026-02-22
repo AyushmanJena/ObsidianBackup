@@ -1,5 +1,34 @@
 # LeetCode
 
+[696. Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/)
+#twopointer #strings
+```java
+class Solution {
+    public int countBinarySubstrings(String s) {
+        int i = 0;
+        int j = 0;
+        int ans = 0;
+        while(i < s.length()){
+            char firstChar = s.charAt(i);
+            int iCount = 0;
+            int jCount = 0;
+            while( i < s.length() && s.charAt(i) == firstChar){
+                i++;
+                iCount++;
+            }
+            j = i;
+            while(i < s.length() && s.charAt(i) != firstChar){
+                i++;
+                jCount++;
+            } 
+            ans += Math.min(iCount, jCount);
+            i = j;
+        }
+        return ans;
+    }
+}
+```
+
 [2486. Append Characters to String to Make Subsequence](https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/)
 ```java
 public class Solution{
@@ -405,3 +434,43 @@ class Solution {
 }
 ```
 
+
+[761. Special Binary String](https://leetcode.com/problems/special-binary-string/)
+#hard #strings #sorting #recursion
+```java
+class Solution {
+    public String makeLargestSpecial(String s) {
+        return helper(s);
+    }
+
+    public String helper(String s){
+        if(s.length() <= 2){ // 10 smallest possible valid
+            return s;
+        }
+
+        int i = 0;
+        int j = 0;
+        int sum = 0;
+        ArrayList<String> lst = new ArrayList<>();
+        while(i < s.length()){           // break into multiple valids and run recursion on them
+            if(s.charAt(i) == '1'){
+                sum += 1;
+            }
+            else if(s.charAt(i) == '0'){
+                sum -= 1;
+            }
+            
+            if(sum == 0){ // recurrence on valid parts 
+                String st = s.substring(j+1, i); 
+                String temp = helper(st);
+                lst.add("1" + temp + "0");
+                j = i+1;
+            }
+            i++;
+        }
+
+        lst.sort((a, b) -> b.compareTo(a));
+        return String.join("", lst);
+    }
+}
+```

@@ -188,3 +188,37 @@ class Solution {
     }
 }
 ```
+
+[401. Binary Watch](https://leetcode.com/problems/binary-watch/)
+medium and involved bit manipulation
+```java
+class Solution {
+    public List<String> readBinaryWatch(int turnedOn) {
+        List<String> result = new ArrayList<>();
+        helper(turnedOn, 0, 0, 0, result);
+        return result;
+    }
+
+    public void helper(int turnedOn, int hours, int minutes, int index, List<String> result){
+        if(hours > 11 || minutes > 59){
+            return;
+        }
+        if(turnedOn == 0){
+            result.add(hours + ":" + ((minutes < 10)? "0"+minutes : minutes));
+            return;
+        }
+
+        if(index == 10)return;
+
+        // without including current index
+        helper(turnedOn, hours, minutes, index+1, result);
+
+        // including current index
+        if(index < 4){
+            helper(turnedOn -1, hours + (1 << index), minutes, index + 1, result);
+        }else{
+            helper(turnedOn -1, hours, minutes + (1 << (index - 4)), index+ 1, result);
+        }
+    }
+}
+```

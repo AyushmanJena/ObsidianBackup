@@ -1,4 +1,39 @@
 You should Know
+
+[693. Binary Number with Alternating Bits](https://leetcode.com/problems/binary-number-with-alternating-bits/)
+```java
+class Solution {
+    public boolean hasAlternatingBits(int n) {
+        StringBuilder str = new StringBuilder();
+        while(n != 1){
+            int rem = n % 2;
+            n = n /2;
+            str.append(rem);
+        }
+        str.append(1);
+
+        str.reverse();
+        System.out.println(str);
+
+        char f = str.charAt(0);
+
+        for(int i = 0; i<str.length(); i++){
+            if(i % 2 == 0){
+                if(str.charAt(i) != f){
+                    return false;
+                }
+            }else{
+                if(str.charAt(i) == f){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+```
+
+
 ### 1. Find GCD of two numbers using Recursion : 
 - Using Euclid Division Method
 ```java
