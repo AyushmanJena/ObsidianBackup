@@ -29,6 +29,35 @@ class Solution {
 }
 ```
 
+[868. Binary Gap](https://leetcode.com/problems/binary-gap/)
+#bitmanipulation #easy #twopointer 
+```java
+class Solution {
+    public int binaryGap(int n) {
+        int maxGap = 0;
+        int slow = 0;
+        int fast = 0;
+
+        String num = Integer.toBinaryString(n);
+
+        while(fast < num.length() && num.charAt(fast) != '1'){
+            fast++;
+        }
+
+        while(fast < num.length() && slow < num.length()){
+            maxGap = Math.max(maxGap, fast - slow);
+            slow = fast;
+            fast++;
+            while(fast < num.length() && num.charAt(fast) != '1'){
+                fast++;
+            }
+        }
+
+        return maxGap;
+    }
+}
+```
+
 [2486. Append Characters to String to Make Subsequence](https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/)
 ```java
 public class Solution{

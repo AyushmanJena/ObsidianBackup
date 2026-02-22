@@ -9,5 +9,7 @@
   "readableLineLength": true,
   "attachmentFolderPath": "./assets",
   "alwaysUpdateLinks": true,
-  "showLineNumber": false
+  "showLineNumber": false,
+  "livePreview": true,
+  "newLinkFormat": "relative"
 }

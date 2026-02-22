@@ -22,7 +22,6 @@ Example of **Bold Text**
 Example of *Italic Text*
 Example of ~~Strike Through Text~~
 Example of ==Highlighted Text==
-Example of `Code Snip`
+Example of `Code Snippet`
 Example of $Math  Expression$
 Example of %% Comment %%
-
