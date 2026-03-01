@@ -217,6 +217,36 @@ class Solution {
 }
 ```
 
+
+[1022. Sum of Root To Leaf Binary Numbers](https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/)
+#easy #recursion #tree #bitmanipulation 
+```java
+class Solution {
+    public int sumRootToLeaf(TreeNode root) {
+        return helper(root , "");
+    }
+
+    public int helper(TreeNode node, String binaryString){
+        if(node.left == null && node.right == null){
+            binaryString = binaryString + node.val;
+            return Integer.parseInt(binaryString, 2);
+        }
+
+        int ans = 0;
+        binaryString = binaryString + node.val;
+
+        if(node.left != null){
+            ans += helper(node.left, binaryString);
+        }
+        if(node.right != null){
+            ans += helper(node.right, binaryString);
+        }
+        return ans;
+    }
+}
+```
+
+
 [226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
 ```java
 class Solution {

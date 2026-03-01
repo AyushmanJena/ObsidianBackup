@@ -1,6 +1,4 @@
----
-lastSync: Sun Oct 06 2024 13:45:58 GMT+0530 (India Standard Time)
----
+
 ## Maven
 - Maven is a project management tool used for build management and dependencies.
 - Tell Maven the projects(tools) you're working with (dependencies) like spring, hibernate, etc.
@@ -22,9 +20,9 @@ lastSync: Sun Oct 06 2024 13:45:58 GMT+0530 (India Standard Time)
 		src/test -> unit testing code and properties
 		target -> Destination directory for compiled code
 **POM - Project Object Model file**
-		⌊ Project meta data
-		⌊ dependencies
-		⌊ Plugins
+		- Project meta data
+		- dependencies
+		- Plugins
 		
 	_GAV -> Group id, Artifact id, Version_
 

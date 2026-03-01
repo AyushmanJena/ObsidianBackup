@@ -29,12 +29,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "MASTERING JAVA/00 ReadMe.md",
-                "mode": "source",
+                "file": "One Page Notes/Git and Github.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00 ReadMe"
+              "title": "Git and Github"
             }
           },
           {
@@ -52,41 +52,17 @@
             }
           },
           {
-            "id": "308d72e23a846fa4",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "One Page Notes/assets/git picture 2.png"
-              },
-              "icon": "lucide-image",
-              "title": "git picture 2"
-            }
-          },
-          {
-            "id": "a5420d4327f46f18",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "One Page Notes/assets/example-diagram.png"
-              },
-              "icon": "lucide-image",
-              "title": "example-diagram"
-            }
-          },
-          {
             "id": "94465146d85eef79",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/01 Basics.md",
+                "file": "DSA/09 Trees.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Basics"
+              "title": "09 Trees"
             }
           }
         ],
@@ -122,7 +98,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "radix",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -233,45 +209,46 @@
   },
   "active": "8a439e64ee8721af",
   "lastOpenFiles": [
-    "MASTERING JAVA/assets/Screenshot (87).png",
-    "MASTERING JAVA/00 ReadMe.md",
-    "MASTERING JAVA/assets",
-    "MASTERING JAVA/Microservices Level 1.md",
-    "OBSIDIAN cheatsheet.md",
-    "IONIC/assets/Screenshot (87).png",
-    "assets/Screenshot (87).png",
-    "IONIC/00 Readme.md",
-    "IONIC/assets",
-    "assets",
-    "SPRING BOOT NOTES/SPRING BOOT notes for the boys.md",
     "JavaScript Notes/React Tutorial/incomplete React Notes.md",
+    "ANGULAR/Angular Course Udemy/101 Forms.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U01-Introduction.md",
+    "DSA/03 Strings.md",
+    "DSA/12 Graphs 🟢.md",
+    "DSA/09 Trees.md",
+    "DSA/02 Arrays.md",
+    "DSA/03 Sorting Algorithms.md",
     "DSA/01 Basics.md",
     "One Page Notes/assets/example-diagram.png",
     "One Page Notes/assets/git picture 2.png",
-    "DSA/03 Strings.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U10-.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U09-Advanced JPA-Hibernate Mappings.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U08-Spring MVC Security.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U07-Thymeleaf CRUD App IMP.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U06-Thymeleaf Introduction.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U04-REST APIs.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U03-Hibernate JPA.md",
+    "IONIC/01 Introduction.md",
+    "IONIC/02 Basic Builds.md",
+    "IONIC/00 Readme.md",
+    "IONIC/03 Authentication.md",
+    "DSA/13 Sliding Window.md",
+    "One Page Notes/Git and Github.md",
     "JavaScript Notes/JWT theory.md",
+    "One Page Notes/SQL.md",
+    "MASTERING JAVA/assets/Screenshot (87).png",
+    "MASTERING JAVA/assets",
+    "IONIC/assets/Screenshot (87).png",
+    "assets/Screenshot (87).png",
+    "IONIC/assets",
+    "assets",
     "JavaScript Notes/assets/Pasted image 20250601000450.png",
     "JavaScript Notes/assets/Pasted image 20250601003541.png",
     "JavaScript Notes/assets",
     "JavaScript Notes/assets/Pasted image 20250601003940.png",
     "JavaScript Notes/assets/Pasted image 20250601002937.png",
-    "SPRING BOOT NOTES/Documenting Projects.md",
     "SPRING BOOT NOTES/Spring Boot Course/assets/hibernate.png",
-    "SPRING BOOT NOTES/Additional Java/Reading an Image.md",
-    "One Page Notes/CSS.md",
-    "One Page Notes/Git and Github.md",
-    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
-    "JavaScript Notes/React Tutorial/React Notes/03 Intermediate.md",
-    "JavaScript Notes/React Tutorial/React Notes/02 Basic React.md",
-    "JavaScript Notes/React Tutorial/React Notes/01 Introduction.md",
-    "IONIC/03 Authentication.md",
-    "ANGULAR/Angular Course Udemy/01 Introduction.md",
-    "ANGULAR/Angular Course Udemy/00 Readme.md",
-    "One Page Notes/Tailwind CSS.md",
-    "DSA/04 Subsets and Subsequences.md",
-    "DSA/10 Heaps.md",
-    "DSA/11 Hashmap and Hashset.md",
-    "DSA/12 Graphs 🟢.md",
     "Untitled.base",
     "Untitled 1.base",
     "DSA/LEETCODE 75 SOLUTIONS/assets",

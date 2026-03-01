@@ -241,6 +241,27 @@ class Solution {
 }
 ```
 
+[1461. Check If a String Contains All Binary Codes of Size K](https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/)
+#medium #slidingwindow #hash #string 
+- since the number of distinct sub-strings should be exactly 2<sup>k</sup>
+```java
+class Solution {
+    public boolean hasAllCodes(String s, int k) {
+        HashSet<String> set = new HashSet<>();
+
+        int i = 0;
+        int j = k - 1;
+        while(j < s.length()){
+            set.add(s.substring(i, j+1));
+            i++;
+            j++;
+        }
+
+        return set.size() == Math.pow(2, k);
+    }
+}
+```
+
 [930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) #imp
 ```java
 class Solution {

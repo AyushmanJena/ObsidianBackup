@@ -1,6 +1,4 @@
----
-lastSync: Tue Oct 08 2024 14:41:06 GMT+0530 (India Standard Time)
----
+
 ### IOC : Inversion Of Control
 - IOC is basically creating objects and managing them automatically instead of creating them manually using new keyword, which is the usual way of doing it in java.
 - ![[Screenshot 2024-10-06 142740.png]]

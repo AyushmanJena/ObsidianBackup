@@ -1,6 +1,3 @@
----
-lastSync: Thu Oct 17 2024 17:36:40 GMT+0530 (India Standard Time)
----
 **Complete Spring Security Manual :** 
 https://docs.spring.io/spring-security/reference/
 

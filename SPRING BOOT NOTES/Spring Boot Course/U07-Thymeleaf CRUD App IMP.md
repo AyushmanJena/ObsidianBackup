@@ -1,6 +1,3 @@
----
-lastSync: Tue Oct 15 2024 10:40:48 GMT+0530 (India Standard Time)
----
 ## Creating a Web UI for Employee Directory : 
 https://github.com/darbyluv2code/spring-boot-3-spring-6-hibernate-for-beginners/tree/main/07-spring-boot-spring-mvc-crud
 

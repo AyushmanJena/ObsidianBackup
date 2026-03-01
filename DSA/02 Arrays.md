@@ -355,6 +355,79 @@ public class MaxArrayInArray {
 ```
 
 
+[1356. Sort Integers by The Number of 1 Bits](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/)
+#bitmanipulation #sorting #array 
+```java
+class Solution {
+    public int[] sortByBits(int[] arr) {
+        int[] ans = new int[arr.length];
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+
+        // sort based on number of 1s
+        for(int i = 0; i<arr.length; i++){
+            int n = Integer.bitCount(arr[i]);
+            if(!map.containsKey(n)){
+                map.put(n, new ArrayList<>());
+            }
+            map.get(n).add(arr[i]);
+        }
+
+        List<Integer> keys = new ArrayList<>(map.keySet());
+        Collections.sort(keys);
+
+        // sort individual arrayLists
+        for(int key : map.keySet()){
+            ArrayList<Integer> list = map.get(key);
+            Collections.sort(list);
+        }
+
+        // combine all lists
+        int k =0;;
+        for(int key : map.keySet()){
+            ArrayList<Integer> list = map.get(key);
+            for(int i = 0; i<list.size() ; i++){
+                ans[k] = list.get(i);
+                k++;
+            }
+        }
+
+        return ans;
+    }
+}
+```
+Optimised code : 
+```java
+import java.util.*;
+
+class Solution {
+    public int[] sortByBits(int[] arr) {
+        Integer[] temp = new Integer[arr.length];
+        
+        for(int i = 0; i < arr.length; i++) {
+            temp[i] = arr[i];
+        }
+
+        Arrays.sort(temp, (a, b) -> {
+            int countA = Integer.bitCount(a);
+            int countB = Integer.bitCount(b);
+
+            if(countA == countB) {
+                return a - b;
+            }
+            return countA - countB;
+        });
+
+        for(int i = 0; i < arr.length; i++) {
+            arr[i] = temp[i];
+        }
+
+        return arr;
+    }
+}
+```
+
+
+
 [2326. Spiral Matrix IV](https://leetcode.com/problems/spiral-matrix-iv/)
 ```java
 

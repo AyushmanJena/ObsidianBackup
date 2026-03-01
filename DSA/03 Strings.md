@@ -319,6 +319,29 @@ class Solution {
 }
 ```
 
+[1404. Number of Steps to Reduce a Number in Binary Representation to One](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/)
+#bitmanipulation #string 
+- this cannot be solved using basic looping over the number converted using parseInt() since the limit can exceed integer value
+- So it is done using string manipulation
+```java
+class Solution {
+    public int numSteps(String s) {
+        int st = 0;
+        int c = 0;
+        for(int i = s.length() - 1; i > 0;  i--){
+            int n = s.charAt(i) - '0';
+            if(n + c == 1){
+                st += 2;
+                c = 1;
+            }else{
+                st += 1;
+            }
+        }
+        return st + c;
+    }
+}
+```
+
 [1945. Sum of Digits of String After Convert](https://leetcode.com/problems/sum-of-digits-of-string-after-convert/)
 ```java
 

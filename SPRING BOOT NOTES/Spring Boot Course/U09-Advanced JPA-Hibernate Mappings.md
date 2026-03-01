@@ -1,6 +1,3 @@
----
-lastSync: Thu Oct 24 2024 22:19:22 GMT+0530 (India Standard Time)
----
 **Multiple Tables, Relationships between tables** 
 One-to-One
 One-to-Many

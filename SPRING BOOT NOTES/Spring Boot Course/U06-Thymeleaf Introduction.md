@@ -1,6 +1,3 @@
----
-lastSync: Sun Oct 20 2024 20:31:55 GMT+0530 (India Standard Time)
----
 ## Thymeleaf
 - Java templating Engine
 - used to generate HTML views for web pages

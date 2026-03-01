@@ -1,6 +1,4 @@
----
-lastSync: Wed Oct 16 2024 16:15:52 GMT+0530 (India Standard Time)
----
+
 ## Hibernate :
 - Framework and ORM (Object Relational Mapping) tool 
 - Most popular implementation of JPA spec (or interface) and is default in spring boot.
