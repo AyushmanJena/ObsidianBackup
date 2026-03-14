@@ -58,6 +58,30 @@ class Solution {
 }
 ```
 
+[1545. Find Kth Bit in Nth Binary String](https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/)
+#bitmanipulation #string #medium 
+```java
+class Solution {
+    public char findKthBit(int n, int k) {
+        StringBuilder str = new StringBuilder("0");
+        for(int i = 2; i<= n; i++){
+            StringBuilder inv = new StringBuilder();
+            for(int j = str.length()- 1; j >= 0; j--){
+                if(str.charAt(j) == '0'){
+                    inv.append('1');
+                }else{
+                    inv.append('0');
+                }
+            }
+
+            str = str.append("1" + inv);
+        }
+
+        return str.charAt(k-1);
+    }
+}
+```
+
 [2486. Append Characters to String to Make Subsequence](https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/)
 ```java
 public class Solution{

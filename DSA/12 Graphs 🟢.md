@@ -360,21 +360,431 @@ class Solution {
 
 
 ### Detecting Cycle in an Undirected Graph 
-using BFS
+##### Using BFS
+- generate adjacency list for the graph
+- create a visited array and initialize all nodes as not visited
+- For every unvisited node, start BFS (if has disconnected graphs).
+- define queue and push the first node as `(startNode, parent = -1)`
+- Mark start node visited
+- While queue is not empty, pop `(currentNode, parent)`
+- For each adjacent node of currentNode : 
+	- If it is not visited, mark it visited and push `(adjacentNode, currentNode)` into the queue
+	- If it is already visited and not equals to `parent`, then a cycle exists
+- If BFS finishes without finding any such cases, then no cycle exists
+
+```java
+public boolean hasCycle(int V, List<List<Integer>> adj){
+	boolean[] visited = new boolean[V];
+	
+	// handle disconnected components
+	for(int i = 0; i< V; i++){
+		if(!visited[i]){
+			if(bfsCheck(i, adj, visited)) return true;
+		}
+	}
+	return false;
+}
+
+
+private static boolean bfsCheck(int start, List<List<Integer>> adj, boolean[] visited){
+	Queue<int[]> queue = new LinkedList<>();
+		
+	// int[]  = {node, parent}
+	queue.offer(new int[]{start, -1});
+	visited[start] = true;
+		
+	while(!queue.isEmpty()){
+		int[] current = queue.poll();
+		int node = current[0];
+		int parent = current[1];
+			
+		for(int neighbor : adj.get(node)){
+			if(!visited[neightbor]){
+				visited[neighbor] = true;
+				queue.offer(new int[]{neighbor, node});
+			}else if(neighbor != parent){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+```
+Time complexity : O (V + 2E) : BFS
+Space Complexity : O(N) + O(N)  : queue and visited
+					~ O(N)
+
+##### Using DFS
+- Generate the adjacency list for the graph
+-  build a visited array and mark all nodes as unvisited
+- For every unvisited node, start DFS (to handle disconnected graphs)
+- Call dfs(currentNode, parent) for the unvisited node
+- Mark current node visited
+- For each adjacent node of currentNode : 
+	- If the adjacent node is not visited, recursively call dfs(adjacentNode, currentNode)
+	- If the adjacent node is already visited and not equals to parent, then a cycle exists
+- If DFS finishes without finding such a case, then no cycle exists
+
+```java
+public boolean hasCycle(int V, List<List<Integer>> adj){
+	boolean[] visited = new boolean[V];
+	
+	// handling disconnected graph
+	for(int i =0; i< V; i++){
+		if(!visited[i]){
+			if(dfs(i, -1, visited, adj)){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+public boolean dfs(int node, int parent, boolean[] visited, List<List<Integer>> adj){
+	visited[node] = true;
+	for(int neighbor: adj.get(node)){
+		if(!visited[neighbor]){
+			if(dfs(neighbor, node, visited, adj)){
+				return true;
+			}
+		}else if(neighbor != parent){
+			return true; // cycle detected
+		}
+	}
+	return false;
+}
+```
+
+
+Time complexity : O (V + 2E) : BFS
+Space Complexity : O(N) + O(N)  : recursion stack and visited
+					~ O(N)
+
+
+
+### Distance of Nearest Cell having 1
+row or col only no diagonal distance
+```
+1 0 1        for (0, 0) itself so ans = 0
+1 1 0    ->   for (0, 1) left 1, right 1 or down 1 so ans = 1
+1 0 0         for(2, 2) ans = 2
+
+answer matrix : 
+0 1 0
+0 0 1
+0 1 2
+```
+
+Solving using BFS
+- Create a `visited[][]` matrix initialized to false
+- Create a distance matrix to store the answer
+- Create a queue to store `(row, col, dist)`
+- Traverse the grid and push all cells having value 1 into the queue with distance = 0
+- Mark all these cells as visited
+- While the queue is not empty : 
+	- Pop(row, col, dist) from the queue
+	- Set `distance[row][col] = dist`
+	- Move in all 4 directions (up, down, left, right)
+	- For each valid neighbor cell : 
+		- If it is inside the grid and not visited
+		- then mark it visited
+		- Push `(newRow, newCol, dist + 1)` into the queue
+- After BFS finishes, `distance[][]` will contain the nearest distance to a cell having 1
+```java
+static class Cell {  
+	int row, col, dist;  
+  
+	Cell(int row, int col, int dist) {  
+	this.row = row;  
+	this.col = col;  
+	this.dist = dist;  
+	}  
+}
+
+public int[][] nearestOne(int[][] grid){
+	int n = grid.length;
+	int m = grid[0].length;
+	
+	int[][] distance = new int[n][m];
+	boolean[][] visited = new boolean[n][m];
+	
+	Queue<Cell> queue = new LinkedList<>();
+	
+	// push all cells having value 1 into queue
+	for(int i = 0; i< n; i++){
+		for(int j = 0; j <m; j++){
+			if(grid[i][j] == 1){
+				queue.offer(new Cell(i, j, 0));
+				visited[i][j] = true;
+			}
+		}
+	}
+	
+	// 4 directions (up, down, left, right)
+	while(!queue.isEmpty()){
+		Cell current = queue.poll();
+		int row = current.row;
+		int col = current.col;
+		int dist = current.dist;
+		
+		distance[row][col] = dist;
+		
+		// UP  
+		if (row - 1 >= 0 && !visited[row - 1][col]) {  
+			visited[row - 1][col] = true;  
+			queue.offer(new Cell(row - 1, col, dist + 1));  
+		}  
+		  
+		// DOWN  
+		if (row + 1 < n && !visited[row + 1][col]) {  
+			visited[row + 1][col] = true;  
+			queue.offer(new Cell(row + 1, col, dist + 1));  
+		}  
+		  
+		// LEFT  
+		if (col - 1 >= 0 && !visited[row][col - 1]) {  
+			visited[row][col - 1] = true;  
+			queue.offer(new Cell(row, col - 1, dist + 1));  
+		}  
+		  
+		// RIGHT  
+		if (col + 1 < m && !visited[row][col + 1]) {  
+			visited[row][col + 1] = true;  
+			queue.offer(new Cell(row, col + 1, dist + 1));  
+		}
+	}
+	return distance;
+}
+```
+
+Similar leetcode problem :
+[542. 01 Matrix](https://leetcode.com/problems/01-matrix/)
+Distance of the nearest cell having 0 for each cell
+
+
+### Replace O's with X's
+Given N x M matrix where every element is either O or X 
+Replace all O with X that are surrounded by X in all 4 directions
+It can also have a set of Os which are together surrounded by X then it will also be converted
+
+```
+X X X X             X X X X 
+X O X X             X X X X 
+X O O X         ->  X X X X 
+X O X X             X X X X
+X X O O             X X O O
+
+- The below 2 Os are not surrounded by X on right and bottom
+```
+
+- Observation : If the island of Os is connected to a boundary then it is invalid, but if it is not connected to any boundary then it is bound to be surrounded by X
+- Start from the boundary Os and mark their islands  that they cannot be converted.
+- Convert the remaining Os
+
+Algorithm:
+- Build a visited matrix initialized with all Os
+- Loop over the matrix for all the borders and call DFS on the cell with Os
+- Mark the cell visited
+- go to all the neighbor Os and mark them visited too and so on recursively
+- Now loop over the entire matrix matrix and call DFS on cells with Os 
+- Convert the O to X
+- Go to all the neighbors, and if any cell is marked visited then do not convert it into X since it is connected to boundary
+
+```java
+void solve(char[][] board){
+	int m = board.length;
+	int n = board[0].length;
+	
+	boolean[][] visited = new boolean[m][n];
+	
+	// traverse first and last row
+	for(int j = 0; j < n; j++){
+		if(board[0][j] == 'O' && !visited[0][j])
+			dfs(board, visited, 0, j);
+			
+		if(board[m-1][j] == 'O' && !visited[m - 1][j]){
+			dfs(board, visited, m-1, j);
+		}
+	}
+	
+	// traverse first and last column
+	for(int i = 0; i < m; i++){
+		if(board[i][0] == 'O' && !visited[i][0])
+			dfs(board, visited, i, 0);
+			
+		if(board[i][n-1] == 'O' && !visited[i][n-1])
+			dfs(board, visited, i, n-1);
+	}
+	
+	// Convert surrounded O to X  
+	for (int i = 0; i < m; i++) {  
+		for (int j = 0; j < n; j++) {  
+			if (board[i][j] == 'O' && !visited[i][j]) {  
+				board[i][j] = 'X';  
+			}
+		}  
+	}
+}
+
+void dfs(char[][] board, boolean[][] visited, int r, int c){
+	int m = board.length; 
+	int n = board[0].length;
+	
+	if(r < 0 || c < 0 || r >= m || c >= n){
+		return;
+	}
+	
+	if(board[r][c] != 'O' || visited[r][c]){
+		return;
+	}
+	
+	visited[r][c] = true;
+	
+	dfs(board, visited, r+1, c);
+	dfs(board, visited, r-1, c);
+	dfs(board, visited, r, c+1);
+	dfs(board, visited, r, c-1);
+}
+```
+
+
+
+### Number of Enclaves
+You are given n x m binary matrix, where 0 represents a sea cell and 1 represents a land cell
+A move consists of walking from one land cell to another adjacent (4-directionally) land cell or walking off the boundary of the grid
+Find the number of land cells in grid for which we cannot walk off the boundary of the grid in any number of moves
+
+```
+0 0 0 1
+0 1 1 0
+0 1 1 0     ->  
+0 0 0 1
+0 1 1 0
+
+ the middle four 1s
+ but for the other 1's you can move out of the boundary 
+ 
+ so answer = 4
+```
+
+approach : 
+- start from the cells which are land and are connected to boundary
+- perform bfs/dfs on those cells and cancel them out
+- the remaining land cells which are not reached will be the answers
+
+algorithm : (applying bfs)
+- Create a Queue data structure
+- Traverse the whole matrix and Push all boundary land cells 
+- convert them to 0s / create another visited matrix and mark them visited there 
+- pop the first from queue and perform bfs i.e.
+	- traverse in all 4 directions that are 
+	- not visited and are land 
+	- push them into the queue as well
+- Continue poping and performing bfs on them untill the queue is empty
+- traverse the matrix and count all the remaining lands
+
+```java
+public static int numEnclaves(int[][] grid) {
+
+    int n = grid.length;
+    int m = grid[0].length;
+
+    Queue<int[]> queue = new LinkedList<>();
+
+    // Push boundary land cells
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            if(i == 0 || j == 0 || i == n - 1 || j == m - 1){
+                if(grid[i][j] == 1){
+                    queue.add(new int[]{i, j});
+                    grid[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    bfs(queue, grid, n, m);
+
+    // Count remaining land cells
+    int count = 0;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            if(grid[i][j] == 1){
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+public static void bfs(Queue<int[]> queue, int[][] grid, int n, int m){
+
+    while(!queue.isEmpty()){
+
+        int[] cell = queue.poll();
+        int row = cell[0];
+        int col = cell[1];
+
+        // Up
+        if(row - 1 >= 0 && grid[row - 1][col] == 1){
+            queue.add(new int[]{row - 1, col});
+            grid[row - 1][col] = 0;
+        }
+
+        // Down
+        if(row + 1 < n && grid[row + 1][col] == 1){
+            queue.add(new int[]{row + 1, col});
+            grid[row + 1][col] = 0;
+        }
+
+        // Left
+        if(col - 1 >= 0 && grid[row][col - 1] == 1){
+            queue.add(new int[]{row, col - 1});
+            grid[row][col - 1] = 0;
+        }
+
+        // Right
+        if(col + 1 < m && grid[row][col + 1] == 1){
+            queue.add(new int[]{row, col + 1});
+            grid[row][col + 1] = 0;
+        }
+    }
+}
+```
+
+
+
+### Number of Distinct Islands : 
+Given a boolean 2D matrix grid of size `n*m`. You have to find the number of distinct islands where a group of connected 1s (horizontally or vertically) forms an island. 
+Two islands are considered to be distinct if and only if one island is equal to another (not rotated or reflected)
+```
+1 1 0 1 1
+1 0 0 0 0
+0 0 0 0 1
+1 1 0 1 1
+
+There are two 1 1 that are identical
+the two islands with 3 ones are rotated and not identical
+
+So answer = 3 total unique distinct islands
+
+
+1 1 0 1 1
+1 0 0 0 0
+0 0 0 1 1
+1 1 0 1 0
+
+ans = 2
+```
+
+Approach : 
+add a hashset to store all arraylist of  (row, col) 
 
 
 
 
-
-
-
-
-
-
-
-
-
-### Dijkstra's Algorithm
+# Dijkstra's Algorithm
 ```
 for each vertex v : 
 	dist[v]= max_value
@@ -390,7 +800,7 @@ while destination not explored:
 			dist[w] = dist[v] + len(v, w)
 			prev[w] = v
 ```
-
+code: 
 ```java
 import java.util.*;
 

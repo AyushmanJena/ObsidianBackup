@@ -426,6 +426,394 @@ class Solution {
 }
 ```
 
+[3487. Maximum Unique Subarray Sum After Deletion](https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/)
+```java
+class Solution {
+    public int maxSum(int[] nums) {
+        int maxElement = Integer.MIN_VALUE;
+        int positiveSum = 0;
+        Set<Integer> seen = new HashSet<>();
+
+        for (int num : nums) {
+            if (!seen.contains(num)) {
+                seen.add(num);
+                if (num > 0) {
+                    positiveSum += num;
+                }
+                maxElement = Math.max(maxElement, num);
+            }
+        }
+
+        return positiveSum > 0 ? positiveSum : maxElement;
+    }
+}
+
+```
+
+[118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
+```java
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for(int i = 0; i<numRows; i++){
+            ans.add(new ArrayList<Integer>());
+            for(int j = 0; j<i+1; j++){
+                ans.get(i).add(1);
+            }
+        }
+
+        for(int i = 2; i<numRows; i++){
+            for(int j = 1; j < i; j++){
+                int top = ans.get(i-1).get(j-1);
+                int left = ans.get(i-1).get(j);
+                ans.get(i).set(j, top+left);
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
+
+[3477. Fruits Into Baskets II](https://leetcode.com/problems/fruits-into-baskets-ii/)
+```java
+class Solution {
+    public int numOfUnplacedFruits(int[] fruits, int[] baskets) {
+        int unplaced = 0;
+        boolean unp = true;
+        for(int i = 0; i<fruits.length; i++){
+            for(int j = 0; j< baskets.length; j++){
+                if(baskets[j] >= fruits[i]){
+                    baskets[j] = 0;
+                    unp = false;
+                    break;
+                }
+            }
+            if(unp){
+                unplaced++;
+            }
+            unp = true;
+        }
+        return unplaced;
+    }
+}
+```
+
+
+[2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/)
+```java
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+        long total = 0;
+        long zeroCount = 0;
+        for(int i = 0; i<nums.length+1; i++){
+            if(i < nums.length && nums[i] == 0){
+                zeroCount++;
+            }
+            else{
+                if(zeroCount > 0){
+                    total += calculateCombinations(zeroCount);
+                    zeroCount = 0;
+                }
+            }
+        }
+        return total;
+    }
+
+    public long calculateCombinations(long count){
+        return count * (count + 1)/2;
+    }
+}
+```
+
+
+[2154. Keep Multiplying Found Values by Two](https://leetcode.com/problems/keep-multiplying-found-values-by-two/)
+```java
+class Solution {
+    public int findFinalValue(int[] nums, int original) {
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : nums) {
+            numSet.add(num);
+        }
+        
+        while (numSet.contains(original)) {
+            original *= 2;
+        }
+        
+        return original;
+    }
+}
+```
+
+
+[1200. Minimum Absolute Difference](https://leetcode.com/problems/minimum-absolute-difference/)
+```java
+class Solution {
+    public List<List<Integer>> minimumAbsDifference(int[] arr) {
+        Arrays.sort(arr);
+        int min = Integer.MAX_VALUE;
+        for(int i = 1 ; i < arr.length;i++){
+            if(arr[i] - arr[i-1] < min){
+                min = arr[i] - arr[i-1];
+            }
+        }
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for(int i = 1; i< arr.length ;i++){
+            if(arr[i] - arr[i-1] == min){
+                ArrayList<Integer> temp = new ArrayList<>();
+                temp.add(arr[i-1]);
+                temp.add(arr[i]);
+                ans.add(temp);
+            }
+        }
+        return ans;
+    }
+}
+```
+
+[3010. Divide an Array Into Subarrays With Minimum Cost I](https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/)
+```java
+class Solution {
+    public int minimumCost(int[] nums) {
+        int first = Integer.MAX_VALUE;
+        int second = Integer.MAX_VALUE;
+
+        for (int i = 1; i < nums.length; i++) {
+            int x = nums[i];
+            if (x < first) {
+                second = first;
+                first = x;
+            } else if (x < second) {
+                second = x;
+            }
+        }
+        
+        return nums[0] + first + second;
+    }
+}
+```
+
+[3637. Trionic Array I](https://leetcode.com/problems/trionic-array-i/)
+```java
+class Solution {
+    public boolean isTrionic(int[] nums) {
+        int i =1;
+        while(i < nums.length && nums[i] > nums[i-1]){
+            i++;
+        }
+        if(i == 1 || i == nums.length) return false;
+        while(i < nums.length && nums[i] < nums[i-1]){
+            i++;
+        }
+        if(i == nums.length) return false;
+        while(i < nums.length && nums[i] > nums[i-1]){
+            i++;
+        }
+        if(i == nums.length){
+            return true;
+        }
+        return false;
+    }
+}
+```
+
+
+### 2D Arrays / Matrix Questions
+
+[1582. Special Positions in a Binary Matrix](https://leetcode.com/problems/special-positions-in-a-binary-matrix/)
+#matrix #easy 
+```java
+class Solution {
+    public int numSpecial(int[][] mat) {
+        int ans = 0;
+        boolean isValid = false;
+        for(int i = 0; i< mat.length; i++){
+            isValid = false;
+            for(int j = 0; j < mat[0].length; j++){
+                if(mat[i][j] == 1){
+                    mat[i][j] = 0;
+                    if(check(mat, i, j)){
+                        ans++;
+                        isValid = true;
+                    }
+                    mat[i][j] = 1;
+                }
+            }
+            if(isValid){continue;}
+        }
+        return ans;
+    }
+    public boolean check(int[][] mat, int row, int col){
+        for(int i =0; i<mat.length; i++){
+            if(mat[i][col] == 1){
+                return false;
+            }
+        }
+        for(int j = 0; j< mat[0].length; j++){
+            if(mat[row][j] == 1){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+[1536. Minimum Swaps to Arrange a Binary Grid](https://leetcode.com/problems/minimum-swaps-to-arrange-a-binary-grid/)
+#array #matrix #greedy #medium 
+```java
+class Solution {
+    public int minSwaps(int[][] grid) {
+        int[] zeroCount = new int[grid.length];
+
+        for(int i = 0; i< grid.length; i++){
+            int j = grid[0].length - 1;
+            int count = 0;
+            while(j >= 0 && grid[i][j] == 0){
+                count++;
+                j--;
+            }
+            zeroCount[i] = count;
+        }
+
+        
+        int swapCount = 0;
+
+        for(int i = 0; i< grid.length; i++){
+            int required = grid.length - i -1;
+
+            if(zeroCount[i] >= required){
+                continue;
+            }
+
+            int j = i+1;
+            while(j < grid.length && zeroCount[j] < required){
+                j++;
+            }
+
+            if(j == grid.length) {
+                return -1;
+            }
+
+            // swap
+            while( j > i){
+                int temp = zeroCount[j];
+                zeroCount[j] = zeroCount[ j - 1];
+                zeroCount[j - 1] = temp;
+                j--;
+                swapCount++;
+            }
+        }
+
+        return swapCount;
+
+    }
+}
+```
+
+[36. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
+```java
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        int i =0;
+        int j = 0;
+
+        HashSet<Character> set = new HashSet<>();
+
+        // check rows
+        for(i = 0; i< 9; i++){
+            for(j = 0; j < 9; j++){
+                if(board[i][j] != '.'){
+                    if(set.contains(board[i][j])){
+                        return false;
+                    }
+                    set.add(board[i][j]);
+                }
+            }
+            set.clear();
+        }
+
+
+        // check columns
+        for(i = 0; i<9; i++){
+            for(j = 0; j< 9; j++){
+                if(board[j][i] != '.'){
+                    if(set.contains(board[j][i])){
+                        return false;
+                    }
+                    set.add(board[j][i]);
+                }
+            }
+            set.clear();
+        }
+
+        i = 0;
+        j = 0;
+
+        
+
+
+        // check grids
+        for(i =0; i<9; i+=3){
+            for(j = 0; j <9;j+=3){
+                boolean check = checkGrid(board, i, j, set);
+                if(check == false){
+                    return false;
+                }
+                set.clear();
+            }
+        }
+
+        return true;
+    }
+
+    public boolean checkGrid(char[][] board, int r, int c, HashSet<Character> set){
+        for(int i = r; i<r+3; i++){
+            for(int j = c; j< c+3; j++){
+                if(board[i][j] != '.'){
+                    if(set.contains(board[i][j])){
+                        return false;
+                    }
+                    set.add(board[i][j]);
+                }
+            }
+        }
+        return true;
+    }
+}
+```
+
+
+[48. Rotate Image](https://leetcode.com/problems/rotate-image/)
+```java
+class Solution {
+    public void rotate(int[][] matrix) {
+        // transpose the matrix
+        for(int i =0; i <matrix.length; i++){
+            for(int j =0; j< matrix[0].length; j++){
+                if(j > i){
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+        }
+
+        // reverse rows 
+        for(int i =0 ; i < matrix.length; i++){
+            for(int j = 0; j < matrix.length / 2; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][matrix[i].length - 1 - j];
+                matrix[i][matrix[i].length- 1 - j] = temp;
+            }
+        }
+    }
+}
+```
 
 
 [2326. Spiral Matrix IV](https://leetcode.com/problems/spiral-matrix-iv/)
@@ -583,299 +971,3 @@ class Solution {
 }
 ```
 
-
-[3487. Maximum Unique Subarray Sum After Deletion](https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/)
-```java
-class Solution {
-    public int maxSum(int[] nums) {
-        int maxElement = Integer.MIN_VALUE;
-        int positiveSum = 0;
-        Set<Integer> seen = new HashSet<>();
-
-        for (int num : nums) {
-            if (!seen.contains(num)) {
-                seen.add(num);
-                if (num > 0) {
-                    positiveSum += num;
-                }
-                maxElement = Math.max(maxElement, num);
-            }
-        }
-
-        return positiveSum > 0 ? positiveSum : maxElement;
-    }
-}
-
-```
-
-
-[118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
-```java
-class Solution {
-    public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> ans = new ArrayList<>();
-
-        for(int i = 0; i<numRows; i++){
-            ans.add(new ArrayList<Integer>());
-            for(int j = 0; j<i+1; j++){
-                ans.get(i).add(1);
-            }
-        }
-
-        for(int i = 2; i<numRows; i++){
-            for(int j = 1; j < i; j++){
-                int top = ans.get(i-1).get(j-1);
-                int left = ans.get(i-1).get(j);
-                ans.get(i).set(j, top+left);
-            }
-        }
-
-        return ans;
-    }
-}
-```
-
-
-[3477. Fruits Into Baskets II](https://leetcode.com/problems/fruits-into-baskets-ii/)
-```java
-class Solution {
-    public int numOfUnplacedFruits(int[] fruits, int[] baskets) {
-        int unplaced = 0;
-        boolean unp = true;
-        for(int i = 0; i<fruits.length; i++){
-            for(int j = 0; j< baskets.length; j++){
-                if(baskets[j] >= fruits[i]){
-                    baskets[j] = 0;
-                    unp = false;
-                    break;
-                }
-            }
-            if(unp){
-                unplaced++;
-            }
-            unp = true;
-        }
-        return unplaced;
-    }
-}
-```
-
-
-[2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/)
-```java
-class Solution {
-    public long zeroFilledSubarray(int[] nums) {
-        long total = 0;
-        long zeroCount = 0;
-        for(int i = 0; i<nums.length+1; i++){
-            if(i < nums.length && nums[i] == 0){
-                zeroCount++;
-            }
-            else{
-                if(zeroCount > 0){
-                    total += calculateCombinations(zeroCount);
-                    zeroCount = 0;
-                }
-            }
-        }
-        return total;
-    }
-
-    public long calculateCombinations(long count){
-        return count * (count + 1)/2;
-    }
-}
-```
-
-
-[2154. Keep Multiplying Found Values by Two](https://leetcode.com/problems/keep-multiplying-found-values-by-two/)
-```java
-class Solution {
-    public int findFinalValue(int[] nums, int original) {
-        Set<Integer> numSet = new HashSet<>();
-        for (int num : nums) {
-            numSet.add(num);
-        }
-        
-        while (numSet.contains(original)) {
-            original *= 2;
-        }
-        
-        return original;
-    }
-}
-```
-
-
-[36. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
-```java
-class Solution {
-    public boolean isValidSudoku(char[][] board) {
-        int i =0;
-        int j = 0;
-
-        HashSet<Character> set = new HashSet<>();
-
-        // check rows
-        for(i = 0; i< 9; i++){
-            for(j = 0; j < 9; j++){
-                if(board[i][j] != '.'){
-                    if(set.contains(board[i][j])){
-                        return false;
-                    }
-                    set.add(board[i][j]);
-                }
-            }
-            set.clear();
-        }
-
-
-        // check columns
-        for(i = 0; i<9; i++){
-            for(j = 0; j< 9; j++){
-                if(board[j][i] != '.'){
-                    if(set.contains(board[j][i])){
-                        return false;
-                    }
-                    set.add(board[j][i]);
-                }
-            }
-            set.clear();
-        }
-
-        i = 0;
-        j = 0;
-
-        
-
-
-        // check grids
-        for(i =0; i<9; i+=3){
-            for(j = 0; j <9;j+=3){
-                boolean check = checkGrid(board, i, j, set);
-                if(check == false){
-                    return false;
-                }
-                set.clear();
-            }
-        }
-
-        return true;
-    }
-
-    public boolean checkGrid(char[][] board, int r, int c, HashSet<Character> set){
-        for(int i = r; i<r+3; i++){
-            for(int j = c; j< c+3; j++){
-                if(board[i][j] != '.'){
-                    if(set.contains(board[i][j])){
-                        return false;
-                    }
-                    set.add(board[i][j]);
-                }
-            }
-        }
-        return true;
-    }
-}
-```
-
-
-[48. Rotate Image](https://leetcode.com/problems/rotate-image/)
-```java
-class Solution {
-    public void rotate(int[][] matrix) {
-        // transpose the matrix
-        for(int i =0; i <matrix.length; i++){
-            for(int j =0; j< matrix[0].length; j++){
-                if(j > i){
-                    int temp = matrix[i][j];
-                    matrix[i][j] = matrix[j][i];
-                    matrix[j][i] = temp;
-                }
-            }
-        }
-
-        // reverse rows 
-        for(int i =0 ; i < matrix.length; i++){
-            for(int j = 0; j < matrix.length / 2; j++){
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[i][matrix[i].length - 1 - j];
-                matrix[i][matrix[i].length- 1 - j] = temp;
-            }
-        }
-    }
-}
-```
-
-[1200. Minimum Absolute Difference](https://leetcode.com/problems/minimum-absolute-difference/)
-```java
-class Solution {
-    public List<List<Integer>> minimumAbsDifference(int[] arr) {
-        Arrays.sort(arr);
-        int min = Integer.MAX_VALUE;
-        for(int i = 1 ; i < arr.length;i++){
-            if(arr[i] - arr[i-1] < min){
-                min = arr[i] - arr[i-1];
-            }
-        }
-
-        List<List<Integer>> ans = new ArrayList<>();
-
-        for(int i = 1; i< arr.length ;i++){
-            if(arr[i] - arr[i-1] == min){
-                ArrayList<Integer> temp = new ArrayList<>();
-                temp.add(arr[i-1]);
-                temp.add(arr[i]);
-                ans.add(temp);
-            }
-        }
-        return ans;
-    }
-}
-```
-
-[3010. Divide an Array Into Subarrays With Minimum Cost I](https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/)
-```java
-class Solution {
-    public int minimumCost(int[] nums) {
-        int first = Integer.MAX_VALUE;
-        int second = Integer.MAX_VALUE;
-
-        for (int i = 1; i < nums.length; i++) {
-            int x = nums[i];
-            if (x < first) {
-                second = first;
-                first = x;
-            } else if (x < second) {
-                second = x;
-            }
-        }
-        
-        return nums[0] + first + second;
-    }
-}
-```
-
-[3637. Trionic Array I](https://leetcode.com/problems/trionic-array-i/)
-```java
-class Solution {
-    public boolean isTrionic(int[] nums) {
-        int i =1;
-        while(i < nums.length && nums[i] > nums[i-1]){
-            i++;
-        }
-        if(i == 1 || i == nums.length) return false;
-        while(i < nums.length && nums[i] < nums[i-1]){
-            i++;
-        }
-        if(i == nums.length) return false;
-        while(i < nums.length && nums[i] > nums[i-1]){
-            i++;
-        }
-        if(i == nums.length){
-            return true;
-        }
-        return false;
-    }
-}
-```

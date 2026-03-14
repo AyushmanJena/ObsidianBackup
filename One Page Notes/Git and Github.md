@@ -19,6 +19,9 @@ git checkout main
 git merge feature
 
 git log 
+
+
+// take pull from development and overwrite changes
 ```
 
 Commit Message Format : personal
