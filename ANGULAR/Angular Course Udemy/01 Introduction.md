@@ -36,3 +36,7 @@ Starting a local Development Server :
 or 
 `ng serve`
 
+Run angular app with local IP : 
+```
+ng serve --host your-local-ip-address
+```

@@ -80,7 +80,7 @@ public class ... {
 	public QuoteResponse getQuote(){
 		String api = API;
 		ResponseEntity<QuoteResponse> response = restTemplate.exchange(api, HttpMethod.GET, null, QuoteResponse.class); 
-		// (api call, http method, http request entity (e.g. header) here none, class)
+		// (api call url, http method, http request entity (e.g. header) here none, class)
 		QuoteResponse body = response.getBody();
 		return body;
 	}

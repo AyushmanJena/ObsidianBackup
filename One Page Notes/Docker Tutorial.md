@@ -1,47 +1,96 @@
-`docker run -it ubuntu `
-checks if you have a ubuntu image locally
-otherwise it downloads the ubuntu from hub.docker.com
-it creates a container 
-container behaves as a virtual machine but lighter and more portable
-now you should be in the container
-ctrl + d to stop the container
+Tutorial by Piyush Garg : https://www.youtube.com/watch?v=31k6AtW-b3Y
+# CONTINUE 31:31
 
+Docker is a platform that allows developers to build, package and run applications inside containers.
+
+**Docker allows you to package an application with all its dependencies and run it consistently across different environments using containers.**
+
+Docker solves the problem of replicating same project on multiple environments.
+
+Docker solves problems like: 
+1. Inconsistent environment due to which code works on one machine but fails on another
+2. Dependency/ version conflicts 
+3. Time consuming project setup
+4. Configuring same environment for cloud deployment
+
+#### Using Docker
+Install Docker CLI & Docker Desktop
+
+`docker -v`
+Checks docker version on your system
+
+`docker run -it ubuntu`
+checks if you have a ubuntu image locally
+if not, then it downloads the ubuntu image from hub.docker.com
+it creates a container and runs it.
+
+You can check the ubuntu image in docker as well.
+
+inside the terminal it shows like : 
+```
+root@234gjhg2j3h4324kh:/#
+```
+- Now you are inside the container 
+- Any commands you will run will be run inside ubuntu terminal
+- The random string is container id
+
+#### Containers
+container behaves as a virtual machine but lighter and more portable
+Containers are lightweight isolated processes that share the host OS kernel, unlike virtual machines which include a full OS.
+
+now you should be in the container
+ctrl + d to exits the container shell. Use `docker stop <container>` to stop the container explicitly
+
+Docker Containers can have different versions of tools installed than your local machine.
+For example you machine could have node version 19 while a container can have node version 21.
+Multiple containers can have multiple versions running.
+
+#### Images
 images behave as an os
-the containers run the images
-the containers are isolated from each other untill we want it to
+Docker images are read-only templates containing application code, runtime, libraries, and dependencies.
+- the containers run the images
+- the containers are isolated from each other (until we want it to communicate)
 
 `docker images `
 or `docker image ls`
-lists all the images on the mahine
+lists all the images on the machine
 
 `docker container ls`
 lists all the docker running containers
--a : all containers
+`docker container ls -a` : list all containers (running and not running)
 
 `docker start <container name>` : to start the container
 
 `docker stop <container name>` to stop the container
 
-`docker run` : new container
+`docker run` : spin up a new container
 
 `docker run -it <image_name>`
 new container with the given image 
 
-docker run -it --name container_name image_name
+`docker run -it --name <container_name> <image_name>`
 give a name to your container
 
-execute a command in a container
 `docker exec <container name> <command to execute>`
+execute a command in a container
 but this command runs the command and return back to the host machine 
 
-`docker exec - it <container name> bash`
+`docker exec -it <container name> bash`
 it : interactive
 it joins the host terminal with the container terminal
 
 
+Note : 
+Instead of installing a vanilla image like ubuntu and installing node on it 
+you can also install a node image and continue further from there
+Find the list of available docker images on hub.docker.com
+ex : `docker run -it node`
+Check for docker verified and docker official images 
+
 ## Port Mapping
 If you are running an application on a port in a container, you cannot access the application from the host machine at that port.
 In order to do that we need to expose the ports
+Containers have isolated networking. To access services from the host, ports must be mapped using `-p`.
 
 Command :
 `docker run -it -p 1025:1025 image` 
@@ -117,7 +166,8 @@ RUN apt-get install -y nodejs
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
 
-RUN cd app && npm install
+WORKDIR /app  
+RUN npm install
 
 COPY main.js /app/main.js
 
@@ -143,7 +193,7 @@ Ignore files :
 > .dockerignore
  ignores files you do not want to copy like node_modules
 
-use .dokerignore if you are using COPY . . command
+use `.dockerignore` if you are using COPY . . command
 
 Instead of mentioning /app/ everytime to copy or perform directory operations manually 
 set the working directory 
@@ -220,6 +270,8 @@ all the networks and drivers available locally
 
 Note : While using bridge you need to expose ports but while using host network we don't need to expose ports manually because they use the host machine ports automatically
 
+Host network mode removes isolation and directly uses host ports — not recommended for production.
+
 `--network=none`
 This container will not have access to internet
 
@@ -250,7 +302,7 @@ The container will have access to only that folder of the host machine
 -v : Volume mapping 
 example : 
 ```
-docker run -it -v /users/ayush/desktop/test-folder : /home/abc ubuntu
+docker run -it -v /users/ayush/desktop/test-folder:/home/abc ubuntu
 ```
 
  any changes made in the container will also be reflected in the root device folder and vice versa
@@ -287,12 +339,12 @@ RUN tsc -p . # build
 FROM ubuntu as runner
 
 WORKDIR app/
-copy --from=build app/ /
+copy --from=build /app /app
 ```
 
 two stages are build and runner 
 packages like typescript and others will not be forwarded to the runner stage
-You can have multiple such stages 
+You can have multiple such stages
 
 
 

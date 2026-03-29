@@ -1,6 +1,7 @@
 ## Note: 
 Need to complete Graphs playlist by STRIVER
 
+[[#Dijkstra's Algorithm]]
 #### Matrix :
 
 |     | A   | B   | C   |
@@ -780,11 +781,271 @@ ans = 2
 
 Approach : 
 add a hashset to store all arraylist of  (row, col) 
+`{(0,0), (0,1), (1,0)}` -> 1st island
+we need to store it in such a way that all indices have same value when stored, but maintain the order
+so we take the top left element as the base (0,0) and the other elements of the same island in respect to it
+
+for 4th island : subtract the base from all elements 
+(2,3) - (2,3) = (0,0) ; (2,4) - (2,3) = (0,1) ; (3,3) - (2,3) = (1,0) 
+so the 4th island in the above matrix would be `{(0,0), (0,1), (1,0)}`  as well
+note : make sure you follow the same pattern of traversal for each island
+
+Store the arraylist into a set data structure
+
+Algorithm : 
+First find all the islands
+Traverse through the entire matrix and perform DFS to find all the islands in the matrix
+For found 1 While traversing store the path in a list data structure : 
+			first push the elements in the same row into stack
+			then push the elements below it connected to the stacks
+			also make sure to make them uniform by subtracting the base
+Maintain same traversal order (Up -> Right -> Down -> Left) for consistency
+Mark visited cells (either using a visited array or by modifying grid)
+After DFS completes : Add relative coordinates to set
+The size of set is the answer
+
+```java
+public class DistinctIslands {
+	public static int countDistinctIslands(int[][] grid){
+		int n = grid.length;
+		int m = grid[0].length;
+		
+		boolean[][] visited = new boolean[n][m];
+		Set<List<String>> set = new HashSet<>();
+		
+		for(int i = 0; i<n; i++){
+			for(int j = 0; j < m; j++){
+				if(grid[i][j] == 1 && !visited[i][j]){
+					List<String> shape = new ArrayList<>();
+					dfs(grid, visited, i, j, i, j, shape);
+					set.add(shape);
+				}
+			}
+		}
+		
+		return set.size();
+	}
+	
+	private static void dfs(int[][] grid, boolean[][] visited, int r, int c, int baseR, int baseC, List<String> shape){
+		int n = grid.length;
+		int m = grid[0].length;
+		
+		visited[r][c] = true;
+		
+		// store relative position
+		shape.add((r - baseR) + "," + (c - baseC));
+		
+		// fixed direction order : Up, Right, Down, Left
+		// Up
+		if (r - 1 >= 0 && grid[r - 1][c] == 1 && !visited[r - 1][c]) {  
+			dfs(grid, visited, r - 1, c, baseR, baseC, shape);  
+		}
+		// Right  
+		if (c + 1 < m && grid[r][c + 1] == 1 && !visited[r][c + 1]) {  
+			dfs(grid, visited, r, c + 1, baseR, baseC, shape);  
+		}  
+		  
+		// Down  
+		if (r + 1 < n && grid[r + 1][c] == 1 && !visited[r + 1][c]) {  
+			dfs(grid, visited, r + 1, c, baseR, baseC, shape);  
+		}  
+		  
+		// Left  
+		if (c - 1 >= 0 && grid[r][c - 1] == 1 && !visited[r][c - 1]) {  
+			dfs(grid, visited, r, c - 1, baseR, baseC, shape);  
+		}
+	}
+}
+```
+
+
+### Bipartite Graph
+- It says if you color the graph with 2 colors, such that no two adjacent nodes have same color.
+```
+			g - y 
+		  /       \ 
+y - g - y           g - y - g
+          \        /
+             g - y
+             
+The above graph is bipartite graph 
+
+
+			  y 
+		  /       \ 
+y - g - y           g - y - g
+          \        /
+             g - y
+             
+Not Bipartite graph : two yellows are adjacent
+```
+
+Observations : 
+- A linear graph (a graph with no cycles) is always Bipartite
+- Any graph with even cycle length can also be Bipartite
+- So any graph with odd length cycle will not be bipartite
+
+Approach : 
+Create a visited array 
+-1 means not colored and 0 and 1 are the two colors
+
+Algorithm :
+**USING BFS**
+Put the first node in the queue, color it 0 in visited
+Pop the first node and get neighbours from its adjacency list
+	- if neighbour is unvisited and has the opposite color continue
+	- all adjacent nodes will get the opposite of the parent node i.e. 1
+	- push all the neighbours into the queue
+	- repeat 
+
+at any point if you find a node which has a neighbour visited and has the same color as it, then return false.
+
+```java
+class Solution {
+	public boolean isBipartite(int[][] graph){
+		int n = graph.length;
+		int[] colors = new int[n];
+		Arrays.fill(colors, -1);
+		
+		for(int i = 0; i < n; i++){
+			if(colors[i] == -1){
+				if(!bfs(i, graph, colors)){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean bfs(int min, int[][] graph, int[] colors){
+		Queue<Integer> q = new LinkedList<>();
+		colors[min] = 0;
+		q.add(min);
+		while(!q.isEmpty()){
+			int node = q.poll();
+			
+			for(int adjNode: graph[node]){
+				if(colors[adjNode] == -1){
+					colors[adjNode] = colors[node] == 1? 0 : 1;
+					q.add(adjNode);
+				}
+				else if(colors[adjNode] == colors[node]){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+}
+```
+
+
+**USING DFS**
+Algorithm :
+- Build a visited matrix and mark all initially with -1
+- perform dfs on the first node and pass the color 0
+- find all the adjacent nodes and give them the opposite color i.e. 1 
+	for each adjacent node recursively perform dfs while not going back to the visited nodes
+	if at any point there is a visited node whose color matches the current node return false
+
+```java
+public boolean isBipartiteDFS(int[][] graph){
+	int[] colors = new int[graph.length];
+	Arrays.fill(colors, -1);
+	return dfs(0, graph, colors, 0);
+}
+
+public boolean dfs(int node, int[][] graph, int[] colors, int cValue){
+	colors[node] = cValue;
+	
+	for(int i = 0; i<graph[node].length; i++){
+		int neighbour = graph[node][i];
+		if(colors[neighbour] ==  cValue){
+			return false;
+		}
+
+		if(colors[neighbour] == -1){
+			if(!dfs(neighbour, graph, colors, 1 - color)) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+```
+
+
+### How to detect Cycle in Directed Graph using DFS
+![[assets/Pasted image 20260328111947.png]]
+in the diagram `8,9,10` forms a cycle however `3,4,5,7` does not form a cycle
+
+Why we cannot use normal dfs technique to detect cycles in DIRECTED GRAPHS ?
+Because while traversing we go 3 -> 4 -> 5 > 6 -> then back to 5, 4, 3  -> 7 -> 5
+since 5 is visited we think there is a cycle, but since the graph is directed that is not a cycle.
+For it to be a cycle the node has to be visited again in the same path
+
+Therefore we will use backtracking
+
+Approach : 
+We will take two visited arrays : visited and pathVisited of n size
+and perform traversal component wise
+```
+for( i = 1 -> v){
+	if(!visited[i] ){ 
+		if(dfs(i) == true) return true; // if exists cycle
+	}
+}
+```
+
+**Algorithm :**
+find a node traverse it in dfs
+mark it visited and pathVisited  
+for all the unvisited neighbours perform dfs recursively
+	mark them all visited and path visited
+	return true if no more neighbours
+	before returning from the recursive call mark current node as **not pathVisited** : false, visited remains marked true
+if at any point there is a node both visited and pathVisited, cycle is found. return true;
+
+```java
+public boolean detectCycleDirectedGraph(int[][] adj){
+	boolean[] visited = new boolean[adj.length];
+	boolean[] pathVisited = new boolean[adj.length];
+
+	for(int i = 0 ; i < adj.length; i++){
+		if(!visited[i]){
+			if(dfs(adj, i, visited, pathVisited)){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+public boolean dfs(int[][] adj, int node, boolean[] visited, boolean[] pathVisited){
+	visited[node] = true;
+	pathVisited[node] = true;
+	int[] neighbours = adj[node];
+	for(int neighbour : neighbours){
+		if(pathVisited[neighbour]){
+			return true;
+		}
+		if(!visited[neighbour]){
+			if(dfs(adj, neighbour, visited, pathVisited)){
+				return true;
+			}
+		}
+	}
+	pathVisited[node] = false;
+	return false;
+}
+```
 
 
 
 
 # Dijkstra's Algorithm
+
+Algorithm:
 ```
 for each vertex v : 
 	dist[v]= max_value

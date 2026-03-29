@@ -593,6 +593,92 @@ Continue : https://www.youtube.com/watch?v=QGfn7JeXK54&list=PLgUwDviBIf0qUlt5H_k
 
 # LEETCODE QUESTIONS 
 
+[3070. Count Submatrices with Top-Left Element and Sum Less Than k](https://leetcode.com/problems/count-submatrices-with-top-left-element-and-sum-less-than-k/)
+#medium #dp #matrix 
+```java
+class Solution {
+    public int countSubmatrices(int[][] grid, int k) {
+        int[][] dp = new int[grid.length][grid[0].length];
+        int ans = 0 ;
+
+        for(int i = 0; i < grid.length; i++){
+            for(int j  =0 ; j< grid[0].length; j++){
+                int sum = 0;
+
+                if(i > 0){
+                    sum += dp[i-1][j];
+                }
+                if(j > 0){
+                    sum += dp[i][j-1];
+                }
+                if(i > 0 && j > 0){
+                    sum -= dp[i-1][j-1]; // to avoid overlapping 
+                }
+
+                sum += grid[i][j];
+                dp[i][j] = sum;
+                if(sum <= k){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+
+[3212. Count Submatrices With Equal Frequency of X and Y](https://leetcode.com/problems/count-submatrices-with-equal-frequency-of-x-and-y/)
+#medium #matrix #dp  
+```java
+class Solution {
+    public int numberOfSubmatrices(char[][] grid) {
+        int[][] x = new int[grid.length][grid[0].length];
+        int[][] y = new int[grid.length][grid[0].length];
+        for(int i =0; i<grid.length; i++){
+            for(int j = 0; j< grid[0].length; j++){
+                int xCount = 0;
+                int yCount = 0;
+
+                if(i > 0){
+                    xCount += x[i-1][j];
+                    yCount += y[i-1][j];
+                }
+                if(j > 0){
+                    xCount += x[i][j-1];
+                    yCount += y[i][j-1];
+                }
+                if(i > 0 && j > 0){
+                    xCount -= x[i-1][j-1];
+                    yCount -= y[i-1][j-1];
+                }
+
+                if(grid[i][j] == 'X'){
+                    x[i][j] = xCount + 1;
+                    y[i][j] = yCount;
+                }
+                else if(grid[i][j] == 'Y'){
+                    x[i][j] = xCount;
+                    y[i][j] = yCount + 1;
+                }else{
+                    x[i][j] = xCount;
+                    y[i][j] = yCount;
+                }
+            }
+        }
+        int ans = 0;
+
+        for(int i =0; i<grid.length; i++){
+            for(int j = 0; j< grid[0].length; j++){
+                if(x[i][j] == y[i][j] && x[i][j] != 0){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+
 [518. Coin Change II](https://leetcode.com/problems/coin-change-ii/)
 ```java
 class Solution {

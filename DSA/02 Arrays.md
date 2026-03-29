@@ -1,5 +1,7 @@
 # LeetCode
 
+[[#2D Arrays / Matrix Questions]]
+
 [3379. Transformed Array](https://leetcode.com/problems/transformed-array/)
 ```java
 class Solution {
@@ -624,6 +626,30 @@ class Solution {
 
 ### 2D Arrays / Matrix Questions
 
+[3643. Flip Square Submatrix Vertically](https://leetcode.com/problems/flip-square-submatrix-vertically/)
+#matrix #twopointer #easy 
+```java
+class Solution {
+    public int[][] reverseSubmatrix(int[][] grid, int x, int y, int k) {
+        int top = x;
+        int bottom = x + k -1;
+
+        while(top < bottom){
+            for(int i = y; i < y + k; i++){
+                int temp = grid[top][i];
+                grid[top][i] = grid[bottom][i];
+                grid[bottom][i] = temp;
+            }
+            top++;
+            bottom--;
+        }
+
+        return grid;
+    }
+}
+```
+
+
 [1582. Special Positions in a Binary Matrix](https://leetcode.com/problems/special-positions-in-a-binary-matrix/)
 #matrix #easy 
 ```java
@@ -656,6 +682,39 @@ class Solution {
         for(int j = 0; j< mat[0].length; j++){
             if(mat[row][j] == 1){
                 return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+[2946. Matrix Similarity After Cyclic Shifts](https://leetcode.com/problems/matrix-similarity-after-cyclic-shifts/)
+#easy #matrix #twopointer 
+```java
+class Solution {
+    public boolean areSimilar(int[][] mat, int k) {
+
+        int n = mat[0].length;
+
+        int evenStart = ((-k % n) + n) % n;
+        int oddStart = (k % n);
+
+        for(int i = 0; i<mat.length; i++){
+            int even = evenStart;
+            int odd = oddStart;
+            for(int j = 0; j < n; j++){
+                if(i%2 == 0){
+                    if(mat[i][j] != mat[i][even % n]){
+                        return false;
+                    } 
+                    even++;
+                }else{
+                    if(mat[i][j] != mat[i][odd % n]){
+                        return false;
+                    } 
+                    odd++;
+                }
             }
         }
         return true;
@@ -711,6 +770,100 @@ class Solution {
 
         return swapCount;
 
+    }
+}
+```
+
+[3567. Minimum Absolute Difference in Sliding Submatrix](https://leetcode.com/problems/minimum-absolute-difference-in-sliding-submatrix/)
+#medium #matrix #sorting 
+```java
+class Solution {
+    public int[][] minAbsDiff(int[][] grid, int k) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        int[][] answer = new int[m-k+1][n-k+1];
+
+        if(k == 1){
+                    return answer;
+                }
+
+        for(int i = 0; i <= m - k; i++){
+            for(int j = 0; j<= n- k; j++){
+
+                
+
+                ArrayList<Integer> list = new ArrayList<>();
+
+                // bruteforce
+                for(int x = i; x < i + k; x++){
+                    for(int y = j; y < j + k; y++){
+                        list.add(grid[x][y]);
+                    }
+                }
+                Collections.sort(list);
+
+                int minDiff = Integer.MAX_VALUE;
+
+                for(int temp = 1; temp < list.size(); temp++){
+
+                    if(!list.get(temp).equals(list.get(temp - 1))){
+                        minDiff = Math.min(minDiff, Math.abs(list.get(temp) - list.get(temp - 1)));
+                    }
+                }
+                if(minDiff == Integer.MAX_VALUE)
+                    minDiff = 0;
+
+                answer[i][j] = minDiff;
+                
+            }
+        }
+        return answer;
+    }
+}
+```
+
+[1886. Determine Whether Matrix Can Be Obtained By Rotation](https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/)
+#easy #matrix #array 
+```java
+class Solution {
+    public boolean findRotation(int[][] mat, int[][] target) {
+        int n = mat.length - 1;
+        boolean orientation = true; // true -> hori / false- > vert
+        // start i, start j, end i, end j, i change, j change
+        return traverse(0, 0, 1, 1,true, mat, target) || 
+        traverse(0, n, 1,-1, false, mat, target) ||
+        traverse(n, n, -1, -1, true, mat, target) ||
+        traverse(n, 0, -1, 1, false, mat, target);
+    }
+
+    public boolean traverse(int starti, int startj, int ichange, int jchange, boolean orientation, int[][] mat, int[][] target){
+        int tempI = starti;
+        int tempJ = startj;
+        if(orientation){ // move horizontally
+            for(int i = 0; i<mat.length; i++){
+                startj = tempJ;
+                for(int j = 0; j < mat.length; j++){
+                    if(mat[i][j] != target[starti][startj]){
+                        return false;
+                    }
+                    startj += jchange;
+                }
+                starti += ichange; 
+            }
+        }else{
+            for(int i = 0; i < mat.length; i++){
+                starti = tempI;
+                for(int j = 0; j< mat.length; j++){
+                    if(mat[i][j] != target[starti][startj]){
+                        return false;
+                    }
+                    starti += ichange;
+                }
+                startj += jchange;
+            }
+        }
+        return true;
     }
 }
 ```
@@ -971,3 +1124,45 @@ class Solution {
 }
 ```
 
+[1594. Maximum Non Negative Product in a Matrix](https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/)
+#medium #matrix #dp #greedy 
+```java
+class Solution {
+    public int maxProductPath(int[][] grid) {
+        long[][] maxDP = new long[grid.length][grid[0].length];
+        long[][] minDP = new long[grid.length][grid[0].length];
+        maxDP[0][0] = grid[0][0];
+        minDP[0][0] = grid[0][0];
+
+        for(int i =0; i < grid.length; i++){
+            for(int j = 0; j < grid[0].length ; j++){
+                if(i == 0 && j == 0) continue;
+                long tMax = Integer.MIN_VALUE;
+                long tMin = Integer.MAX_VALUE;
+                if(i > 0){
+                    tMax = Math.max(tMax, maxDP[i-1][j] * grid[i][j]);
+                    tMax = Math.max(tMax, minDP[i-1][j] * grid[i][j]);
+                    
+                    tMin = Math.min(tMin, maxDP[i-1][j] * grid[i][j]);
+                    tMin = Math.min(tMin, minDP[i-1][j] * grid[i][j]);
+                }if(j > 0){
+                    tMax = Math.max(tMax, maxDP[i][j-1] * grid[i][j]);
+                    tMax = Math.max(tMax, minDP[i][j-1] * grid[i][j]);
+                    
+                    tMin = Math.min(tMin, maxDP[i][j-1] * grid[i][j]);
+                    tMin = Math.min(tMin, minDP[i][j-1] * grid[i][j]);
+                }
+
+                maxDP[i][j] = tMax;
+                minDP[i][j]= tMin;
+            }
+        }
+
+        long ans = maxDP[grid.length-1][grid[0].length - 1];
+        if(ans < 0){
+            return -1;
+        }
+        return (int)(ans % 1000000007);
+    }
+}
+```
