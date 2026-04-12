@@ -173,6 +173,81 @@ class Solution {
 ```
 
 
+[3740. Minimum Distance Between Three Equal Elements I](https://leetcode.com/problems/minimum-distance-between-three-equal-elements-i/)
+#array #hash #easy 
+Your observation is the key to this problem. The distance formula is: Distance = abs(i - j) + abs(j - k) + abs(k - i)  
+Let's find a good tuple (i, j, k) and sort the indices, calling them a, b, c such that a < b < c .abs(i - j) abs(j - k) abs(k - i)  
+When we plug them in, the formula becomes: Distance = abs(a - b) + abs(b - c) + abs(c - a) Since we know a < b < c, we can remove the absolute value signs:  
+abs(a - b) = b - a  
+abs(b - c) = c - b  
+abs(c - a) = c - a  
+Now, let's add them together: Distance = (b - a) + (c - b) + (c - a)  
+The b and -b terms cancel each other out: Distance = -a + c + c - a Distance = 2 * (c - a)  
+This is a crucial simplification. The distance of any good tuple is just 2 times the difference between its largest and smallest index. The middle index doesn't affect the final distance at all.
+```java
+class Solution {
+    public int minimumDistance(int[] nums) {
+        int ans = Integer.MAX_VALUE;
+        HashSet<Integer> set = new HashSet<>();
+        for(int i =0 ; i<nums.length; i++){
+            int k = nums[i];
+            if(set.contains(k)){
+                continue;
+            }
+            set.add(k);
+            int j = i;
+            ArrayList<Integer> list = new ArrayList<>();
+            while(j < nums.length){
+                if(nums[j] == k){
+                    list.add(j);
+                }
+                j++;
+            }
+            if(list.size() <= 2) continue;
+            for(int l = 2; l < list.size(); l++){
+                ans = Math.min(ans, 2 * (list.get(l) - list.get(l-2)));
+            }
+        }
+        if(ans == Integer.MAX_VALUE) return -1;
+        return ans;
+    }
+}
+```
+
+[3741. Minimum Distance Between Three Equal Elements II](https://leetcode.com/problems/minimum-distance-between-three-equal-elements-ii/)
+#medium #arrays #hash #slidingwindow 
+```java
+class Solution {
+    public int minimumDistance(int[] nums) {
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+
+        for(int i =0; i<nums.length; i++){
+            if(map.containsKey(nums[i])){
+                map.get(nums[i]).add(i);
+            }else{
+                map.put(nums[i], new ArrayList<>());
+                map.get(nums[i]).add(i);
+            }
+        }
+
+        int ans = Integer.MAX_VALUE;
+
+        for(int k : map.keySet()){
+            int size = map.get(k).size();
+            for(int i = 2; i<size; i++){
+                ans = Math.min(ans, 2 * (map.get(k).get(i) - map.get(k).get(i-2)) );
+            }
+        }
+
+        if(ans == Integer.MAX_VALUE)return -1;
+
+        return ans;
+    }
+}
+```
+
+
+
 [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
 ```java
 class Solution {

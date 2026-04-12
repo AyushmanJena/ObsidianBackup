@@ -59,7 +59,7 @@ class Solution {
 ```
 
 [1545. Find Kth Bit in Nth Binary String](https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/)
-#bitmanipulation #string #medium 
+#bitmanipulation #strings  #medium 
 ```java
 class Solution {
     public char findKthBit(int n, int k) {
@@ -344,7 +344,7 @@ class Solution {
 ```
 
 [1404. Number of Steps to Reduce a Number in Binary Representation to One](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/)
-#bitmanipulation #string 
+#bitmanipulation #strings 
 - this cannot be solved using basic looping over the number converted using parseInt() since the limit can exceed integer value
 - So it is done using string manipulation
 ```java
@@ -362,6 +362,39 @@ class Solution {
             }
         }
         return st + c;
+    }
+}
+```
+
+[2840. Check if Strings Can be Made Equal With Operations II](https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-ii/)
+#strings #hash #sorting 
+```java
+class Solution 
+{
+    public boolean checkStrings(String s1, String s2) 
+    {
+        if (s1.length() != s2.length()) return false;
+
+        int[] even1 = new int[26];
+        int[] odd1  = new int[26];
+        int[] even2 = new int[26];
+        int[] odd2  = new int[26];
+
+        for (int i = 0; i < s1.length(); i++) 
+        {
+            int idx1 = s1.charAt(i) - 'a';
+            int idx2 = s2.charAt(i) - 'a';
+
+            if (i % 2 == 0) {
+                even1[idx1]++;
+                even2[idx2]++;
+            } else {
+                odd1[idx1]++;
+                odd2[idx2]++;
+            }
+        }
+
+        return Arrays.equals(even1, even2) && Arrays.equals(odd1, odd2);
     }
 }
 ```

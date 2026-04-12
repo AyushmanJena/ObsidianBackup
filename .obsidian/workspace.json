@@ -43,26 +43,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "One Page Notes/Docker Tutorial.md",
+                "file": "DSA/02 Arrays.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Docker Tutorial"
-            }
-          },
-          {
-            "id": "1db90cf953334080",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ANGULAR/Angular Course Udemy/01 Introduction.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "01 Introduction"
+              "title": "02 Arrays"
             }
           }
         ],
@@ -98,7 +84,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "file:Do",
+                "query": "@PutMapping",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -123,8 +109,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 276.5,
-    "collapsed": true
+    "width": 276.5
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -208,40 +193,40 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e91709d5b8af57bf",
+  "active": "f20b3e03675258fc",
   "lastOpenFiles": [
+    "SPRING BOOT NOTES/Additional Java/JDBC Tutorial.md",
+    "SPRING BOOT NOTES/Additional Notes/Exposing an Endpoint.md",
+    "SPRING BOOT NOTES/Additional Notes/Spring Boot Application Unit Testing.md",
+    "SPRING BOOT NOTES/Additional Notes/External API Calls.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U11-Additional Spring Boot 4.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U10-.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U09-Advanced JPA-Hibernate Mappings.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U08-Spring MVC Security.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U07-Thymeleaf CRUD App IMP.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U06-Thymeleaf Introduction.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U04-REST APIs.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
     "ANGULAR/Angular Course Udemy/01 Introduction.md",
+    "DSA/02 Arrays.md",
+    "DSA/DATA STRUCTURES/Basic Methods.md",
+    "One Page Notes/Docker Tutorial.md",
+    "DSA/03 Strings.md",
     "ANGULAR/Angular Course Udemy/00 Readme.md",
     "DSA/12 Graphs 🟢.md",
-    "One Page Notes/Docker Tutorial.md",
     "DSA/assets/Pasted image 20260328111947.png",
     "DSA/assets",
     "SPRING BOOT NOTES/Additional Notes/Swagger Dependencies.md",
     "DSA/09 Trees.md",
     "IONIC/02 Basic Builds.md",
     "IONIC/01 Introduction.md",
-    "DSA/02 Arrays.md",
     "SPRING BOOT NOTES/Additional Notes/Spring Boot Docker.md",
-    "SPRING BOOT NOTES/Additional Notes/Spring Boot Application Unit Testing.md",
-    "SPRING BOOT NOTES/Additional Notes/External API Calls.md",
-    "SPRING BOOT NOTES/Additional Notes/Exposing an Endpoint.md",
     "ANGULAR/Angular Course Udemy/101 Forms.md",
-    "One Page Notes/Git and Github.md",
-    "DSA/03 Strings.md",
     "SPRING BOOT NOTES/Additional Notes/assets/Pasted image 20260322002058.png",
     "SPRING BOOT NOTES/Additional Notes/assets",
-    "SPRING BOOT NOTES/Spring Boot Course/U11-Additional Spring Boot 4.md",
-    "DSA/15 Dynamic Programming 🟢.md",
-    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
-    "ReadMe.md.md",
-    "JavaScript Notes/React Tutorial/incomplete React Notes.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U01-Introduction.md",
-    "DSA/03 Sorting Algorithms.md",
-    "DSA/01 Basics.md",
     "One Page Notes/assets/example-diagram.png",
     "One Page Notes/assets/git picture 2.png",
-    "SPRING BOOT NOTES/Spring Boot Course/U10-.md",
     "MASTERING JAVA/assets/Screenshot (87).png",
     "MASTERING JAVA/assets",
     "IONIC/assets/Screenshot (87).png",

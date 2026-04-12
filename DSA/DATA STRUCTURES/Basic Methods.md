@@ -34,6 +34,7 @@ ArrayList<Integer> arr = new ArrayList<>()
 arr.add(val)
 arr.add(index, val)
 arr.remove(index)
+arr.get(index)
 ```
 
 ### LinkedList (in built)
