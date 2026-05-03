@@ -242,7 +242,7 @@ class Solution {
 ```
 
 [1461. Check If a String Contains All Binary Codes of Size K](https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/)
-#medium #slidingwindow #hash #string 
+#medium #slidingwindow #hash #strings 
 - since the number of distinct sub-strings should be exactly 2<sup>k</sup>
 ```java
 class Solution {

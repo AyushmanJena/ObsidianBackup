@@ -775,3 +775,53 @@ class Solution {
     }
 }
 ```
+
+[2463. Minimum Total Distance Traveled](https://leetcode.com/problems/minimum-total-distance-traveled/)
+#dp #array #hard 
+```java
+class Solution {
+    public long minimumTotalDistance(List<Integer> robot, int[][] factory) {
+        int factoryCount = 0;
+        for(int i = 0; i < factory.length; i++){
+            factoryCount += factory[i][1];
+        }
+        int[] factories = new int[factoryCount];
+        int k = 0;
+        for(int i = 0; i < factory.length; i++){
+            for(int j = 0; j < factory[i][1]; j++){
+                factories[k] = factory[i][0];
+                k++;
+            }
+        }
+        Arrays.sort(factories);
+        Collections.sort(robot);
+
+        
+        long[][] dp = new long[factories.length][robot.size()];
+        for(long[] d: dp){
+            Arrays.fill(d, -1);
+        }
+
+        return helper(factories.length - 1, robot.size() - 1, robot, factories, dp);
+    }
+
+    public long helper(int x, int y, List<Integer> robot, int[] factories, long[][] dp){
+        if(y < 0) return 0; // all robots assigned
+        if(x < 0) return Long.MAX_VALUE;
+
+        if(dp[x][y]  != -1){
+            return dp[x][y];
+        }
+
+        long notAssigned = helper(x-1, y,robot, factories, dp);
+
+        long assigned = helper(x-1, y-1, robot, factories, dp);
+        if(assigned != Long.MAX_VALUE){
+            assigned += Math.abs(robot.get(y) - factories[x]);
+        }
+
+        dp[x][y]= Math.min(notAssigned, assigned);
+        return dp[x][y];
+    }
+}
+```

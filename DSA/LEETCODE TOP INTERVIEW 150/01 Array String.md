@@ -95,6 +95,7 @@ class Solution {
 ```
 
 [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+#easy #array 
 ```java
 class Solution {
     public int maxProfit(int[] prices) {
@@ -116,6 +117,8 @@ class Solution {
 ```
 
 [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+#medium #array #greedy 
+intuition : you can sell the stock on a day and buy it again if you have a greater value next day.
 ```java
 class Solution {
     public int maxProfit(int[] prices) {
@@ -131,6 +134,8 @@ class Solution {
 ```
 
 [55. Jump Game](https://leetcode.com/problems/jump-game/)
+#medium #array #greedy
+Intuition : If at any point you reach 0 as the maximum and  cannot go any further, return false
 ```java
 class Solution {
     public boolean canJump(int[] nums) {
@@ -150,6 +155,7 @@ class Solution {
 ```
 
 [45. Jump Game II](https://leetcode.com/problems/jump-game-ii/)
+#medium #array #greedy
 ```java
 class Solution {
     public int jump(int[] nums) {

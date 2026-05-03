@@ -1,5 +1,33 @@
 # LeetCode
 
+[2833. Furthest Point From Origin](https://leetcode.com/problems/furthest-point-from-origin/)
+#easy #strings 
+```java
+class Solution {
+    public int furthestDistanceFromOrigin(String moves) {
+        int lCount = 0;
+        int rCount = 0;
+        int blank = 0;
+        for(int i =0 ;i <moves.length(); i++){
+            char ch = moves.charAt(i);
+            if(ch == 'L'){
+                lCount++;
+            }else if(ch == 'R'){
+                rCount++;
+            }else{
+                blank++;
+            }
+        }
+
+        if(lCount > rCount){
+            return lCount + blank - rCount;
+        }else{
+            return rCount + blank - lCount;
+        }
+    }
+}
+```
+
 [696. Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/)
 #twopointer #strings
 ```java

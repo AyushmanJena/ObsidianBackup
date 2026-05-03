@@ -1041,9 +1041,339 @@ public boolean dfs(int[][] adj, int node, boolean[] visited, boolean[] pathVisit
 ```
 
 
+### Find Eventual Safe States
+A directed graph with V vertices and E edges and given adjacency list adj.
+Each node of graph is labelled with distinct integer in range 0 -> V-1.
+
+A node is a terminal node, if there are no outgoing edges. A node is a safe node if every possible path starting from that node leads to a terminal node.
+Return array containing all the safe nodes of the graph. (return ans in ascending order)
+
+##### a) Solving using cycle detection technique
+If there exists a cycle then all the nodes in the cycle are NOT safe nodes
+And every other node having outgoing to nodes of the cycle (directly or indirectly) are also NOT safe nodes.
+Ex : If 7 is directed to 1, then it is also not safe
+
+![[assets/Pasted image 20260413102354.png]]
+`[2, 4, 5, 6]` are the safe nodes in the graph
+
+
+Algorithm: 
+- Make two arrays visited and pathVisited of size V
+- Check each node from 0 to V-1 to check if they are unvisited and traverse using Dfs()
+
+- Mark the node visited and pathVisited and traverse all the neighbour nodes of the current node using Dfs()
+- If we reach a node which does not have any more neighbours, mark it as SAFE also return true for its parent 
+- Repeat the above step until we reach a node that is pathVisited then return along the path and mark each node before as NOT SAFE  (return false)
+- Note : Node is safe is all the paths from it are safe
+- While returning from the dfs method set pathVisited to false for current node
+
+```java
+List<Integer> findEventualSafeStates(int[][] adj){
+	boolean[] visited = new boolean[adj.length];
+	boolean[] pathVisited = new boolean[adj.length];
+	boolean[] safe = new boolean[adj.length];
+	ArrayList<Integer> ans = new ArrayList<>();
+	
+	for(int i = 0 ; i< adj.length ; i++){
+		if(visited[i] == false){
+			dfs(i, visited, pathVisited, safe, adj);
+		}
+	}
+	
+	for(int i = 0; i< adj.length; i++){
+		if(safe[i]) {
+			ans.add(i); 
+		}
+	}
+	
+	Collections.sort(ans);
+	return ans;
+}
+
+boolean dfs(int node, boolean[] visited, boolean[] pathVisited, boolean[] safe, int[][] adj){
+	visited[node] = true;
+	pathVisited[node] = true;
+	int[] neighbours = adj[node];
+	
+	for(int neighbour : neighbours){
+		if(pathVisited[neighbour]){
+			safe[node] = false;
+			pathVisited[node] = false;
+			return false;
+		}
+		
+		if(!visited[neighbour]){
+			if(!dfs(neighbour, visited, pathVisited, safe, adj)){
+				safe[node] = false;
+				pathVisited[node] = false;
+				return false;
+			}	
+		}
+		else if(!safe[neighbour]){
+			safe[node] = false;
+			pathVisited[node] = false;
+			return false;
+		}
+		
+	}
+	
+	safe[node] = true;
+	pathVisited[node] = false;
+	return isSafe;
+}
+```
+
+
+# Topological Sorting Algorithm
+#imp
+- Only exists on  DAG - > Directed Acyclic Graph
+- Topological Sorting -> Linear ordering of vertices such that if there is an edge between u and v, u appears before v in that ordering.
+
+
+![[assets/Pasted image 20260428103853.png]]
+
+5 appears before 0, 4 appears before 0, etc.
+There can be multiple orderings 
+
+**PROBLEMS WHICH ASK FOR "SOMETHING BEFORE SOMETHING" toposort might be applied**
+
+### Topological Sorting Using DFS :
+Algorithm :
+- Create a visited array and initialize all false
+- Create an empty stack
+- loop over all the nodes and if not visited call dfs(node)
+
+- in dfs(node)
+- mark node as visited
+- then for all the adjacent nodes from the current node:
+	- if not visited run dfs(neighbour)
+	- and put them in the stack while returning
+
+
+```java
+public int[] topologicalSortingDFS(int[][] adj){
+	boolean[] vis = new boolean[adj.length];
+	Stack<Integer> stack = new Stack<>();
+	for(int i =0 ; i < adj.length; i++){
+		if(!vis[i]){
+			dfs(i, vis, stack, adj);
+		}
+	}
+	
+	int[] ans = new int[adj.length];
+	int i = 0;
+	
+	while(!stack.isEmpty()){
+		ans[i++] = stack.pop();
+	}
+	return ans;
+}
+
+public void dfs(int node, boolean[] vis, Stack<Integer> st, int[][] adj){
+	vis[node] = true;
+	int[] neighbours = adj[node];
+	
+	for(int neighbour: neighbours){
+		if(!vis[neighbour]){
+			dfs(neighbour, vis, st, adj);
+		}
+	}
+	st.push(node);
+}
+```
+
+
+### Topological Sort using BFS :
+Also called **Kahn's Algorithm**
+#imp
+
+Algorithm: 
+- Build a queue Datastructure
+- Indegree array of size V : to store number of incoming edges to a node
+- Build the indegree array by looping over the adj list
+
+- Insert all nodes with indegree 0 into the queue
+- while queue is not empty
+	- pop the first node add to ans
+	- and from its neighbours decrease 1 each from the indegree array (simulating removing the node)
+	- now push all elements into queue with indegree 0 into the queue
+
+```java
+topologicalSortBFS(int[][] adj){
+	int[] indegree = new int[adj.length];
+	for(int i = 0 ;i< adj.length; i++){
+		for(int it: adj[i]){
+			indegree[it]++;
+		}
+	}
+	
+	Queue<Integer> q = new LinkedList<Integer>();
+	
+	for(int i = 0 ; i < adj.length; i++){
+		if(indegree[i] == 0){
+			q.add(i);
+		}
+	}
+	
+	int[] topo = new int[adj.length];
+	int i = 0;
+	while(!q.isEmpty()){
+		int node = q.poll();
+		topo[i++] = node;
+		
+		for(int it : adj[node]){
+			indegree[it]--;
+			if(indegree[it] == 0){
+				q.add(it);
+			}
+		}
+	}
+	
+	return topo;
+}
+```
+
+
+### Cycle Detection in Directed Graph using BFS
+
+in DFS approach we used backtracking, but in BFS we cannot  use backtracking to solve the problem.
+So we use the **Kahn's algorithm**
+
+TOPO sort is applicable on only Directed Acyclic graph
+We will still apply topo sort on it even though there could be a cycle
+
+At one point there will no no nodes with indegree 0 so, toposort could not be completed.
+
+If the toposort array has n elements then it is acyclic graph, if it has less than n elements, then it has a cycle. 
+
+
+### Couse Schedule I 
+There are a total of N tasks, labeled from 0 to N-1, Some tasks may have prerequisites for example to do task 0 you have to first complete task 1, Which is expressed as pair `[0, 1]` 
+Given the total number of tasks N and a list of prerequisite pairs P, find if it is possible to finish all the tasks.
+
+```
+[[1,0], [2, 1], [3, 2]]
+
+3 -> 2 -> 1 -> 0 to be done in order
+
+true : can be performed all tasks
+```
+
+This problem can be solved by Implementing Topological Sort : 
+First we need to build the adjacency list
+```java
+public boolean isPossible(int V, int[][] prerequisites){
+	// build adj list
+	ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+	
+	for(int i = 0; i < V; i++){
+		adj.add(new ArrayList<>());
+	}
+	int m = prerequisites.length();
+	for(int i = 0; i < m ; i++){
+		adj.get(prerequisites[i][0]).add(prerequisites[i][1]);
+	}
+	
+	int indegree[] = new int[V];
+	for(int i =0 ; i< V; i++){
+		for(int it: adj.get(i)){
+			indegree[it]++;
+		}
+	}
+	
+	Queue<Integer> q = new LinkedList<Integer>();
+	for(int i =0 ; i < V; i++){
+		if(indegree[i] == 0){
+			q.add(i);
+		}
+	}
+	
+	List<Integer> topo = new ArrayList<Integer>();
+	while(!q.isEmpty()){
+		int node = q.peek();
+		q.remove();
+		topo.add(node);
+		
+		for(int it: adj.get(node)){
+			indegree[it]--;
+			if(indegree[it] == 0){
+				q.add(it);
+			}
+		}
+	}
+	
+	if(topo.size() == V) return true;
+	return false;
+}
+```
+We can return the topo list if asked for the order in which the tasks are being done.
+
+
+### Find Eventual Safe States
+Solved above using DFS, but can also be solved using Topological Sorting
+
+Algorithm : 
+- Reverse all the edges
+- Get all nodes with indegree 0
+- Then do removal of edges on adjacent nodes
+- and continue as with topological sort above
+
+### Alien Dictionary Topological Sort
+Given a sorted dictionary of an alien language having N words and K starting alphabets of standard dictionary. Find order of characters in the alien language.
+```
+N = 5 , K = 4
+["baa", "abcd", "abca", "cab", "cad"]
+'baa' appears before 'abcd' => b appears before a in the alphabet
+"cab" appears before "cad" => b appears before d , and so on.
+
+b -> d -> a -> c is the alien order
+```
+compare pairs of characters and find the first mismatch in the chars and make a graph
+"baa" and "abcd" =>  b -> a
+"abcd" and "abca" => d -> a
+
+then apply normal topological sort
+
+
+### Shortest Path in Directed Acyclic Graph 
+Using Topological Sort
+
+![[assets/Pasted image 20260502123550.png]]
+Given weighted edges.
+Starting from 0 node, Find the shortest path to all vertices.
+```
+given adjacency list : {neighbour, weight} 
+0 -> {1, 2}, {4, 1}
+1 -> {2, 3}
+2 -> {3, 6}
+4 -> {2, 2}, {5, 4}
+5 -> {3, 1}
+```
+
+Algorithm: 
+Do a topo sort on the graph 
+we are using dfs approach here
+5:00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Dijkstra's Algorithm
+#imp 
 
 Algorithm:
 ```

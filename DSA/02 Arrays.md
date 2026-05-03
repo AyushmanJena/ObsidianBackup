@@ -2,7 +2,36 @@
 
 [[#2D Arrays / Matrix Questions]]
 
+[1848. Minimum Distance to the Target Element](https://leetcode.com/problems/minimum-distance-to-the-target-element/)
+#array #easy #twopointer 
+```java
+class Solution {
+    public int getMinDistance(int[] nums, int target, int start) {
+        int left = start;
+        int right = start;
+
+        if(nums[start] == target) return 0;
+
+        while(left >= 0 || right <= nums.length -1){
+            if(left > 0){
+                left--;
+            }
+            if(right < nums.length-1){
+                right++;
+            }
+            if(nums[left] == target){
+                return start - left;
+            }else if(nums[right] == target){
+                return right - start;
+            }
+        }
+        return -1;
+    }
+}
+```
+
 [3379. Transformed Array](https://leetcode.com/problems/transformed-array/)
+#easy #array
 ```java
 class Solution {
     public int[] constructTransformedArray(int[] nums) {
@@ -25,6 +54,7 @@ class Solution {
 ```
 
 [2022. Convert 1D Array Into 2D Array](https://leetcode.com/problems/convert-1d-array-into-2d-array/)
+#easy #matrix #array
 ```java
 class Solution {
     public int[][] construct2DArray(int[] original, int m, int n) {
@@ -35,8 +65,8 @@ class Solution {
         int row;
         int col;
         for(int i = 0; i<original.length; i++){
-            row = i/n;    				// row of 2d array element = original array index / number of columns
-            col = i %n;					// column of 2d array element = original array index % number of columns 
+            row = i/n;   // row = original array index / number of columns
+            col = i %n;	 // column = original array index % number of columns 
             ans[row][col] = original[i];
         }
         return ans;
@@ -44,8 +74,64 @@ class Solution {
 }
 ```
 
+[1855. Maximum Distance Between a Pair of Values](https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/)
+#easy #twopointer #array 
+```java
+class Solution {
+    public int maxDistance(int[] nums1, int[] nums2) {
+        int i = 0; 
+        int j = 0;
+        int ans = 0;
+        
+        while(i < nums1.length && j < nums2.length){
+            if(nums1[i] > nums2[j]){
+                i++;
+            }
+            else{
+                ans = Math.max(ans, j - i);
+                j++;
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
+[2515. Shortest Distance to Target String in a Circular Array](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/)
+#array #easy #twopointer 
+```java
+class Solution {
+    public int closestTarget(String[] words, String target, int startIndex) {
+
+        int left = startIndex;
+        int right = startIndex;
+
+        int steps = 0;
+
+        while(steps < words.length){
+            int l = (left % words.length + words.length) % words.length;
+            if(target.equals(words[l])){
+                return steps;
+            }
+
+            int r = right % words.length;
+            if(target.equals(words[r])){
+                return steps;
+            }
+
+            left--;
+            right++;
+            steps++;
+        }
+        return -1;
+    }
+}
+```
+
 
 [1894. Find the Student that Will Replace the Chalk](https://leetcode.com/problems/find-the-student-that-will-replace-the-chalk/)
+#medium #array 
 ```java
 class Solution {
     public int chalkReplacer(int[] chalk, int k) {
@@ -64,7 +150,6 @@ class Solution {
             }
 
             k -= chalk[i];
-            System.out.println("k = "+k + " i = "+i);
 
         }
         return 0;
@@ -214,8 +299,37 @@ class Solution {
 }
 ```
 
+[3761. Minimum Absolute Distance Between Mirror Pairs](https://leetcode.com/problems/minimum-absolute-distance-between-mirror-pairs/)
+#medium #array #hash 
+```java
+class Solution {
+    public int minMirrorPairDistance(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int ans = Integer.MAX_VALUE;
+        for(int i = 0; i < nums.length; i++){
+            int num = nums[i];
+
+            if(map.containsKey(num)){
+                ans = Math.min(ans, i - map.get(num));
+            }
+
+            int reversed = 0;
+            int n = 0;
+            while(num > 0){
+                reversed = reversed * 10 + (num % 10) ;
+                num = num/10;
+            }
+            
+            map.put(reversed, i);
+        }
+        if(ans == Integer.MAX_VALUE) return -1;
+        return ans;
+    }
+}
+```
+
 [3741. Minimum Distance Between Three Equal Elements II](https://leetcode.com/problems/minimum-distance-between-three-equal-elements-ii/)
-#medium #arrays #hash #slidingwindow 
+#medium #array #hash #slidingwindow 
 ```java
 class Solution {
     public int minimumDistance(int[] nums) {
@@ -246,7 +360,93 @@ class Solution {
 }
 ```
 
+[3488. Closest Equal Element Queries](https://leetcode.com/problems/closest-equal-element-queries/)
+#medium #hash #array #binarysearch
+```java
+class Solution {
+    public List<Integer> solveQueries(int[] nums, int[] queries) {
+        
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
 
+        for(int i = 0; i<nums.length; i++){
+            if(!map.containsKey(nums[i])){
+                map.put(nums[i], new ArrayList<>());
+            }
+            map.get(nums[i]).add(i);
+        }
+
+        List<Integer> ans = new ArrayList<>();
+        for(int i = 0;i< queries.length; i++){
+            int num = nums[queries[i]];
+
+            ArrayList<Integer> list = map.get(num);
+
+            if(list.size() == 1){
+                ans.add(-1);
+                continue;
+            }
+            
+            int curr = Collections.binarySearch(list, queries[i]);
+
+            int left = curr - 1;
+            int right = curr + 1;
+            if(left == -1) left = list.size() - 1;
+            if(right == list.size()) right = 0;
+
+            int n = nums.length;
+            int leftDist = Math.abs(list.get(curr) - list.get(left));
+            leftDist = Math.min(leftDist, n - leftDist);
+
+            int rightDist = Math.abs(list.get(curr) - list.get(right));
+            rightDist = Math.min(rightDist, n - rightDist);
+
+            int temp = Math.min(leftDist, rightDist);
+
+            ans.add(temp);
+        }
+
+        return ans;
+    }
+}
+```
+
+[2615. Sum of Distances](https://leetcode.com/problems/sum-of-distances/)
+#array #hash #prefixsum #medium 
+```java
+class Solution {
+    public long[] distance(int[] nums) {
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        long[] ans = new long[nums.length];
+
+        for(int i = 0; i< nums.length; i++){
+            if(!map.containsKey(nums[i])){
+                map.put(nums[i], new ArrayList<>());
+            }
+            map.get(nums[i]).add(i);
+        }
+
+        for(ArrayList<Integer> list : map.values()){
+            int size = list.size();
+
+            long[] prefix = new long[size + 1];
+
+            for(int j = 0; j < size; j++){
+                prefix[j + 1] = prefix[j] + list.get(j);
+            }
+
+            for(int j = 0; j < size; j++){
+                long currIndex = list.get(j);
+                long left = j * currIndex - prefix[j];
+                long right = (prefix[size] - prefix[j + 1]) - (size - j - 1) * currIndex;
+
+                ans[(int) currIndex] = left + right;
+            }
+        }
+
+        return ans;
+    }
+}
+```
 
 [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
 ```java
@@ -429,6 +629,31 @@ public class MaxArrayInArray {
     }
 }
 
+```
+
+[396. Rotate Function](https://leetcode.com/problems/rotate-function/)
+#medium #array #maths 
+```java
+class Solution {
+    public int maxRotateFunction(int[] nums) {
+        int sum = 0;
+        int curr = 0;
+
+        for(int i = 0 ; i < nums.length; i++){
+            sum += nums[i];
+            curr += nums[i] * i;
+        }
+
+        int ans = curr;
+
+        for(int i = 1; i< nums.length; i++){
+            curr = curr - sum + (nums.length * nums[i-1]);
+            ans = Math.max(ans, curr);
+        }
+
+        return ans;
+    }
+}
 ```
 
 
@@ -795,6 +1020,40 @@ class Solution {
         return true;
     }
 }
+```
+
+[2033. Minimum Operations to Make a Uni-Value Grid](https://leetcode.com/problems/minimum-operations-to-make-a-uni-value-grid/)
+#medium #array #matrix #sorting 
+```java
+class Solution {
+    public int minOperations(int[][] grid, int x) {
+        int[] arr = new int[grid.length * grid[0].length];
+        int k =0;
+
+        for(int i =0 ; i< grid.length; i++){
+            for(int j = 0; j < grid[0].length; j++){
+                arr[k] = grid[i][j];
+                k++;
+            }
+        }
+
+        Arrays.sort(arr);
+
+        int medianIndex = arr.length / 2;
+        int sum = 0;
+        
+        for(int i =0 ; i<arr.length; i++){
+            int temp = Math.abs(arr[medianIndex] - arr[i]);
+            if(temp % x != 0){
+                return -1;
+            }
+            sum += temp / x;
+        }
+
+        return sum;
+    }
+}
+
 ```
 
 [1536. Minimum Swaps to Arrange a Binary Grid](https://leetcode.com/problems/minimum-swaps-to-arrange-a-binary-grid/)
