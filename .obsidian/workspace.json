@@ -38,21 +38,21 @@
             }
           },
           {
-            "id": "e91709d5b8af57bf",
+            "id": "05eedfbc12c3444b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
-                "mode": "preview",
+                "file": "System Design/02 Untitled.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Introduction"
+              "title": "02 Untitled"
             }
           },
           {
-            "id": "3e607f5862d7c45b",
+            "id": "4df6144844302dd4",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -64,37 +64,9 @@
               "icon": "lucide-file",
               "title": "02 Arrays"
             }
-          },
-          {
-            "id": "67e7fc0035363f50",
-            "type": "leaf",
-            "state": {
-              "type": "webviewer",
-              "state": {
-                "url": "https://leetcode.com/problems/find-the-student-that-will-replace-the-chalk/description/",
-                "title": "Find the Student that Will Replace the Chalk - LeetCode",
-                "mode": "webview"
-              },
-              "icon": "globe-2",
-              "title": "Find the Student that Will Replace the Chalk - LeetCode"
-            }
-          },
-          {
-            "id": "966c99de409cba39",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/12 Graphs 🟢.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "12 Graphs 🟢"
-            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -126,7 +98,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "ngmodel",
+                "query": "JpaRepository",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -151,8 +123,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 276.5,
-    "collapsed": true
+    "width": 276.5
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -236,35 +207,42 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "966c99de409cba39",
+  "active": "4df6144844302dd4",
   "lastOpenFiles": [
-    "DSA/assets/Pasted image 20260502123550.png",
+    "System Design/02 Untitled.md",
+    "System Design/01 Fundamentals.md",
     "DSA/02 Arrays.md",
+    "DSA/12 Graphs 🟢.md",
+    "DSA/14 Greedy Algorithm.md",
+    "System Design/00 ReadMe.md",
+    "DevOps/Absolute Basics/01 Fundamentals.md",
+    "System Design",
+    "DevOps/Absolute Basics",
+    "DevOps",
+    "Untitled 2",
+    "Untitled 1",
+    "DSA/15 Dynamic Programming 🟢.md",
+    "MASTERING JAVA/AWS/00 Readme.md",
+    "MASTERING JAVA/AWS",
+    "DSA/09 Trees.md",
+    "DSA/00 Readme.md",
+    "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U04-REST APIs.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U03-Hibernate JPA.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U09-Advanced JPA-Hibernate Mappings.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U06-Thymeleaf Introduction.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U07-Thymeleaf CRUD App IMP.md",
+    "DSA/07 LinkedList.md",
+    "DSA/03 Strings.md",
+    "DSA/assets/Pasted image 20260502123550.png",
     "DSA/01 Basics.md",
     "DSA/LEETCODE TOP INTERVIEW 150/01 Array String.md",
-    "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
     "MASTERING JAVA/System Design Patterns.md",
     "One Page Notes/Kubernetes Tutorial.md",
-    "DSA/15 Dynamic Programming 🟢.md",
     "ANGULAR/Angular Course Udemy/02 Angular Essentials.md",
-    "ANGULAR/Angular Youtube Tutorial/03 Custom Property Binding.md",
-    "One Page Notes/MongoDB Tutorial.md",
-    "DSA/12 Graphs 🟢.md",
     "DSA/assets/Pasted image 20260428103853.png",
-    "One Page Notes/Docker Tutorial.md",
-    "DSA/03 Strings.md",
-    "DSA/13 Sliding Window.md",
-    "ANGULAR/Angular Course Udemy/01 Introduction.md",
-    "ANGULAR/Angular Course Udemy/00 Readme.md",
-    "ANGULAR/Angular Course Udemy/102 Modules.md",
-    "ANGULAR/Angular Course Udemy/201 Debugging Angular Apps.md",
-    "ANGULAR/Angular Course Udemy/104 Handling HTTP Requests and Responses.md",
-    "ANGULAR/Angular Course Udemy/103 Routing (prev. Angular 16).md",
-    "ANGULAR/Angular Course Udemy/101 Forms.md",
-    "ANGULAR/Angular Course Udemy/05 RxJS and Observables.md",
-    "ANGULAR/Angular Course Udemy/04 Services and Dependency Injection.md",
-    "ANGULAR/Angular Course Udemy/03 Basics.md",
-    "SPRING BOOT NOTES/Additional Notes/Swagger Dependencies.md",
     "DSA/assets/Pasted image 20260413102354.png",
     "DSA/assets/Pasted image 20260328111947.png",
     "DSA/assets",
@@ -277,13 +255,6 @@
     "IONIC/assets/Screenshot (87).png",
     "assets/Screenshot (87).png",
     "IONIC/assets",
-    "assets",
-    "JavaScript Notes/assets/Pasted image 20250601000450.png",
-    "JavaScript Notes/assets",
-    "Untitled.base",
-    "Untitled 1.base",
-    "DSA/LEETCODE 75 SOLUTIONS/assets",
-    "DSA/LEETCODE 75 SOLUTIONS/Untitled",
     "SPRING BOOT NOTES/Resources/canvas for structures.canvas",
     "DATA STRUCTURES/Untitled.canvas",
     "Untitled.canvas"

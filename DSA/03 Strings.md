@@ -28,8 +28,42 @@ class Solution {
 }
 ```
 
+[796. Rotate String](https://leetcode.com/problems/rotate-string/)
+#easy #twopointer #strings 
+```java
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        int ch = 0;
+        int st = 0;
+        int p = 0;
+
+        if(s.length() != goal.length()) return false;
+
+        while(st < goal.length()){
+            while(st < goal.length() && goal.charAt(st) != s.charAt(ch)){
+                st++;
+            }
+            int compSize = 0;
+            while(goal.charAt(st%s.length()) == s.charAt(ch)){
+                st++;
+                ch++;
+                compSize++;
+                if(compSize == goal.length()){
+                    return true;
+                }
+            }
+            st = p+1;
+            p = st;
+            ch = 0;
+        }
+        return false;
+
+    }
+}
+```
+
 [696. Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/)
-#twopointer #strings
+#twopointer #strings #easy
 ```java
 class Solution {
     public int countBinarySubstrings(String s) {

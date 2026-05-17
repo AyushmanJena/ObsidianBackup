@@ -288,6 +288,39 @@ class Solution {
 }
 ```
 
+[61. Rotate List](https://leetcode.com/problems/rotate-list/)
+#medium #linked-list #twopointer 
+```java
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+
+        if(head == null || head.next == null) return head;
+
+
+        int listSize = 1;
+        ListNode lastNode = head;
+        while(lastNode.next != null){
+            lastNode = lastNode.next;
+            listSize++;
+        }
+        k = k % listSize;
+        if (k == 0) return head;
+
+        int newHeadIndex = listSize  - k;
+        
+        ListNode prev = head;
+        for(int i = 1; i < newHeadIndex; i++){
+            prev = prev.next;
+        }
+
+        ListNode newHead = prev.next;
+        prev.next = null;
+        lastNode.next = head;
+        return newHead;
+    }
+}
+```
+
 
 [3217. Delete Nodes From Linked List Present in Array](https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/)
 ```java

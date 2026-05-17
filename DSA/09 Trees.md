@@ -198,6 +198,26 @@ private int update(Node node , int index, int value){
 # LeetCode Questions
 
 
+[108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
+#easy #array #tree #binarysearch 
+```java
+class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return sortedArrayToBST(nums, 0, nums.length-1);
+    }
+    public TreeNode sortedArrayToBST(int[] nums, int left, int right){
+        if(left > right){
+            return null;
+        }
+        int mid = left + (right - left)/2;
+        TreeNode node = new TreeNode(nums[mid]);
+        node.left = sortedArrayToBST(nums, left, mid-1);
+        node.right = sortedArrayToBST(nums, mid+1, right);
+        return node;
+    }
+}
+```
+
 [1367. Linked List in Binary Tree](https://leetcode.com/problems/linked-list-in-binary-tree/)
 ```java
 class Solution {

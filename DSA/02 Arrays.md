@@ -98,6 +98,31 @@ class Solution {
 }
 ```
 
+[2553. Separate the Digits in an Array](https://leetcode.com/problems/separate-the-digits-in-an-array/)
+#easy #array 
+```java
+class Solution {
+    public int[] separateDigits(int[] nums) {
+        ArrayList<Integer> digits = new ArrayList<>();
+
+        for(int i = nums.length -1 ; i>= 0; i--){
+            int num = nums[i];
+            while(num != 0){
+                int rem = num % 10;
+                digits.add(rem);
+                num = num / 10;
+            }
+        }
+
+        int[] ans = new int[digits.size()];
+        for(int i = 0; i < ans.length; i++){
+            ans[i] = digits.get(digits.size() - 1 - i);
+        }
+        return ans;
+    }
+}
+```
+
 [2515. Shortest Distance to Target String in a Circular Array](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/)
 #array #easy #twopointer 
 ```java
@@ -129,63 +154,58 @@ class Solution {
 }
 ```
 
-
-[1894. Find the Student that Will Replace the Chalk](https://leetcode.com/problems/find-the-student-that-will-replace-the-chalk/)
-#medium #array 
-```java
-class Solution {
-    public int chalkReplacer(int[] chalk, int k) {
-        long sum = 0;
-        for(int i = 0; i<chalk.length; i++){
-            sum += chalk[i];
-        }
-
-        while(sum < k){
-            k -= sum;
-        }
-
-        for(int i = 0; i<chalk.length; i++){
-            if(k < chalk[i]){
-                return i;
-            }
-
-            k -= chalk[i];
-
-        }
-        return 0;
-    }
-}
-```
-
-
 [2441. Largest Positive Integer That Exists With Its Negative](https://leetcode.com/problems/largest-positive-integer-that-exists-with-its-negative/)
+#easy #array #twopointer #sorting 
 ```java
 class Solution {
     public int findMaxK(int[] nums) {
-        int largest;
-        int notAns = 1001;
-        for(int i = 0; i<nums.length; i++){
-            largest = 0;
-            for(int j = 0; j < nums.length; j++){
-                if(nums[j] > 0 && nums[j] > largest && nums[j] < notAns){
-                    largest = nums[j];
-                }
+        Arrays.sort(nums);
+        int start = 0;
+        int end = nums.length-1;
+
+        while(start < end){
+            if(nums[start] == -1 * nums[end]){
+                return nums[end];
             }
-            for(int j = 0; j<nums.length; j++){
-                if(nums[j] *-1 == largest){
-                    return largest;
-                }
+            if(nums[start] >  -1 * nums[end]){
+                end--;
+            }else{
+                start++;
             }
-            notAns = largest;
         }
         return -1;
     }
 }
 ```
 
+[3487. Maximum Unique Subarray Sum After Deletion](https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/)
+Catch : you might have only negative numbers too
+```java
+class Solution {
+    public int maxSum(int[] nums) {
+        int maxElement = Integer.MIN_VALUE;
+        int positiveSum = 0;
+        Set<Integer> seen = new HashSet<>();
+
+        for (int num : nums) {
+            if (!seen.contains(num)) {
+                seen.add(num);
+                if (num > 0) {
+                    positiveSum += num;
+                }
+                maxElement = Math.max(maxElement, num);
+            }
+        }
+
+        return positiveSum > 0 ? positiveSum : maxElement;
+    }
+}
+
+```
 
 Move Zeros to End
 [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+#easy #array #twopointer 
 ```java
 class Solution {
     public void moveZeroes(int[] nums) {
@@ -206,6 +226,7 @@ class Solution {
 
 
 [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/)
+#easy #twopointer #array #hashs
 ```java
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
@@ -213,46 +234,26 @@ class Solution {
         Arrays.sort(nums2);
         int i = 0;
         int j = 0;
-        ArrayList<Integer> ans = new ArrayList<>();
-        while (i < nums1.length && j < nums2.length) {
-            if (nums1[i] == nums2[j]) {
-                if (ans.isEmpty() || nums1[i] != ans.get(ans.size() - 1)) {
-                    ans.add(nums1[i]);
-                }
-                i++;
-                j++;
-            } else if (nums1[i] > nums2[j]) {
-                j++;
-            } else {
-                i++;
-            }
-        }
-        int[] result = new int[ans.size()];
-        for (int k = 0; k < ans.size(); k++) {
-            result[k] = ans.get(k);
-        }
-        return result;
-    }
-}
-```
-Efficient Solution:
-```java
-class Solution {
-    public int[] intersection(int[] nums1, int[] nums2) {
-        int[] a = new int[1001];
-        for(int i : nums1){
-            a[i]++;
-        }
-        int[] ans = new int[nums1.length];
-        int k = 0;
-        for(int j : nums2){
-            if(a[j] != 0){
-                a[j] = 0;
-                ans[k++] = j;
-            }
-        }
+        HashSet<Integer> set = new HashSet<>();
 
-        return Arrays.copyOfRange(ans,0,k);
+        while(i < nums1.length && j < nums2.length){
+            if(nums1[i] == nums2[j]){
+                set.add(nums1[i]);
+                i++;
+                j++;
+            }
+            else if(nums1[i] > nums2[j]){
+                j++;
+            }else{
+                i++;
+            }
+        }
+        int[] ans = new int[set.size()];
+        int k = 0;
+        for(int n : set){
+            ans[k++] = n;
+        }
+        return ans;
     }
 }
 ```
@@ -260,9 +261,7 @@ class Solution {
 
 [3740. Minimum Distance Between Three Equal Elements I](https://leetcode.com/problems/minimum-distance-between-three-equal-elements-i/)
 #array #hash #easy 
-Your observation is the key to this problem. The distance formula is: Distance = abs(i - j) + abs(j - k) + abs(k - i)  
-Let's find a good tuple (i, j, k) and sort the indices, calling them a, b, c such that a < b < c .abs(i - j) abs(j - k) abs(k - i)  
-When we plug them in, the formula becomes: Distance = abs(a - b) + abs(b - c) + abs(c - a) Since we know a < b < c, we can remove the absolute value signs:  
+for the numbers being sorted : 
 abs(a - b) = b - a  
 abs(b - c) = c - b  
 abs(c - a) = c - a  
@@ -299,8 +298,87 @@ class Solution {
 }
 ```
 
+[153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+#medium #array #sorting #binarysearch 
+```java
+class Solution {
+    public int findMin(int[] nums) {
+        int l = 0;
+        int h = nums.length -1;
+        int ans = Integer.MAX_VALUE;
+        while(l <= h){
+            int m = l + (h-l)/2;
+            if(nums[l] <= nums[m]){
+                ans = Math.min(ans, nums[l]);
+                l = m + 1;
+            }
+            else{
+                ans = Math.min(ans, nums[m]);
+                h = m - 1;
+            }
+        }
+        return ans;
+    }
+}
+```
+
+[1894. Find the Student that Will Replace the Chalk](https://leetcode.com/problems/find-the-student-that-will-replace-the-chalk/)
+#medium #array 
+```java
+class Solution {
+    public int chalkReplacer(int[] chalk, int k) {
+        long sum = 0;
+        for(int i = 0; i<chalk.length; i++){
+            sum += chalk[i];
+        }
+
+        while(sum < k){
+            k -= sum;
+        }
+
+        for(int i = 0; i<chalk.length; i++){
+            if(k < chalk[i]){
+                return i;
+            }
+
+            k -= chalk[i];
+
+        }
+        return 0;
+    }
+}
+```
+
+[1306. Jump Game III](https://leetcode.com/problems/jump-game-iii/)
+#medium #array 
+```java
+class Solution {
+    public boolean canReach(int[] arr, int start) {
+        boolean[] vis = new boolean[arr.length];
+        return helper(start, arr, vis);
+    }
+
+    public boolean helper(int i, int[] arr, boolean[] vis){
+        if(i < 0 || i >= arr.length){
+            return false;
+        }
+
+        if(arr[i] == 0){
+            return true;
+        }
+        if(vis[i]){
+            return false;
+        }
+        vis[i] = true;
+        return helper(i - arr[i], arr, vis) || helper(i + arr[i], arr, vis);
+    }
+}
+```
+
+
 [3761. Minimum Absolute Distance Between Mirror Pairs](https://leetcode.com/problems/minimum-absolute-distance-between-mirror-pairs/)
 #medium #array #hash 
+Traverse the array and keep reversing numbers, and compare the current number if there was the same number in the past (since past number is reversed)
 ```java
 class Solution {
     public int minMirrorPairDistance(int[] nums) {
@@ -336,12 +414,10 @@ class Solution {
         HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
 
         for(int i =0; i<nums.length; i++){
-            if(map.containsKey(nums[i])){
-                map.get(nums[i]).add(i);
-            }else{
+            if(!map.containsKey(nums[i])){
                 map.put(nums[i], new ArrayList<>());
-                map.get(nums[i]).add(i);
             }
+            map.get(nums[i]).add(i);
         }
 
         int ans = Integer.MAX_VALUE;
@@ -362,10 +438,11 @@ class Solution {
 
 [3488. Closest Equal Element Queries](https://leetcode.com/problems/closest-equal-element-queries/)
 #medium #hash #array #binarysearch
+make a frequency map of number and its all occurrences
+then for each index, either its previous or next index is closest
 ```java
 class Solution {
     public List<Integer> solveQueries(int[] nums, int[] queries) {
-        
         HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
 
         for(int i = 0; i<nums.length; i++){
@@ -386,7 +463,7 @@ class Solution {
                 continue;
             }
             
-            int curr = Collections.binarySearch(list, queries[i]);
+            int curr = Collections.binarySearch(list, queries[i]); //IMP for TLE
 
             int left = curr - 1;
             int right = curr + 1;
@@ -410,8 +487,34 @@ class Solution {
 }
 ```
 
+[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+#medium #prefixsum #array
+```java
+public static int[] productExceptSelf(int[] nums) {
+    int n = nums.length;
+    int[] result = new int[n];
+    for (int i = 0; i < n; i++) {
+        result[i] = 1;
+    }
+    int product = 1;
+    for (int i = 0; i < n; i++) {
+        result[i] = product;
+        product *= nums[i];
+    }
+    product = 1;
+    for (int i = n - 1; i >= 0; i--) {
+        result[i] *= product;
+        product *= nums[i];
+    }
+
+    return result;
+}
+```
+
 [2615. Sum of Distances](https://leetcode.com/problems/sum-of-distances/)
 #array #hash #prefixsum #medium 
+make a frequency map of number and its occurrences
+then perform prefix sum on each index of every number array
 ```java
 class Solution {
     public long[] distance(int[] nums) {
@@ -448,51 +551,8 @@ class Solution {
 }
 ```
 
-[108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
-```java
-class Solution {
-    public TreeNode sortedArrayToBST(int[] nums) {
-        return sortedArrayToBST(nums, 0, nums.length-1);
-    }
-    public TreeNode sortedArrayToBST(int[] nums, int left, int right){
-        if(left > right){
-            return null;
-        }
-        int mid = left + (right - left)/2;
-        TreeNode node = new TreeNode(nums[mid]);
-        node.left = sortedArrayToBST(nums, left, mid-1);
-        node.right = sortedArrayToBST(nums, mid+1, right);
-        return node;
-    }
-}
-```
-
-
-[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
-```java
-public static int[] productExceptSelf(int[] nums) {
-    int n = nums.length;
-    int[] result = new int[n];
-    for (int i = 0; i < n; i++) {
-        result[i] = 1;
-    }
-    int product = 1;
-    for (int i = 0; i < n; i++) {
-        result[i] = product;
-        product *= nums[i];
-    }
-    product = 1;
-    for (int i = n - 1; i >= 0; i--) {
-        result[i] *= product;
-        product *= nums[i];
-    }
-
-    return result;
-}
-```
-
-
 [334. Increasing Triplet Subsequence](https://leetcode.com/problems/increasing-triplet-subsequence/)
+#medium #array #greedy
 ```java
 // My Not so optimised solution 
 class Solution {
@@ -555,82 +615,6 @@ class Solution {
 }
 ```
 
-
-[74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
-```java
-public class LeetCode {
-	public static void main(String[] args){
-		int[][] arr = {
-			{1}
-		};
-		System.out.println(searchMatrix(arr,  1    ));
-	}
-	public static boolean searchMatrix(int[][] matrix, int target){
-		int row = 0;
-		int col = matrix[0].length -1;
-		while(row < matrix.length && col >= 0 ){
-			if(matrix[row][col] == target){
-				return true;
-			}
-			else if(matrix[row][col] > target){
-				col--;
-			}
-			else{
-				row++;
-			}
-		}
-		return false;
-	}
-}
-```
-
-Max Array in Array
-```java
-public class MaxArrayInArray {
-    public static void main(String[] args){
-        int[][] arr = {
-                {9,9,8,1},
-                {5,6,2,6},
-                {8,2,6,4},
-                {6,2,2,2}};
-        int[][] ans = largestLocal(arr);
-        for(int i = 0; i<ans.length; i++){
-            for(int j = 0; j < ans.length; j++){
-                System.out.print(ans[i][j]);
-            }
-            System.out.println();
-        }
-    }
-    public static int[][] largestLocal(int[][] grid) {
-        int m = grid.length;
-        int x = 0;
-        int y = 0;
-        int[][] arr = new int[m-2][m-2];
-        for(int i = 0; i <= m-3; i++){ // row till-1 for index -2 for size n-2
-            y = 0;
-            for(int j = 0;j <= m-3; j++){ // col
-                arr[x][y] = findMax(grid, i,i+2, j, j+2);
-                y++;
-            }
-            x++;
-        }
-        return arr;
-    }
-    public static int findMax(int[][] grid, int srow,int erow, int scol, int ecol ){
-        int max = 0;
-        for(int i = srow; i<= erow; i++){
-            for(int j = scol; j <= ecol; j++){
-                if(max < grid[i][j]){
-                    max = grid[i][j];
-                }
-            }
-        }
-        return max;
-    }
-}
-
-```
-
 [396. Rotate Function](https://leetcode.com/problems/rotate-function/)
 #medium #array #maths 
 ```java
@@ -655,7 +639,6 @@ class Solution {
     }
 }
 ```
-
 
 [1356. Sort Integers by The Number of 1 Bits](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/)
 #bitmanipulation #sorting #array 
@@ -728,31 +711,8 @@ class Solution {
 }
 ```
 
-[3487. Maximum Unique Subarray Sum After Deletion](https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/)
-```java
-class Solution {
-    public int maxSum(int[] nums) {
-        int maxElement = Integer.MIN_VALUE;
-        int positiveSum = 0;
-        Set<Integer> seen = new HashSet<>();
-
-        for (int num : nums) {
-            if (!seen.contains(num)) {
-                seen.add(num);
-                if (num > 0) {
-                    positiveSum += num;
-                }
-                maxElement = Math.max(maxElement, num);
-            }
-        }
-
-        return positiveSum > 0 ? positiveSum : maxElement;
-    }
-}
-
-```
-
 [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
+#easy #array #dp 
 ```java
 class Solution {
     public List<List<Integer>> generate(int numRows) {
@@ -923,6 +883,43 @@ class Solution {
 }
 ```
 
+[3660. Jump Game IX](https://leetcode.com/problems/jump-game-ix/)
+#array #dp #prefixsum 
+```java
+class Solution {
+    public int[] maxValue(int[] nums) {
+        int n = nums.length;
+
+        int[] maxPrefix = new int[n];
+        int[] minSuffix = new int[n];
+
+        maxPrefix[0] = nums[0];
+        minSuffix[n-1] = nums[n-1];
+
+        for(int i = 1; i < n; i++){
+            maxPrefix[i] = Math.max(nums[i], maxPrefix[i-1]);
+        }
+
+        for(int i = n -2; i >= 0 ; i--){
+            minSuffix[i] = Math.min(nums[i], minSuffix[i+1]);
+        }
+
+        int ans[] = new int[n];
+        ans[n-1] = maxPrefix[n-1];
+
+        for(int i = n -2; i >= 0 ; i--){
+            if(maxPrefix[i] > minSuffix[i+1]){
+                ans[i] = ans[i+1];
+            }else{
+                ans[i] = maxPrefix[i];
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
 
 ### 2D Arrays / Matrix Questions
 
@@ -1056,6 +1053,77 @@ class Solution {
 
 ```
 
+[74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+#medium #array #matrix #binarysearch 
+```java
+public class LeetCode {
+	public static boolean searchMatrix(int[][] matrix, int target){
+		int row = 0;
+		int col = matrix[0].length -1;
+		while(row < matrix.length && col >= 0 ){
+			if(matrix[row][col] == target){
+				return true;
+			}
+			else if(matrix[row][col] > target){
+				col--;
+			}
+			else{
+				row++;
+			}
+		}
+		return false;
+	}
+}
+```
+
+Max Array in Array
+```java
+public class MaxArrayInArray {
+    public static void main(String[] args){
+        int[][] arr = {
+                {9,9,8,1},
+                {5,6,2,6},
+                {8,2,6,4},
+                {6,2,2,2}};
+        int[][] ans = largestLocal(arr);
+        for(int i = 0; i<ans.length; i++){
+            for(int j = 0; j < ans.length; j++){
+                System.out.print(ans[i][j]);
+            }
+            System.out.println();
+        }
+    }
+    public static int[][] largestLocal(int[][] grid) {
+        int m = grid.length;
+        int x = 0;
+        int y = 0;
+        int[][] arr = new int[m-2][m-2];
+        for(int i = 0; i <= m-3; i++){ // row till-1 for index -2 for size n-2
+            y = 0;
+            for(int j = 0;j <= m-3; j++){ // col
+                arr[x][y] = findMax(grid, i,i+2, j, j+2);
+                y++;
+            }
+            x++;
+        }
+        return arr;
+    }
+    public static int findMax(int[][] grid, int srow,int erow, int scol, int ecol ){
+        int max = 0;
+        for(int i = srow; i<= erow; i++){
+            for(int j = scol; j <= ecol; j++){
+                if(max < grid[i][j]){
+                    max = grid[i][j];
+                }
+            }
+        }
+        return max;
+    }
+}
+
+```
+
+
 [1536. Minimum Swaps to Arrange a Binary Grid](https://leetcode.com/problems/minimum-swaps-to-arrange-a-binary-grid/)
 #array #matrix #greedy #medium 
 ```java
@@ -1153,6 +1221,56 @@ class Solution {
             }
         }
         return answer;
+    }
+}
+```
+
+[1861. Rotating the Box](https://leetcode.com/problems/rotating-the-box/)
+#medium #matrix #twopointer 
+we first set the values in the original matrix
+then copy them to the result rotated matrix
+```java
+class Solution {
+    public char[][] rotateTheBox(char[][] boxGrid) {
+        int m = boxGrid.length;
+        int n = boxGrid[0].length;
+
+        for(int i = 0; i< m; i++){
+            int j = 0;
+            while(j < n){
+                int rockCount = 0;
+                while(j < n && boxGrid[i][j] != '*'){
+                    if(boxGrid[i][j] == '#'){
+                        rockCount++;
+                        boxGrid[i][j] = '.';
+                    }
+                    j++;
+                }
+
+                int left = j - rockCount;
+                while(left < j){
+                    boxGrid[i][left] = '#';
+                    left++;
+                }
+                j++;
+            }
+        }
+
+        char[][] ans = new char[n][m]; 
+        int row = m-1;
+        int col = 0;
+
+        for(int i = 0; i< n; i++){
+            row = m-1;
+            for(int j = 0; j < m; j++){
+                ans[i][j] = boxGrid[row][col];
+                row--;
+            }
+            col++;
+        }
+
+
+        return ans;
     }
 }
 ```
@@ -1276,6 +1394,8 @@ class Solution {
 
 
 [48. Rotate Image](https://leetcode.com/problems/rotate-image/)
+#medium #maths #array 
+logic : transpose and reversing the matrix also simulates the roatation
 ```java
 class Solution {
     public void rotate(int[][] matrix) {

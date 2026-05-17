@@ -346,3 +346,33 @@ public static double solution(int[][] arr, int w){
 
 --- 
 
+# LeetCode
+
+[1665. Minimum Initial Energy to Finish Tasks](https://leetcode.com/problems/minimum-initial-energy-to-finish-tasks/)
+- sort array based on remaining energy (minimum - actual) descending
+- it will help to carry forward the remaining energy to next task
+- current energy is initially 0 , update it if needed and add update to ans
+```java
+class Solution {
+    public int minimumEffort(int[][] tasks) {
+        int ans = 0;
+        int curr = 0;
+
+        Arrays.sort(tasks, (a, b) -> {
+            int t1 = a[1] - a[0];
+            int tw = b[1] - b[0];
+            return tw - t1;
+        });
+
+        for(int i = 0 ;i< tasks.length; i++){
+            if(tasks[i][1] > curr){
+                ans += tasks[i][1] - curr;
+                curr = tasks[i][1];
+            }
+            curr = curr - tasks[i][0];
+        }
+
+        return ans;
+    }
+}
+```

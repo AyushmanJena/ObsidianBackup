@@ -18,6 +18,9 @@
 18. Greedy Algorithm
 19. Dynamic Programming ❄️
 
+Important Questions to make a new list : 
+- Prefix sum
+
 MORE : 
 - add to Basics (also add Hanoi tower)
 - Add traversal methods in trees, BFS DFS, etc.

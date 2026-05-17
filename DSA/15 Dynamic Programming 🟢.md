@@ -728,6 +728,42 @@ class Solution {
 }
 ```
 
+[2770. Maximum Number of Jumps to Reach the Last Index](https://leetcode.com/problems/maximum-number-of-jumps-to-reach-the-last-index/)
+#array #dp #medium 
+```java
+class Solution {
+    public int maximumJumps(int[] nums, int target) {
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, Integer.MIN_VALUE);
+        return helper(0, nums, target, dp);
+    }
+
+    public int helper(int i, int[] nums, int t, int[] dp){
+        if(i == nums.length - 1){
+            return 0;
+        }
+
+        if(dp[i] != Integer.MIN_VALUE){
+            return dp[i];
+        }
+
+        int ans = -1;
+        for(int j = i + 1; j < nums.length; j++){
+            int diff = nums[j] - nums[i];
+            int next = 0;
+            if(diff >= -t && diff <= t){
+                next = helper(j, nums, t, dp);
+                if(next != -1){
+                    ans = Math.max(ans, next+1);
+                }
+            }
+            
+        }
+        return dp[i] = ans;
+    }
+}
+```
+
 [198. House Robber](https://leetcode.com/problems/house-robber/)
 ```java
 class Solution {
