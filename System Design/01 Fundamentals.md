@@ -1,5 +1,111 @@
 Note : Skipped Some topics from beginning
 
+Components of a System Design : 
+1. Logical Entities
+2. Tangible Entities
+
+#### Logical Entities :
+![[assets/Pasted image 20260519214041.png]]
+
+
+Presentation Layer: 
+- The Layer user interacts with and sees
+- The app may or may not need a presentation layer
+
+
+- All these components run on some computers or instances, which are available by some clouod provides.
+- These instances come under infrastructure requirements of a system which is given by cloud services AWS, Google Cloud, etc.
+
+
+#### Tangible Entities (or Technologies)
+
+Data -> Text, images, videos
+Databases -> MongoDB, MySQL, Cassandra, etc.
+Application -> Java, Golang, Python, React, Amber
+Cache -> Redis, MemeCache
+
+Message Queues -> Kafka, RabbitMQ, ...
+
+Infra -> AWS, google Cloud platform, Azure, etc.
+Communication -> APIs, RPCs, Messages
+
+Overall System Design Overview : 
+![[assets/Pasted image 20260519215026.png]]
+
+
+### Client Server Architecture
+
+```
+------------       request         ------------
+|          | ------------------>   |          |------------> Logic
+|  client  |                       | server   |
+|          | ------------------>   |          |------------> Data
+------------      response         ------------
+     |
+     |
+Presentation
+
+```
+Basic 2 Tier Architecture
+
+
+```
+------------       request         ------------              ---------------
+|          | ------------------>   |          |------------> |             |
+|  client  |                       |  Logic   |              |    Data     |
+|          | ------------------>   |          |------------> |             |
+------------      response         ------------              ---------------
+```
+3 Tier Architecture
+
+
+Thick Client -> It is not necessary that logic happens on server side, it might happen that the logical manipulation is done on client side. It is called Thick Client.
+Ex : Outlook, video editors, etc.
+
+Thin Client -> When the logics and processing is done on server side, then it is called a thin client.
+Ex : Netflix, Hotstar, etc.
+
+
+- 3 Tier Architecture is used when the logical manipulations is much higher or the data is heavy, another logical layer (usually the application) is introduced between client and data (usually the database)
+- For even complex systems there can be even more layers like caching, load balancers, etc.
+
+
+# Proxies
+(On Behalf of)
+
+Forward Proxy
+Reverse Proxy
+
+#### Forward Proxy
+- Talks to server on behalf of client
+```
+							|
+client <-------> Proxy <-------> Server 
+							|
+```
+- Used for anonymity
+- Disguises a client's IP address 
+- Used in institutions where there are multiple clients and all traffic is monitored through forward proxy
+- Improve user's experience by caching external site content.
+
+#### Reverse Proxy
+Server Side Proxy
+```
+			|					|->Server
+Client <------> Proxy <---------|->Server
+			|					|->Server
+```
+- Anonymity of servers 
+- Used for traffic control and load balancing
+- used for caching response from servers
+- Deflates DDOs attacks (Distributed Denial of Services)
+- Used for managing SSL/TSL
+
+
+Cons of Proxy :
+ - Using forward Proxy you can access blocked sites, etc (VPNs)
+ - Reverse Proxy can become the center of failure in case of system Failure.
+
 
 # Data and Data Flow
 

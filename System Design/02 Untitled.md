@@ -227,3 +227,168 @@ In the beginning we need to take decisions so that we are able to scale them at 
 - It should be able to grow along with requirements
 - It should not increase the complexity of the system
 - The performance as a whole should not take a hit.
+
+
+# Database Replication
+
+Replication -> To have a copy
+In case of DBs, we will have 1 DB which will have all the data, then we will have a replica which will have copy of all the data in another DB.
+The first DB is called Primary DB / Master DB
+The copy/replica DB is called Secondary DB / Follower DB
+
+In case some network/hardware issue happens and we are not able to access the primary db. In such cases having a replica helps.
+- We will not lose the data 
+- In certain cases the replica can take over and become master DB so as to save the system overall
+
+Having replica helps in reducing latency
+For the primary DB is in USA and replica DB is in Mumbai. 
+When data is fetched in India from anywhere the Mumbai Db would respond.
+Thus decreases network transfer times.
+
+
+Common Practise to Follow : 
+The primary DB is used for writes and updates queries.
+The secondary DB is used for read queries.
+
+This helps in increasing system scalability and application performance.
+
+
+#### Replication Lag
+an update comes to primary DB at t1
+At same time read query comes to secondary Db at t3
+
+Replication Lag (r)-> The time it takes to copy from Primary to Secondary DB.
+
+if r < t3 - t1   ----> The user would see the right value
+but if r > t3 - t1   ----> The user would see wrong data (inconsistent)
+
+If the replication lag is huge, it becomes a problem. 
+This problem becomes worse when there are multiple number of replicas.
+
+#### Replicating Synchronously 
+if r > t3 - t1 
+Replication lag takes more time 
+
+Our goal is to build the system in a way so that the data is consistent.
+This is solved using Consistency Models / Consistency Algorithms
+Ex : Read after Write consistency
+
+##### Synchronous Replication : 
+Master will write to its own, then send to all the replicas, 
+then waits for all their Acknowledgements 
+Then marks the write as complete.
+Then only after that allows reads
+In this case Replication lag is zero
+This is also called Synchronous Replication
+
+Advantages of Synchronous Replication : 
+- The replication lag is 0
+- The data is consistent across all databases.
+
+Disadvantages : 
+- The performance will take a hit, as every write will have to wait to get updated and acknowledgement. The latency of the whole write operation is higher.
+- In case of failure, if any replica goes down and could not give ACK. 
+
+##### Asynchronous Replication :
+A new write is issued to master, it will send to all the replicas
+It will not wait for ACK.
+The replication is happening in the background
+
+Advantages : 
+- Fast
+
+Disadvantages :
+- If any replication fails, we might get inconsistent results
+But if there are a number of replicas, we can fetch from multiple DBs to compare data
+
+
+The use of Synchronous or Asynchronous depends on the business use- cases.
+Synchronous : banking apps
+Asynchronous : apps where some inconsistency is okay
+
+##### Semi Synchronous Replication
+As soon as a new write is issued, the primary DB will update to all values and will wait for only one replica for acknowledgement.
+Then we are relying on other replicas to update in the background.
+The primary DB might wait for 2/3/4 replicas as instructed. 
+This number is called Quorum.
+
+It has some positives of Synchronous and some positives of Asynchronous
+
+You will have to choose among the trade-offs. It depends on the use-cases.
+
+
+### DB Replica vs Snapshot
+Snapshot -> Capturing the state of a database at a certain time
+If something goes wrong, you can rollback to previous states.
+
+DB Replica -> Helps in tolerate faults and increase application performance
+
+
+### Overview of how Replication is done
+In real world applications different systems implement replication in different manners
+
+1. Periodic Replication
+Primary DB has multiple DBs, 
+Replication happens at scheduled times to another DB
+
+2. Change Data Capture 
+Any slight change in the master DB is reflected in other DBs.
+
+3. Partial Replication
+WE can replicate only a particular table and not the whole database
+
+
+# CAP  
+**Consistency - Availability - Partitioning**
+
+Consistency : 
+Having the same data across multiple services, or databases.
+
+Availability : 
+If one system fails, the other systems should be able to handle the overall workload.
+With more systems, the overall availability of the system increases.
+Highly Available Systems -> How much throughput these systems can sustain.
+
+Partitioning : 
+The communication channel between systems has failed.
+This phenomenon is called partition. 
+The overall system must be prepared for such situations and this is called Partition Tolerance.
+
+### Consistency and Availability in Partition Tolerant Systems :
+When there is a partition between the systems, but in order to stay consistent and available we have to make only one system accept the requests.
+But it won't be as available as it was earlier.
+If you want to have all systems and have it highly available you will have to sacrifice Consistency
+
+# CAP Theorem
+
+C, A and P in Distributed Systems :
+
+Distributed System ->  A system consisting of a group of machines working in coordination so as to appear as a single coherent system to the end-user.
+
+Consistency -> Any read that is happening after a latest write, all the nodes should return the latest value of that write.
+
+Availability -> Every available node in the system should respond in a non error format to any read request without the guarantee of returning the latest write.
+
+Partition Tolerance -> System will be responding to all read and write even if the communication channel (or middleware) between nodes is broken (or partitioned)
+
+CAP Theorem is also known as Brewer's Theorem
+Any Network shared system wants to have these 3 properties.
+In any system having all 3 properties is nearly impossible. So we will have to sacrifice at least one of them. (based on the usecase)
+
+Since network failure is something we cannot be controlled, therefore Partition Tolerance support becomes a mandatory property for our distributed systems.
+Now we have to choose between Consistency and Availability
+
+### Degree of Consistency and Availability
+If you do not have Availability property, It does not necessarily mean that you cannot provide consistency at all. 
+You can provide Consistency to some level
+and same for Availability.
+
+### Examples : 
+Consistency > Availability : Booking seats on flights, banking systems, booking movies
+Availability > Consistency : Social Media, Content apps
+
+##### Tweaking Partition Tolerance : 
+Having Backup Network Connections, to avoid Partitions
+If one network fails over which nodes are connected, we switch to other network.
+This will be costly and not particularly feasible.
+

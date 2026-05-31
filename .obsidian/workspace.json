@@ -43,16 +43,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "System Design/02 Untitled.md",
+                "file": "JavaScript Notes/React Tutorial/React Notes/02 Basic React.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Untitled"
+              "title": "02 Basic React"
             }
           },
           {
-            "id": "4df6144844302dd4",
+            "id": "71985599c4476353",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -64,9 +64,23 @@
               "icon": "lucide-file",
               "title": "02 Arrays"
             }
+          },
+          {
+            "id": "a20217eacdc22016",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DSA/Tries.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Tries"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,7 +112,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "JpaRepository",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -123,7 +137,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 276.5
+    "width": 354.5
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -207,44 +221,47 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4df6144844302dd4",
+  "active": "05eedfbc12c3444b",
   "lastOpenFiles": [
+    "DSA/Tries.md",
+    "System Design/04 Untitled.md",
     "System Design/02 Untitled.md",
-    "System Design/01 Fundamentals.md",
+    "System Design/03 Database Sharding.md",
+    "DSA/13 Sliding Window.md",
     "DSA/02 Arrays.md",
+    "JavaScript Notes/React Tutorial/React Notes/02 Basic React.md",
+    "JavaScript Notes/React Tutorial/React Notes/01 Introduction.md",
+    "JavaScript Notes/React Tutorial/React Notes/00 Readme.md",
+    "JavaScript Notes/React Tutorial/incomplete React Notes.md",
+    "DSA/11 Hashmap and Hashset.md",
     "DSA/12 Graphs 🟢.md",
+    "One Page Notes/Git and Github.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
+    "MASTERING JAVA/00 ReadMe.md",
+    "OBSIDIAN cheatsheet.md",
+    "README.md",
+    "SPRING BOOT NOTES/Additional Java/Reading an Image.md",
+    "SPRING BOOT NOTES/Additional Java/Unit Testing.md",
+    "DSA/assets/Pasted image 20260502123550.png",
+    "DSA/assets/Pasted image 20260428103853.png",
+    "DSA/assets/Pasted image 20260413102354.png",
+    "DSA/assets/Pasted image 20260328111947.png",
+    "SPRING BOOT NOTES/Additional Notes/Basic Spring Security.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U08-Spring MVC Security.md",
+    "SPRING BOOT NOTES/SPRING BOOT notes for the boys.md",
+    "DSA/DATA STRUCTURES/Basic Methods.md",
+    "System Design/01 Fundamentals.md",
+    "System Design/assets/Pasted image 20260519215026.png",
+    "System Design/assets/Pasted image 20260519214041.png",
+    "System Design/assets",
     "DSA/14 Greedy Algorithm.md",
     "System Design/00 ReadMe.md",
-    "DevOps/Absolute Basics/01 Fundamentals.md",
     "System Design",
     "DevOps/Absolute Basics",
     "DevOps",
     "Untitled 2",
     "Untitled 1",
-    "DSA/15 Dynamic Programming 🟢.md",
-    "MASTERING JAVA/AWS/00 Readme.md",
     "MASTERING JAVA/AWS",
-    "DSA/09 Trees.md",
-    "DSA/00 Readme.md",
-    "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U04-REST APIs.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U03-Hibernate JPA.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U02-Spring Core.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U09-Advanced JPA-Hibernate Mappings.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U06-Thymeleaf Introduction.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U07-Thymeleaf CRUD App IMP.md",
-    "DSA/07 LinkedList.md",
-    "DSA/03 Strings.md",
-    "DSA/assets/Pasted image 20260502123550.png",
-    "DSA/01 Basics.md",
-    "DSA/LEETCODE TOP INTERVIEW 150/01 Array String.md",
-    "MASTERING JAVA/System Design Patterns.md",
-    "One Page Notes/Kubernetes Tutorial.md",
-    "ANGULAR/Angular Course Udemy/02 Angular Essentials.md",
-    "DSA/assets/Pasted image 20260428103853.png",
-    "DSA/assets/Pasted image 20260413102354.png",
-    "DSA/assets/Pasted image 20260328111947.png",
     "DSA/assets",
     "SPRING BOOT NOTES/Additional Notes/assets/Pasted image 20260322002058.png",
     "SPRING BOOT NOTES/Additional Notes/assets",
@@ -252,9 +269,6 @@
     "One Page Notes/assets/git picture 2.png",
     "MASTERING JAVA/assets/Screenshot (87).png",
     "MASTERING JAVA/assets",
-    "IONIC/assets/Screenshot (87).png",
-    "assets/Screenshot (87).png",
-    "IONIC/assets",
     "SPRING BOOT NOTES/Resources/canvas for structures.canvas",
     "DATA STRUCTURES/Untitled.canvas",
     "Untitled.canvas"

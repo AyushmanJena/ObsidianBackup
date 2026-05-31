@@ -551,3 +551,62 @@ public class MaximumXorOfTwoNoInTwoArrays {
     }
 }
 ```
+
+
+# LEETCODE
+
+[3093. Longest Common Suffix Queries](https://leetcode.com/problems/longest-common-suffix-queries/)
+#hard #tries #array #strings #hash 
+```java
+class Solution {
+    public int[] stringIndices(String[] wordsContainer, String[] wordsQuery) {
+        Node root = new Node();
+
+        // build the trie
+        for(int i = 0; i < wordsContainer.length; i++){
+            Node curr = root;
+            String word = wordsContainer[i];
+            int n = word.length();
+
+            if(curr.best == null || n < curr.best[1] || (n == curr.best[1] && i < curr.best[0])){
+                curr.best = new int[]{i, n};
+            }
+
+            //insert word
+            for(int j = word.length() - 1; j >= 0 ; j--){
+                char ch = word.charAt(j);
+                if(!curr.map.containsKey(ch)){
+                    curr.map.put(ch, new Node());
+                }
+                curr = curr.map.get(ch);
+
+                if(curr.best == null || n < curr.best[1] || (n == curr.best[1] && i < curr.best[0])){
+                    curr.best = new int[] {i, n};
+                }
+            }
+        }
+
+        int[] ans = new int[wordsQuery.length];
+        // traverse wordsQuery
+        for(int i = 0; i < wordsQuery.length; i++){
+            Node curr = root;
+            String word = wordsQuery[i];
+
+            for(int j = word.length() - 1; j >= 0 ; j--){
+                char ch = word.charAt(j);
+                if(!curr.map.containsKey(ch)) break;
+                curr = curr.map.get(ch);
+            }
+
+            ans[i] = curr.best[0];
+        }
+
+        return ans;
+    }
+
+    class Node{
+        HashMap<Character, Node> map = new HashMap<>();
+        int[] best; // [smallest index, length]
+    }
+}
+```

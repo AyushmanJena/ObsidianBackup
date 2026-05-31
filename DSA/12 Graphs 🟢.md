@@ -1648,3 +1648,57 @@ class Solution {
     }
 }
 ```
+
+[1340. Jump Game V](https://leetcode.com/problems/jump-game-v/)
+#hard #graph #array #dfs
+```java
+class Solution {
+    public int maxJumps(int[] arr, int d) {
+        int n = arr.length;
+        List<Integer>[] graph = new ArrayList[n];
+
+        for(int i = 0; i < n; i++){
+            graph[i] = new ArrayList<>();
+        }
+
+        for(int i= 0; i< n; i++){
+            for(int j = i + 1; j <= Math.min(n-1, i + d); j++){
+                if(arr[j] >= arr[i]){
+                    break;
+                }
+                graph[i].add(j);
+            }
+
+            for(int j = i - 1; j >= Math.max(0, i - d); j--){
+                if(arr[j] >= arr[i]){
+                    break;
+                }
+                graph[i].add(j);
+            }
+        }
+
+
+        int[] dp = new int[n];
+
+        int ans = 0;
+        for(int i = 0; i< n; i++){
+            ans = Math.max(ans, dfs(graph, i, dp));
+        }
+
+        return ans;
+    }
+
+    public int dfs(List<Integer>[] graph, int i, int[] dp){
+        if(dp[i] != 0){
+            return dp[i];
+        }
+        int best = 1;
+
+        for(int next : graph[i]){
+            best = Math.max(best, 1 + dfs( graph,next, dp));
+        }
+        dp[i] = best;
+        return best;
+    }
+}
+```

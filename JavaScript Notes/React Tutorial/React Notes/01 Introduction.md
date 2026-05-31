@@ -93,8 +93,8 @@ So you must enclose all the elements in your return in a parent tag
 function App() {
 	return (
 		<>
-		<Chai/>
-		<h1>Hello</h1>
+			<Chai/>
+			<h1>Hello</h1>
 		</>
 	)
 }

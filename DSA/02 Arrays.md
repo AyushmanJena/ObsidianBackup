@@ -2,6 +2,31 @@
 
 [[#2D Arrays / Matrix Questions]]
 
+[2540. Minimum Common Value](https://leetcode.com/problems/minimum-common-value/)
+```java
+class Solution {
+    public int getCommon(int[] nums1, int[] nums2) {
+        int p1 = 0;
+        int p2 = 0;
+
+        while(p1 < nums1.length && p2 < nums2.length){
+            if(nums1[p1] == nums2[p2]){
+                return nums1[p1];
+            }
+
+            if(nums1[p1] > nums2[p2]){
+                p2++;
+            }
+
+            else{
+                p1++;
+            }
+        }
+        return -1;
+    }
+}
+```
+
 [1848. Minimum Distance to the Target Element](https://leetcode.com/problems/minimum-distance-to-the-target-element/)
 #array #easy #twopointer 
 ```java
@@ -123,6 +148,26 @@ class Solution {
 }
 ```
 
+[1752. Check if Array Is Sorted and Rotated](https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/)
+#easy #array #sorting 
+```java
+class Solution {
+    public boolean check(int[] nums) {
+        int drops = 0;
+        int n = nums.length;
+
+        for(int i = 0; i< n; i++){
+            if(nums[i] > nums[(i+1) % n]){
+                drops++;
+            }
+            if(drops > 1) return false;
+        }
+
+        return true;
+    }
+}
+```
+
 [2515. Shortest Distance to Target String in a Circular Array](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/)
 #array #easy #twopointer 
 ```java
@@ -226,7 +271,7 @@ class Solution {
 
 
 [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/)
-#easy #twopointer #array #hashs
+#easy #twopointer #array #hash
 ```java
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
@@ -551,6 +596,38 @@ class Solution {
 }
 ```
 
+[3043. Find the Length of the Longest Common Prefix](https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/)
+#medium #array #hash 
+```java
+class Solution {
+    public int longestCommonPrefix(int[] arr1, int[] arr2) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int i = 0; i < arr1.length ;i++){
+            int n = arr1[i];
+            while(n > 0){
+                set.add(n);
+                n = n /10;
+            }
+        }
+        System.out.println("temp");
+        int ans = 0;
+
+        for(int i = 0; i< arr2.length; i++){
+            int n = arr2[i];
+            while(n > 0){
+                if(set.contains(n)){
+                    String s = Integer.toString(n);
+                    ans = Math.max(ans, s.length());
+                }
+                n = n/10;
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
 [334. Increasing Triplet Subsequence](https://leetcode.com/problems/increasing-triplet-subsequence/)
 #medium #array #greedy
 ```java
@@ -633,6 +710,36 @@ class Solution {
         for(int i = 1; i< nums.length; i++){
             curr = curr - sum + (nums.length * nums[i-1]);
             ans = Math.max(ans, curr);
+        }
+
+        return ans;
+    }
+}
+```
+
+[2657. Find the Prefix Common Array of Two Arrays](https://leetcode.com/problems/find-the-prefix-common-array-of-two-arrays/)
+#easy #array #dp 
+```java
+class Solution {
+    public int[] findThePrefixCommonArray(int[] A, int[] B) {
+        int[] seen = new int[A.length + 1];
+        int[] ans = new int[A.length];
+
+        int common = 0;
+
+        for(int i = 0; i < A.length; i++){
+            seen[A[i]]++;
+
+            if(seen[A[i]] == 2){
+                common++;
+            }
+
+            seen[B[i]]++;
+            if(seen[B[i]] == 2){
+                common++;
+            }
+
+            ans[i] = common;
         }
 
         return ans;
@@ -920,6 +1027,87 @@ class Solution {
 }
 ```
 
+[3629. Minimum Jumps to Reach End via Prime Teleportation](https://leetcode.com/problems/minimum-jumps-to-reach-end-via-prime-teleportation/)
+#medium #array #hash #bfs #maths 
+https://www.youtube.com/watch?v=VAfMyGlwv5g
+```java
+class Solution {
+    public int minJumps(int[] nums) {
+        // create frequency map
+        // visited array
+        // dist array
+        // queue
+        // loop over using BFS
+
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        int[] dist = new int[nums.length];
+        boolean[] vis = new boolean[nums.length];
+        int maxNum = Integer.MIN_VALUE;
+
+        for(int i = 0 ; i < nums.length; i++){
+            if(!map.containsKey(nums[i])){
+                map.put(nums[i], new ArrayList<>());
+            }
+            map.get(nums[i]).add(i);
+            maxNum = Math.max(maxNum, nums[i]);
+        }
+
+        for(int i = 1; i < dist.length; i++){
+            dist[i] = -1;
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        vis[0] = true;
+
+        while(!queue.isEmpty()){
+            int curr = queue.remove();
+
+            List<Integer>  nextJumps = new ArrayList<>();
+            if(curr - 1 >= 0){
+                nextJumps.add(curr - 1);
+            }
+            if(curr + 1 <= nums.length -1){
+                nextJumps.add(curr + 1);
+            }
+
+            if(isPrime(nums[curr])){
+                int p = nums[curr];
+                for( int y = p ; y <= maxNum; y += p){
+                    if(map.containsKey(y)){
+                        nextJumps.addAll(map.get(y));
+                        map.remove(y);
+                    }
+                }
+            }
+
+            for(int next : nextJumps){
+                if(!vis[next]){
+                    vis[next] = true;
+                    dist[next ] = dist[curr] + 1;
+                    if(next == nums.length  -1 ){
+                        return dist[next];
+                    }
+                    queue.add(next);
+                }
+            }
+        }
+
+        return dist[nums.length -1];
+    }
+
+    boolean isPrime(int num){
+        if(num < 2)return false;
+        if(num == 2) return true;
+        for(int i = 2; i <= Math.sqrt(num); i++){
+            if(num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
 
 ### 2D Arrays / Matrix Questions
 

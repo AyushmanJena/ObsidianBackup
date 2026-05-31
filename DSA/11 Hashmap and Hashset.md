@@ -141,3 +141,35 @@ public class KarpRabinAlgo {
 }
 
 ```
+
+# LEETCODE
+
+[3120. Count the Number of Special Characters I](https://leetcode.com/problems/count-the-number-of-special-characters-i/)
+#strings #hash #easy 
+```java
+class Solution {
+    public int numberOfSpecialChars(String word) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int i = 0 ; i < word.length() ; i++){
+            char ch = word.charAt(i);
+            
+            if((ch >= 'a' && ch <= 'z') && !set.contains(ch+0)){
+                set.add(ch+0);
+            }
+        }
+        int ans = 0;
+        System.out.println(set);
+
+        for(int i = 0; i < word.length(); i++){
+            char ch = word.charAt(i);
+            System.out.println(ch-32);
+            if((ch >= 'A' && ch <= 'Z') && set.contains(ch + 32)){
+                ans++;
+                set.remove(ch+32);
+            }
+        }
+
+        return ans;
+    }
+}
+```
