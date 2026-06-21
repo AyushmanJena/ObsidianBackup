@@ -327,3 +327,89 @@ public static void sort(int[] arr, int low, int high){ //
     sort(arr, s, high);
 }
 ```
+
+
+# LEETCODE QUESTIONS
+[2161. Partition Array According to Given Pivot](https://leetcode.com/problems/partition-array-according-to-given-pivot/)
+#sorting #array #easy 
+```java
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        int[] ans = new int[nums.length];
+        int sameCount = 0;
+        int j = 0;
+        for(int i = 0; i< nums.length; i++){
+            if(nums[i] == pivot){
+                sameCount++;
+            }
+            if(nums[i] < pivot){
+                ans[j] = nums[i];
+                j++;
+            }
+        }
+
+        while(sameCount > 0){
+            ans[j] = pivot;
+            j++;
+            sameCount--;
+        }
+
+        for(int i = 0; i< nums.length; i++){
+            if(nums[i] > pivot){
+                ans[j] = nums[i];
+                j++;
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
+[1840. Maximum Building Height](https://leetcode.com/problems/maximum-building-height/)
+#hard #sorting #array #prefixsum 
+```java
+class Solution {
+    public int maxBuilding(int n, int[][] restrictions) {
+        if(restrictions.length == 0){
+            return n-1;
+        }
+        
+        Arrays.sort(restrictions, (a, b) -> Integer.compare(a[0], b[0]));
+
+
+        int ans = 0;
+
+        int m = restrictions.length;
+        restrictions[0][1] = Math.min(restrictions[0][1], restrictions[0][0] - 1);
+
+        for(int i = 1; i < m; i++){
+            int gap = restrictions[i][0] - restrictions[i-1][0];
+            restrictions[i][1] = Math.min(restrictions[i][1], restrictions[i-1][1] + gap);
+        }
+
+        for(int i = m - 2; i >= 0; i--){
+            int gap = restrictions[i+1][0] - restrictions[i][0];
+            restrictions[i][1] = Math.min(restrictions[i][1], restrictions[i+1][1] + gap);
+        }
+
+        int gap = restrictions[0][0] - 1;
+        ans = Math.max(ans, (gap + restrictions[0][1]) / 2);
+
+        for(int i =1; i < m; i++){
+            gap = restrictions[i][0] - restrictions[i-1][0];
+            int h1 = restrictions[i-1][1];
+            int h2 = restrictions[i][1];
+
+            ans = Math.max(ans, (gap+ h1 + h2) / 2);
+        }
+
+        int lastPos = restrictions[m-1][0];
+        int lastH = restrictions[m-1][1];
+
+        ans = Math.max(ans, lastH + (n - lastPos));
+
+        return ans;
+    }
+}
+```

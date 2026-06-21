@@ -291,7 +291,7 @@ It still increases value by 1 each time.
 This is due to useState() 
 Since it is the same task performed 4 times. The calls are batched and performed only once.
 
-To fix that we can use a callback, and passing the last updatedState
+To fix that we can use a callback function, and passing the last updatedState
 
 ```jsx
 function addValue(){

@@ -123,6 +123,38 @@ class Solution {
 }
 ```
 
+[2574. Left and Right Sum Differences](https://leetcode.com/problems/left-and-right-sum-differences/)
+#easy #array #prefixsum 
+```java
+class Solution {
+    public int[] leftRightDifference(int[] nums) {
+        if(nums.length == 1) return new int[] {0};
+        int[] left = new int[nums.length];
+        int[] right = new int[nums.length];
+
+        int leftSum = 0;
+        left[0] = 0;
+        for(int i = 1; i<nums.length; i++){
+            leftSum += nums[i-1];
+            left[i] = leftSum;
+        }
+
+        int rightSum = 0;
+        right[nums.length -1] = 0;
+        for(int i = nums.length - 2; i >= 0; i--){
+            rightSum += nums[i+1];
+            right[i] = rightSum;
+        }
+
+        for(int i = 0; i < nums.length; i++){
+            left[i] = Math.abs(left[i] - right[i]);
+        }
+
+        return left;
+    }
+}
+```
+
 [2553. Separate the Digits in an Array](https://leetcode.com/problems/separate-the-digits-in-an-array/)
 #easy #array 
 ```java

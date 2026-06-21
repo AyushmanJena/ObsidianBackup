@@ -24,63 +24,49 @@
             }
           },
           {
-            "id": "5fc23c8f894278db",
+            "id": "bd8d1207c70ddcbc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SPRING BOOT NOTES/Additional Notes/Swagger Dependencies.md",
+                "file": "JavaScript Notes/React Tutorial/React Notes/04 React Pt2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Swagger Dependencies"
+              "title": "04 React Pt2"
             }
           },
           {
-            "id": "05eedfbc12c3444b",
+            "id": "2529aa288bbc184d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JavaScript Notes/React Tutorial/React Notes/02 Basic React.md",
+                "file": "JavaScript Notes/React Tutorial/React Notes/03 Intermediate.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Basic React"
+              "title": "03 Intermediate"
             }
           },
           {
-            "id": "71985599c4476353",
+            "id": "1fc6f9e23261d12a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/02 Arrays.md",
+                "file": "JavaScript Notes/React Tutorial/React Notes/04 React Pt2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Arrays"
-            }
-          },
-          {
-            "id": "a20217eacdc22016",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/Tries.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Tries"
+              "title": "04 React Pt2"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -112,7 +98,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "segment ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -137,7 +123,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 354.5
+    "width": 261.5,
+    "collapsed": true
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -221,54 +208,54 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "05eedfbc12c3444b",
+  "active": "1fc6f9e23261d12a",
   "lastOpenFiles": [
+    "DSA/03 Sorting Algorithms.md",
+    "DSA/12 Graphs 🟢.md",
+    "JavaScript Notes/React Tutorial/React Notes/04 React Pt2.md",
+    "JavaScript Notes/React Tutorial/React Notes/03 Intermediate.md",
+    "DSA/03 Strings.md",
+    "One Page Notes/SQL.md",
+    "DSA/15 Dynamic Programming 🟢.md",
+    "SPRING BOOT NOTES/Spring Boot Course/U10-.md",
+    "DSA/09 Trees.md",
+    "SPRING BOOT NOTES/Additional Notes/Swagger Dependencies.md",
+    "DSA/02 Arrays.md",
+    "DSA/11 Hashmap and Hashset.md",
+    "OBSIDIAN cheatsheet.md",
+    "SQL/SQL Basics.md",
+    "SQL/00 Readme.md",
+    "SPRING BOOT NOTES/Additional Notes/Stripe API Integration.md",
+    "SQL/Untitled",
+    "JavaScript Notes/React Tutorial/React Notes/02 Basic React.md",
+    "SQL",
+    "System Design/System Design",
+    "System Design/00 ReadMe.md",
+    "System Design/assets/Pasted image 20260601225940.png",
+    "System Design/04 Hashing.md",
+    "System Design/assets/Pasted image 20260601224513.png",
+    "System Design/assets/Pasted image 20260601221239.png",
+    "System Design/assets/Pasted image 20260601220955.png",
     "DSA/Tries.md",
-    "System Design/04 Untitled.md",
     "System Design/02 Untitled.md",
     "System Design/03 Database Sharding.md",
     "DSA/13 Sliding Window.md",
-    "DSA/02 Arrays.md",
-    "JavaScript Notes/React Tutorial/React Notes/02 Basic React.md",
     "JavaScript Notes/React Tutorial/React Notes/01 Introduction.md",
     "JavaScript Notes/React Tutorial/React Notes/00 Readme.md",
     "JavaScript Notes/React Tutorial/incomplete React Notes.md",
-    "DSA/11 Hashmap and Hashset.md",
-    "DSA/12 Graphs 🟢.md",
-    "One Page Notes/Git and Github.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U05-Spring Security.md",
-    "MASTERING JAVA/00 ReadMe.md",
-    "OBSIDIAN cheatsheet.md",
-    "README.md",
-    "SPRING BOOT NOTES/Additional Java/Reading an Image.md",
-    "SPRING BOOT NOTES/Additional Java/Unit Testing.md",
     "DSA/assets/Pasted image 20260502123550.png",
     "DSA/assets/Pasted image 20260428103853.png",
     "DSA/assets/Pasted image 20260413102354.png",
     "DSA/assets/Pasted image 20260328111947.png",
-    "SPRING BOOT NOTES/Additional Notes/Basic Spring Security.md",
-    "SPRING BOOT NOTES/Spring Boot Course/U08-Spring MVC Security.md",
-    "SPRING BOOT NOTES/SPRING BOOT notes for the boys.md",
-    "DSA/DATA STRUCTURES/Basic Methods.md",
-    "System Design/01 Fundamentals.md",
     "System Design/assets/Pasted image 20260519215026.png",
     "System Design/assets/Pasted image 20260519214041.png",
     "System Design/assets",
-    "DSA/14 Greedy Algorithm.md",
-    "System Design/00 ReadMe.md",
     "System Design",
     "DevOps/Absolute Basics",
     "DevOps",
     "Untitled 2",
     "Untitled 1",
     "MASTERING JAVA/AWS",
-    "DSA/assets",
-    "SPRING BOOT NOTES/Additional Notes/assets/Pasted image 20260322002058.png",
-    "SPRING BOOT NOTES/Additional Notes/assets",
-    "One Page Notes/assets/example-diagram.png",
-    "One Page Notes/assets/git picture 2.png",
-    "MASTERING JAVA/assets/Screenshot (87).png",
-    "MASTERING JAVA/assets",
     "SPRING BOOT NOTES/Resources/canvas for structures.canvas",
     "DATA STRUCTURES/Untitled.canvas",
     "Untitled.canvas"

@@ -605,6 +605,62 @@ class Solution {
 }
 ```
 
+[3614. Process String with Special Operations II](https://leetcode.com/problems/process-string-with-special-operations-ii/)
+#hard #strings 
+```java
+class Solution {
+    public char processStr(String s, long k) {
+        long len = 0;
+
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+
+            if(ch == '#'){
+                len = len * 2;
+            }
+            else if(ch == '*'){
+                if(len > 0){
+                    len--;
+                }
+            }else if(ch == '%'){
+                continue;
+            }else{
+                len++;
+            }
+        }
+
+        if(k >= len){
+            return '.';
+        }
+
+        int n = s.length();
+
+        for(int i = n-1; i >=0; i--){
+            char ch = s.charAt(i);
+
+            if(ch == '#'){
+                len = len/2;
+                if (k >= len){
+                    k  = k -len;
+                }
+            }
+            else if(ch == '*'){
+                len++;
+            }else if(ch == '%'){
+                k = len - k -1;
+            }else{
+                len--;
+                if(len == k){
+                    return s.charAt(i);
+                }
+            }
+        }
+
+        return '.';
+    }
+}
+```
+
 
 [761. Special Binary String](https://leetcode.com/problems/special-binary-string/)
 #hard #strings #sorting #recursion

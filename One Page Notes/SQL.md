@@ -19,8 +19,8 @@ DROP DATABASE IF EXISTS databaseName;
 ```sql
 USE databaseName;
 
-USE college;  
- ```
+USE college;
+```
 
 show all databases in our server
 ```
@@ -100,7 +100,7 @@ Binary :
 
 
 UNSIGNED : By default all numeric datatypes can have negative as well as positive values. This restrict the range, so if we know there is only +ve values which is stored, we use UNSIGNED attribute(0-255)
-```
+```sql
 CREATE TABLE student(
 	id INT UNSIGNED
 );
@@ -200,6 +200,18 @@ CREATE TABLE childtableName(
 ```
 
 
+#### Multi-Level (Chained) Cascade
+Cascade propagates through multiple levels of foreign keys.
+```
+departments -> employees -> projects
+
+	delete a department row
+	       ↓ cascade
+	Employees with that dept FK deleted
+			↓ cascade again
+	All their projects deleted automatically
+
+```
 
 # Types of SQL commands
 ### DQL 
@@ -220,11 +232,14 @@ CREATE, ALTER, DROP, TRUNCATE, RENAME
 ### DCL
 Data Control Language
 Specify the controls on our data
+Controls who can access what in the database
+GRANT, REVOKE 
 
 ### TCL
-Transaction Control Command
+Transaction Control Commands
 Used while performing transactions
-
+Controls when changes are saved or rolled back
+BEGIN, COMMIT, ROLLBACK, SAVEPOINT
 
 # Update Command
  The UPDATE command in SQL is used to modify existing records in a table. 
@@ -288,7 +303,7 @@ SELECT name, age FROM employee WHERE aga>20;
 ```
 
 
-# Alter Command
+# ALTER Command
 Alter is a DDL command used to modify(change) existing database objects, such as tables, indexes or constraints(schema)
 
 Ex: 
@@ -465,6 +480,10 @@ AND(&), OR(|)
 LIKE operator is used to search for a specified pattern in a column.
 It uses wildcard operators for matching patterns.
 
+> [!note]
+> Percentage Sign -> 0 or Multiple Character
+> Underscore Sign -> Single Character
+
 % (percentage sign) : It matches for any sequence of zero or more characters
 ```sql
 SELECT * FROM employee WHERE name LIKE 'A%';
@@ -580,7 +599,7 @@ Types of Aggregate functions :
 - This counts how many things are in a list or a group.
 
 ```sql
-SELECT count(name) FROM employee; 
+SELECT COUNT(name) FROM employee; 
 -- This will tell the number of employees in a company.
 -- name : column name
 ```
@@ -637,6 +656,7 @@ GROUP BY department;
 
 -- output will be all departments and their avg salary table
 ```
+- avgsal would be the column name for AVG(salary) as an alias
 
 ##### HAVING clause
 Having Clause : The HAVING clause is just like the where clause but the main difference is it works on aggregated data. 
@@ -656,7 +676,13 @@ GROUP BY department
 HAVING avgsal > 1500;
 ```
 
-![[Pasted image 20250930225540.png]]
+| WHERE                                                                                          | HAVING                                                                                        |
+| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Used to filter rows from the result based on condition applied to a row before the aggregation | Used to filter rows from the result based on condition applied to a row after the aggregation |
+| It is used with SELECT, UPDATE or DELETE commands                                              | It is used with GROUP BY and aggregate functions                                              |
+| `SELECT *  FROM tableName WHERE condition;`                                                    | `SELECT col1, col2 aggregateFun(col2) FROM tableName GROUP BY col1 col2 HAVING condition;`    |
+
+
 # Practice Questions 
 ```sql
 -- Write a query to find the total number of employees in each city
@@ -691,13 +717,13 @@ HAVING AVG(salary) > 50000; -- can use avgsalary as well
 
 # Joins in SQL
 Joins are used to combine rows from two or more tables based on a related or shared or common column between them.
-There are commonly 4 types of joins including 
-INNER JOIN
-LEFT JOIN
-RIGHT JOIN,
-FULL JOIN,
-SELF JOIN,
-CROSS JOIN
+Common types of Joins:  
+- INNER JOIN
+- LEFT JOIN
+- RIGHT JOIN,
+- FULL JOIN,
+- SELF JOIN,
+- CROSS JOIN
 
 Q. Is Foreign key important for performing joins?
 A. Joins can be performed based on any columns that establish a relationship between tables, not just FK constraints, so its not necessary.
@@ -841,7 +867,7 @@ LEFT JOIN table2
 ON table1.colName = table2.colName
 WHERE table2.colName IS NULL;
 
--- EX :
+-- EX : Find customers who have not placed any orders
 SELECT *
 FROM customer
 LEFT JOIN orders
@@ -859,7 +885,7 @@ LEFT JOIN table2
 ON table1.colName = table2.colName
 WHERE table1.colName IS NULL;
 
---EX : 
+--EX : Orders with no customers (usually return no rows)
 SELECT *
 FROM customer
 LEFT JOIN orders
@@ -888,7 +914,7 @@ RIGHT JOIN table2
 ON table1.colName = table2.colName
 WHERE table1.colName IS NULL;
 
---EX : 
+--EX : Customers without orders and orders without customers
 SELECT *
 FROM customer
 LEFT JOIN orders
@@ -898,9 +924,9 @@ WHERE orders.id IS NULL
 UNION
 
 SELECT *
-FROM customer
-LEFT JOIN orders
-ON customer.id = orders.id
+FROM orders
+LEFT JOIN customer
+ON orders.id = customer.id
 WHERE customer.id IS NULL;
 ```
 
@@ -914,7 +940,7 @@ Things to keep in mind :
 3. Columns should be listed in the same order across all SELECT statements.
 
 ### UNION ALL Operator in SQL
-UNION Operator in SQL is used to combine the results of two or more SELECT queries inot a single result set and gives all rows by **not removing duplicate rows**.
+UNION Operator in SQL is used to combine the results of two or more SELECT queries in a single result set and gives all rows by **not removing duplicate rows**.
 
 ```sql
 SELECT columns
@@ -937,7 +963,8 @@ FROM tableName;
 
 --EX : 
 --Find the employees with average age and age of employees
-SELECT AGE, (AVG(age) FROM employee) as avg_age
+SELECT AGE, 
+	(SELECT AVG(age) FROM employee) as avg_age
 FROM employee;
 ```
 
@@ -953,7 +980,7 @@ WHERE column name operator (subquery);
 -- 2. find employee having salary greater than min salary
 SELECT name, salary
 FROM employee
-WHERE salary >(SELECT MIN(salary) FROM employee);
+WHERE salary > (SELECT MIN(salary) FROM employee);
 
 -- Find the employee with the minimum age
 -- 1. FInd the min age
@@ -984,7 +1011,7 @@ Steps
 - So at the end of the query we will provide a LIMIT so that on the dataset which we have got after ordering the salary in descending order, we can fetch the nth highest one.
 
 ```sql
-SELECT DISTINCE Salary
+SELECT DISTINCT Salary
 FROM tableName
 ORDER BY Salary DESC
 LIMIT n-1, 1; -- skip first n-1 and get the 1 after that

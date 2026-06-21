@@ -399,6 +399,43 @@ class Solution {
 }
 ```
 
+[2196. Create Binary Tree From Descriptions](https://leetcode.com/problems/create-binary-tree-from-descriptions/)
+#medium #tree #hash #array 
+```java
+class Solution {
+    public TreeNode createBinaryTree(int[][] descriptions) {
+        HashMap<Integer, TreeNode> map = new HashMap<>();
+        HashSet<Integer> headHunter = new HashSet<>();
+
+        for(int i = 0; i< descriptions.length; i++){
+            if(!map.containsKey(descriptions[i][0])){
+                map.put(descriptions[i][0], new TreeNode(descriptions[i][0]));
+            }
+            if(!map.containsKey(descriptions[i][1])){
+                map.put(descriptions[i][1], new TreeNode(descriptions[i][1]));
+            }
+            headHunter.add(descriptions[i][0]);
+            headHunter.add(descriptions[i][1]);
+        }
+
+        for(int i = 0; i< descriptions.length; i++){
+            headHunter.remove(descriptions[i][1]);
+        }
+        int head = headHunter.iterator().next();
+
+        for(int i = 0; i<descriptions.length; i++){
+            if(descriptions[i][2] == 1){
+                map.get(descriptions[i][0]).left = map.get(descriptions[i][1]);
+            }else{
+                map.get(descriptions[i][0]).right = map.get(descriptions[i][1]);
+            }
+        }
+
+        return map.get(head);
+    }
+}
+```
+
 
 [230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 
@@ -580,3 +617,11 @@ class Solution {
         }
     }
 ```
+
+
+
+
+segment tree solution
+- Build a segment tree on the array `[0, n-1]` each ode holds `[min, max]` in the range
+- Use priority queue and add initial value and array range `[val, 0, n-1]`
+- Keep removing top k elements and add to total value
