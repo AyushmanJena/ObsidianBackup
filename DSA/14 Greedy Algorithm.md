@@ -376,3 +376,36 @@ class Solution {
     }
 }
 ```
+
+[486. Predict the Winner](https://leetcode.com/problems/predict-the-winner/)
+#medium #greedy #array #dp #recursion 
+```java
+class Solution {
+    public boolean predictTheWinner(int[] nums) {
+        int n = nums.length;
+        int[][] dp = new int[n][n];
+
+        for(int[] arr : dp){
+            Arrays.fill(arr, -1);
+        }
+
+        return helper(nums, 0, n-1, dp) >= 0;
+    }
+
+    public int helper(int[] nums, int l, int r, int[][] dp){
+        if(l == r){
+            return nums[l];
+        }
+
+        if(dp[l][r] != -1){
+            return dp[l][r];
+        }
+
+        int left = nums[l] - helper(nums, l+1, r, dp);
+        int right = nums[r] - helper(nums, l, r-1, dp);
+
+        dp[l][r] = Math.max(left, right);
+        return dp[l][r];
+    }
+}
+```

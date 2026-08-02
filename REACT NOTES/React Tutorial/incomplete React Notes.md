@@ -100,7 +100,7 @@ For static values write them in html as usual, but for dynamic values write them
 -  Typically done from a parent component to a child component
 - Similar to arguments passed to functions
 
-![[01.png]]
+![[assets/01.png]]
 Example : 
 
 ```js
@@ -170,7 +170,7 @@ Now tailwind css is the way to go. (most popular and recommended)
 - State is like a react component's brain
 - It holds information about components that can change overtime.
 
-![[02.png]]
+![[assets/02.png]]
 
 If  you use js variable instead of states and pass them as props to components, react won't know when the value has changed and would not render changes accordingly.
 Because React rendering process relies on state and props to decide when and how to re-render components.

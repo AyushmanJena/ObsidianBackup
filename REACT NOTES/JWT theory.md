@@ -35,7 +35,7 @@ Authentication vs Authorization
 accessing multiple resources with the key
 
 
-![[Pasted image 20250601000450.png]]
+![[assets/Pasted image 20250601000450.png]]
 
 
 
@@ -83,9 +83,9 @@ Three tier architecture
 Client-server-database
 
 ##### JWT TOKEN (stateless mechanism)  :
-![[Pasted image 20250601002937.png]]
+![[assets/Pasted image 20250601002937.png]]
 
-![[Pasted image 20250601003541.png]]
+![[assets/Pasted image 20250601003541.png]]
 again the first step repeats
 
 
@@ -93,7 +93,7 @@ again the first step repeats
 - we need to store something in the db and verify it everytime
 - consumes more server memory due to the db read write use
 
-![[Pasted image 20250601003940.png]]
+![[assets/Pasted image 20250601003940.png]]
 (cropped -> Invalid session response)
 
 

@@ -262,6 +262,37 @@ class Solution {
 }
 ```
 
+[3741. Minimum Distance Between Three Equal Elements II](https://leetcode.com/problems/minimum-distance-between-three-equal-elements-ii/)
+#medium #array #hash #slidingwindow 
+```java
+class Solution {
+    public int minimumDistance(int[] nums) {
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+
+        for(int i =0; i<nums.length; i++){
+            if(!map.containsKey(nums[i])){
+                map.put(nums[i], new ArrayList<>());
+            }
+            map.get(nums[i]).add(i);
+        }
+
+        int ans = Integer.MAX_VALUE;
+
+        for(int k : map.keySet()){
+            int size = map.get(k).size();
+            for(int i = 2; i<size; i++){
+                ans = Math.min(ans, 2 * (map.get(k).get(i) - map.get(k).get(i-2)) );
+            }
+        }
+
+        if(ans == Integer.MAX_VALUE)return -1;
+
+        return ans;
+    }
+}
+```
+
+
 [930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) #imp
 ```java
 class Solution {

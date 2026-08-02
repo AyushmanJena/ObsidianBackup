@@ -222,3 +222,106 @@ class Solution {
     }
 }
 ```
+
+
+[3699. Number of ZigZag Arrays I](https://leetcode.com/problems/number-of-zigzag-arrays-i/)
+#hard #dp #array #greedy 
+https://www.youtube.com/watch?v=rlTXRJdMAso
+```java
+class Solution {
+    public int zigZagArrays(int n, int l, int r) {
+        final int MOD = 1_000_000_007;
+        int m = r - l + 1;
+
+        long[] up   = new long[m];
+        long[] down = new long[m];
+        Arrays.fill(up, 1);
+        Arrays.fill(down, 1);
+
+        for (int i = 2; i <= n; i++) {
+            long[] preDown = new long[m + 1];
+            for (int j = 0; j < m; j++)
+                preDown[j + 1] = (preDown[j] + down[j]) % MOD;
+
+            long[] sufUp = new long[m + 1];
+            for (int j = m - 1; j >= 0; j--)
+                sufUp[j] = (sufUp[j + 1] + up[j]) % MOD;
+
+            long[] newUp   = new long[m];
+            long[] newDown = new long[m];
+            for (int j = 0; j < m; j++) {
+                newUp[j]   = preDown[j];
+                newDown[j] = sufUp[j + 1];
+            }
+
+            up = newUp;
+            down = newDown;
+        }
+
+        long ans = 0;
+        for (int j = 0; j < m; j++){
+            ans = (ans + up[j] + down[j]) % MOD;
+        }
+        return (int) ans;
+    }
+}
+```
+
+
+[3700. Number of ZigZag Arrays II](https://leetcode.com/problems/number-of-zigzag-arrays-ii/)
+soln : https://www.youtube.com/watch?v=ayEV16AVCq4
+#hard #dp #array #greedy 
+```java
+class Solution {
+    int mod = 1_000_000_007;
+
+    public int zigZagArrays(int n, int l, int r) {
+        int m = r - l + 1;
+
+        long[][] T = new long[m][m];
+        for (int j = 0; j < m; j++) {
+            for (int i = m - j; i < m; i++) {
+                T[i][j] = 1; 
+            }
+        }
+
+        long[][] powT = matPow(T, n - 1, m);
+
+        long total = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < m; j++) {
+                total = (total + powT[i][j]) % mod;
+            }
+        }
+
+        return (int) (total * 2 % mod);
+    }
+
+    long[][] matPow(long[][] base, long e, int m) {
+        long[][] res = new long[m][m];
+        for (int i = 0; i < m; i++) res[i][i] = 1;
+
+        while (e > 0) {
+            if (e % 2 == 1) res = mul(res, base);
+            base = mul(base, base);
+            e >>= 1;
+        }
+        return res;
+    }
+
+    long[][] mul(long[][] A, long[][] B) {
+        int m = A.length;
+        long[][] C = new long[m][m];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < m; j++) {
+                long sum = 0;
+                for (int k = 0; k < m; k++) {
+                    sum = (sum + A[i][k] * B[k][j]) % mod;
+                }
+                C[i][j] = sum;
+            }
+        }
+        return C;
+    }
+}
+```
