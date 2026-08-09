@@ -256,8 +256,9 @@ Redux is  a JavaScript library that provides a central place to store, update an
 Redux Toolkit : More abstraction, less configurations and can help you do stuff more easily
 
 ### Concepts in Redux and Redux Toolkit : 
-Store :  Single store, similar to global variables which we can access from anywhere. Can have multiple stores for different functionalities like auth, product, etc.
-Reducers : Writing and updating to specific stores is done through reducers
+**Store** :  Single store, similar to global variables which we can access from anywhere. Can have multiple stores for different functionalities like auth, product, etc.
+**Reducers** : Writing and updating to specific stores is done through reducers
+**Slice** : A slice in Redux Toolkit is a collection of redux reducer logic and actions for a single feature of an app.
 
 useSelector() : When you have to select a value from a store
 useDispatch() : When you have to dispatch a value from a store
@@ -285,10 +286,71 @@ configureStore
 configureStore() takes an object
 
 store.js
-```
+```js
+
 ```
 
 now create reducers
 createReducer() 
 
-1:36:50
+/src/feature folder : 
+multiple features in it
+
+create slice in the folder
+/src/feature/todo/todoSlice.js
+feature : todo
+slice: todoSlice
+
+todoSlice.js
+```js
+import {createSlice, nanoid} from '@reduxjs/toolkit';
+
+const initialState = {
+    todos: [{id: 1, text: "Hello World"}]
+}
+
+export const todoSlice = createSlice({
+    name: 'todo', // these properties exists in redux toolkit
+    initialState,
+    reducers: { // reducers take properties and function 
+        addTodo: (state, action) => {
+            const todo = {
+                id: nanoid(),
+                 text: action.payload
+            }
+            state.todos.push(todo)
+        },
+        removeTodo: (state, action) => {
+            state.todos = state.todos.filter((todo) => {todo.id !== action.payload})
+        },
+
+    } 
+})
+
+export const {addTodo, removeTodo} = todoSlice.actions; // export all slice actions that will perform all actions
+
+export default todoSlice.reducer; // export all reducers 
+```
+
+nanoid -> creates unique ids 
+initialState -> How the store would look initially, can be an array or object as well
+createSlice -> takes object and creates a slice.
+
+each function in reducer will have two things : state and action from redux toolkit
+state -> state of the data
+action -> the value which would change the state e.g. id, username, etc.
+payload can accept objects with multiple values, etc. 
+
+In context API we used to give only function declaration but did not define the context in the same place. 
+but in Redux Toolkit we will be writing definition in the slice itself.
+
+Now accept the slice in the store.js
+```js
+import {configureStore} from '@reduxjs/toolkit';
+import todoReducer from '../features/todo/todoSlice';
+
+export const store = configureStore({
+    reducer: todoReducer
+})
+```
+

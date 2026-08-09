@@ -276,6 +276,8 @@ shortcut : rafce -> react arrow function component elements
 
 # MOVIE PROJECT 
 
+Sadly the public api they used is not available in our region
+
 ### Installing Tailwindcss in the project
 1. `npm install tailwindcss @tailwindcss/vite`
 2. Configure the vite plugin  vite.config.js

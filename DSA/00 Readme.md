@@ -23,7 +23,6 @@ Important Questions to make a new list :
 
 MORE : 
 - add to Basics (also add Hanoi tower)
-- Add traversal methods in trees, BFS DFS, etc.
 
 TOPICS NEED MORE QUESTIONS :
 1. Stacks and Queues

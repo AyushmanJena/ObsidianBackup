@@ -38,6 +38,15 @@ ng build --base-href  "https://ayushmanjena.github.io/tic-tac-toe/"
 npx angular-cli-ghpages --dir=dist/tic-tac-toe/browser
 ```
 
+Deploying Portfolio Website : 
+```
+First push your code to the main branch of your repo
+
+ng build --base-href="/"
+
+npx angular-cli-ghpages --dir=dist/portfolio/browser
+```
+
 ### Basic directory commands : 
 ```
 Show contents of current folder : 

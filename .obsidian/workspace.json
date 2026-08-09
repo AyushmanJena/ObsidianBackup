@@ -38,9 +38,37 @@
               "icon": "lucide-file",
               "title": "04 React Pt2"
             }
+          },
+          {
+            "id": "9be2a877b3037661",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "One Page Notes/Git and Github.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Git and Github"
+            }
+          },
+          {
+            "id": "a5b0165233754501",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "REACT NOTES/React Tutorial/React Notes/02 Basic React.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02 Basic React"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -74,7 +102,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "#hash",
+                "query": "BFS",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -99,8 +127,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 272.5,
-    "collapsed": true
+    "width": 272.5
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -184,41 +211,42 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "db8befb8ce8bc341",
+  "active": "a5b0165233754501",
   "lastOpenFiles": [
-    "DSA/14 Greedy Algorithm.md",
-    "REACT NOTES/React Tutorial/React Notes/04 React Pt2.md",
-    "DSA/12 Graphs 🟢.md",
-    "Node Backend Notes/Crash Course/00 Crash Course.md",
-    "DSA/11 Hashmap and Hashset.md",
-    "Node Backend Notes/Crash Course",
-    "Node Backend Notes",
-    "One Page Notes/CSS.md",
-    "REACT NATIVE NOTES incomplete/React Native Youtube Tutorial/02 Basic App Development.md",
     "REACT NOTES/Axios React API Handling.md",
-    "REACT NOTES/JWT theory.md",
+    "REACT NOTES/React Tutorial/React Notes/04 React Pt2.md",
+    "REACT NOTES/React Tutorial/incomplete React Notes.md",
+    "REACT NOTES/React Tutorial/React Notes/00 Readme.md",
+    "REACT NOTES/React Tutorial/React Notes/03 Intermediate.md",
+    "REACT NOTES/React Tutorial/React Notes/02 Basic React.md",
+    "REACT NOTES/React Tutorial/React Notes/01 Introduction.md",
+    "One Page Notes/Computer Networking Notes.md",
+    "One Page Notes/CSS.md",
+    "One Page Notes/R tutorial notes.md",
+    "One Page Notes/MongoDB Tutorial.md",
+    "One Page Notes/Git and Github.md",
+    "REACT NATIVE NOTES incomplete/React Native Youtube Tutorial/02 Basic App Development.md",
+    "REACT NATIVE NOTES incomplete/React Native Youtube Tutorial/01 Getting Started.md",
+    "REACT NATIVE NOTES incomplete/React Native Youtube Tutorial/00 ReadMe.md",
+    "One Page Notes/Tailwind CSS.md",
+    "One Page Notes/SQL.md",
+    "One Page Notes/Reactive Databases.md",
+    "One Page Notes/Kubernetes Tutorial.md",
+    "One Page Notes/Docker Tutorial.md",
+    "One Page Notes/AWS.md",
+    "SPRING BOOT NOTES/Documenting Projects.md",
+    "SPRING BOOT NOTES/SPRING BOOT notes for the boys.md",
+    "SPRING BOOT NOTES/JWT Authentication and Authorization in Spring Boot.md",
+    "README.md",
+    "DSA/18 Greedy Algorithm.md",
+    "EXPRESS JS NOTES/Full",
+    "EXPRESS JS NOTES/Crash Course",
+    "EXPRESS JS NOTES",
     "Untitled 2.base",
     "Untitled 1.base",
     "Untitled.base",
-    "REACT NOTES/JS Fundamentals.md",
-    "REACT NOTES/React Tutorial/incomplete React Notes.md",
-    "ANGULAR/IONIC/01 Introduction.md",
-    "Admin Panel Layout plan for lab.md",
-    "ANGULAR/IONIC/00 Readme.md",
-    "ANGULAR/IONIC/03 Authentication.md",
-    "ANGULAR/IONIC/02 Basic Builds.md",
     "REACT NOTES/React Tutorial/assets/02.png",
     "REACT NOTES/React Tutorial/assets/01.png",
-    "One Page Notes/Git and Github.md",
-    "ANGULAR/Angular Youtube Tutorial/01 Introduction.md",
-    "DSA/13 Sliding Window.md",
-    "DSA/02 Arrays.md",
-    "DSA/09 Trees.md",
-    "DSA/03 Strings.md",
-    "DSA/04 Subsets and Subsequences.md",
-    "REACT NOTES/React Tutorial/React Notes/03 Intermediate.md",
-    "One Page Notes/Docker Tutorial.md",
-    "DSA/03 Sorting Algorithms.md",
     "SQL/Untitled",
     "SQL",
     "System Design/System Design",
@@ -231,7 +259,6 @@
     "DSA/assets/Pasted image 20260413102354.png",
     "DSA/assets/Pasted image 20260328111947.png",
     "System Design/assets",
-    "System Design",
     "SPRING BOOT NOTES/Resources/canvas for structures.canvas",
     "DATA STRUCTURES/Untitled.canvas",
     "Untitled.canvas"

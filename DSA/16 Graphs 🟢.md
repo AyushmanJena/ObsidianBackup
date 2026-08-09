@@ -1608,6 +1608,63 @@ class Solution {
 }
 ```
 
+[3310. Remove Methods From Project](https://leetcode.com/problems/remove-methods-from-project/)
+#medium #graph #dfs 
+```java
+class Solution {
+    public List<Integer> remainingMethods(int n, int k, int[][] invocations) {
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        boolean[] suspicious = new boolean[n];
+
+        for(int i =0 ; i < n; i++){
+            graph.add(new ArrayList<>());
+        }
+        for(int i = 0; i < invocations.length; i++){
+            graph.get(invocations[i][0]).add(invocations[i][1]);
+        }
+
+        
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(k);
+        suspicious[k] = true;
+
+        while(!queue.isEmpty()){
+            int x = queue.poll();
+            for(int neighbor : graph.get(x)){
+                if(!suspicious[neighbor]){
+                    suspicious[neighbor] = true;
+                    queue.offer(neighbor);
+                }
+            }
+        }
+
+        for(int[] edge : invocations){
+            int u = edge[0];
+            int v = edge[1];
+
+            if(!suspicious[u] && suspicious[v]){
+                List<Integer> ans = new ArrayList<>();
+                for(int i = 0; i < n; i++){
+                    ans.add(i);
+                
+                }
+                return ans;
+            }
+        }
+
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        for(int i = 0; i < n; i++){
+
+            if(!suspicious[i]){
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
+```
+
 [2976. Minimum Cost to Convert String I](https://leetcode.com/problems/minimum-cost-to-convert-string-i/)
 ```java
 class Solution {
