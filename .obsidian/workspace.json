@@ -45,30 +45,46 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "One Page Notes/Git and Github.md",
+                "file": "Javascript/DOM Navigation.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "Git and Github"
+              "title": "DOM Navigation"
             }
           },
           {
             "id": "a5b0165233754501",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "REACT NOTES/React Tutorial/React Notes/02 Basic React.md",
+                "file": "One Page Notes/Linux Theory.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Linux Theory"
+            }
+          },
+          {
+            "id": "07bd4b961545e6ed",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Cloud Computing/02 Cloud Computing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 Basic React"
+              "title": "02 Cloud Computing"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -102,10 +118,10 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "BFS",
+                "query": "ionic",
                 "matchingCase": false,
                 "explainSearch": false,
-                "collapseAll": false,
+                "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
               },
@@ -127,7 +143,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 272.5
+    "width": 272.5,
+    "collapsed": true
   },
   "right": {
     "id": "7965664ec10f3ce2",
@@ -211,34 +228,39 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a5b0165233754501",
+  "active": "07bd4b961545e6ed",
   "lastOpenFiles": [
+    "ANGULAR/IONIC/00 Readme.md",
+    "One Page Notes/Linux Theory.md",
+    "Cloud Computing/02 Cloud Computing.md",
+    "Cloud Computing/01 Introduction.md",
+    "Cloud Computing/00 Readme.md",
+    "One Page Notes/Linux Basic Commands.md",
+    "SPRING BOOT NOTES/SPRING BOOT notes for the boys.md",
+    "One Page Notes/R tutorial notes.md",
+    "Javascript/DOM Navigation.md",
+    "One Page Notes/assets/shell_in_os.webp",
+    "One Page Notes/Docker Tutorial.md",
+    "EXPRESS JS NOTES/Full/01 Introduction.md",
+    "Cloud Computing",
+    "EXPRESS JS NOTES/Full/00 Readme.md",
+    "One Page Notes/Git and Github.md",
+    "Javascript/assets/Pasted image 20260827100423.png",
+    "Javascript/assets",
+    "Javascript/JS Fundamentals.md",
+    "Javascript",
+    "ANGULAR/IONIC/01 Introduction.md",
     "REACT NOTES/Axios React API Handling.md",
+    "One Page Notes/Computer Networking Notes.md",
+    "REACT NOTES/Redux and Redux Toolkit.md",
     "REACT NOTES/React Tutorial/React Notes/04 React Pt2.md",
+    "REACT NOTES/React Tutorial/React Notes/02 Basic React.md",
     "REACT NOTES/React Tutorial/incomplete React Notes.md",
     "REACT NOTES/React Tutorial/React Notes/00 Readme.md",
     "REACT NOTES/React Tutorial/React Notes/03 Intermediate.md",
-    "REACT NOTES/React Tutorial/React Notes/02 Basic React.md",
     "REACT NOTES/React Tutorial/React Notes/01 Introduction.md",
-    "One Page Notes/Computer Networking Notes.md",
     "One Page Notes/CSS.md",
-    "One Page Notes/R tutorial notes.md",
     "One Page Notes/MongoDB Tutorial.md",
-    "One Page Notes/Git and Github.md",
-    "REACT NATIVE NOTES incomplete/React Native Youtube Tutorial/02 Basic App Development.md",
-    "REACT NATIVE NOTES incomplete/React Native Youtube Tutorial/01 Getting Started.md",
-    "REACT NATIVE NOTES incomplete/React Native Youtube Tutorial/00 ReadMe.md",
-    "One Page Notes/Tailwind CSS.md",
-    "One Page Notes/SQL.md",
-    "One Page Notes/Reactive Databases.md",
-    "One Page Notes/Kubernetes Tutorial.md",
-    "One Page Notes/Docker Tutorial.md",
-    "One Page Notes/AWS.md",
-    "SPRING BOOT NOTES/Documenting Projects.md",
-    "SPRING BOOT NOTES/SPRING BOOT notes for the boys.md",
-    "SPRING BOOT NOTES/JWT Authentication and Authorization in Spring Boot.md",
-    "README.md",
-    "DSA/18 Greedy Algorithm.md",
     "EXPRESS JS NOTES/Full",
     "EXPRESS JS NOTES/Crash Course",
     "EXPRESS JS NOTES",
@@ -248,17 +270,12 @@
     "REACT NOTES/React Tutorial/assets/02.png",
     "REACT NOTES/React Tutorial/assets/01.png",
     "SQL/Untitled",
-    "SQL",
-    "System Design/System Design",
     "System Design/assets/Pasted image 20260601225940.png",
     "System Design/assets/Pasted image 20260601224513.png",
     "System Design/assets/Pasted image 20260601221239.png",
     "System Design/assets/Pasted image 20260601220955.png",
     "DSA/assets/Pasted image 20260502123550.png",
     "DSA/assets/Pasted image 20260428103853.png",
-    "DSA/assets/Pasted image 20260413102354.png",
-    "DSA/assets/Pasted image 20260328111947.png",
-    "System Design/assets",
     "SPRING BOOT NOTES/Resources/canvas for structures.canvas",
     "DATA STRUCTURES/Untitled.canvas",
     "Untitled.canvas"
