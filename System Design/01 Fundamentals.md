@@ -5,7 +5,7 @@ Components of a System Design :
 2. Tangible Entities
 
 #### Logical Entities :
-![[assets/Pasted image 20260519214041.png]]
+![[Pasted image 20260519214041.png]]
 
 
 Presentation Layer: 
